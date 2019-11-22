@@ -10,7 +10,6 @@ function App() {
   return (
     <TheApp className="App">
       <Header/>
-      <About/>
       <Main/>
     </TheApp>
   );

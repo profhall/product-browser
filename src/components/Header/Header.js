@@ -7,7 +7,9 @@ const Header = () => {
     return (
         <TheHeader>
             <HeaderIcon src={plateIcon} />
-            <HeaderTitle> Products </HeaderTitle>
+            <HeaderTitle>
+                Instructions
+            </HeaderTitle>
             {/*https://www.eatthismuch.com/food/nutrition/young-green-jackfruit-in-brine,474598/*/}
         </TheHeader>
     );
@@ -15,7 +17,7 @@ const Header = () => {
 
 const TheHeader = styled.div`
   //width: 100%;
-  height: 7%;
+  height: 10%;
   background-color: #333333 ;
   color: white;
   display: flex;
@@ -26,7 +28,7 @@ const HeaderIcon = styled.img`
   height: 75%;
   align-self: center;
 `;
-const HeaderTitle = styled.h2`
+const HeaderTitle = styled.p`
   //height: 75%;
   align-self: center;
   margin: auto;
