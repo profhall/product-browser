@@ -8,7 +8,7 @@ const Header = () => {
         <TheHeader>
             <HeaderIcon src={plateIcon} />
             <HeaderTitle>
-                Instructions
+                PJ's Eats
             </HeaderTitle>
             {/*https://www.eatthismuch.com/food/nutrition/young-green-jackfruit-in-brine,474598/*/}
         </TheHeader>
