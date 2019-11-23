@@ -5,7 +5,13 @@ import Product from "../Product/Product";
 const stuff =
     [
         {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
+            "name": "Quinoa &  Bowl with BBQ Jerked Jackfruit",
+            "sides": ["Fried Plantains", "Salad"],
+            "description": "...",
+            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
+        },
+        {
+            "name": "Quinoa & Bean Bowl  BBQ Jerked Jackfruit",
             "sides": ["Fried Plantains", "Salad"],
             "description": "...",
             "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
@@ -17,19 +23,42 @@ const stuff =
             "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
         },
         {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
+            "name": "Quinoa & Bean Bowl with BBQ  Jackfruit",
             "sides": ["Fried Plantains", "Salad"],
             "description": "...",
             "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
         },
         {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
+            "name": "Quinoa & Bean Bowl with  Jerked Jackfruit",
+            "sides": ["Fried Plantains", "Salad"],
+            "description": "...",
+            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
+        },{
+            "name": "Quinoa & Bean Bowl  BBQ Jerked Jackfruit",
             "sides": ["Fried Plantains", "Salad"],
             "description": "...",
             "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
         },
         {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
+            "name": " Bowl with BBQ Jerked Jackfruit",
+            "sides": ["Fried Plantains", "Salad"],
+            "description": "...",
+            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
+        },
+        {
+            "name": "Bean Bowl with BBQ Jerked Jackfruit",
+            "sides": ["Fried Plantains", "Salad"],
+            "description": "...",
+            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
+        },
+        {
+            "name": "Quinoa & Bean Bowl with BBQ ",
+            "sides": ["Fried Plantains", "Salad"],
+            "description": "...",
+            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
+        },
+        {
+            "name": "Quinoa & Bean Bowl Jerked Jackfruit",
             "sides": ["Fried Plantains", "Salad"],
             "description": "...",
             "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
@@ -40,78 +69,19 @@ const stuff =
             "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
         },
         {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
+            "name": "Quinoa with BBQ Jerked Jackfruit",
             "sides": ["Fried Plantains", "Salad"],
             "description": "...",
             "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
         },
         {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
+            "name": " BBQ Jerked Jackfruit",
             "sides": ["Fried Plantains", "Salad"],
             "description": "...",
             "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
         },
         {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
-            "sides": ["Fried Plantains", "Salad"],
-            "description": "...",
-            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
-        },
-        {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
-            "sides": ["Fried Plantains", "Salad"],
-            "description": "...",
-            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
-        },{
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
-            "sides": ["Fried Plantains", "Salad"],
-            "description": "...",
-            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
-        },
-        {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
-            "sides": ["Fried Plantains", "Salad"],
-            "description": "...",
-            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
-        },
-        {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
-            "sides": ["Fried Plantains", "Salad"],
-            "description": "...",
-            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
-        },
-        {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
-            "sides": ["Fried Plantains", "Salad"],
-            "description": "...",
-            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
-        },
-        {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
-            "sides": ["Fried Plantains", "Salad"],
-            "description": "...",
-            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
-        },
-        {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
-            "sides": ["Fried Plantains", "Salad"],
-            "description": "...",
-            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
-        },
-        {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
-            "sides": ["Fried Plantains", "Salad"],
-            "description": "...",
-            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
-        },
-        {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
-            "sides": ["Fried Plantains", "Salad"],
-            "description": "...",
-            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
-        },
-        {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
+            "name": "Quinoa & Bean  Jerked Jackfruit",
             "sides": ["Fried Plantains", "Salad"],
             "description": "...",
             "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg"
@@ -121,6 +91,11 @@ const stuff =
 
 
 const Main = () => {
+
+
+    const [windowWidth, setWidth] = useState(getWidth);
+    const [chosenItems, setFavs] = useState([]);
+
     const handleResize = ()=>{
         console.log("window resize")
         setWidth(getWidth());
@@ -129,18 +104,23 @@ const Main = () => {
         return window.innerWidth
     }
 
-    const [windowWidth, setWidth] = useState(getWidth);
-    const [chosenItems, setFavs] = useState([]);
-
-
-    console.log(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-
     const addToFavs=(item)=> {
         // chosenItems.push(<li>{item.name}</li>)
-        setFavs(chosenItems.concat(<li>{item.name}</li>))
+        const items = chosenItems.concat(item.name)
+        console.log(items)
+        setFavs(items)
     };
+    console.log("chosenItems: ", chosenItems)
 
+    const toggleFav= (fav) =>{
+        console.log("toggle: ", fav)
+        // const name =  e.target.innerText
+
+        setFavs(chosenItems.filter(item => item !== fav));
+    }
+
+
+    window.addEventListener('resize', handleResize);
 
 
     const productList = stuff.map((item) => {
@@ -154,16 +134,18 @@ const Main = () => {
                 <h2>Meals</h2>
                 <p>This is where the instructions will go...</p>
             </ProductsHeader>
+
             <Products width={windowWidth}  >
                 {productList}
             </Products>
+
             <Favs>
-                <h2>
+                <FavHeader>
                     Your Picks
-                </h2>
-                <ul>
-                {chosenItems}
-                </ul>
+                </FavHeader>
+                <FavList>
+                {chosenItems.map((fav)=><li onClick={()=>toggleFav(fav)}>{fav}</li>)}
+                </FavList>
             </Favs>
         </TheMainContent>
     );
@@ -186,6 +168,16 @@ const ProductsHeader = styled.div`
   grid-area: pheader;
 `;
 
+const FavHeader = styled.h2`
+  flex-grow: 1 ;
+`;
+
+const FavList = styled.ul`
+  margin: 0;
+  padding:0;
+  flex-grow: 14 ;
+`;
+
 const Products = styled.div`
   //border: 1px solid orangered;
   grid-area: products;
@@ -198,6 +190,10 @@ const Products = styled.div`
 const Favs = styled.div`
   //border: 1px solid orangered;
   grid-area: cart;
+  flex-direction:column ;
+  display: flex;
+  justify-content: space-between;
+
 `;
 
 export default Main;
