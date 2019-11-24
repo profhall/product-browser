@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/product-browser/static/css/main.b100e6da.chunk.css",
+    "main.js": "/product-browser/static/js/main.d8e70759.chunk.js",
+    "main.js.map": "/product-browser/static/js/main.d8e70759.chunk.js.map",
+    "runtime-main.js": "/product-browser/static/js/runtime-main.d11a696e.js",
+    "runtime-main.js.map": "/product-browser/static/js/runtime-main.d11a696e.js.map",
+    "static/js/2.2eda3111.chunk.js": "/product-browser/static/js/2.2eda3111.chunk.js",
+    "static/js/2.2eda3111.chunk.js.map": "/product-browser/static/js/2.2eda3111.chunk.js.map",
+    "index.html": "/product-browser/index.html",
+    "precache-manifest.1f64bc3cd11160f115a967064ae029f9.js": "/product-browser/precache-manifest.1f64bc3cd11160f115a967064ae029f9.js",
+    "service-worker.js": "/product-browser/service-worker.js",
+    "static/css/main.b100e6da.chunk.css.map": "/product-browser/static/css/main.b100e6da.chunk.css.map",
+    "static/media/logo.svg": "/product-browser/static/media/logo.25bf045c.svg",
+    "static/media/lunch-box.svg": "/product-browser/static/media/lunch-box.2a1ae021.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d11a696e.js",
+    "static/js/2.2eda3111.chunk.js",
+    "static/css/main.b100e6da.chunk.css",
+    "static/js/main.d8e70759.chunk.js"
+  ]
+}
