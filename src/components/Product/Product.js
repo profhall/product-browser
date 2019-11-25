@@ -14,10 +14,10 @@ const Content = ({close, meal}) => {
         <ModalHeader> {meal.name} </ModalHeader>
         <ModalInfo className="content">
            {/*<ModalImg src={meal.photo}/>*/}
-            {meal.description && meal.description !=="..." ? meal.description : "Meal Information will go here"}
+            {meal.ingredients && meal.ingredients !=="..." ? meal.ingredients.map((ing)=><h5>{ing}</h5>) : "Meal Information will go here"}
 
         </ModalInfo>
-            <ModalExit onClick={close}>close</ModalExit>
+            <ModalExit className={'btn'} onClick={close}>close</ModalExit>
     </Modal>)
 
 };
@@ -26,15 +26,24 @@ const Product = ({item,windowWidth,addToFavs}) => {
 
     return (
         <TheProduct width={windowWidth}>
-            <ProductPhoto src={item.photo}/>
-            <p>{item.name}</p>
+            <h6 style={{padding:0,margin:0}}><b>{item.name}</b></h6>
+
+            <ProductContent width={windowWidth}>
+                <PhotoContainer theWidth={windowWidth} >
+                <ProductPhoto  src={item.photo}/>
+                </PhotoContainer>
+                <ProductInfo width={windowWidth}>
+                    <p >{item.description}</p>
+
+                </ProductInfo>
+            </ProductContent>
 
             <TheButtons>
-                <Popup modal trigger={<SelectProdButton >Details</SelectProdButton>}>
+                <Popup modal trigger={<SelectProdButton className={"btn"} >Ingredients</SelectProdButton>}>
                     {close => <Content close={close} meal={item} />}
                 </Popup>
 
-                <SelectProdButton onClick={()=>addToFavs(item)}>
+                <SelectProdButton className={"btn"} onClick={()=>addToFavs(item)}>
                     Add
                 </SelectProdButton>
             </TheButtons>
@@ -52,28 +61,48 @@ const ModalExit = styled.button`
 const Modal = styled.div``;
 
 const ModalHeader = styled.div`
-  font-size: 90%;
+  font-size: 2em;
   margin: 1%;
 `;
 
 const ModalInfo = styled.div`
-  font-size: 85%;
+  font-size: .5em;
+  margin: 1%;
+`;
+const PhotoContainer = styled.div`
+width: ${props => props.theWidth > 860 ? "60%" : "50%"};
+height: 100%;
   margin: 1%;
 `;
 
 const TheProduct = styled.div`
-  height: 200px;
-  width:${props => props.width > 749 ? "30%" : "'100%'"};
-  //min-width: 30%;
+  height:${props => props.width > 860 ? "50%" : "60%"};
+  width:${props => props.width > 860 ? "45%" : "100%"};
   border: #282c34 solid 1px;
-  margin: 10px 0;
-  padding: 0 10px;
+  margin: 5px 0;
+  padding: 10px;
   display: flex;
   flex-direction: column;
 `;
+const ProductInfo = styled.div`
+  height: ${props => props.width > 860 ? "65%" : "80%"};
+  text-align: left;
+  overflow: scroll;
+  
+`;
+
+const ProductContent = styled.div`
+  height:80%;
+  width:100%;
+  //min-width: 30%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  //justify-content: flex-start;
+`;
 
 const SelectProdButton = styled.button`
-  width: 30%;
+  width: 45%;
   margin: auto;
 `;
 
@@ -84,9 +113,9 @@ const TheButtons = styled.div`
 `;
 
 const ProductPhoto = styled.img`
-  height: 50%;
-  margin: auto;
+  height:80%;
   border-radius: 5px;
+  margin: 0 5px;
 `;
 
 const ModalImg = styled.img`

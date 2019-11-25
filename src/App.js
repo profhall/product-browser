@@ -20,7 +20,7 @@ const TheApp = styled.div`
   display: flex;
   flex-direction: column;
   align-content: center;
-  width:100%
+  width:100%;
   `;
 
 export default App;

@@ -8,7 +8,7 @@ const Header = () => {
         <TheHeader>
             <HeaderIcon src={plateIcon} />
             <HeaderTitle>
-                PJ's Eats
+                The Tasty Plant Based Kitchen
             </HeaderTitle>
             {/*https://www.eatthismuch.com/food/nutrition/young-green-jackfruit-in-brine,474598/*/}
         </TheHeader>
@@ -28,7 +28,7 @@ const HeaderIcon = styled.img`
   height: 75%;
   align-self: center;
 `;
-const HeaderTitle = styled.p`
+const HeaderTitle = styled.h4`
   //height: 75%;
   align-self: center;
   margin: auto;
