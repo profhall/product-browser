@@ -254,7 +254,7 @@ const Main = () => {
                         <span>{chosenItems.length > 0 ? chosenItems.length : null}</span> {chosenItems.length !==1 ? "Meals" : "Meal"}
                     </FavHeader>
                     :
-                    <span>{chosenItems.length > 0 ? chosenItems.length : null}</span>}
+                    <h5>{chosenItems.length > 0 ? chosenItems.length : null}</h5>}
 
                 {siderOpen ? <FavList>
                     {chosenItems.map((fav)=>
@@ -300,9 +300,11 @@ const ToggleSiderButton = styled.i`
   display: flex;
   justify-content: center;
   background-color: darkblue;
-  width:100%;
+  width: 100%;
   margin-top: ${props => props.isOpen ? 'auto' : 'auto'};
-  //margin-top: auto ;
+  position: sticky;
+  bottom: 0;
+  left:0;
 `;
 
 
@@ -347,7 +349,7 @@ const Fav = styled.li`
   width: 100%;
   font-size: 1em;
   font-weight: bold;
-  margin: 7px 0;
+  margin: 12px 0;
 
 `;
 
