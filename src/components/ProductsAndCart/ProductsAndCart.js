@@ -6,7 +6,7 @@ import emailjs from 'emailjs-com';
 const stuff =
     [
         {
-            "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
+            "name": "Quinoa Bowl w/BBQ Jerked Jackfruit",
             "sides": ["Fried Plantains", "Salad"],
             "description": "A tasty bowl combining jerked jackfruit quinoa and red beans cooked in coconut milk. We use spices and herbs to create a Caribbean taste.",
             "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg",
@@ -38,7 +38,7 @@ const stuff =
             "ingredients": []
         },
         {
-            "name": "Jackfruit Crab Cakes with Lemon Dill Sauce",
+            "name": "Jackfruit Crab Cakes w/Lemon Dill Sauce",
             "sides": ["Sauteed Veggies", "Cranberry and Cilantro Quinoa Salad" ],
             "description": "Our version of a classic seafood dish made with the versatile Jackfruit. These cakes come with Sauteed veggies and a cranberry cilantro quinoa salad ",
             "ingredients": [],
@@ -123,6 +123,9 @@ const Main = () => {
     const [windowWidth, setWidth] = useState(getWidth);
     const [chosenItems, setFavs] = useState( []);
     const [userinfo, setUser] = useState({"name":"theName","email":"theEmail"});
+    const [seeInfo, showInfo] = useState(true);
+    const [siderOpen, openSider] = useState(windowWidth < 850 ? false : true);
+    const [infoValidated, validateInfo] = useState(false);
 
     const handleResize = ()=>{
         console.log("window resize")
@@ -153,6 +156,7 @@ const Main = () => {
     const emailSelection = (chosenItems) => {
 
         const Info = userinfo
+
         const theSubmitInfo = {"chosen_items":chosenItems,"name":Info["name"],"email":Info["email"]}
         Info['message'] ? theSubmitInfo['message'] = Info['message'] : Info['message'] = null;
         console.log("favs submitted", Info)
@@ -162,24 +166,42 @@ const Main = () => {
             .then(function(response) {
                 console.log('SUCCESS!', response.status, response.text);
                 alert("Thank you! We will reach out to you soon to discuss the next steps")
+
             }, function(error) {
                 console.log('FAILED...', error);
             });
 
     }
     const handleInputChange = (e) => {
-        console.log("input changed", e.target.value)
-        console.log("input id", e.target.id)
+        let emailVal = null
+        let nameVal = null
+        // console.log("input changed", e.target.value)
+        // console.log("input id", e.target.id)
+        console.log(userinfo["email"], userinfo["name"])
+        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
         if (e.target.id === "uName"){
-            userinfo["name"] = e.target.value
+            userinfo["name"] = e.target.value;
+            e.target.value.length < 2 ? nameVal = false : nameVal = true
+
+
         }
         else if (e.target.id === "uEmail"){
-            userinfo["email"]= e.target.value
+
+            userinfo["email"]= e.target.value;
+
+            e.target.value.match(mailformat)  ? emailVal = false : emailVal = true
         }
         else{
             userinfo["message"]= e.target.value
         }
         setUser(userinfo)
+
+        if (userinfo["name"].length >= 2 && userinfo["email"].match(mailformat) ) {
+            console.log(userinfo['name'], nameVal, userinfo['email'], emailVal)
+            validateInfo(true)
+        }
+        else {validateInfo(false) }
 
 
     }
@@ -189,19 +211,35 @@ const Main = () => {
         }
     );
 
+    const toggleInfo=()=>{
+        console.log("toggle info")
+        showInfo(!seeInfo)
+    }
+    const toggleSider=()=>{
+        console.log("toggle sider")
+        openSider(!siderOpen)
+    }
+
+
+
     return (
         <TheMainContent width={windowWidth}>
+            <ExitIcon seeInfo={seeInfo} onClick={()=>toggleInfo()} >
+                {seeInfo ? 'close' : 'see instructions'}
+            </ExitIcon>
+
             <ProductsHeader>
-                <p>
+                {seeInfo ? <p>
+
                     Welcome to The Tasty Plant Based Kitchen, thanks for stopping by!
                     Below are meals for you to choose that we will use as a reference collection when preparing your meals.
                     Please choose at least one salad, all meal orders come with a 16oz salad of your choice. <br/>
                     <b>Disclaimer: We do not own these photos, they are accurate depictions of the meals we prepare, these photos will be updated overtime.</b>
-                </p>
+                </p>:null}
                 <input id="uName" placeholder={"Your Name (required)"} onChange={handleInputChange}/>
-                <input id="uEmail" placeholder={"Your Email (required)"}  onChange={handleInputChange}/>
+                <input id="uEmail"  type="email" pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" placeholder={"Your Email (required)"}  onChange={handleInputChange}/>
                 <MessageArea id="uMessage"  width={windowWidth} onChange={handleInputChange} placeholder={"Type a message here if you would like to give any more info about yourself, and you're here."}/>
-                <SubmitFavsBuuton  width={windowWidth} className={"btn"} onClick={()=>emailSelection(chosenItems)}>Submit</SubmitFavsBuuton>
+                <SubmitFavsBuuton   width={windowWidth} className={`btn ${infoValidated?"":"disabled"}`} onClick={()=>emailSelection(chosenItems)}>Submit</SubmitFavsBuuton>
 
             </ProductsHeader>
 
@@ -209,19 +247,27 @@ const Main = () => {
                 {productList}
             </Products>
 
-            <Favs>
-                <FavHeader>
-                    Your Picks <span>{chosenItems.length}</span>
-                </FavHeader>
-                <FavList>
+            <Favs isOpen={siderOpen} width={windowWidth}>
+
+                {windowWidth > 850 ?
+                    <FavHeader>
+                        <span>{chosenItems.length > 0 ? chosenItems.length : null}</span> {chosenItems.length !==1 ? "Meals" : "Meal"}
+                    </FavHeader>
+                    :
+                    <span>{chosenItems.length > 0 ? chosenItems.length : null}</span>}
+
+                {siderOpen ? <FavList>
                     {chosenItems.map((fav)=>
                         <Fav onClick={()=>toggleFav(fav)}>
                             {fav}
-                            <i className="tiny material-icons">clear</i>
+                            <DelFav className="tiny material-icons">clear</DelFav>
 
                         </Fav>
                     )}
-                </FavList>
+
+                </FavList>:null}
+                {windowWidth < 851 ? <ToggleSiderButton isOpen={siderOpen} onClick={()=>toggleSider()} className="small material-icons">{siderOpen ? "arrow_backward" : "arrow_forward"}</ToggleSiderButton> : null}
+
             </Favs>
         </TheMainContent>
     );
@@ -231,21 +277,55 @@ const TheMainContent = styled.div`
   display: grid;
   overflow: scroll;
   grid-template-rows:${props => props.width > 850 ? "'15% auto auto'" : "'10% 75% 15%'"};
-  grid-template-areas:${props => props.width > 850 ? "'pheader cart''products cart''products cart'" : "'pheader' 'products' 'cart'"};
+  grid-template-areas:${props => props.width > 850 ? 
+    "'cart pheader'" +
+    "'cart products'" +
+    "'cart products'" 
+    : 
+    "'cart pheader pheader' " +
+    "'cart products products' " +
+    "'cart products products'"
+};
   //grid-gap: .5% ;
   height: 90%;
   
-  padding: 0 7px;
   grid-template-columns: ${props => {
-      return(props.width > 850 ? "85% 15%" : "100%")
+      return(props.width > 850 ? "15% 85%" : "50px auto auto")
       }
     };
 `;
 
 
+const ToggleSiderButton = styled.i`
+  display: flex;
+  justify-content: center;
+  background-color: darkblue;
+  width:100%;
+  margin-top: ${props => props.isOpen ? 'auto' : 'auto'};
+  //margin-top: auto ;
+`;
+
+
+const DelFav = styled.i`
+float:right;
+background-color: red;
+border-radius: 100%;
+`;
+
+
+const ExitIcon = styled.span`
+position: fixed;
+font-size: 14px;
+padding: 1px 3px;
+top: 11%;
+right: 3em;
+background-color: ${props => props.seeInfo ? 'red' : 'green'};
+border-radius: 50px;
+`;
+
 const MessageArea = styled.textarea`
   width:${props => props.width > 850 ? '77%' : '90%'};
-  height: ${props => props.width > 850 ? '75px' : '75px'};;
+  height: ${props => props.width > 850 ? '75px' : '75px'};
 `;
 const ProductsHeader = styled.div`
   grid-area: pheader;
@@ -255,7 +335,7 @@ const ProductsHeader = styled.div`
 const SubmitFavsBuuton = styled.button`
   width:${props => props.width > 850 ? '20%' : '80%'};
   //height:50px;
-  float: ${props => props.width > 850 ? 'right' : 'center'};;
+  float: ${props => props.width > 850 ? 'right' : 'center'};
   
   
 `;
@@ -267,12 +347,14 @@ const Fav = styled.li`
   width: 100%;
   font-size: 1em;
   font-weight: bold;
+  margin: 7px 0;
+
 `;
 
-const FavList = styled.ul`
+const FavList = styled.ol`
   margin: 0;
-  padding:0;
   flex-grow: 14 ;
+  text-align: left;
 `;
 
 const Products = styled.div`
@@ -285,13 +367,17 @@ const Products = styled.div`
 `;
 
 const Favs = styled.div`
-  //border: 1px solid orangered;
+  background-color: #333333 ;
+  color: white ;
   grid-area: cart;
+  grid-column: ${props => props.isOpen && props.width < 850 ? '1 / span 2' : ""};
+  z-index: 2;
   flex-direction:column ;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 12px 0;
+  justify-content: flex-start;
+  //align-items: center;
+  width: 100%;
+  //padding-left: 25px;
 
 `;
 

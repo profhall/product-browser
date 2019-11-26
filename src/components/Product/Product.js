@@ -14,7 +14,7 @@ const Content = ({close, meal}) => {
         <ModalHeader> {meal.name} </ModalHeader>
         <ModalInfo className="content">
            {/*<ModalImg src={meal.photo}/>*/}
-            {meal.ingredients && meal.ingredients !=="..." ? meal.ingredients.map((ing)=><h5>{ing}</h5>) : "Meal Information will go here"}
+            {meal.ingredients && meal.ingredients !=="..." ? meal.ingredients.map((ing)=><Ingredient>{ing}</Ingredient>) : "Ingredients coming soon..."}
 
         </ModalInfo>
             <ModalExit className={'btn'} onClick={close}>close</ModalExit>
@@ -60,18 +60,20 @@ const ModalExit = styled.button`
 `;
 const Modal = styled.div``;
 
-const ModalHeader = styled.div`
-  font-size: 2em;
+const ModalHeader = styled.h6`
   margin: 1%;
+`;
+const Ingredient = styled.p`
 `;
 
 const ModalInfo = styled.div`
-  font-size: .5em;
+  font-size: 1em;
   margin: 1%;
+  font-weight: bold;
 `;
 const PhotoContainer = styled.div`
 width: ${props => props.theWidth > 860 ? "60%" : "50%"};
-height: 100%;
+height: 80%;
   margin: 1%;
 `;
 
