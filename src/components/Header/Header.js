@@ -32,6 +32,7 @@ const HeaderTitle = styled.h4`
   //height: 75%;
   align-self: center;
   margin: auto;
+  font-size: 2em;
   
 `;
 

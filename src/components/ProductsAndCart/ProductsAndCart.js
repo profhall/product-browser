@@ -228,20 +228,21 @@ const Main = () => {
                 {seeInfo ? 'close' : 'see instructions'}
             </ExitIcon>
 
-            <ProductsHeader>
-                {seeInfo ? <p>
+            {seeInfo ?  <ProductsHeader>
+                <p>
 
                     Welcome to The Tasty Plant Based Kitchen, thanks for stopping by!
                     Below are meals for you to choose that we will use as a reference collection when preparing your meals.
                     Please choose at least one salad, all meal orders come with a 16oz salad of your choice. <br/>
                     <b>Disclaimer: We do not own these photos, they are accurate depictions of the meals we prepare, these photos will be updated overtime.</b>
-                </p>:null}
+                </p>
                 <input id="uName" placeholder={"Your Name (required)"} onChange={handleInputChange}/>
                 <input id="uEmail"  type="email" pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" placeholder={"Your Email (required)"}  onChange={handleInputChange}/>
                 <MessageArea id="uMessage"  width={windowWidth} onChange={handleInputChange} placeholder={"Type a message here if you would like to give any more info about yourself, and you're here."}/>
                 <SubmitFavsBuuton   width={windowWidth} className={`btn ${infoValidated?"":"disabled"}`} onClick={()=>emailSelection(chosenItems)}>Submit</SubmitFavsBuuton>
 
             </ProductsHeader>
+                :null}
 
             <Products width={windowWidth}  >
                 {productList}
@@ -260,11 +261,12 @@ const Main = () => {
                     {chosenItems.map((fav)=>
                         <Fav onClick={()=>toggleFav(fav)}>
                             {fav}
-                            <DelFav className="tiny material-icons">clear</DelFav>
-
+                            {/*<DelFav className="tiny material-icons">clear</DelFav>*/}
                         </Fav>
                     )}
 
+                    <br/>
+                    click meal to remove it
                 </FavList>:null}
                 {windowWidth < 851 ? <ToggleSiderButton isOpen={siderOpen} onClick={()=>toggleSider()} className="small material-icons">{siderOpen ? "arrow_backward" : "arrow_forward"}</ToggleSiderButton> : null}
 
@@ -316,11 +318,11 @@ border-radius: 100%;
 
 
 const ExitIcon = styled.span`
-position: fixed;
+position: absolute;
 font-size: 14px;
 padding: 1px 3px;
-top: 11%;
-right: 3em;
+top: 12%;
+right: 2em;
 background-color: ${props => props.seeInfo ? 'red' : 'green'};
 border-radius: 50px;
 `;
@@ -331,7 +333,7 @@ const MessageArea = styled.textarea`
 `;
 const ProductsHeader = styled.div`
   grid-area: pheader;
-  padding: 0 6em 1em 6em;
+  padding: 1.5em;
   height: 100% ;
 `;
 const SubmitFavsBuuton = styled.button`
