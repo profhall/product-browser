@@ -1,0 +1,116 @@
+{
+  "meals":
+  [
+    {
+      "name": "Quinoa & Bean Bowl with BBQ Jerked Jackfruit",
+      "sides": ["Fried Plantains", "Salad"],
+      "description": "A tasty bowl combining jerked jackfruit quinoa and red beans cooked in coconut milk. We use spices and herbs to create a Caribbean taste.",
+      "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg",
+      "type": "main",
+      "ingredients": ["scallion","onion","coconut milk", "red beans", "jackfruit", "plantains", "seasonings & herbs"]
+    },
+    {
+      "name": "Jackfruit Wraps",
+      "sides": ["Fried Plantains", "Salad"],
+      "description": "These vegan burritos are filled with red beans, brown rice, cilantro, tomato, jackfruit seasoned with mexican spices with avocado spread.",
+      "photo": "http://www.veganricha.com/wp-content/uploads/2016/05/jamaican-jerk-jackfruit-caribbean-black-bean-tacos-4875.jpg",
+      "ingredients": [],
+      "type": "main"
+    },
+    {
+      "name": "Lentil Spinach BurritoS",
+      "sides": ["Fried Plantains", "Salad"],
+      "description": "These vegan burritos are filled with red beans, brown rice, cilantro, jerked jackfruit, and sauteed mixed veggies",
+      "photo": "https://www.thegardengrazer.com/wp-content/uploads/2012/03/lentilspinach-burrito.webp",
+      "ingredients": [],
+      "type": "main"
+    },
+    {
+      "name": "Jackfruit Stir Fry",
+      "sides": ["Sesame Roasted Sweet Potatoes", "Roasted Brussel Brussels Sprouts"],
+      "description": "A little simple recipe to start off the weekend, Jackfruit Stir Fry. Everyone loves a good stir fry and even though its a pretty simple dish to make there are a few things you want to keep in mind before making one.",
+      "photo": "https://i2.wp.com/www.aboutthatfood.com/wp-content/uploads/2017/05/Jackfruit-Stir-Fry-4.jpg?zoom=2&resize=1034%2C770&ssl=1",
+      "type": "main",
+      "ingredients": []
+    },
+    {
+      "name": "Jackfruit Crab Cakes with Lemon Dill Sauce",
+      "sides": ["Sauteed Veggies", "Cranberry and Cilantro Quinoa Salad" ],
+      "description": "Our version of a classic seafood dish made with the versatile Jackfruit. These cakes come with Sauteed veggies and a cranberry cilantro quinoa salad ",
+      "ingredients": [],
+      "photo": "https://dizzybusyandhungry.com/wp-content/uploads/2018/09/crab-cakes-3862-2.jpg",
+      "type": "main"
+    },
+    {
+      "name": "Jambalaya",
+      "sides": ["Cornbread", "Southern Style Collard Greens"],
+      "description": "A super nutritious recipe containing a great amount of plant protein, carbohydrates, this Louisiana classic will surely fill you up. Served with Cornbread and Southern Style Collard Greens   ",
+      "ingredients": [],
+      "photo": "https://simpleveganblog.com/wp-content/uploads/2018/09/Simple-vegan-jambalaya-3.jpg",
+      "type": "main"
+    },
+    {
+      "name": "Carolina Style Vegan 'Pulled BBQ' and Coleslaw",
+      "sides": ["Chickpea Baked BBQ Beans","Roasted Sweet Potatoes" ],
+      "description": "For the barbecue lovers we have a Carolina Classic! Served with Chickpea Baked BBQ Beans & Roasted Sweet Potatoes ",
+      "ingredients": [],
+      "photo": "https://i.pinimg.com/originals/d7/c7/53/d7c753890cf30de32505bb4e8835afbf.jpg",
+      "type": "main"
+    },
+    {
+      "name": "The Holiday Dinner",
+      "sides": [
+        "Cornbread Dressing", "Jackfruit Turkey", "Rice a& Gravy", "Cranberry Sauce"
+      ],
+      "description": "For a limited time only, the holiday dinner comes with jackfruit in the style of turkey with brown rice and gravy, cornbread dressing and squash casserole.",
+      "ingredients": [],
+      "photo": "https://karmabaker.com/app/uploads/2017/11/B7B893BE-199F-41DF-8010-FEB4F906EC76-600x600.jpeg",
+      "type": "main"
+    },
+    {
+      "name": "Caribbean Curry Jackfruit",
+      "sides": ["Brown Rice & Beans", "Sauteed Greens"],
+      "description": "Another Caribbean classic prepared with jackfruit instead of traditional meat. This is served with brown rice and beans & sauteed cabbage",
+      "ingredients": [],
+      "photo": "https://noeggsorham.files.wordpress.com/2017/09/img_2469.jpg?w=1720",
+      "type": "main"
+    },
+    {
+      "name": "Quinoa & Lentil Stuffed Peppers",
+      "sides": ["Sauteed Sweet Potatoes", "Roasted Brussel Sprouts"],
+      "description": "Bell peppers packed full of a flavorful quinoa, lentil vegetable mixture! This recipe is gluten-free, full of fiber and protein and big on flavor! It's served with Sauteed Sweet Potatoes & Roasted Brussel Sprouts,",
+      "ingredients": [],
+      "photo": "http://ripe-life.com/wp-content/uploads/2015/08/lentilandquinoastuffedpeppers7.jpg"
+    }
+
+  ],
+  "salads":
+  [
+    {
+      "name": "Lemon Herb Couscous Salad",
+      "description": null,
+      "url": "https://www.bbcgoodfood.com/recipes/2303651/sweet-potato-salad",
+      "photo": "https://www.inspiredtaste.net/wp-content/uploads/2017/12/Easy-Couscous-Salad-Recipe-2-1200.jpg"
+    },
+    {
+      "name": "Black Bean Sweet Potato Salad",
+      "description": null,
+      "photo": "https://32lxcujgg9-flywheel.netdna-ssl.com/wp-content/uploads/2011/06/black_bean_salad_sweet_potatoes-10.jpg"
+    },
+    {
+      "name": "Kale Apple Salad with Lemon Vinaigrette",
+      "description": null,
+      "photo": "https://www.spendwithpennies.com/wp-content/uploads/2018/07/massaged-kale-salad-recipe-1515.jpg"
+    },
+    {
+      "name": "Mixed Green Salad with Sesame-Ginger Vinaigrette",
+      "description": null,
+      "photo": "https://www.spendwithpennies.com/wp-content/uploads/2018/07/massaged-kale-salad-recipe-1515.jpg"
+    },
+    {
+      "name": "Cranberry and Cilantro Quinoa Salad" ,
+      "description": null,
+      "photo": "http://images.brandpointcontent.s3.amazonaws.com/1034393639_wide.jpg"
+    }
+  ]
+}

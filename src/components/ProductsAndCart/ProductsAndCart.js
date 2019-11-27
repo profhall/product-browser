@@ -2,118 +2,9 @@ import React, {useState} from 'react';
 import styled from "styled-components";
 import Product from "../Product/Product";
 import emailjs from 'emailjs-com';
+import {meals} from '../../data'
 
-const stuff =
-    [
-        {
-            "name": "Quinoa Bowl w/BBQ Jerked Jackfruit",
-            "sides": ["Fried Plantains", "Salad"],
-            "description": "A tasty bowl combining jerked jackfruit quinoa and red beans cooked in coconut milk. We use spices and herbs to create a Caribbean taste.",
-            "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg",
-            "type": "main",
-            "ingredients": ["scallion","onion","coconut milk", "red beans", "jackfruit", "plantains", "seasonings & herbs"]
-        },
-        {
-            "name": "Jackfruit Wraps",
-            "sides": ["Fried Plantains", "Salad"],
-            "description": "These vegan burritos are filled with red beans, brown rice, cilantro, tomato, jackfruit seasoned with mexican spices with avocado spread.",
-            "photo": "http://www.veganricha.com/wp-content/uploads/2016/05/jamaican-jerk-jackfruit-caribbean-black-bean-tacos-4875.jpg",
-            "ingredients": [],
-            "type": "main"
-        },
-        {
-            "name": "Lentil Spinach BurritoS",
-            "sides": ["Fried Plantains", "Salad"],
-            "description": "These vegan burritos are filled with red beans, brown rice, cilantro, jerked jackfruit, and sauteed mixed veggies",
-            "photo": "https://www.thegardengrazer.com/wp-content/uploads/2012/03/lentilspinach-burrito.webp",
-            "ingredients": [],
-            "type": "main"
-        },
-        {
-            "name": "Jackfruit Stir Fry",
-            "sides": ["Sesame Roasted Sweet Potatoes", "Roasted Brussel Brussels Sprouts"],
-            "description": "A little simple recipe to start off the weekend, Jackfruit Stir Fry. Everyone loves a good stir fry and even though its a pretty simple dish to make there are a few things you want to keep in mind before making one.",
-            "photo": "https://i2.wp.com/www.aboutthatfood.com/wp-content/uploads/2017/05/Jackfruit-Stir-Fry-4.jpg?zoom=2&resize=1034%2C770&ssl=1",
-            "type": "main",
-            "ingredients": []
-        },
-        {
-            "name": "Jackfruit Crab Cakes w/Lemon Dill Sauce",
-            "sides": ["Sauteed Veggies", "Cranberry and Cilantro Quinoa Salad" ],
-            "description": "Our version of a classic seafood dish made with the versatile Jackfruit. These cakes come with Sauteed veggies and a cranberry cilantro quinoa salad ",
-            "ingredients": [],
-            "photo": "https://dizzybusyandhungry.com/wp-content/uploads/2018/09/crab-cakes-3862-2.jpg",
-            "type": "main"
-        },
-        {
-            "name": "Jambalaya",
-            "sides": ["Cornbread", "Southern Style Collard Greens"],
-            "description": "A super nutritious recipe containing a great amount of plant protein, carbohydrates, this Louisiana classic will surely fill you up. Served with Cornbread and Southern Style Collard Greens   ",
-            "ingredients": [],
-            "photo": "https://simpleveganblog.com/wp-content/uploads/2018/09/Simple-vegan-jambalaya-3.jpg",
-            "type": "main"
-        },
-        {
-            "name": "Carolina Style Vegan 'Pulled BBQ' and Coleslaw",
-            "sides": ["Chickpea Baked BBQ Beans","Roasted Sweet Potatoes" ],
-            "description": "For the barbecue lovers we have a Carolina Classic! Served with Chickpea Baked BBQ Beans & Roasted Sweet Potatoes ",
-            "ingredients": [],
-            "photo": "https://i.pinimg.com/originals/d7/c7/53/d7c753890cf30de32505bb4e8835afbf.jpg",
-            "type": "main"
-        },
-        {
-            "name": "The Holiday Dinner",
-            "sides": [
-                "Cornbread Dressing", "Jackfruit Turkey", "Rice a& Gravy", "Cranberry Sauce"
-            ],
-            "description": "For a limited time only, the holiday dinner comes with jackfruit in the style of turkey with brown rice and gravy, cornbread dressing and squash casserole.",
-            "ingredients": [],
-            "photo": "https://karmabaker.com/app/uploads/2017/11/B7B893BE-199F-41DF-8010-FEB4F906EC76-600x600.jpeg",
-            "type": "main"
-        },
-        {
-            "name": "Caribbean Curry Jackfruit",
-            "sides": ["Brown Rice & Beans", "Sauteed Greens"],
-            "description": "A Caribbean Classic prepared with jackfruit instead of traditional meat. This is served with brown rice and beans & sauteed cabbage",
-            "ingredients": [],
-            "photo": "https://noeggsorham.files.wordpress.com/2017/09/img_2469.jpg?w=1720",
-            "type": "main"
-        },
-        {
-            "name": "Quinoa & Lentil Stuffed Peppers",
-            "sides": ["Sauteed Sweet Potatoes", "Roasted Brussel Sprouts"],
-            "description": "Bell peppers packed full of a flavorful quinoa, lentil vegetable mixture! This recipe is gluten-free, full of fiber and protein and big on flavor! It's served with Sauteed Sweet Potatoes & Roasted Brussel Sprouts,",
-            "ingredients": [],
-            "photo": "http://ripe-life.com/wp-content/uploads/2015/08/lentilandquinoastuffedpeppers7.jpg"
-        },
-        {
-            "name": "Lemon Herb Couscous Salad",
-            "description": null,
-            "url": "https://www.bbcgoodfood.com/recipes/2303651/sweet-potato-salad",
-            "photo": "https://www.inspiredtaste.net/wp-content/uploads/2017/12/Easy-Couscous-Salad-Recipe-2-1200.jpg"
-        },
-        {
-            "name": "Black Bean Sweet Potato Salad",
-            "description": null,
-            "photo": "https://32lxcujgg9-flywheel.netdna-ssl.com/wp-content/uploads/2011/06/black_bean_salad_sweet_potatoes-10.jpg"
-        },
-        {
-            "name": "Kale Apple Salad with Lemon Vinaigrette",
-            "description": null,
-            "photo": "https://www.spendwithpennies.com/wp-content/uploads/2018/07/massaged-kale-salad-recipe-1515.jpg"
-        },
-        {
-            "name": "Mixed Green Salad with Sesame-Ginger Vinaigrette",
-            "description": null,
-            "photo": "https://irepo.primecp.com/2015/06/224093/Creamy-Italian-Dressing_ExtraLarge1000_ID-1038789.jpg?v=1038789"
-        },
-        {
-            "name": "Cranberry and Cilantro Quinoa Salad" ,
-            "description": null,
-            "photo": "http://images.brandpointcontent.s3.amazonaws.com/1034393639_wide.jpg"
-        }
-
-    ];
+const stuff = meals
 
 
 
@@ -229,13 +120,19 @@ const Main = () => {
             </ExitIcon>
 
             {seeInfo ?  <ProductsHeader>
-                <p>
+                <PHeaderInfo>
 
                     Welcome to The Tasty Plant Based Kitchen, thanks for stopping by!
-                    Below are meals for you to choose that we will use as a reference collection when preparing your meals.
-                    Please choose at least one salad, all meal orders come with a 16oz salad of your choice. <br/>
-                    <b>Disclaimer: We do not own these photos, they are accurate depictions of the meals we prepare, these photos will be updated overtime.</b>
-                </p>
+                    Below is a collection of meals for you to choose from. Once you pick your meals don't forget to enter the necessary information (name and email).
+                     The meals you choose will show up onn the left sidebar, simple tap or click a meal to remove it from your list. Once you submit,
+                    you will you will recieve an email from The Tasty Plant Based Kitchen to get you started with a plan.<br/>
+                    We will use your selected meals as a reference point for creating your meals, of course we will run everything by you first!
+                    <br/>
+                    <b>Note: </b>Please choose at least one salad, all meal orders come with a 16oz salad of your choice. <br/>
+
+
+                    <b>Disclaimer:</b> We do not own these photos, they are accurate depictions of the meals we prepare, these photos will be updated overtime.
+                </PHeaderInfo>
                 <input id="uName" placeholder={"Your Name (required)"} onChange={handleInputChange}/>
                 <input id="uEmail"  type="email" pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" placeholder={"Your Email (required)"}  onChange={handleInputChange}/>
                 <MessageArea id="uMessage"  width={windowWidth} onChange={handleInputChange} placeholder={"Type a message here if you would like to give any more info about yourself, and you're here."}/>
@@ -249,14 +146,16 @@ const Main = () => {
             </Products>
 
             <Favs isOpen={siderOpen} width={windowWidth}>
+                {windowWidth < 851 ? <ToggleSiderButton isOpen={siderOpen} onClick={()=>toggleSider()} className="small material-icons">{siderOpen ? "arrow_backward" : "arrow_forward"}</ToggleSiderButton> : null}
 
-                {windowWidth > 850 ?
+                {chosenItems.length > 0 && (windowWidth > 850 || siderOpen) ?
                     <FavHeader>
-                        <span>{chosenItems.length > 0 ? chosenItems.length : null}</span> {chosenItems.length !==1 ? "Meals" : "Meal"}
+                        <span>{chosenItems.length} </span> {chosenItems.length !==1 ? "Meals Selected" : "Meal Selected"}
+                        <br/>
+                        <span style={{fontSize:12}}>{chosenItems.length > 0 && siderOpen ?"click meal to remove":null}</span>
                     </FavHeader>
                     :
                     <h5>{chosenItems.length > 0 ? chosenItems.length : null}</h5>}
-
                 {siderOpen ? <FavList>
                     {chosenItems.map((fav)=>
                         <Fav onClick={()=>toggleFav(fav)}>
@@ -266,9 +165,8 @@ const Main = () => {
                     )}
 
                     <br/>
-                    click meal to remove it
+
                 </FavList>:null}
-                {windowWidth < 851 ? <ToggleSiderButton isOpen={siderOpen} onClick={()=>toggleSider()} className="small material-icons">{siderOpen ? "arrow_backward" : "arrow_forward"}</ToggleSiderButton> : null}
 
             </Favs>
         </TheMainContent>
@@ -303,17 +201,14 @@ const ToggleSiderButton = styled.i`
   justify-content: center;
   background-color: darkblue;
   width: 100%;
-  margin-top: ${props => props.isOpen ? 'auto' : 'auto'};
-  position: sticky;
-  bottom: 0;
-  left:0;
+  //margin-bottom: auto;
+  grid-area: toggle;
 `;
 
 
-const DelFav = styled.i`
-float:right;
-background-color: red;
-border-radius: 100%;
+const PHeaderInfo = styled.p`
+max-height: 70%;
+overflow: scroll;
 `;
 
 
@@ -321,7 +216,7 @@ const ExitIcon = styled.span`
 position: absolute;
 font-size: 14px;
 padding: 1px 3px;
-top: 12%;
+top: 11%;
 right: 2em;
 background-color: ${props => props.seeInfo ? 'red' : 'green'};
 border-radius: 50px;
@@ -333,8 +228,9 @@ const MessageArea = styled.textarea`
 `;
 const ProductsHeader = styled.div`
   grid-area: pheader;
-  padding: 1.5em;
+  padding: .5em 1em;
   height: 100% ;
+  
 `;
 const SubmitFavsBuuton = styled.button`
   width:${props => props.width > 850 ? '20%' : '80%'};
@@ -345,8 +241,9 @@ const SubmitFavsBuuton = styled.button`
 `;
 
 const FavHeader = styled.h5`
-  flex-grow: 1 ;
-`;
+  grid-area: head;
+   width: 100%;
+=`;
 const Fav = styled.li`
   width: 100%;
   font-size: 1em;
@@ -357,8 +254,9 @@ const Fav = styled.li`
 
 const FavList = styled.ol`
   margin: 0;
-  flex-grow: 14 ;
   text-align: left;
+  grid-area: list;
+  width: 100%;
 `;
 
 const Products = styled.div`
@@ -377,9 +275,9 @@ const Favs = styled.div`
   grid-column: ${props => props.isOpen && props.width < 850 ? '1 / span 2' : ""};
   z-index: 2;
   flex-direction:column ;
-  display: flex;
-  justify-content: flex-start;
-  //align-items: center;
+  display: grid;
+  grid-template-areas: 'toggle''head' 'list';
+  grid-template-rows: 5% 15% auto;
   width: 100%;
   //padding-left: 25px;
 
