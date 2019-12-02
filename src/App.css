@@ -1,7 +1,20 @@
 
+.DayPicker-Months {
+    background-color: grey;
+}
+.DayPickerInput{
+color: white;
+
+}
+
+.DayPickerInput input{
+    color: white;
+
+}
 
 .App {
   text-align: center;
+
 }
 
 .App-logo {

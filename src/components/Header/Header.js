@@ -1,31 +1,37 @@
 import React from 'react';
 import styled from 'styled-components'
 import plateIcon from './assets/lunch-box.svg';
+import colors from "../../Colors";
 
 
-const Header = () => {
+const Navi = () => {
     return (
-        <TheHeader>
-            <HeaderIcon src={plateIcon} />
-            <HeaderTitle>
-                The Tasty Plant Based Kitchen
-            </HeaderTitle>
-            {/*https://www.eatthismuch.com/food/nutrition/young-green-jackfruit-in-brine,474598/*/}
-        </TheHeader>
+        <div className="navbar-fixed">
+
+        <TheNav >
+            <div className="nav-wrapper container ">
+                <a id="logo-container" href="/" className="brand-logo ">
+                    <h5 className="flow-text" style={{color:colors.bright}}>PJ's Plant-Based Kitchen</h5>
+                </a>
+                <ul className="right">
+                    <li><a href="#">Meals</a></li>
+                </ul>
+
+
+            </div>
+        </TheNav>
+        </div>
     );
 };
 
-const TheHeader = styled.div`
+const TheNav = styled.nav`
   //width: 100%;
-  height: 10%;
-  background-color: #333333 ;
-  color: white;
-  display: flex;
-  padding: 0 7px;
+  background-color: ${colors.secondaryOne} ;
+  color: ${colors.bright} ;
 `;
 
 const HeaderIcon = styled.img`
-  height: 75%;
+  width: 7%;
   align-self: center;
 `;
 const HeaderTitle = styled.h4`
@@ -36,4 +42,4 @@ const HeaderTitle = styled.h4`
   
 `;
 
-export default Header;
+export default Navi;
