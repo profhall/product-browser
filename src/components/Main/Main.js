@@ -65,6 +65,8 @@ const Main = ({ToggleMeals,chosenMeals,setMeals}) => {
 
         setMeals(chosenMeals.filter(item => item !== fav));
     };
+
+
     return (
         <MainContent className="" currentSlide={currentSlide}>
             <Slide id={0} name={"user_info"}  className="container" style={{display: currentSlide===0?"":"none"}}>
@@ -144,14 +146,13 @@ const Main = ({ToggleMeals,chosenMeals,setMeals}) => {
 
 
             <Slide id={4} name={"meal_section"} className="" style={{display: currentSlide===4?"":"none"}}>
-                <br/>
                 <div className="row center">
-                    <h4 className="header center"> All meals are 100% Plant-Based. No animals products are used!</h4>
+                    <h4 className="header center">100% Plant-Based Meals</h4>
 
                     <div  className={`col ${windowWidth>600 ?"s8":"s12"} center`}>
-                        <h6>Pick your {mealCount} meals</h6>
+                        <h6 style={{margin:0}} >Pick your {mealCount} meals</h6>
                         {
-                            chosenMeals.length > 0 ? <ul>
+                            chosenMeals.length > 0 && windowWidth > 600 ? <ul>
                                 {chosenMeals.map((fav)=> <li onClick={()=>deleteMeal(fav)}>{fav}</li>)} </ul>:null
                         }
                     </div>
@@ -187,7 +188,7 @@ background:linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,.7)),url(${foodPic});
 background-repeat: no-repeat ;
 background-size:  cover ;
 background-position: center;
-height: ${props=> props.currentSlide===4?"350px":"500px"};
+height: ${props=> props.currentSlide===4?"250px":"500px"};
 `;
 
 const BackButton = styled.button`
@@ -199,6 +200,15 @@ background-color: ${colors.bright};
 margin: 12px;
 `;
 const StartButton = styled.button`
+color : white;
+background-color: ${colors.bright};
+&:hover {
+  background-color: ${colors.secondaryTwo};
+}
+margin: 12px;
+
+`;
+const HideButton = styled.button`
 color : white;
 background-color: ${colors.bright};
 &:hover {
