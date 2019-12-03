@@ -147,7 +147,7 @@ const Main = ({ToggleMeals,chosenMeals,setMeals}) => {
 
             <Slide id={4} name={"meal_section"} className="" style={{display: currentSlide===4?"":"none"}}>
                 <div className="row center">
-                    <h4 className="header center">100% Plant-Based Meals</h4>
+                    <h4 className="header center">100% Plant-Based Me</h4>
 
                     <div  className={`col ${windowWidth>600 ?"s8":"s12"} center`}>
                         <h6 style={{margin:0}} >Pick your {mealCount} meals</h6>
