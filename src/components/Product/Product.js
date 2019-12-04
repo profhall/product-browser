@@ -25,25 +25,24 @@ const Content = ({close, meal}) => {
 const Product = ({item,windowWidth,addToFavs}) => {
 
     return (
-        <TheProduct width={windowWidth}>
+        <TheProduct width={windowWidth} className={"row"}>
             <h6 style={{padding:0,margin:0}}><b>{item.name}</b></h6>
 
-            <ProductContent width={windowWidth}>
-                <PhotoContainer theWidth={windowWidth} >
-                <ProductPhoto  src={item.photo}/>
+            <ProductContent width={windowWidth} className={"row col s12"}>
+                <PhotoContainer bg={item.photo} className={`col ${windowWidth>600?"s5":"s8"}`} theWidth={windowWidth} >
+
                 </PhotoContainer>
-                <ProductInfo width={windowWidth}>
+                <ProductInfo className={`col ${windowWidth>600?"s7":"s12"}`} width={windowWidth}>
                     <p >{item.description}</p>
 
                 </ProductInfo>
             </ProductContent>
 
-            <TheButtons>
-                <Popup modal trigger={<SelectProdButton className={"btn"} >Ingredients</SelectProdButton>}>
+            <TheButtons  className={"col s12"}>
+                <Popup modal trigger={<SelectProdButton width={windowWidth} className={"btn"} >Ingredients</SelectProdButton>}>
                     {close => <Content close={close} meal={item} />}
-                </Popup>
-
-                <SelectProdButton className={"btn"} onClick={()=>addToFavs(item)}>
+                </Popup><br/>
+                <SelectProdButton className={"btn"} width={windowWidth} onClick={()=>addToFavs(item)}>
                     Add
                 </SelectProdButton>
             </TheButtons>
@@ -72,16 +71,20 @@ const ModalInfo = styled.div`
   font-weight: bold;
 `;
 const PhotoContainer = styled.div`
-width: ${props => props.width > 860 ? "60%" : "90%"};
-height: ${props => props.width > 860 ? '80%': '65%'};
-  margin: 1%;
-  // border: ${props => props.width > 860 ? 'red solid 2px':'yellow solid 1px'};
+width: ${props => props.width > 860 ? "45%" : "90%"};
+height: ${props => props.width > 860 ? '90%': '100%'};
+ margin: 1% !important;
+ background:url(${props =>props.bg});
+ border-radius: 5px;
+background-repeat: no-repeat ;
+background-size:  cover ;
+background-position: center;
+
 `;
 
 const TheProduct = styled.div`
-  height:${props => props.width > 860 ? "50%" : "75%"};
-  width:${props => props.width > 860 ? "45%" : "100%"};
-  //border: lightgray solid 1px;
+  height:${props => props.width > 860 ? "50%" : "60%"};
+  width:${props => props.width > 860 ? "50%" : "99%"};
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   margin-bottom: 2em;
@@ -93,22 +96,21 @@ const ProductInfo = styled.div`
   height: ${props => props.width > 860 ? "65%" : "100%"};
   text-align: left;
   overflow: scroll;
+   margin-left:0 !important;
   
 `;
 
 const ProductContent = styled.div`
   height:80%;
   width:100%;
-  //min-width: 30%;
   display: flex;
   flex-direction: ${props => props.width > 860 ? "row":"column"};
   align-items: center;
   margin: 10px;
-  //justify-content: flex-start;
 `;
 
 const SelectProdButton = styled.button`
-  width: 45%;
+  width: ${props => props.width > 860 ? "45%":"100%"};
   margin: auto;
 `;
 
@@ -117,6 +119,7 @@ const TheButtons = styled.div`
   display: flex;
   margin: auto;
   margin-bottom: 5px;
+  height: 20%;
 `;
 
 const ProductPhoto = styled.img`

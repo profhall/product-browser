@@ -120,6 +120,7 @@ const CircleButton = styled.button`
 border-radius: 100%;
 width: 50px;
 height: 50px;
+background-color: ${props=>props.restrictions.includes(props.name)? "red":""};
 `;
 
 const FormTextArea = styled.textarea`

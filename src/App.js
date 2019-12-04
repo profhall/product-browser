@@ -17,6 +17,7 @@ const stuff = meals;
 function App() {
 
     const [chosenMeals, setMeals] = useState([]);
+    const [howManyMeals, getNumberOfMeals] = useState(0);
     const [mealViewOpen, ToggleMeals] = useState(false);
     const ToggleMealsView = ()=>{
         console.log("See Meals...")
@@ -27,14 +28,16 @@ function App() {
         // chosenItems.push(<li>{item.name}</li>)
 
         let items = []
-        chosenMeals.includes(item.name) ? items = chosenMeals : items = chosenMeals.concat(item.name);
-        console.log(items)
-        setMeals(items)
+        console.log(chosenMeals.length , howManyMeals)
+        if (chosenMeals.length < howManyMeals){
+            items = chosenMeals.concat(item.name);
+            setMeals(items)
+        }
     };
   return (
       <TheApp>
           <Navi/>
-          <MainIntro chosenMeals={chosenMeals} setMeals={setMeals} ToggleMeals={ToggleMealsView}/>
+          <MainIntro chosenMeals={chosenMeals} getNumberOfMeals={getNumberOfMeals} setMeals={setMeals} ToggleMeals={ToggleMealsView}/>
           {mealViewOpen ?
               <Meals>{<Products addToFavs={addToFavs}/>}</Meals> : null}
           <MainInfo/>
