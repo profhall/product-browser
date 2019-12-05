@@ -2,15 +2,17 @@ import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import colors from "../../Colors";
 import foodPic from './veganBowl.jpeg'
-import DayPickerInput from 'react-day-picker/DayPickerInput';
+import DayPickerInput from 'react-day-picker';
+import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import Product from "../Product/Product";
 import emailjs from "emailjs-com";
 
 
-const Main = ({ToggleMeals,chosenMeals,setMeals, getNumberOfMeals}) => {
+const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, getNumberOfMeals}) => {
     const [windowWidth, setWidth] = useState(getWidth);
     const [currentSlide, changeSlide] = useState(0);
+    const [mealPrice, setPrice] = useState(0);
     const [mealsValidated, validateMeals] = useState(false);
     const [infoValidated, validateInfo] = useState(false);
     const [startDate, setDate] = useState(null);
@@ -19,58 +21,36 @@ const Main = ({ToggleMeals,chosenMeals,setMeals, getNumberOfMeals}) => {
     const [restrictions, updateRestrictions] = useState([]);
     const [userinfo, setUser] = useState({"name":null,"email":null});
 
+    const deliveryFee = 7;
+    const containerFee = 10;
     useEffect(()=>{
-        console.log("component mounted..")
-        mealCount !== 0 ? validateMeals(true) :  validateMeals(false)
-        console.log(`Start Date: ${startDate}, Number Of Meals: ${mealCount}, Restrictions: ${restrictions}`)
+        console.log("component mounted..");
+        mealCount !== 0 ? validateMeals(true) :  validateMeals(false);
+        console.log(`Start Date: ${startDate}, Number Of Meals: ${mealCount}, Restrictions: ${restrictions}`);
         setWidth(getWidth())
     });
 
-    const emailSelection = (chosenItems) => {
-
-        const Info = userinfo;
-
-        const theSubmitInfo = {"chosen_items":chosenItems,"name":Info["name"],"email":Info["email"]}
-        Info['message'] ? theSubmitInfo['message'] = Info['message'] : Info['message'] = null;
-        console.log("favs submitted", Info)
-
-
-        emailjs.send('gmail', 'template_VM9IlcIJ', theSubmitInfo, "user_ii2HeUxvMKEfOyePRTfc8")
-            .then(function(response) {
-                console.log('SUCCESS!', response.status, response.text);
-                alert("Thank you! We will reach out to you soon to discuss the next steps")
-
-            }, function(error) {
-                console.log('FAILED...', error);
-            });
-
-    }
     const handleInputChange = (e) => {
-        let emailVal = null
-        let nameVal = null
-        // console.log("input changed", e.target.value)
         console.log("input id", e.target.id)
         let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (e.target.id === "name"){userinfo["name"] = e.target.value;}
+        else if (e.target.id === "email"){userinfo["email"]= e.target.value;}
+        else if (e.target.id === "state"){userinfo["state"]= e.target.value;}
+        else if (e.target.id === "city"){userinfo["city"]= e.target.value;}
+        else if (e.target.id === "zip"){userinfo["zip"]= e.target.value;}
+        else if (e.target.id === "street"){userinfo["street"]= e.target.value;}
 
-        if (e.target.id === "name"){
-            userinfo["name"] = e.target.value;
-            e.target.value.length < 2 ? nameVal = false : nameVal = true
+        setUser(userinfo);
 
-
-        }
-        else if (e.target.id === "email"){
-
-            userinfo["email"]= e.target.value;
-
-            e.target.value.match(mailformat)  ? emailVal = false : emailVal = true
-        }
-        setUser(userinfo)
-
-        if ((userinfo["name"] && userinfo["email"]) && userinfo["name"].length >= 2 && userinfo["email"].match(mailformat) ) {
-            console.log(userinfo['name'], nameVal, userinfo['email'], emailVal)
+        if ((userinfo["name"] && userinfo["email"] && userinfo["city"] && userinfo["street"] && userinfo["state"] && userinfo["zip"])
+            && userinfo["name"].length >= 2 && userinfo["email"].match(mailformat) && userinfo["city"].length > 2 && userinfo["street"].length > 4 && userinfo["state"].length === 2 && userinfo["zip"].length === 5)
+        {
+            console.log(userinfo['name'], userinfo['email'])
             validateInfo(true)
         }
-        else {validateInfo(false) }
+        else {
+            validateInfo(false)
+        }
         console.log(userinfo["email"], userinfo["name"])
     };
     const handleResize = ()=>{
@@ -83,12 +63,12 @@ const Main = ({ToggleMeals,chosenMeals,setMeals, getNumberOfMeals}) => {
         return window.innerWidth
     }
 
-    const selectButton = (e) => {
-        console.log(e.target.classList)
-
+    const selectButton = (e,price) => {
+        console.log(e.target, price)
         if (e.target.classList.contains("mc"))
         {
-            changeMealCount(e.target.id)
+            changeMealCount(e.target.id);
+            setPrice(price);
             getNumberOfMeals(Number(e.target.id))
 
         }
@@ -136,14 +116,28 @@ const Main = ({ToggleMeals,chosenMeals,setMeals, getNumberOfMeals}) => {
 
 
     };
-
+    function handleDayClick(day, { selected, disabled }) {
+        if (disabled) {
+            console.log("day is disabled")
+            return;
+        }
+        if (selected) {
+            // Unselect the day if already selected
+            setDate( null );
+            return;
+        }
+        setDate( day.toDateString() );
+    }
 
     return (
         <MainContent className="" currentSlide={currentSlide}>
             <Slide id={0} name={"user_info"}  className="container" style={{display: currentSlide===0?"":"none"}}>
+                <br/>
+                <br/>
+                <br/>
+
                 <div className="container" >
-                    <br/>
-                    <h4 className="header center ">Healthy Delicious Plant-Based Meals Prepared Just For You!</h4>
+                    <h4 className="header center ">Delicious Plant-Based Meals Prepared For You!</h4>
                     <div className="row center">
                         <p className="header col s12 light">
                             Provide your information to get started.
@@ -157,9 +151,26 @@ const Main = ({ToggleMeals,chosenMeals,setMeals, getNumberOfMeals}) => {
                                 <div className="input-field col s6">
                                     <FormInput onChange={handleInputChange} id="email" placeholder={"Email Address"} type="email" className="validate"/>
                                 </div>
-                            </div>
-                            <div className="row center">
-                                <StartButton onClick={StartOrderProcess}  className={`btn-large ${infoValidated?"":"disabled"}`}>Get Started</StartButton>
+
+                                <div className="input-field col s12">
+                                    <FormInput onChange={handleInputChange} id="street" placeholder={"Number & Street"} />
+                                </div>
+
+
+                                <div className="input-field col s6">
+                                    <FormInput onChange={handleInputChange} id="city" placeholder={"City"} />
+                                </div>
+
+                                <div className="input-field col s2">
+                                    <FormInput onChange={handleInputChange} id="state" placeholder={"State"} />
+                                </div>
+
+                                <div className="input-field col s4">
+                                    <FormInput onChange={handleInputChange} id="zip" placeholder={"Zip"} />
+                                </div>
+                                <div className="row center">
+                                    <StartButton onClick={StartOrderProcess}  className={`btn-large ${infoValidated?"":"disabled"}`}>Get Started</StartButton>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -170,43 +181,44 @@ const Main = ({ToggleMeals,chosenMeals,setMeals, getNumberOfMeals}) => {
                     <br/>
                     <h4 className="header center ">{mealCount !==0 ?`You Selected ${mealCount} Meals`: `How Many Meals?`}</h4>
                     <HorizontalButtons className="row " >
-                        <SquareButton id={4} className="mc btn  s2 "  onClick={(e)=>selectButton(e)} >
+                        <SquareButton id={4} price={13} className="mc btn  s2 "  onClick={(e)=>selectButton(e,52)} >
                             4 MEALS<br/>
                             $13 / MEAL <br/>
                            $52 TOTAL
                         </SquareButton>
-                        <SquareButton id={7} className={"mc btn  s2"}  onClick={(e)=>selectButton(e)} >
+                        <SquareButton id={7} className={"mc btn  s2"}  onClick={(e)=>selectButton(e,84)} >
                             7 MEALS<br/>
                             $12 / MEAL <br/>
                             $84 TOTAL
                         </SquareButton>
-                        <SquareButton id={10} className={"mc btn  s2 "}  onClick={(e)=>selectButton(e)} >
+                        <SquareButton id={10} className={"mc btn  s2 "}  onClick={(e)=>selectButton(e,110)} >
                             10 MEALS<br/>
                             $11 / MEAL <br/>
                             $110 TOTAL
                         </SquareButton>
-                        <SquareButton id={12} className={"mc btn  s2 "}  onClick={(e)=>selectButton(e)} >
+                        <SquareButton id={12} className={"mc btn  s2 "}  onClick={(e)=>selectButton(e,120)} >
                             12 MEALS<br/>
                             $10/ MEAL <br/>
                             $120 TOTAL
                         </SquareButton>
                     </HorizontalButtons>
                 <div className="row center">
-                    <BackButton onClick={GoBack}  className="btn-large">Back</BackButton>
+                    <BackButton onClick={GoBack}  className="btn-large">Go Back</BackButton>
                     <StartButton onClick={StartOrderProcess}  className={`btn-large ${mealsValidated?"":"disabled"}`}>Choose Delivery Date</StartButton>
                 </div>
 
             </Slide>
             <Slide id={2} name={"delivery"} className="" style={{display: currentSlide===2?"":"none"}}>
-                <br/>
-                <h4 className="header center "> Choose A Delivery Date</h4>
-                <div className="row">
-                    <div className="input-field col s12">
-                        <DayPickerInput style={{width:"100%"}}  placeholder={"Start Date"} onDayChange={day => setDate(day.toDateString())} />
-                    </div>
-                </div>
+                <h5 className="header center "> We Deliver On Wednesdays and Saturdays</h5>
+                <CalendarContainer className="row">
+                        <DayPickerInput
+                            disabledDays={{ daysOfWeek: [0,1,2,4,5] }}
+                            style={{width:"100%"}}  placeholder={"Start Date"}
+                            selectedDays={startDate}
+                            onDayClick={handleDayClick} />
+                </CalendarContainer>
                 <div className="row center">
-                    <StartButton onClick={GoBack}  className="btn-large">Back</StartButton>
+                    <StartButton onClick={GoBack}  className="btn-large">Go Back</StartButton>
                     <StartButton onClick={StartOrderProcess}  className={`btn-large ${startDate ? "":"disabled"}`}>Set Dietary Restrictions</StartButton>
                 </div>
 
@@ -229,14 +241,18 @@ const Main = ({ToggleMeals,chosenMeals,setMeals, getNumberOfMeals}) => {
                     </CircleButton>
                 </HorizontalButtons>
                 <div className="row center">
-                        <BackButton onClick={GoBack}  className="btn-large">Back</BackButton>
+                        <BackButton onClick={GoBack}  className="btn-large">Go Back</BackButton>
                         <StartButton onClick={StartOrderProcess} className="btn-large" id={"mealSelect"}>Select Meals</StartButton>
                     </div>
             </Slide>
             <Slide id={4} name={"meal_section"} className="" style={{display: currentSlide===4?"":"none"}}>
                 <div className="row center">
-                    <h4 className="header center">100% Plant-Based Me</h4>
+                    <br/>
+                    {windowWidth > 600?"<br/>":null}
+
+                    <h4 className="header center">100% Plant-Based</h4>
                     <h6 style={{margin:0}} >{chosenMeals.length > 0? null:"Pick"} {mealCount-chosenMeals.length} {chosenMeals.length >0? " meals remaining":"meals"} </h6>
+
                     {
                         chosenMeals.length > 0 && windowWidth > 600?
                             <ChosenMealsList  className={`col ${windowWidth>600 ?"s8":"s12"} center`}>
@@ -247,25 +263,58 @@ const Main = ({ToggleMeals,chosenMeals,setMeals, getNumberOfMeals}) => {
                             }
                             </ChosenMealsList>: null
                         }
-
                     <div className={`col ${ windowWidth>600 ?"s4":"s12"} center`}>
-                        <BackButton onClick={GoBack}  className="btn-large">Back</BackButton>
+
+                        <BackButton onClick={GoBack}  className="btn-large">Go Back</BackButton>
                         <StartButton onClick={StartOrderProcess}  className={`btn-large ${chosenMeals.length>=mealCount ? "":"disabled"}`}>Checkout</StartButton>
                     </div>
+
+                </div>
+
+            </Slide>
+            <Slide id={5} name={"checkout"} className="center" style={{display: currentSlide===5?"":"none"}}>
+<br/>
+                <div className="row center">
+                    <h5><b>{userinfo.name}</b>, please validate the information below. </h5>
+
+                    <h5>
+                        <b>Address</b>:{`${userinfo.street} ${userinfo.city}, ${userinfo.state} ${userinfo.zip}`}
+                    </h5>
+                    <h5><b>Email</b>: {userinfo.email}</h5>
+
+                    {startDate ?<h5><b>Date</b>: {`${startDate}`}</h5>:null}
+
+                    <h5>{mealCount} Meals & {mealCount/4} Salads</h5>
+
+                    {restrictions.length >0 ? <h5><b>Dietary Restrictions</b>: {`${restrictions}`}</h5>:null}
+
+                </div>
+                <div className="row center">
+                    <BackButton onClick={GoBack}  className="btn-large">Go Back</BackButton>
+                    <StartButton onClick={()=>{
+                        changeSlide(currentSlide+1)
+                        emailSelection(chosenMeals, userinfo)}}  className="btn-large">Submit Order</StartButton>
                 </div>
 
             </Slide>
 
+            <Slide id={6} name={"checkout"} className="" style={{display: currentSlide===6?"":"none"}}>
+                <div className="row center" style={{width:"60%"}}>
 
-            <Slide id={5} name={"checkout"} className="" style={{display: currentSlide===5?"":"none"}}>
-                <h4>Almost done {userinfo.name}! Validate your order information below. </h4>
 
-                <div className="row center">
+                {confirmation?
+                    <div className="col s12" >
+                    <h4>Thanks {userinfo.name}, There's one more step! Send your ${mealPrice+deliveryFee+containerFee}.00 payment to   </h4>
+                    </div>
+                    :
+                    <div className="col s12" >
+                        <BackButton onClick={GoBack}  className="btn-large">Go Back</BackButton>
+
+                        <h4>Hey {userinfo.name}, there seems to be a problem, your information did not go through. Go back and make sure your info is still correct and try to submit your order again.  </h4>                </div>
+
+                }
                 </div>
-                <div className="row center">
-                    <BackButton onClick={GoBack}  className="btn-large">Back</BackButton>
-                    <StartButton onClick={StartOrderProcess}  className="btn-large">Get Started</StartButton>
-                </div>
+
 
             </Slide>
 
@@ -281,7 +330,8 @@ background:linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,.7)),url(${foodPic});
 background-repeat: no-repeat ;
 background-size:  cover ;
 background-position: center;
-height: ${props=> props.currentSlide===4?"250px":"500px"};
+height: ${props=> props.currentSlide===4?"250px":"600px"};
+max-height:600px;
 `;
 
 const BackButton = styled.button`
@@ -290,7 +340,7 @@ background-color: ${colors.bright};
 &:hover {
   background-color: ${colors.secondaryTwo};
 }
-margin: 12px;
+margin: 7px;
 `;
 
 const ButtText = styled.span`
@@ -309,16 +359,11 @@ background-color: ${colors.bright};
 &:hover {
   background-color: ${colors.secondaryTwo};
 }
-margin: 12px;
+margin: 7px;
 
 `;
-const HideButton = styled.button`
-color : white;
-background-color: ${colors.bright};
-&:hover {
-  background-color: ${colors.secondaryTwo};
-}
-margin: 12px;
+const CalendarContainer = styled.div`
+margin : 0 !important;
 
 `;
 
@@ -327,7 +372,7 @@ height: 75%;
 display: flex;
 flex-direction: column;
 align-items: center ;
-justify-content: space-between;
+justify-content: space-around;
 `;
 
 const FormInput = styled.input`

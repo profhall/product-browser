@@ -13,16 +13,43 @@ import MainIntro from "./components/Main/Main";
 import MainInfo from "./components/InfoSection/InfoSection";
 import Contact from "./components/Contact/Contact";
 import {meals} from "./data";
+import emailjs from "emailjs-com";
 const stuff = meals;
 function App() {
 
     const [chosenMeals, setMeals] = useState([]);
     const [howManyMeals, getNumberOfMeals] = useState(0);
     const [mealViewOpen, ToggleMeals] = useState(false);
+    const [confirmation, setConfirmation] = useState(false);
     const ToggleMealsView = ()=>{
         console.log("See Meals...")
         ToggleMeals(!mealViewOpen)
     };
+
+    const emailSelection = (chosenItems, userInfo) => {
+
+        const Info = userInfo;
+
+        const theSubmitInfo = {"chosen_items":chosenItems,"name":Info["name"],"email":Info["email"]}
+        Info['message'] ? theSubmitInfo['message'] = Info['message'] : Info['message'] = null;
+        console.log(`favs submitted`);
+        console.log(theSubmitInfo);
+        setConfirmation(!confirmation)
+
+
+        // emailjs.send('gmail', 'template_VM9IlcIJ', theSubmitInfo, "user_ii2HeUxvMKEfOyePRTfc8")
+        //     .then(function(response) {
+        //         console.log('SUCCESS!', response.status, response.text);
+        //         alert("Thank you! We will reach out to you soon to discuss the next steps")
+        //         setConfirmation(true)
+        //
+        //     }, function(error) {
+        //         console.log('FAILED...', error);
+        //         setConfirmation(false)
+        //     });
+
+    };
+
 
     const addToFavs=(item)=> {
         // chosenItems.push(<li>{item.name}</li>)
@@ -37,7 +64,7 @@ function App() {
   return (
       <TheApp>
           <Navi/>
-          <MainIntro chosenMeals={chosenMeals} getNumberOfMeals={getNumberOfMeals} setMeals={setMeals} ToggleMeals={ToggleMealsView}/>
+          <MainIntro confirmation={confirmation}  emailSelection={emailSelection} chosenMeals={chosenMeals} getNumberOfMeals={getNumberOfMeals} setMeals={setMeals} ToggleMeals={ToggleMealsView}/>
           {mealViewOpen ?
               <Meals>{<Products addToFavs={addToFavs}/>}</Meals> : null}
           <MainInfo/>
