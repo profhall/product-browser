@@ -21,15 +21,14 @@ function App() {
     const [howManyMeals, getNumberOfMeals] = useState(0);
     const [mealViewOpen, ToggleMeals] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
-    const ToggleMealsView = ()=>{
+
+    const ToggleMealsView = (toToggle) =>{
         console.log("See Meals...")
-        ToggleMeals(!mealViewOpen)
+        ToggleMeals(toToggle)
     };
 
     const emailSelection = (chosenItems, userInfo) => {
-
         const Info = userInfo;
-
         const theSubmitInfo = {"chosen_items":chosenItems,"name":Info["name"],"email":Info["email"]}
         Info['message'] ? theSubmitInfo['message'] = Info['message'] : Info['message'] = null;
         console.log(`favs submitted`);
@@ -54,28 +53,28 @@ function App() {
     const addToFavs=(item)=> {
         // chosenItems.push(<li>{item.name}</li>)
 
-        let items = []
-        console.log(chosenMeals.length , howManyMeals)
+        let items = [];
+        console.log(chosenMeals.length , howManyMeals);
+
         if (chosenMeals.length < howManyMeals){
             items = chosenMeals.concat(item.name);
-            setMeals(items)
+            setMeals(items);
+        }
+        if(item.type === "salad"){
+            console.log("Salad Chosen")
         }
     };
-  return (
-      <TheApp>
-          <Navi/>
-          <MainIntro confirmation={confirmation}  emailSelection={emailSelection} chosenMeals={chosenMeals} getNumberOfMeals={getNumberOfMeals} setMeals={setMeals} ToggleMeals={ToggleMealsView}/>
-          {mealViewOpen ?
+    return (
+        <TheApp>
+            <Navi/>
+            <MainIntro confirmation={confirmation}  emailSelection={emailSelection} chosenMeals={chosenMeals} getNumberOfMeals={getNumberOfMeals} setMeals={setMeals} ToggleMeals={ToggleMealsView}/>
+            {mealViewOpen ?
               <Meals>{<Products addToFavs={addToFavs}/>}</Meals> : null}
-          <MainInfo/>
-
-          <Contact/>
-
-
-         <Footer/>
-
-    </TheApp>
-)
+            <MainInfo/>
+            <Contact/>
+            <Footer/>
+        </TheApp>
+    )
 };
 
 const TheApp = styled.div`

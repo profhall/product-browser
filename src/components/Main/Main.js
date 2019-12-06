@@ -9,6 +9,11 @@ import Product from "../Product/Product";
 import emailjs from "emailjs-com";
 
 
+
+function getWidth() {
+    return window.innerWidth
+}
+
 const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, getNumberOfMeals}) => {
     const [windowWidth, setWidth] = useState(getWidth);
     const [currentSlide, changeSlide] = useState(0);
@@ -24,14 +29,37 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
     const deliveryFee = 7;
     const containerFee = 10;
     useEffect(()=>{
-        console.log("component mounted..");
+
         mealCount !== 0 ? validateMeals(true) :  validateMeals(false);
+
         console.log(`Start Date: ${startDate}, Number Of Meals: ${mealCount}, Restrictions: ${restrictions}`);
-        setWidth(getWidth())
+
+        setWidth(getWidth());
+        if(currentSlide !== 4){ToggleMeals(false)}
+        else{ToggleMeals(true)}
+
+        console.log("Salad count ", mealCount/4);
+
+
     });
 
+
+    const handleResize =()=> setWidth(getWidth());
+    window.addEventListener('resize', handleResize);
+
+    const NextSlide= (e)=>{
+        e.preventDefault();
+        changeSlide(currentSlide+1);
+    };
+
+    const PrevSlide = (e)=>{
+        e.preventDefault();
+        changeSlide(currentSlide-1);
+    };
+
     const handleInputChange = (e) => {
-        console.log("input id", e.target.id)
+        console.log("input id", e.target.id);
+
         let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (e.target.id === "name"){userinfo["name"] = e.target.value;}
         else if (e.target.id === "email"){userinfo["email"]= e.target.value;}
@@ -48,32 +76,21 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
             console.log(userinfo['name'], userinfo['email'])
             validateInfo(true)
         }
-        else {
-            validateInfo(false)
-        }
-        console.log(userinfo["email"], userinfo["name"])
-    };
-    const handleResize = ()=>{
-        console.log("window resize")
-        setWidth(getWidth());
-    };
-    window.addEventListener('resize', handleResize);
+        else { validateInfo(false) }
 
-    function getWidth() {
-        return window.innerWidth
-    }
+    };
 
     const selectButton = (e,price) => {
-        console.log(e.target, price)
+
         if (e.target.classList.contains("mc"))
         {
             changeMealCount(e.target.id);
             setPrice(price);
             getNumberOfMeals(Number(e.target.id))
-
         }
+
         if( e.target.classList.contains("dr")){
-            console.log(e.target.name)
+            console.log(e.target.name);
             if (restrictions.includes(e.target.name)) {
                 updateRestrictions(restrictions.filter((res)=>res!==e.target.name))
             }
@@ -83,39 +100,17 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
                 console.log(restrictions)
             }
         }
-
     };
 
-    const StartOrderProcess= (e)=>{
-        e.preventDefault()
-        console.log("starting the process");
-        changeSlide(currentSlide+1)
-        if( e.target.id === "mealSelect") {ToggleMeals()}
-
-    };
-
-    const GoBack = (e)=>{
-        e.preventDefault()
-        console.log("starting the process");
-        changeSlide(currentSlide-1)
-    };
-
-    const Submit= ()=>{
-        console.log("Order Sent")
-    };
     const deleteMeal= (fav) =>{
         var index = chosenMeals.indexOf(fav);
-
         if (index > -1) {
-            let meals = chosenMeals.splice(index, 1);
-            console.log(meals)
-
+            chosenMeals.splice(index, 1);
             setMeals(chosenMeals);
             refresh(refreshCount+1)
         }
-
-
     };
+
     function handleDayClick(day, { selected, disabled }) {
         if (disabled) {
             console.log("day is disabled")
@@ -169,7 +164,7 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
                                     <FormInput onChange={handleInputChange} id="zip" placeholder={"Zip"} />
                                 </div>
                                 <div className="row center">
-                                    <StartButton onClick={StartOrderProcess}  className={`btn-large ${infoValidated?"":"disabled"}`}>Get Started</StartButton>
+                                    <StartButton onClick={NextSlide}  className={`btn-large ${infoValidated?"":"disabled"}`}>Get Started</StartButton>
                                 </div>
                             </div>
                         </form>
@@ -177,34 +172,44 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
 
                 </div>
             </Slide>
+
             <Slide id={1} name={"mealCount"}  className="" style={{display: currentSlide===1?"":"none"}}>
+                <br/>
+
+                <h4 className="header center ">
+                    {mealCount !==0 ?`You Selected ${mealCount} Meals`: `How Many Meals?`}
                     <br/>
-                    <h4 className="header center ">{mealCount !==0 ?`You Selected ${mealCount} Meals`: `How Many Meals?`}</h4>
-                    <HorizontalButtons className="row " >
-                        <SquareButton id={4} price={13} className="mc btn  s2 "  onClick={(e)=>selectButton(e,52)} >
-                            4 MEALS<br/>
-                            $13 / MEAL <br/>
-                           $52 TOTAL
-                        </SquareButton>
-                        <SquareButton id={7} className={"mc btn  s2"}  onClick={(e)=>selectButton(e,84)} >
-                            7 MEALS<br/>
-                            $12 / MEAL <br/>
-                            $84 TOTAL
-                        </SquareButton>
-                        <SquareButton id={10} className={"mc btn  s2 "}  onClick={(e)=>selectButton(e,110)} >
-                            10 MEALS<br/>
-                            $11 / MEAL <br/>
-                            $110 TOTAL
-                        </SquareButton>
-                        <SquareButton id={12} className={"mc btn  s2 "}  onClick={(e)=>selectButton(e,120)} >
-                            12 MEALS<br/>
-                            $10/ MEAL <br/>
-                            $120 TOTAL
-                        </SquareButton>
-                    </HorizontalButtons>
+                    You get {Math.floor(mealCount/4)} {Math.floor(mealCount/4)===1 ?"salad":"salads"}
+                </h4>
+                <h6>
+                    <b>For every 4 meals, you receive a free salad</b>
+                </h6>
+
+                <HorizontalButtons className="row " >
+                    <SquareButton id={4} price={13} className="mc btn  s2 "  onClick={(e)=>selectButton(e,52)} >
+                        4 MEALS<br/>
+                        $13 / MEAL <br/>
+                       $52 TOTAL
+                    </SquareButton>
+                    <SquareButton id={7} className={"mc btn  s2"}  onClick={(e)=>selectButton(e,84)} >
+                        7 MEALS<br/>
+                        $12 / MEAL <br/>
+                        $84 TOTAL
+                    </SquareButton>
+                    <SquareButton id={10} className={"mc btn  s2 "}  onClick={(e)=>selectButton(e,110)} >
+                        10 MEALS<br/>
+                        $11 / MEAL <br/>
+                        $110 TOTAL
+                    </SquareButton>
+                    <SquareButton id={12} className={"mc btn  s2 "}  onClick={(e)=>selectButton(e,120)} >
+                        12 MEALS<br/>
+                        $10/ MEAL <br/>
+                        $120 TOTAL
+                    </SquareButton>
+                </HorizontalButtons>
                 <div className="row center">
-                    <BackButton onClick={GoBack}  className="btn-large">Go Back</BackButton>
-                    <StartButton onClick={StartOrderProcess}  className={`btn-large ${mealsValidated?"":"disabled"}`}>Choose Delivery Date</StartButton>
+                    <BackButton onClick={PrevSlide}  className="btn-large">Go Back</BackButton>
+                    <StartButton onClick={NextSlide}  className={`btn-large ${mealsValidated?"":"disabled"}`}>Choose Delivery Date</StartButton>
                 </div>
 
             </Slide>
@@ -218,8 +223,8 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
                             onDayClick={handleDayClick} />
                 </CalendarContainer>
                 <div className="row center">
-                    <StartButton onClick={GoBack}  className="btn-large">Go Back</StartButton>
-                    <StartButton onClick={StartOrderProcess}  className={`btn-large ${startDate ? "":"disabled"}`}>Set Dietary Restrictions</StartButton>
+                    <StartButton onClick={PrevSlide}  className="btn-large">Go Back</StartButton>
+                    <StartButton onClick={NextSlide}  className={`btn-large ${startDate ? "":"disabled"}`}>Set Dietary Restrictions</StartButton>
                 </div>
 
             </Slide>
@@ -241,8 +246,8 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
                     </CircleButton>
                 </HorizontalButtons>
                 <div className="row center">
-                        <BackButton onClick={GoBack}  className="btn-large">Go Back</BackButton>
-                        <StartButton onClick={StartOrderProcess} className="btn-large" id={"mealSelect"}>Select Meals</StartButton>
+                        <BackButton onClick={PrevSlide}  className="btn-large">Go Back</BackButton>
+                        <StartButton onClick={NextSlide} className="btn-large" id={"mealSelect"}>Select Meals</StartButton>
                     </div>
             </Slide>
             <Slide id={4} name={"meal_section"} className="" style={{display: currentSlide===4?"":"none"}}>
@@ -265,8 +270,8 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
                         }
                     <div className={`col ${ windowWidth>600 ?"s4":"s12"} center`}>
 
-                        <BackButton onClick={GoBack}  className="btn-large">Go Back</BackButton>
-                        <StartButton onClick={StartOrderProcess}  className={`btn-large ${chosenMeals.length>=mealCount ? "":"disabled"}`}>Checkout</StartButton>
+                        <BackButton onClick={PrevSlide}  className="btn-large">Go Back</BackButton>
+                        <StartButton onClick={NextSlide}  className={`btn-large ${chosenMeals.length>=mealCount ? "":"disabled"}`}>Checkout</StartButton>
                     </div>
 
                 </div>
@@ -278,7 +283,7 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
                     <h5><b>{userinfo.name}</b>, please validate the information below. </h5>
 
                     <h5>
-                        <b>Address</b>:{`${userinfo.street} ${userinfo.city}, ${userinfo.state} ${userinfo.zip}`}
+                        <b>Address</b>: {`${userinfo.street} ${userinfo.city}, ${userinfo.state} ${userinfo.zip}`}
                     </h5>
                     <h5><b>Email</b>: {userinfo.email}</h5>
 
@@ -290,7 +295,7 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
 
                 </div>
                 <div className="row center">
-                    <BackButton onClick={GoBack}  className="btn-large">Go Back</BackButton>
+                    <BackButton onClick={PrevSlide}  className="btn-large">Go Back</BackButton>
                     <StartButton onClick={()=>{
                         changeSlide(currentSlide+1)
                         emailSelection(chosenMeals, userinfo)}}  className="btn-large">Submit Order</StartButton>
@@ -308,7 +313,7 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
                     </div>
                     :
                     <div className="col s12" >
-                        <BackButton onClick={GoBack}  className="btn-large">Go Back</BackButton>
+                        <BackButton onClick={PrevSlide}  className="btn-large">Go Back</BackButton>
 
                         <h4>Hey {userinfo.name}, there seems to be a problem, your information did not go through. Go back and make sure your info is still correct and try to submit your order again.  </h4>                </div>
 

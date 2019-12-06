@@ -41,8 +41,9 @@ const Product = ({item,windowWidth,addToFavs}) => {
             <TheButtons  className={"col s12"}>
                 <Popup modal trigger={<SelectProdButton width={windowWidth} className={"btn"} >Ingredients</SelectProdButton>}>
                     {close => <Content close={close} meal={item} />}
-                </Popup><br/>
-                <SelectProdButton className={"btn"} width={windowWidth} onClick={()=>addToFavs(item)}>
+                </Popup>
+                <br/>
+                <SelectProdButton  className={`btn ${item.type}`} width={windowWidth} onClick={()=>addToFavs(item)}>
                     Add
                 </SelectProdButton>
             </TheButtons>
