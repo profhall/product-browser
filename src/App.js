@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect,useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Navi from "./components/Header/Header"
@@ -18,14 +18,24 @@ const stuff = meals;
 function App() {
 
     const [chosenMeals, setMeals] = useState([]);
+    const [chosenSalads, setSalads] = useState([]);
     const [howManyMeals, getNumberOfMeals] = useState(0);
     const [mealViewOpen, ToggleMeals] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
+    // const [allMeals, setAllMeals] = useState([]);
 
     const ToggleMealsView = (toToggle) =>{
         console.log("See Meals...")
         ToggleMeals(toToggle)
     };
+
+    let everything = []
+
+    useEffect(() => {
+        console.log(chosenMeals,chosenSalads);
+
+    }, [chosenSalads,chosenMeals]);
+
 
     const emailSelection = (chosenItems, userInfo) => {
         const Info = userInfo;
@@ -53,21 +63,31 @@ function App() {
     const addToFavs=(item)=> {
         // chosenItems.push(<li>{item.name}</li>)
 
-        let items = [];
+        let items = null;
+        let salads = null;
         console.log(chosenMeals.length , howManyMeals);
 
-        if (chosenMeals.length < howManyMeals){
+        if (chosenMeals.length < howManyMeals && item.type !== "salad"){
+            console.log("Entree Chosen");
+
             items = chosenMeals.concat(item.name);
+            // console.log(items)
             setMeals(items);
+
+
         }
-        if(item.type === "salad"){
-            console.log("Salad Chosen")
+        if(chosenSalads.length < Math.floor(howManyMeals/4) && item.type === "salad"){
+            console.log("Salad Chosen");
+            salads = chosenSalads.concat(item.name);
+            // console.log(items)
+            setSalads(salads);
+
         }
     };
     return (
         <TheApp>
             <Navi/>
-            <MainIntro confirmation={confirmation}  emailSelection={emailSelection} chosenMeals={chosenMeals} getNumberOfMeals={getNumberOfMeals} setMeals={setMeals} ToggleMeals={ToggleMealsView}/>
+            <MainIntro confirmation={confirmation}  emailSelection={emailSelection} chosenMeals={chosenMeals} getNumberOfMeals={getNumberOfMeals} setMeals={setMeals} chosenSalads={chosenSalads} setSalads={setSalads} ToggleMeals={ToggleMealsView}/>
             {mealViewOpen ?
               <Meals>{<Products addToFavs={addToFavs}/>}</Meals> : null}
             <MainInfo/>

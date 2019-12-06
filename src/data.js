@@ -1,6 +1,6 @@
 export const meals = [
     {
-        "name": "Quinoa Bowl w/BBQ Jerked Jackfruit",
+        "name": "Caribbean Quinoa Bowl with BBQ Jerked Jackfruit",
         "sides": ["Fried Plantains", "Salad"],
         "description": "A tasty bowl combining jerked jackfruit quinoa and red beans cooked in coconut milk. We use spices and herbs to create a Caribbean taste.",
         "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg",
@@ -32,7 +32,7 @@ export const meals = [
         "ingredients":["sweet potato", "brussel sprouts", "jalapenos", "young jackfruit","lime juice","green peas", "baby corn", "garlic", "herb & spices", "bell pepper"," onion", "grapeseed oil" ]
     },
     {
-        "name": "Jackfruit Crab Cakes w/Lemon Dill Sauce",
+        "name": "Jackfruit Crab Cakes with Lemon Dill Sauce",
         "sides": ["Sauteed Veggies" ],
         "description": "Our version of a classic seafood dish made with the versatile Jackfruit. These cakes come with sauteed veggies a salad of your choice and a lemon dill aioli dipping sauce",
         "photo": "https://dizzybusyandhungry.com/wp-content/uploads/2018/09/crab-cakes-3862-2.jpg",
@@ -62,15 +62,6 @@ export const meals = [
         "photo": "https://cdn.shortpixel.ai/client/q_lossy,ret_img,w_300/https://thatgirlcookshealthy.com/wp-content/uploads/2018/03/curried-jackfruit-Image-300x300.jpg",
         "type": "entree",
         "ingredients":["young jackfruit", "sweet potato", "garlic", "ginger", "onion", "scallion", "herbs & spices", "tomato", "coconut milk", "coconut oil", "rice", "kidney beans", "kale", "red cabbage", "carrots" ]
-    },
-    {
-        "name": "Quinoa & Lentil Stuffed Peppers",
-        "nutrition": "carbs 72g | protein 21g | fat 12g | ",
-        "sides": ["Sauteed Sweet Potatoes", "Roasted Brussel Sprouts"],
-        "description": "Stuffed with lentils, quinoa, kale, shallots, garlic, and smoky spices, these peppers are as healthy as they are delicious. This recipe is gluten-free, packed with nutrition! It comes with roasted sweet potatoes & roasted brussel sprouts",
-        "ingredients": ["quinoa", "lentils","kale", "grapeseed oil", "garlic", "tomato sauce", "shallot", ],
-        "type":"entree",
-        "photo": "https://www.veganosity.com/wp-content/uploads/2015/02/2015-02-09-001-2015-02-09-026-216x248.jpg"
     },
     {
         "name": "Lemon Herb Couscous Salad",

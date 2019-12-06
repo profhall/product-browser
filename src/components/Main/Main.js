@@ -7,6 +7,7 @@ import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import Product from "../Product/Product";
 import emailjs from "emailjs-com";
+import ReactModal from "react-modal";
 
 
 
@@ -14,7 +15,10 @@ function getWidth() {
     return window.innerWidth
 }
 
-const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, getNumberOfMeals}) => {
+
+
+
+const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,allMeals, setAllMeals,setMeals,chosenSalads,setSalads, getNumberOfMeals}) => {
     const [windowWidth, setWidth] = useState(getWidth);
     const [currentSlide, changeSlide] = useState(0);
     const [mealPrice, setPrice] = useState(0);
@@ -22,9 +26,11 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
     const [infoValidated, validateInfo] = useState(false);
     const [startDate, setDate] = useState(null);
     const [mealCount, changeMealCount] = useState(0);
+    const [saladCount, changeSaladCount] = useState(0);
     const [refreshCount, refresh] = useState(0);
     const [restrictions, updateRestrictions] = useState([]);
     const [userinfo, setUser] = useState({"name":null,"email":null});
+    const [modalOpen, setModal] = useState(false);
 
     const deliveryFee = 7;
     const containerFee = 10;
@@ -32,16 +38,16 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
 
         mealCount !== 0 ? validateMeals(true) :  validateMeals(false);
 
-        console.log(`Start Date: ${startDate}, Number Of Meals: ${mealCount}, Restrictions: ${restrictions}`);
+        console.log(`Start Date: ${startDate}, 
+        Number Of Meals: ${mealCount}, 
+        Modal Open: ${modalOpen}
+        Restrictions: ${restrictions}`);
 
         setWidth(getWidth());
         if(currentSlide !== 4){ToggleMeals(false)}
         else{ToggleMeals(true)}
-
-        console.log("Salad count ", mealCount/4);
-
-
-    });
+        changeSaladCount(Math.floor(mealCount/4));
+    },  [ chosenMeals, chosenSalads, saladCount, mealCount, startDate, restrictions, currentSlide, ToggleMeals, modalOpen]);
 
 
     const handleResize =()=> setWidth(getWidth());
@@ -103,12 +109,25 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
     };
 
     const deleteMeal= (fav) =>{
-        var index = chosenMeals.indexOf(fav);
-        if (index > -1) {
-            chosenMeals.splice(index, 1);
-            setMeals(chosenMeals);
-            refresh(refreshCount+1)
+        let index = null;
+        console.log(fav, chosenSalads.includes(fav), chosenMeals.includes(fav))
+        if (chosenMeals.includes(fav)){
+            index = chosenMeals.indexOf(fav);
+            if (index > -1) {
+                chosenMeals.splice(index, 1);
+                setMeals(chosenMeals);
+            }
         }
+        if (chosenSalads.includes(fav)) {
+            index = chosenSalads.indexOf(fav);
+            if (index > -1) {
+                chosenSalads.splice(index, 1);
+                setSalads(chosenSalads);
+            }
+        }
+
+        refresh(refreshCount+1)
+
     };
 
     function handleDayClick(day, { selected, disabled }) {
@@ -124,6 +143,19 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
         setDate( day.toDateString() );
     }
 
+
+
+    function handleOpenModal () {
+        console.log("open modal");
+        setModal(true);
+    }
+
+    function handleCloseModal () {
+        console.log("close modal")
+        setModal(false);
+    }
+    const everything = chosenMeals.concat(chosenSalads);
+    console.log(Number(mealCount)+Number(saladCount), everything.length)
     return (
         <MainContent className="" currentSlide={currentSlide}>
             <Slide id={0} name={"user_info"}  className="container" style={{display: currentSlide===0?"":"none"}}>
@@ -172,17 +204,16 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
 
                 </div>
             </Slide>
-
             <Slide id={1} name={"mealCount"}  className="" style={{display: currentSlide===1?"":"none"}}>
                 <br/>
 
                 <h4 className="header center ">
                     {mealCount !==0 ?`You Selected ${mealCount} Meals`: `How Many Meals?`}
                     <br/>
-                    You get {Math.floor(mealCount/4)} {Math.floor(mealCount/4)===1 ?"salad":"salads"}
+                    You get {saladCount} {saladCount===1 ?"salad":"salads"}
                 </h4>
                 <h6>
-                    <b>For every 4 meals, you receive a free salad</b>
+                    <b>For every 4 meals, you receive a free 16oz salad of your choice</b>
                 </h6>
 
                 <HorizontalButtons className="row " >
@@ -256,13 +287,13 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
                     {windowWidth > 600?"<br/>":null}
 
                     <h4 className="header center">100% Plant-Based</h4>
-                    <h6 style={{margin:0}} >{chosenMeals.length > 0? null:"Pick"} {mealCount-chosenMeals.length} {chosenMeals.length >0? " meals remaining":"meals"} </h6>
+                    <h6 style={{margin:0}} >{chosenMeals.length > 0? null:"Pick"} {mealCount-chosenMeals.length} {chosenMeals.length >0? " entrees remaining":"entrees"} </h6>
 
                     {
-                        chosenMeals.length > 0 && windowWidth > 600?
+                        (chosenMeals.length > 0 || chosenSalads.length >0)&& windowWidth > 600?
                             <ChosenMealsList  className={`col ${windowWidth>600 ?"s8":"s12"} center`}>
                             {<ol>
-                                {chosenMeals.map((fav)=>
+                                {everything.map((fav)=>
                                     <li  onClick={()=>deleteMeal(fav)}>{fav}</li>
                                 )} </ol>
                             }
@@ -271,7 +302,9 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
                     <div className={`col ${ windowWidth>600 ?"s4":"s12"} center`}>
 
                         <BackButton onClick={PrevSlide}  className="btn-large">Go Back</BackButton>
-                        <StartButton onClick={NextSlide}  className={`btn-large ${chosenMeals.length>=mealCount ? "":"disabled"}`}>Checkout</StartButton>
+                        <StartButton onClick={NextSlide}  className={`btn-large ${everything.length>=(Number(mealCount)+Number(saladCount)) ? "":"disabled"}`}>
+                            Checkout
+                        </StartButton>
                     </div>
 
                 </div>
@@ -289,7 +322,30 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
 
                     {startDate ?<h5><b>Date</b>: {`${startDate}`}</h5>:null}
 
-                    <h5>{mealCount} Meals & {mealCount/4} Salads</h5>
+                    <h5 onClick={handleOpenModal}>{mealCount} Meals & {saladCount} Salads <br/> <span style={{fontSize: 12}}> click to see your selection</span></h5>
+
+                    <ReactModalStyled
+                        isOpen={modalOpen}
+                        contentLabel="onRequestClose Example"
+                        onRequestClose={handleCloseModal}
+                        className="Modal"
+                        overlayClassName="Overlay"
+                    >
+                        <h5><b>Your Selections</b></h5>
+                        <VerifyListContainer>
+                            <VerifyList>
+                                <h5><b>Entrees</b></h5>
+                                {chosenMeals.map((meal)=><h5><li>{meal}</li></h5>)}
+                            </VerifyList>
+
+                            <VerifyList>
+                                <h5><b>Salads</b></h5>
+
+                                {chosenSalads.map((meal)=><h5><li>{meal}</li></h5>)}
+                            </VerifyList>
+                        </VerifyListContainer>
+                        <StartButton className="btn-large" onClick={handleCloseModal}>Close</StartButton>
+                    </ReactModalStyled>
 
                     {restrictions.length >0 ? <h5><b>Dietary Restrictions</b>: {`${restrictions}`}</h5>:null}
 
@@ -309,7 +365,7 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,setMeals, ge
 
                 {confirmation?
                     <div className="col s12" >
-                    <h4>Thanks {userinfo.name}, There's one more step! Send your ${mealPrice+deliveryFee+containerFee}.00 payment to   </h4>
+                    <h4>Thanks {userinfo.name}, There's one more step! Send your ${mealPrice+deliveryFee+containerFee}.00 payment using the following link <a href={"paypal.me/phalljr"}> paypal.me/phalljr </a> </h4>
                     </div>
                     :
                     <div className="col s12" >
@@ -337,6 +393,31 @@ background-size:  cover ;
 background-position: center;
 height: ${props=> props.currentSlide===4?"250px":"600px"};
 max-height:600px;
+`;
+
+const ReactModalStyled = styled(ReactModal)`
+color : ${colors.bright};
+display: flex;
+flex-direction:column;
+justify-content: space-evenly;
+align-items: center;
+padding: 0 12px;
+background-color: ${colors.secondaryOne} ;
+
+
+`;
+
+const VerifyListContainer = styled.div`
+display: flex;
+justify-content: space-evenly;
+width:100%;
+max-height: 80%;
+overflow: auto;
+
+`;
+
+const VerifyList = styled.ul`
+color : ${colors.bright};
 `;
 
 const BackButton = styled.button`
@@ -407,9 +488,9 @@ const CircleButton = styled.button`
 border-radius: 100%;
   position: relative; /* If you want text inside of it */
 
-width: 20%;
+width: 15%;
 margin-left: 0;
-padding-top: 20%;
+padding-top: 15%;
 background-color: ${props => props.restrictions && props.restrictions.includes(props.name)? "red":colors.bright} ;
 &:hover {
   background-color: ${colors.secondaryTwo};

@@ -29,7 +29,6 @@ const Products = ({addToFavs}) => {
     };
     window.addEventListener('resize', handleResize);
 
-
     // const addToFavs=(item)=> {
     //     // chosenItems.push(<li>{item.name}</li>)
     //
