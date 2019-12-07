@@ -37,25 +37,36 @@ function App() {
     }, [chosenSalads,chosenMeals]);
 
 
-    const emailSelection = (chosenItems, userInfo) => {
+    const emailSelection = (chosenItems, chosenSalads,userInfo) => {
         const Info = userInfo;
-        const theSubmitInfo = {"chosen_items":chosenItems,"name":Info["name"],"email":Info["email"]}
+        const theSubmitInfo =
+            {
+
+                "chosen_items":chosenItems.concat(chosenSalads),
+                "name":Info["name"],
+                "email":Info["email"],
+                "state":Info["state"],
+                "city":Info["city"],
+                "zip":Info["zip"],
+                "street": Info["street"]
+
+            };
         Info['message'] ? theSubmitInfo['message'] = Info['message'] : Info['message'] = null;
         console.log(`favs submitted`);
         console.log(theSubmitInfo);
-        setConfirmation(!confirmation)
+        // setConfirmation(!confirmation)
 
+        var service_id = "default_service";
+        var template_id = "template_awzr3ptv";
+        emailjs.send('meal_prep', 'template_awzr3ptv', theSubmitInfo, "user_p8ucvKr8lnqx5SwxOEshJ")
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                setConfirmation(true)
 
-        // emailjs.send('gmail', 'template_VM9IlcIJ', theSubmitInfo, "user_ii2HeUxvMKEfOyePRTfc8")
-        //     .then(function(response) {
-        //         console.log('SUCCESS!', response.status, response.text);
-        //         alert("Thank you! We will reach out to you soon to discuss the next steps")
-        //         setConfirmation(true)
-        //
-        //     }, function(error) {
-        //         console.log('FAILED...', error);
-        //         setConfirmation(false)
-        //     });
+            }, function(error) {
+                console.log('FAILED...', error);
+                setConfirmation(false)
+            });
 
     };
 

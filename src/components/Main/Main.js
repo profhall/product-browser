@@ -354,7 +354,7 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,allMeals, se
                     <BackButton onClick={PrevSlide}  className="btn-large">Go Back</BackButton>
                     <StartButton onClick={()=>{
                         changeSlide(currentSlide+1)
-                        emailSelection(chosenMeals, userinfo)}}  className="btn-large">Submit Order</StartButton>
+                        emailSelection(chosenMeals, chosenSalads,userinfo)}}  className="btn-large">Submit Order</StartButton>
                 </div>
 
             </Slide>
