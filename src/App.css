@@ -1,9 +1,9 @@
 .Modal {
   position: absolute;
-  top: 40px;
+  top: 20%;
   left: 40px;
   right: 40px;
-  bottom: 40px;
+  bottom: 30%;
   width: 80%;
   margin: auto;
 }

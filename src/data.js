@@ -8,14 +8,6 @@ export const meals = [
         "ingredients": ["scallion","onion","coconut milk", "red beans", "jackfruit", "plantains", "spices & herbs"]
     },
     {
-        "name": "Jackfruit Life Wraps",
-        "sides": ["Fried Plantains", "Salad"],
-        "description": "Vegan burritos filled with black beans, brown rice, cilantro, tomato, mexican style jackfruit with an avocado spread.",
-        "photo": "https://www.veganricha.com/wp-content/uploads/2016/05/vegan-jamaican-jerk-jackfruit-caribbean-black-bean-tacos-4866-1024x1024.jpg",
-        "ingredients": ["fried plantian","young jackfruit", "black beans", "brown rices", "kale", "mango dressing","cucumber", "herbs & spices" ],
-        "type": "entree"
-    },
-    {
         "name": "Quinoa Lentil Spinach Burritos",
         "sides": ["https://www.veganricha.com/wp-content/uploads/2016/05/vegan-jamaican-jerk-jackfruit-caribbean-black-bean-tacos-4866-1024x1024.jpgFried Plantain", "sauteed brussel sprouts"],
         "description": "A nutrient packed burrito with tons of flavor, served with sauteed brussel sprouts and your salad choice",
@@ -86,20 +78,68 @@ export const meals = [
         "photo": "https://natashaskitchen.com/wp-content/uploads/2016/11/Kale-Salad-Recipe-with-Honey-Lemon-Dressing-5.jpg"
     },
     {
-        "name": "Mixed Green Salad with Sesame-Ginger Vinaigrette",
-        "description": "A japanese inspired traditional green salad.",
-        "type":"salad",
-        "nutrition": "Calories: 68kcal | Carbohydrates: 8.8g | Protein: 2.2g | Fat: 3.6g | Saturated Fat: 0.5g | Sodium: 152mg | Fiber: 2.3g",
-        "vitamins": {"vitamins":[],"minerals":[]},
-        "ingredients":["arugula","hemp seeds","apple cider vinger", "agave syrup", "baby spinach", "baby kale", "onion", "red cabbage", "toasted sesame seeds", "ginger", "chili paste" ],
-        "photo": "https://www.lecremedelacrumb.com/wp-content/uploads/2019/01/best-simple-green-salad-3-350x350.jpg"
+        "name": "Thai Red Curry with Vegetables",
+        "description": "Comes with brown jasmine rice and sauteed greens",
+        "ingredients": [],
+        "type":"entree",
+        "photo": "https://cookieandkate.com/images/2015/10/thai-red-curry-recipe-with-vegetables-1-1.jpg"
     },
     {
-        "name": "Quinoa Lime Cilantro Salad" ,
-        "description": "Quinoa and black beans tossed in a refreshing lime-cilantro vinaigrette for a quick and protein-packed lunch or side dish.",
+        "name": "Homemade Vegan Chili",
+        "description": "This a a great meal for the cold months made with simple ingredients  like onion, carrot, tomatoes, celery and garlic. Served with brown rice and vegan cornbread.",
+        "ingredients": [],
+        "type":"entree",
+        "photo": "https://cookieandkate.com/images/2015/11/vegetarian-chili-recipe-6.jpg"
+    },
+    {
+        "name": "Quinoa Cakes with tomato-chickpea relish" ,
+        "description": "Crispy Vegan Quinoa Cakes topped with Tomato Chickpea Relish. Comes with sauteed greens and sauteed veggies",
+        "type":"entree",
+        "ingredients": [],
+        "photo": "https://www.feastingathome.com/wp-content/uploads/2012/06/Vegan-quinoa-cake-recipe-15.jpg"
+    },
+    {
+        "name": "Green Jad Noodle with Chickpea Tofu(Soy Free!)" ,
+        "description": "Asian-style noodle salad loaded up with fresh seasonal veggies and a delicious Sesame Dressing, eat warm or chilled.",
         "type":"salad",
-        "ingredients": ["quinoa", "hemp seeds", "sweet corn", "black beans", "onion", "cilantro","lime juice", "agave syrup", "extra virgin olive oil", "herbs & spices"],
-        "photo": "https://cleanfoodcrush.com/wp-content/uploads/2016/11/Cilantro-Lime-Quinoa-Salad-Recipe-1024x683.jpg"
+        "ingredients": [],
+        "photo": "https://www.feastingathome.com/wp-content/uploads/2017/05/Jade-Noodle-Salad-201.jpg"
+    },
+    {
+        "name": "Roasted Cauliflower Steaks" ,
+        "description": "Comes with sauteed greens and roated sweet potatoes. ",
+        "type":"entree",
+        "ingredients": [],
+        "photo": "https://www.jessicagavin.com/wp-content/uploads/2018/05/roasted-cauliflower-steaks-7.jpg"
+    },
+    {
+        "name": "Tikka Masala",
+        "description": "Made with coconut milk and comes with brown fluffy basmati rice & quinoa ",
+        "type": "entree",
+        "ingredients": [],
+        "photo": "https://www.feastingathome.com/wp-content/uploads/2017/05/vegan-tikka-masala-with-cauliflower-100-3.jpg"
+    },
+    {
+        "name": "Kung Pao Brussels Sprouts" ,
+        "description": "",
+        "type":"entree",
+        "ingredients": [],
+        "photo": "https://hips.hearstapps.com/del.h-cdn.co/assets/18/05/640x959/gallery-1517252475-delish-kung-poa-brussels-sprouts-pinterest-still001.jpg?resize=768:*"
+    },
+    {
+        "name": "Delicious Green Detox Salad" ,
+        "description": "The base of this salad is made up of Tuscan kale, broccoli, purple cabbage, cilantro, parsley, grapefruit, and avocado. It’s a simple mixed salad that gets dressed up in a delicious lemony tahini dressing. ",
+        "type":"salad",
+        "ingredients": [],
+        "photo": "https://www.halfbakedharvest.com/wp-content/uploads/2016/01/The-Mean-Green-Detox-Salad-1.jpg"
+    }
+,
+    {
+        "name": "Spicy Sweet Potato and Green Rice Burrito Bowls" ,
+        "description": "Healthy burrito bowls made with roasted sweet potato, green rice and black beans! This delicious, vegan dinner reheats well for lunch.",
+        "type":"entree",
+        "ingredients": [] ,
+        "photo": "https://cookieandkate.com/images/2015/01/sweet-potato-green-rice-burrito-bowls-recipe-1.jpg"
     }
 
 ];

@@ -204,7 +204,7 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,allMeals, se
 
                 </div>
             </Slide>
-            <Slide id={1} name={"mealCount"}  className="" style={{display: currentSlide===1?"":"none"}}>
+            <Slide id={1} name={"mealCount"}  className="row" style={{display: currentSlide===1?"":"none"}}>
                 <br/>
 
                 <h4 className="header center ">
@@ -212,8 +212,8 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,allMeals, se
                     <br/>
                     You get {saladCount} {saladCount===1 ?"salad":"salads"}
                 </h4>
-                <h6>
-                    <b>For every 4 meals, you receive a free 16oz salad of your choice</b>
+                <h6 className={"center"} style={{width:"35%"}}>
+                    This is a ${deliveryFee} delivery fee and a one time container charge of ${containerFee} that will be added at the end.<br/><b> And for every 4 meals, you receive a free 16oz salad of your choice</b>
                 </h6>
 
                 <HorizontalButtons className="row " >
