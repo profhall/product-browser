@@ -35,7 +35,9 @@ const Footer = () => {
 export default Footer;
 
 const TheFooter = styled.footer`
-  //width: 100%;
-  background-color: ${colors.secondaryOne} ;
+  width: 100%;
+  background-color: ${colors.primaryTwo} ;
   color: ${colors.bright};
+  bottom: 0;
+  position: relative ;
 `;

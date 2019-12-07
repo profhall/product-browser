@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import Popup from "reactjs-popup";
+import colors from "../../Colors";
 
 
 
@@ -113,6 +114,10 @@ const ProductContent = styled.div`
 const SelectProdButton = styled.button`
   width: ${props => props.width > 860 ? "45%":"100%"};
   margin: auto;
+background-color: ${colors.primaryTwo} ;
+&:hover {
+  background-color: ${colors.secondaryOne};
+}
 `;
 
 const TheButtons = styled.div`

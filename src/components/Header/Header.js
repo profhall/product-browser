@@ -26,7 +26,7 @@ const Navi = () => {
 
 const TheNav = styled.nav`
   //width: 100%;
-  background-color: ${colors.secondaryOne} ;
+  background-color: ${colors.primaryTwo} ;
   color: ${colors.bright} ;
 `;
 

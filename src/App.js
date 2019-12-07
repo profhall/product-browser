@@ -110,6 +110,8 @@ function App() {
 
 const TheApp = styled.div`
   height: 100vh;
+  position: relative;
+  //width: 100%;
   `;
 
 const Meals = styled.div`
