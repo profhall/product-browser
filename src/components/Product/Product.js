@@ -26,13 +26,24 @@ const Content = ({close, meal}) => {
 const Product = ({item,windowWidth,addToFavs}) => {
 
     return (
-        <TheProduct width={windowWidth} className={"row"}>
+        <TheProduct width={windowWidth} className={""}>
             <h6 style={{padding:0,margin:0}}><b>{item.name}</b></h6>
 
             <ProductContent width={windowWidth} className={"row col s12"}>
-                <PhotoContainer bg={item.photo} className={`col ${windowWidth>600?"s5":"s8"}`} theWidth={windowWidth} >
+                <div className={` row col s12`} style={{height:"100%"}}>
+                    <PhotoContainer bg={item.photo} className={`col ${windowWidth>600?"s8":"s6"}`} theWidth={windowWidth} >
 
-                </PhotoContainer>
+                    </PhotoContainer>
+                    <div className={`col ${windowWidth>600?"s12":"s5"}`} style={{height:"100%"}}>
+
+                        <PhotoContainer bg={item.photo} align={"flex-end"} className={`col s5`} theWidth={windowWidth} >
+
+                        </PhotoContainer>
+                        <PhotoContainer bg={item.photo} align={"flex-end"} className={`col s5`} theWidth={windowWidth} >
+
+                        </PhotoContainer>
+                    </div>
+                </div>
                 <ProductInfo className={`col ${windowWidth>600?"s7":"s12"}`} width={windowWidth}>
                     <p >{item.description}</p>
 
@@ -75,12 +86,14 @@ const ModalInfo = styled.div`
 const PhotoContainer = styled.div`
 width: ${props => props.width > 860 ? "45%" : "90%"};
 height: ${props => props.width > 860 ? '90%': '100%'};
+align-self: ${props => props.align ? props.align: ''};
  margin: 1% !important;
  background:url(${props =>props.bg});
  border-radius: 5px;
 background-repeat: no-repeat ;
 background-size:  cover ;
 background-position: center;
+justify-self: flex-start;
 
 `;
 
@@ -103,11 +116,11 @@ const ProductInfo = styled.div`
 `;
 
 const ProductContent = styled.div`
-  height:80%;
+  height:100%;
   width:100%;
   display: flex;
   flex-direction: ${props => props.width > 860 ? "row":"column"};
-  align-items: center;
+  align-items: flex-start;
   margin: 10px;
 `;
 

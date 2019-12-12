@@ -32,7 +32,7 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,allMeals, se
     const [userinfo, setUser] = useState({"name":null,"email":null});
     const [modalOpen, setModal] = useState(false);
 
-    const deliveryFee = 8;
+    const deliveryFee = 7;
     const containerFee = 10;
     useEffect(()=>{
 
@@ -205,33 +205,34 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,allMeals, se
                 </div>
             </Slide>
             <Slide id={1} name={"mealCount"}  className="row" style={{display: currentSlide===1?"":"none"}}>
+                <br/>
 
                 <h4 className="header center ">
                     {mealCount !==0 ?`You Selected ${mealCount} Meals`: `How Many Meals?`}
                     <br/>
                     You get {saladCount} {saladCount===1 ?"salad":"salads"}
                 </h4>
-                <h6 className={"center"} style={{width:"85%"}}>
-                    An <b>${deliveryFee}</b> delivery fee will be added to your total.<br/><br/><b> For every 4 meals, you receive a free 16oz salad of your choice</b>
+                <h6 className={"center"} style={{width:"35%"}}>
+                    This is a ${deliveryFee} delivery fee and a one time container charge of ${containerFee} that will be added at the end.<br/><b> And for every 4 meals, you receive a free 16oz salad of your choice</b>
                 </h6>
 
-                <HorizontalButtons width={windowWidth} className="row " >
-                    <SquareButton width={windowWidth} id={4} price={13.75} className="mc btn  "  onClick={(e)=>selectButton(e,52)} >
+                <HorizontalButtons className="row " >
+                    <SquareButton id={4} price={13} className="mc btn  s2 "  onClick={(e)=>selectButton(e,52)} >
                         4 MEALS<br/>
-                        $13.75 / MEAL <br/>
-                       $55 TOTAL
+                        $13 / MEAL <br/>
+                       $52 TOTAL
                     </SquareButton>
-                    <SquareButton id={7} width={windowWidth} className={"mc btn "}  onClick={(e)=>selectButton(e,84)} >
+                    <SquareButton id={7} className={"mc btn  s2"}  onClick={(e)=>selectButton(e,84)} >
                         7 MEALS<br/>
-                        $12.14 / MEAL <br/>
-                        $85 TOTAL
+                        $12 / MEAL <br/>
+                        $84 TOTAL
                     </SquareButton>
-                    <SquareButton id={10} width={windowWidth} className={"mc btn  "}  onClick={(e)=>selectButton(e,110)} >
+                    <SquareButton id={10} className={"mc btn  s2 "}  onClick={(e)=>selectButton(e,110)} >
                         10 MEALS<br/>
                         $11 / MEAL <br/>
                         $110 TOTAL
                     </SquareButton>
-                    <SquareButton id={12} width={windowWidth} className={"mc btn  "}  onClick={(e)=>selectButton(e,120)} >
+                    <SquareButton id={12} className={"mc btn  s2 "}  onClick={(e)=>selectButton(e,120)} >
                         12 MEALS<br/>
                         $10/ MEAL <br/>
                         $120 TOTAL
@@ -260,18 +261,18 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,allMeals, se
             </Slide>
             <Slide id={3} name={"dietary_restrictions"} className="" style={{display: currentSlide===3?"":"none"}}>
                 <br/>
-                <h4 className="header center ">Any Dietary Restrictions? </h4>
-                <HorizontalButtons width={windowWidth} className="row" >
-                    <CircleButton width={windowWidth} name={"wheat"} className="dr btn" restrictions={restrictions}  onClick={(e)=>selectButton(e)} >
+                <h4 className="header center "> Dietary Restrictions? </h4>
+                <HorizontalButtons className="row " >
+                    <CircleButton name={"wheat"} className="dr btn s2 " restrictions={restrictions}  onClick={(e)=>selectButton(e)} >
                         <ButtText s_width={windowWidth} > Wheat-Free</ButtText>
                     </CircleButton>
-                    <CircleButton width={windowWidth} name={"soy"} className={"dr btn"} restrictions={restrictions}   onClick={(e)=>selectButton(e)} >
+                    <CircleButton name={"soy"} className={"dr btn  s2"} restrictions={restrictions}   onClick={(e)=>selectButton(e)} >
                         <ButtText s_width={windowWidth} >Soy-Free</ButtText>
                     </CircleButton>
-                    <CircleButton  width={windowWidth} name={"nut"} className={"dr btn "} restrictions={restrictions}   onClick={(e)=>selectButton(e)} >
+                    <CircleButton name={"nut"} className={"dr btn  s2"} restrictions={restrictions}   onClick={(e)=>selectButton(e)} >
                         <ButtText s_width={windowWidth} >Nut-Free</ButtText>
                     </CircleButton>
-                    <CircleButton width={windowWidth} name={"gluten"} className={"dr btn "} restrictions={restrictions}   onClick={(e)=>selectButton(e)} >
+                    <CircleButton name={"gluten"} className={"dr btn  s2 "} restrictions={restrictions}   onClick={(e)=>selectButton(e)} >
                         <ButtText s_width={windowWidth} >Gluten-Free</ButtText>
                     </CircleButton>
                 </HorizontalButtons>
@@ -283,14 +284,14 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,allMeals, se
             <Slide id={4} name={"meal_section"} className="" style={{display: currentSlide===4?"":"none"}}>
                 <div className="row center">
                     <br/>
-                    {windowWidth > 650?"<br/>":null}
+                    {windowWidth > 600?"<br/>":null}
 
                     <h4 className="header center">100% Plant-Based</h4>
                     <h6 style={{margin:0}} >{chosenMeals.length > 0? null:"Pick"} {mealCount-chosenMeals.length} {chosenMeals.length >0? " entrees remaining":"entrees"} </h6>
 
                     {
-                        (chosenMeals.length > 0 || chosenSalads.length >0)&& windowWidth > 650?
-                            <ChosenMealsList  className={`col ${windowWidth>650 ?"s8":"s12"} center`}>
+                        (chosenMeals.length > 0 || chosenSalads.length >0)&& windowWidth > 600?
+                            <ChosenMealsList  className={`col ${windowWidth>600 ?"s8":"s12"} center`}>
                             {<ol>
                                 {everything.map((fav)=>
                                     <li  onClick={()=>deleteMeal(fav)}>{fav}</li>
@@ -298,7 +299,7 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,allMeals, se
                             }
                             </ChosenMealsList>: null
                         }
-                    <div className={`col ${ windowWidth>650 ?"s4":"s12"} center`}>
+                    <div className={`col ${ windowWidth>600 ?"s4":"s12"} center`}>
 
                         <BackButton onClick={PrevSlide}  className="btn-large">Go Back</BackButton>
                         <StartButton onClick={NextSlide}  className={`btn-large ${everything.length>=(Number(mealCount)+Number(saladCount)) ? "":"disabled"}`}>
@@ -331,23 +332,22 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,allMeals, se
                         overlayClassName="Overlay"
                     >
                         <h5><b>Your Selections</b></h5>
-                        <VerifyListContainer width={windowWidth}>
-                            <EntreeList>
-                                <h5><b>Entrees:{chosenMeals.length} </b></h5>
-                                {chosenMeals.map((meal,i)=><h5>{i+1}. {meal}</h5>)}
-                            </EntreeList>
+                        <VerifyListContainer>
+                            <VerifyList>
+                                <h5><b>Entrees</b></h5>
+                                {chosenMeals.map((meal)=><h5><li>{meal}</li></h5>)}
+                            </VerifyList>
 
-                            <SaladList>
-                                <h5><b>Salads: {chosenSalads.length}</b></h5>
+                            <VerifyList>
+                                <h5><b>Salads</b></h5>
 
-                                {chosenSalads.map((meal,i)=><h5> {i+1}. {meal}</h5>)}
-                            </SaladList>
+                                {chosenSalads.map((meal)=><h5><li>{meal}</li></h5>)}
+                            </VerifyList>
                         </VerifyListContainer>
                         <StartButton className="btn-large" onClick={handleCloseModal}>Close</StartButton>
                     </ReactModalStyled>
 
-                    {restrictions.length >0 ? <h5><b>5 Dietary Restrictions</b>: {`${restrictions}`}</h5>:null}
-                    <h5><b>Total Price</b>: ${mealPrice+deliveryFee}.00</h5>
+                    {restrictions.length >0 ? <h5><b>Dietary Restrictions</b>: {`${restrictions}`}</h5>:null}
 
                 </div>
                 <div className="row center">
@@ -365,7 +365,7 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,allMeals, se
 
                 {confirmation?
                     <div className="col s12" >
-                    <h4>Thanks {userinfo.name}, There's one more step! Send your ${mealPrice+deliveryFee}.00 payment using the following link <a href={"paypal.me/phalljr"}> paypal.me/phalljr </a> </h4>
+                    <h4>Thanks {userinfo.name}, There's one more step! Send your ${mealPrice+deliveryFee+containerFee}.00 payment using the following link <a href={"https://www.paypal.me/phalljr"}> paypal.me/phalljr </a> </h4>
                     </div>
                     :
                     <div className="col s12" >
@@ -391,8 +391,8 @@ background:linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,.7)),url(${foodPic});
 background-repeat: no-repeat ;
 background-size:  cover ;
 background-position: center;
-height: ${props=> props.currentSlide===4?"250px":"650px"};
-max-height:650px;
+height: ${props=> props.currentSlide===4?"250px":"600px"};
+max-height:600px;
 `;
 
 const ReactModalStyled = styled(ReactModal)`
@@ -408,32 +408,16 @@ background-color: ${colors.secondaryOne} ;
 `;
 
 const VerifyListContainer = styled.div`
-display: grid;
+display: flex;
+justify-content: space-evenly;
 width:100%;
-max-height: ${props=>props.width > 650 ? "80%":"100%"};
+max-height: 80%;
 overflow: auto;
-grid-template-columns: repeat(auto,4);
-grid-column-gap:10px ;
-grid-template-areas:${props=>props.width > 650 ?'"head head head head"\n"entree entree salad salad"\n"entree entree salad salad"\n"entree entree salad salad"':'"head""entree""salad"'}; 
-
-;
-`;
-
-const SaladList = styled.div`
-color:  ${colors.bright};
-position: relative;
-grid-area: salad;
-//border: 12px solid royalblue;
-
 
 `;
 
-const EntreeList = styled.ol`
-color:  ${colors.bright};
-position: relative;
-
-grid-area: entree;
-//border: 12px solid royalblue;
+const VerifyList = styled.ul`
+color : ${colors.bright};
 `;
 
 const BackButton = styled.button`
@@ -446,10 +430,10 @@ margin: 7px;
 `;
 
 const ButtText = styled.span`
-font-size:${ props=>props.s_width > 650?"120%":"80%"};
+font-size:${ props=>props.s_width >500?"120%":"80%"};
   line-height: normal;
 position: absolute;
-  top:${ props=>props.s_width >650?"4em":"2em"};
+  top:${ props=>props.s_width >500?"4em":"2em"};
   left: 0;
   right: 0;
   pointer-events: none;
@@ -470,7 +454,7 @@ margin : 0 !important;
 `;
 
 const Slide = styled.div`
-height: 95%;
+height: 75%;
 display: flex;
 flex-direction: column;
 align-items: center ;
@@ -487,17 +471,13 @@ margin: 15px auto;
 width: 85%;
   // background-color: ${colors.secondaryTwo};
 display: flex;
-flex-direction: ${props=>props.width > 650 ?'row':'column'};
-height: ${props=>props.width > 650 ?'40%':'80%'};
-overflow: scroll;
-justify-content:${props=>props.width > 650 ?'space-evenly':''};
-align-items: center;
+justify-content: space-evenly;
+
 `;
 const SquareButton = styled.button`
-border-radius: 15px;
-order: 1;
-margin: 10px;
-width: ${props=>props.width > 650 ?'90%':'80%'};
+border-radius: 5%;
+width: 20%;
+margin-left: 0;
 height: 150px;
 background-color: ${colors.bright};
 &:hover {
@@ -506,10 +486,11 @@ background-color: ${colors.bright};
 `;
 const CircleButton = styled.button`
 border-radius: 100%;
-position: relative; /* If you want text inside of it */
-width: ${props=>props.width > 650 ?'20%':'45%'};
-margin: 5px;
-padding-top:  ${props=>props.width > 650 ?'20%':'45%'};
+  position: relative; /* If you want text inside of it */
+
+width: 15%;
+margin-left: 0;
+padding-top: 15%;
 background-color: ${props => props.restrictions && props.restrictions.includes(props.name)? "red":colors.bright} ;
 &:hover {
   background-color: ${colors.secondaryTwo};
