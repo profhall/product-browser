@@ -31,19 +31,22 @@ const Product = ({item,windowWidth,addToFavs}) => {
 
             <ProductContent width={windowWidth} className={"row col s12"}>
                 <div className={` row col s12`} style={{height:"100%"}}>
-                    <PhotoContainer bg={item.photo} className={`col ${windowWidth>600?"s8":"s6"}`} theWidth={windowWidth} >
+                    <PhotoContainer bg={item.photo} className={`col ${windowWidth>600 && item.side ?"s6":"s6"}`} theWidth={windowWidth} >
 
                     </PhotoContainer>
-                    <div className={`col ${windowWidth>600?"s12":"s5"}`} style={{height:"100%"}}>
+                    {item.side && item.side[1].pic? <div className={`col ${windowWidth>600?"s5":"s5"}`} style={{ minHeight:175,height:"100%",display:"flex",flexDirection:"column"}}>
 
-                        <PhotoContainer bg={item.photo} align={"flex-end"} className={`col s5`} theWidth={windowWidth} >
-
-                        </PhotoContainer>
-                        <PhotoContainer bg={item.photo} align={"flex-end"} className={`col s5`} theWidth={windowWidth} >
-
-                        </PhotoContainer>
-                    </div>
+                            <PhotoContainer bg={item.side && item.side[1].pic !== "" ? item.side[1].pic: "none"} align={"flex-end"} className={`col s12`} theWidth={windowWidth} >
+                                <p>{ item.side && item.side[1].pic === ""? item.side[1].name: null}</p>
+                            </PhotoContainer>
+                            <PhotoContainer bg={item.side && item.side[2].pic !== "" ? item.side[2].pic: "none"} align={"flex-end"} className={`col s12`} theWidth={windowWidth} >
+                                <p>{ item.side && item.side[2].pic === ""? item.side[2].name: null}</p>
+                            </PhotoContainer>
+                        </div>
+                        : null
+                    }
                 </div>
+
                 <ProductInfo className={`col ${windowWidth>600?"s7":"s12"}`} width={windowWidth}>
                     <p >{item.description}</p>
 
@@ -84,8 +87,9 @@ const ModalInfo = styled.div`
   font-weight: bold;
 `;
 const PhotoContainer = styled.div`
-width: ${props => props.width > 860 ? "45%" : "90%"};
-height: ${props => props.width > 860 ? '90%': '100%'};
+width: ${props => props.width > 775 ? "100%" : "100%"};
+height: ${props => props.width > 775 ? '90%': '100%'};
+min-height: 175px !important;
 align-self: ${props => props.align ? props.align: ''};
  margin: 1% !important;
  background:url(${props =>props.bg});
@@ -98,8 +102,8 @@ justify-self: flex-start;
 `;
 
 const TheProduct = styled.div`
-  height:${props => props.width > 860 ? "50%" : "60%"};
-  width:${props => props.width > 860 ? "50%" : "99%"};
+  height:${props => props.width > 775 ? "50%" : "60%"};
+  width:${props => props.width > 775 ? "50%" : "99%"};
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   margin-bottom: 2em;
@@ -108,7 +112,7 @@ const TheProduct = styled.div`
   flex-direction: column;
 `;
 const ProductInfo = styled.div`
-  height: ${props => props.width > 860 ? "65%" : "100%"};
+  height: ${props => props.width > 775 ? "65%" : "100%"};
   text-align: left;
   overflow: scroll;
    margin-left:0 !important;
@@ -119,13 +123,13 @@ const ProductContent = styled.div`
   height:100%;
   width:100%;
   display: flex;
-  flex-direction: ${props => props.width > 860 ? "row":"column"};
+  flex-direction: ${props => props.width > 775 ? "row":"column"};
   align-items: flex-start;
   margin: 10px;
 `;
 
 const SelectProdButton = styled.button`
-  width: ${props => props.width > 860 ? "45%":"100%"};
+  width: ${props => props.width > 775 ? "45%":"100%"};
   margin: auto;
 background-color: ${colors.primaryTwo} ;
 &:hover {
@@ -149,10 +153,5 @@ const ProductPhoto = styled.img`
   
 `;
 
-const ModalImg = styled.img`
-  width: 40%;
-  float: left;
-  border-radius: 5px;
-`;
 
 export default Product;

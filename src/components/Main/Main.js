@@ -283,7 +283,7 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,allMeals, se
             <Slide id={4} name={"meal_section"} className="" style={{display: currentSlide===4?"":"none"}}>
                 <div className="row center">
                     <br/>
-                    {windowWidth > 650?"<br/>":null}
+                    {windowWidth > 650?<br/>:null}
 
                     <h4 className="header center">100% Plant-Based</h4>
                     <h6 style={{margin:0}} >{chosenMeals.length > 0? null:"Pick"} {mealCount-chosenMeals.length} {chosenMeals.length >0? " entrees remaining":"entrees"} </h6>
