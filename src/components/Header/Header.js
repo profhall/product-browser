@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components'
 import plateIcon from './assets/lunch-box.svg';
 import colors from "../../Colors";
+import Routes from "../../Routes"
+import {A} from "hookrouter";
+import {AuthContext} from "../../Auth/Auth";
+import app from "../../fbase";
 
 
-const Navi = () => {
+const Navi = ({toggleMenu}) => {
+    const {currentUser} = useContext(AuthContext)
+
     return (
         <div className="navbar-fixed">
 
@@ -14,7 +20,8 @@ const Navi = () => {
                     <h5 className="flow-text" style={{color:colors.bright}}>PJ's Plant-Based Kitchen</h5>
                 </a>
                 <ul className="right">
-                    <li><a href="#">Meals</a></li>
+                    <li onClick={toggleMenu}><A href="/menu">Menu</A></li>
+                    {currentUser?<li onClick={()=>app.auth().signOut()}><A href="/">Logout</A></li>:null}
                 </ul>
 
 
@@ -25,9 +32,10 @@ const Navi = () => {
 };
 
 const TheNav = styled.nav`
-  //width: 100%;
+  width: 100%;
   background-color: ${colors.primaryTwo} ;
   color: ${colors.bright} ;
+  grid-area: head;
 `;
 
 const HeaderIcon = styled.img`

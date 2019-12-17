@@ -26,4 +26,7 @@ export default Contact;
 
 const TheContactSection = styled.div`
 color:${colors.secondaryTwo}
-`
+grid-area:contact;
+height: 100%;
+background-color: #8b9898;
+`;

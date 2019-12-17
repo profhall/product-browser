@@ -286,11 +286,12 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,allMeals, se
                     {windowWidth > 650?<br/>:null}
 
                     <h4 className="header center">100% Plant-Based</h4>
-                    <h6 style={{margin:0}} >{chosenMeals.length > 0? null:"Pick"} {mealCount-chosenMeals.length} {chosenMeals.length >0? " entrees remaining":"entrees"} </h6>
+                    <h6 style={{margin:0}} >{chosenMeals.length > 0? null:"Pick"} {mealCount-chosenMeals.length} {chosenMeals.length >0? " entrees remaining":"entrees"} & {saladCount-chosenSalads.length} Salads </h6>
 
                     {
                         (chosenMeals.length > 0 || chosenSalads.length >0)&& windowWidth > 650?
                             <ChosenMealsList  className={`col ${windowWidth>650 ?"s8":"s12"} center`}>
+                                <p>Tap Item To Delete</p>
                             {<ol>
                                 {everything.map((fav)=>
                                     <li  onClick={()=>deleteMeal(fav)}>{fav}</li>

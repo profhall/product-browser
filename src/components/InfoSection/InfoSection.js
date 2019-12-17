@@ -50,6 +50,9 @@ const MainContent = styled.div`
 color : ${colors.secondaryTwo};
 background-repeat: no-repeat;
 background-size:  cover;
+grid-area: info;
+//height: 300px;
+background-color: #51a0fa;
 `
 
 const StartButton = styled.button`

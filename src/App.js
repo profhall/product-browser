@@ -10,13 +10,18 @@ import Products from "./components/Products/Products";
 import colors from "./Colors"
 import Footer from "./components/Footer/Footer";
 import MainIntro from "./components/Main/Main";
-import MainInfo from "./components/InfoSection/InfoSection";
+import Main from "./components/InfoSection/InfoSection";
 import Contact from "./components/Contact/Contact";
 import {meals} from "./data";
 import emailjs from "emailjs-com";
+import OrderForm from "./components/OrderForm/OrderForm";
+import {AuthProvider} from "./Auth/Auth";
+
+
 const stuff = meals;
 function App() {
 
+    const [showMenu, setMenuVisibility] = useState(false);
     const [chosenMeals, setMeals] = useState([]);
     const [chosenSalads, setSalads] = useState([]);
     const [howManyMeals, getNumberOfMeals] = useState(0);
@@ -35,8 +40,6 @@ function App() {
         console.log(chosenMeals,chosenSalads);
 
     }, [chosenSalads,chosenMeals]);
-
-
     const emailSelection = (chosenItems, chosenSalads,userInfo) => {
         const Info = userInfo;
         const theSubmitInfo =
@@ -69,8 +72,6 @@ function App() {
             });
 
     };
-
-
     const addToFavs=(item)=> {
         // chosenItems.push(<li>{item.name}</li>)
 
@@ -95,44 +96,45 @@ function App() {
 
         }
     };
+
+    const toggleWeeklyMenu = () =>{
+        setMenuVisibility(!showMenu)
+        console.log(`Show Menu: ${showMenu}`)
+    }
+
     return (
-        <TheApp>
-            <Navi/>
-            <MainIntro confirmation={confirmation}  emailSelection={emailSelection} chosenMeals={chosenMeals} getNumberOfMeals={getNumberOfMeals} setMeals={setMeals} chosenSalads={chosenSalads} setSalads={setSalads} ToggleMeals={ToggleMealsView}/>
-            {mealViewOpen ?
-              <Meals>{<Products addToFavs={addToFavs}/>}</Meals> : null}
-            <MainInfo/>
-            <Contact/>
+<AuthProvider>
+        <TheAppGrid showMenu={showMenu}>
+            <OrderForm/>
+            <Navi toggleMenu={toggleWeeklyMenu}/>
             <Footer/>
-        </TheApp>
+            <Contact/>
+
+            <Main/>
+        </TheAppGrid>
+</AuthProvider>
     )
 };
 
-const TheApp = styled.div`
-  height: 100vh;
-  position: relative;
-  //width: 100%;
-  `;
-
-const Meals = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-content: space-between;
-  max-width:100%;
-  height: 75% ;
-  // background-color: ${colors.primaryTwo } ;
-  `;
 
 const TheAppGrid = styled.div`
   height: 100vh;
   display: grid;
+  grid-template-rows: ${ props=> 
+    props.showMenu ? 
+        "64px 80% repeat(5, auto)"
+        :
+        "64px 20% repeat(5, auto)" 
+};
   grid-template-areas: 
-  'hero hero hero hero' 
-  'sider main main main' 
-  'sider main main main' 
-  'sider main main main'
-  'sider main main main'
-  'sider main main main'
+  'head head head head' 
+  'order order order order' 
+  'order order order order' 
+  'info info info info'
+  'info info info info'
+  'info info info info'
+  'contact contact contact contact'
+  'footer footer footer footer'
   ;
   width:100vw;
   `;

@@ -1,3 +1,20 @@
+export const sides ={
+    1:{},
+    2: {},
+    3:{}
+}
+
+export const mains ={
+    1:{},
+    2:{},
+    3:{}
+}
+
+export const salads ={
+    1:{},
+    2: {},
+    3:{}
+}
 export const meals = [
     {
         "name": "Caribbean Quinoa Bowl with BBQ Jerked Jackfruit",
@@ -391,3 +408,8 @@ export const meals = [
 
 ];
 
+export const ThisWeeksMenu = {
+    Entrees: mains,
+    Salads: salads,
+    Sides: sides
+}

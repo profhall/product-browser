@@ -40,4 +40,5 @@ const TheFooter = styled.footer`
   color: ${colors.bright};
   bottom: 0;
   position: relative ;
+  grid-area: footer;
 `;
