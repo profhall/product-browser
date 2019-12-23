@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react';
+import React, {useEffect,useState, useContext} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Navi from "./components/Header/Header"
@@ -11,7 +11,7 @@ import Contact from "./components/Contact/Contact";
 import {meals} from "./data";
 import emailjs from "emailjs-com";
 import OrderForm from "./components/OrderForm/OrderForm";
-import {AuthProvider} from "./Auth/Auth";
+import {AuthContext, AuthProvider} from "./Auth/Auth";
 
 
 function getWidth() {
@@ -41,6 +41,7 @@ function App() {
         setWidth(getWidth());
 
     }, [chosenSalads,chosenMeals,windowWidth,showMenu,url]);
+
     const emailSelection = (chosenItems, chosenSalads,userInfo) => {
         const Info = userInfo;
         const theSubmitInfo =
@@ -112,7 +113,7 @@ function App() {
 <AuthProvider>
 
         <TheAppGrid url={url} width={ windowWidth} showMenu={showMenu}>
-            <OrderForm setURL={handleUrlChange}/>
+            <OrderForm  setURL={handleUrlChange}/>
             <Navi toggleMenu={toggleWeeklyMenu} />
             <Footer/>
             <Contact/>

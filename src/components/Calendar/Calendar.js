@@ -31,6 +31,8 @@ const DeliveryDate = () => {
             setDate( null );
             return;
         }
+        console.log(day.toDateString())
+
         setDate( day.toDateString() );
     }
 

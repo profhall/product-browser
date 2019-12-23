@@ -90,12 +90,13 @@ const SignUp = ({}) => {
 
     return (
         <SignUpForm>
-            <h4 className="header center ">Please fill out the form below to get started.</h4>
+            <h2 className="header center ">Please fill out the form below to get started.</h2>
             <div className="row center">
-                <p className="header col s12 light">
-                    We will not share any of your information.
-                </p>
-                <form className="col s12" >
+                <h5 className="header col s12 light">
+                    <b> Your information will not be shared.</b>
+                </h5>
+                <br/>
+                <SignUpFormForm className="col s12" >
                     <div className="row">
                         <div className="input-field col s12 m4">
                             <FormInput onChange={FormValidation} id="email" placeholder={"Email"} type="email"  className="validate"/>
@@ -122,7 +123,7 @@ const SignUp = ({}) => {
                             <FormInput onChange={FormValidation} id="zip" placeholder={"Zip"} />
                         </div>
 
-                        <div className="input-field col s12 m6">
+                        <div className="input-field col s12 m6 offset-m3">
                             <h5>Dietary Restrictions</h5>
                             <p>
                                 <label>
@@ -151,7 +152,7 @@ const SignUp = ({}) => {
                             Sign Up
                         </LoginButton>
                     </div>
-                </form>
+                </SignUpFormForm>
             </div>
         </SignUpForm>
     );
@@ -167,10 +168,20 @@ background-color: ${colors.bright};
 }
 
 `;
-const SignUpForm = styled.div`
+const SignUpFormForm = styled.form`
 color:white;
+
+justify-content: center;
+
+`;
+const SignUpForm = styled.div`
+background-color: rgba(0,0,0,0.4);
+color:white;
+font-weight: bolder;
 margin: auto;
 grid-area: content;
+width:80%;
+justify-content: center;
 
 `;
 const FormInput = styled.input`

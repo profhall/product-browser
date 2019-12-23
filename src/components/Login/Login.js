@@ -7,7 +7,7 @@ import {AuthContext} from "../../Auth/Auth";
 function getWidth() {
     return window.innerWidth
 }
-const Login = ({FormValidation, infoValidated, userLogin, history}) => {
+const Login = ({FormValidation, infoValidated, userLogin, userOrder}) => {
     const [windowWidth, setWidth] = useState(getWidth);
 
     const handleResize =()=> setWidth(getWidth());
@@ -21,9 +21,10 @@ const goToSignup = () =>{
             const {email, password} = {...userLogin}
             try{
                 await app.auth()
-                    .signInWithEmailAndPassword(email,password);
-                console.log(`Login: ${email} : ${password}`)
-                navigate("/")
+                    .signInWithEmailAndPassword(email,password).then(()=>{
+                        console.log(`Login: ${email} : ${password}`)
+                        // navigate(`/`, true, {userId:"0000"})
+                    });
                 // history.push("/")
             } catch (error){
                 alert(error)
@@ -33,14 +34,14 @@ const goToSignup = () =>{
 
     );
     const {currentUser} = useContext(AuthContext);
-
+    console.log(currentUser?currentUser.uid:"No user")
     return (
         <LoginForm className="container" >
-            <h4 className="header center ">Delicious Plant-Based Meals Prepared For You!</h4>
+            <h1 className="header center ">Delicious Plant-Based Meals Prepared For You.</h1>
             <div className="row center">
-                <p className="header col s12 light">
-                    Login or <span onClick={goToSignup} ><A href={"#"}>Sign Up</A></span >
-                </p>
+                <h5 className="header col s12 light">
+                    <b> Login or <span onClick={goToSignup} ><A href={"#"}>Sign Up</A></span ></b>
+                </h5>
                 <form className="col s12" >
                     <div className="row">
                         <div className="input-field col s12 m6">

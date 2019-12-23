@@ -14,7 +14,7 @@ const Confirmation = () => {
         <ConfirmationContainer>
             <h4>Hey {currentUser.email}, please confirm your selections below.</h4>
 
-            <Button className={"btn-large col s12 m6"} onClick={()=>navigate("/submitOrder")}>Submit Order</Button>
+            <Button className={"btn-large col s12 m6"} onClick={()=>navigate("/order_submitted")}>Submit Order</Button>
         </ConfirmationContainer>
     );
 };
