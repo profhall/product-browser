@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import colors from "../../Colors";
-import foodPic from './veganBowl.jpeg'
+import foodPic from '../OrderForm/veganBowl.jpeg'
 import DayPickerInput from 'react-day-picker';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';

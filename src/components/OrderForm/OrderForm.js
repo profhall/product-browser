@@ -7,9 +7,12 @@ import PrivateRoute from "../../PrivateRoute/PrivateRoute";
 import {AuthContext, AuthProvider} from "../../Auth/Auth";
 import Login from "../Login/Login";
 import app from "../../fbase";
+import foodPic from './veganBowl.jpeg'
+import * as firebase from "firebase";
 
 
-const OrderForm = () => {
+
+const OrderForm = ({setURL}) => {
     const [infoValidated, validateInfo] = useState(false);
     const [userLogin, setLoginInfo] = useState({});
     const routeResult = useRoutes(Routes);
@@ -32,8 +35,10 @@ const OrderForm = () => {
 
     };
     const {currentUser} = useContext(AuthContext)
+    console.log(currentUser ?currentUser.uid :null)
 
 const url =window.location.href
+    setURL(url)
     return (
             <TheOrderForm>
                 {
@@ -53,15 +58,20 @@ export default OrderForm;
 
 
 const TheOrderForm = styled.div`
-  grid-area: order;
-  height:100%;
-  background-color: #282c34;
-  display: grid;
-  grid-template-rows: auto ;
-  grid-template-areas:
-   'content content content content'
-   ;
+    grid-area: order;
+    justify-content: center;
+    color:white;
+    background:linear-gradient(0deg,rgba(0,0,0,.5),rgba(0,0,0,.5)),url(${foodPic});
+    background-repeat: no-repeat ;
+    background-size:  cover ;
+    background-position: center;
+    display: grid;
+    grid-template-rows: auto ;
+    grid-template-areas:
+    'content content content content'
+    ;
 `;
+
 const TheButtons = styled.div`
   grid-area: buttons;
   color: white;

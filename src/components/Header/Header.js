@@ -9,6 +9,7 @@ import app from "../../fbase";
 
 
 const Navi = ({toggleMenu}) => {
+    const url =window.location.href
     const {currentUser} = useContext(AuthContext)
 
     return (
@@ -20,8 +21,7 @@ const Navi = ({toggleMenu}) => {
                     <h5 className="flow-text" style={{color:colors.bright}}>PJ's Plant-Based Kitchen</h5>
                 </a>
                 <ul className="right">
-                    <li onClick={toggleMenu}><A href="/menu">Menu</A></li>
-                    {currentUser?<li onClick={()=>app.auth().signOut()}><A href="/">Logout</A></li>:null}
+                    {currentUser?<li onClick={()=>app.auth().signOut()}><A href="/">Logout</A></li>:<li><A href="/">Login</A></li>}
                 </ul>
 
 

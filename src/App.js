@@ -3,10 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 import Navi from "./components/Header/Header"
 import styled from 'styled-components'
-import About from "./components/About/About";
-import PnC from "./components/ProductsAndCart/ProductsAndCart";
-import IntroHero from "./components/Hero/Hero";
-import Products from "./components/Products/Products";
 import colors from "./Colors"
 import Footer from "./components/Footer/Footer";
 import MainIntro from "./components/Main/Main";
@@ -18,28 +14,33 @@ import OrderForm from "./components/OrderForm/OrderForm";
 import {AuthProvider} from "./Auth/Auth";
 
 
+function getWidth() {
+    return window.innerWidth
+}
+
 const stuff = meals;
 function App() {
+    const [windowWidth, setWidth] = useState(getWidth);
 
+    const [url, setURL] = useState(window.location.href);
     const [showMenu, setMenuVisibility] = useState(false);
     const [chosenMeals, setMeals] = useState([]);
     const [chosenSalads, setSalads] = useState([]);
     const [howManyMeals, getNumberOfMeals] = useState(0);
-    const [mealViewOpen, ToggleMeals] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
     // const [allMeals, setAllMeals] = useState([]);
 
-    const ToggleMealsView = (toToggle) =>{
-        console.log("See Meals...")
-        ToggleMeals(toToggle)
-    };
-
-    let everything = []
 
     useEffect(() => {
-        console.log(chosenMeals,chosenSalads);
+        console.log(chosenMeals,chosenSalads, url);
+        // url =window.location.href
+        setURL(window.location.href)
+        // url.includes("mealselection")? setMenuVisibility(true):setMenuVisibility(false)
 
-    }, [chosenSalads,chosenMeals]);
+
+        setWidth(getWidth());
+
+    }, [chosenSalads,chosenMeals,windowWidth,showMenu,url]);
     const emailSelection = (chosenItems, chosenSalads,userInfo) => {
         const Info = userInfo;
         const theSubmitInfo =
@@ -102,11 +103,17 @@ function App() {
         console.log(`Show Menu: ${showMenu}`)
     }
 
+    const handleResize =()=> setWidth(getWidth());
+    const handleUrlChange =()=>  setURL(window.location.href);
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('hashchange', handleUrlChange);
+
     return (
 <AuthProvider>
-        <TheAppGrid showMenu={showMenu}>
-            <OrderForm/>
-            <Navi toggleMenu={toggleWeeklyMenu}/>
+
+        <TheAppGrid url={url} width={ windowWidth} showMenu={showMenu}>
+            <OrderForm setURL={handleUrlChange}/>
+            <Navi toggleMenu={toggleWeeklyMenu} />
             <Footer/>
             <Contact/>
 
@@ -120,17 +127,10 @@ function App() {
 const TheAppGrid = styled.div`
   height: 100vh;
   display: grid;
-  grid-template-rows: ${ props=> 
-    props.showMenu ? 
-        "64px 80% repeat(5, auto)"
-        :
-        "64px 20% repeat(5, auto)" 
-};
+  grid-template-rows: ${ props=>  `58px ${props.width > 650 && !props.url.includes("mealselection") ? "45%" : "90%"} repeat(4, auto)`};
   grid-template-areas: 
   'head head head head' 
   'order order order order' 
-  'order order order order' 
-  'info info info info'
   'info info info info'
   'info info info info'
   'contact contact contact contact'

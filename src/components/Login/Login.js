@@ -4,8 +4,14 @@ import { navigate,A } from 'hookrouter';
 import colors from "../../Colors";
 import app from "../../fbase"
 import {AuthContext} from "../../Auth/Auth";
-
+function getWidth() {
+    return window.innerWidth
+}
 const Login = ({FormValidation, infoValidated, userLogin, history}) => {
+    const [windowWidth, setWidth] = useState(getWidth);
+
+    const handleResize =()=> setWidth(getWidth());
+    window.addEventListener('resize', handleResize);
 const goToSignup = () =>{
     navigate('/signup')
 }
@@ -54,6 +60,8 @@ const goToSignup = () =>{
                     </div>
                 </form>
             </div>
+            {windowWidth < 650? <h6 className=" center ">Scroll Down To Learn More</h6>:null}
+
 
         </LoginForm>
     );
