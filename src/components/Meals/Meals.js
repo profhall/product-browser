@@ -40,23 +40,22 @@ const MealsSelector = () => {
         let mains = null;
         switch(item.type) {
             case "main":
+
                 mains = mainsList.concat(item.name);
                 if (mainsList.length < meal_count) {
-                    addMain(mainsPicked + 1)
+                    addMain(mainsPicked + 1);
                     addMainToList(mains)
                 }
-
-
-
                 break;
             case "side":
+
                 console.log("Side Dish To Be Added ")
                 break;
             case "salad":
-                console.log("Salad Dish To Be Added ")
 
+                console.log("Salad Dish To Be Added ")
                 if (saladsPicked < salad_count) {
-                    addSalad(saladsPicked+1)
+                    addSalad(saladsPicked+1);
                     mains = mainsList.concat(item.name);
                     addMainToList(mains)
                 }
@@ -111,11 +110,6 @@ const MealsSelector = () => {
                     }
                 </MainHeaderList> : null}
             </MainHeader>
-            {/*<Mains className={"row "}>*/}
-            {/*    {!allMainsPicked ? mainList: null}*/}
-            {/*    {allMainsPicked && !allSidesPicked ? sideList: null}*/}
-            {/*    {allMainsPicked && allSidesPicked && !allSaladsPicked  ? saladList: null}*/}
-            {/*</Mains>*/}
 
             <Mains className={"row "}>
                 {mainList}

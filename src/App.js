@@ -5,7 +5,6 @@ import Navi from "./components/Header/Header"
 import styled from 'styled-components'
 import colors from "./Colors"
 import Footer from "./components/Footer/Footer";
-import MainIntro from "./components/Main/Main";
 import Main from "./components/InfoSection/InfoSection";
 import Contact from "./components/Contact/Contact";
 import {meals} from "./data";
