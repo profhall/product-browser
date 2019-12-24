@@ -42,7 +42,7 @@ export const meals = [
         },
         "description": "A tasty bowl combining bbq jerked jackfruit, quinoa and red beans cooked in coconut milk. We use spices and herbs to create a Caribbean taste.",
         "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg",
-        "type": "entree",
+        "type": "main",
         "ingredients": ["scallion","onion","coconut milk", "red beans", "jackfruit", "plantains", "garlic", "spices & herbs"],
         "nutrition":{
             "Calories":"",
@@ -63,7 +63,7 @@ export const meals = [
         "name": "Thai Red Curry with Vegetables",
         "description": "Comes with brown jasmine rice and sauteed greens",
         "ingredients": [],
-        "type":"entree",
+        "type":"main",
         "photo": "https://cookieandkate.com/images/2015/10/thai-red-curry-recipe-with-vegetables-1-1.jpg",
         "nutrition":{
             "Calories":"",
@@ -95,7 +95,7 @@ export const meals = [
         },
         "description": "A veggie medley sauteed with garlic & mexican spices delivering a delicious mouth watering meal. Served with green rice (cilantro lime rice) and mexican black beans, and guacamole. ",
         "photo": "https://karylskulinarykrusade.com/wp-content/uploads/2018/07/Grilled-Vegetable-Fajitas-Feature.jpg",
-        "type": "entree",
+        "type": "main",
         "ingredients": ["Red & Green Bell Pepper", "Red Onion", "Garlic", "Mexican Spices & Herbs", "Tortillas", ],
         "nutrition":{
             "Calories":"",
@@ -126,7 +126,7 @@ export const meals = [
             }
         },        "description": "A nutrient packed burrito with tons of flavor, served with sauteed brussel sprouts and your salad choice",
         "photo": "https://www.thegardengrazer.com/wp-content/uploads/2012/03/lentilspinach-burrito.webp",
-        "type": "entree",
+        "type": "main",
         "ingredients": ["lentils", "tomatoes", "spinach", "onion", " quinoa", "garlic", "tortillas", "herbs & spices"],
         "nutrition":{
             "Calories":{
@@ -164,7 +164,7 @@ export const meals = [
         },
         "description": "Accompanied by sesame roasted sweet potatoes & sauteed brussel sprouts, this japanese inspired dish packs alot of flavor and nutrition.  ",
         "photo": "https://www.nestleprofessional.us/sites/g/files/gfb131/f/styles/recipe/public/media/young-jackfruit-stir-fry-maggi-nestle-professional-food-service-recipe-540x400.jpg?itok=36eTdMJb",
-        "type": "entree",
+        "type": "main",
         "ingredients":["sweet potato", "brussel sprouts", "jalapenos", "young jackfruit","lime juice","green peas", "baby corn", "garlic", "herb & spices", "bell pepper"," onion", "grapeseed oil" ],
         "nutrition":{
             "Calories":"",
@@ -196,7 +196,7 @@ export const meals = [
         },
         "description": "Served with sauteed greens & roasted brussels spouts. ",
         "photo": "https://i0.wp.com/www.fromachefskitchen.com/wp-content/uploads/2019/07/Zucchini-Yellow-Squash-and-Quinoa-Casserole.jpg?w=600&ssl=1",
-        "type": "entree",
+        "type": "main",
         "ingredients":["garlic", "zucchini","yellow squash", "green chiles", "quinoa", "vegan(soy-free) cheeses"  ],
         "nutrition":{
             "Calories":"",
@@ -228,7 +228,7 @@ export const meals = [
 },
         "description": "Our version of a classic seafood dish made with the versatile Jackfruit. These cakes come with sauteed veggies a salad of your choice and a lemon dill aioli dipping sauce",
         "photo": "https://dizzybusyandhungry.com/wp-content/uploads/2018/09/crab-cakes-3862-2.jpg",
-        "type": "entree",
+        "type": "main",
         "ingredients": ["young jackfruit", "lemon juice", "bell pepper", "sauteed mixed veggies (zucchini, squash, bell pepper, onion, kale)", "herbs & spices", "cauliflower", "vegan mayo", "onion", "grapeseed oil", "coconut flour"  ],
         "nutrition":{
             "Calories":"",
@@ -250,7 +250,7 @@ export const meals = [
         "sides": ["Cornbread", "Southern Style Collard Greens"],
         "description": "A super nutritious recipe packed with lots of protein, natural carbs, and flavor. This Louisiana classic will surely fill you up. Served with cornbread and southern style collard greens",
         "photo": "https://simpleveganblog.com/wp-content/uploads/2018/09/Simple-vegan-jambalaya-3.jpg",
-        "type": "entree",
+        "type": "main",
         "ingredients":["onion", "red and green bell pepper", "herbs & spices", "tomato", "garlic", "soy sauce", "chickpeas", "kidney beans", "brown rice", "quinoa"],
         "nutrition":{
             "Calories":"",
@@ -272,7 +272,7 @@ export const meals = [
         "sides": ["Brown Rice & Beans", "Sauteed Greens"],
         "description": "A Caribbean Classic prepared with jackfruit instead of traditional meat. This is served with brown rice and beans & sauteed cabbage. Comes with brown rice & beans, and sauteed greens" ,
         "photo": "https://cdn.shortpixel.ai/client/q_lossy,ret_img,w_300/https://thatgirlcookshealthy.com/wp-content/uploads/2018/03/curried-jackfruit-Image-300x300.jpg",
-        "type": "entree",
+        "type": "main",
         "ingredients":["young jackfruit", "sweet potato", "garlic", "ginger", "onion", "scallion", "herbs & spices", "tomato", "coconut milk", "coconut oil", "rice", "kidney beans", "kale", "red cabbage", "carrots" ],
         "nutrition":{
             "Calories":"",
@@ -292,7 +292,7 @@ export const meals = [
     {
         "name": "Quinoa Cakes with tomato-chickpea relish" ,
         "description": "Crispy Vegan Quinoa Cakes topped with Tomato Chickpea Relish. Comes with sauteed greens and sauteed veggies",
-        "type":"entree",
+        "type":"main",
         "ingredients": [],
         "photo": "https://www.feastingathome.com/wp-content/uploads/2012/06/Vegan-quinoa-cake-recipe-15.jpg",
         "nutrition":{
@@ -313,7 +313,7 @@ export const meals = [
     {
         "name": "Spicy Sweet Potato and Green Rice Burrito Bowls" ,
         "description": "Healthy burrito bowls made with roasted sweet potato, green rice and black beans! This delicious, vegan dinner reheats well for lunch.",
-        "type":"entree",
+        "type":"main",
         "ingredients": [] ,
         "photo": "https://cookieandkate.com/images/2015/01/sweet-potato-green-rice-burrito-bowls-recipe-1.jpg",
         "nutrition":{

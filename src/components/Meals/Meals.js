@@ -4,7 +4,7 @@ import Products from "../Products/Products";
 import {meals, salads, mains, sides} from '../../data'
 import Product from "../Product/Product";
 import colors from "../../Colors";
-import {navigate} from "hookrouter";
+import {navigate, useQueryParams} from "hookrouter";
 
 const stuff = meals
 
@@ -12,35 +12,41 @@ function getWidth() {
     return window.innerWidth
 }
 const MealsSelector = () => {
-    const [mealCart, setMeals] = useState({mains:[], sides:[], salads:[]});
+    const [queryParams] = useQueryParams()
+    const [mealCart, setMeals] = useState({});
     const [windowWidth, setWidth] = useState(getWidth);
     const [allMainsPicked,validateMains] = useState(false);
-    const [allSidesPicked,validateSides] = useState(false);
     const [allSaladsPicked,validateSalads] = useState(false);
     const [mainsPicked,addMain]= useState(0);
-    const [sidesPicked,addSide] = useState(0);
+    const [mainsList,addMainToList] = useState([]);
     const [saladsPicked,addSalad] = useState(0);
-    let numberofMeals = 4
-    let numberofSides = 8
-    let numberofSalads = 1
+    let {meal_count} = queryParams
+    let salad_count = Math.floor(meal_count/4)
 
 
     const handleResize =()=> setWidth(getWidth());
     window.addEventListener('resize', handleResize);
 
     useEffect(()=>{
-        console.log(getWidth())
+        console.log(mainsList)
         setWidth(getWidth());
-        console.log("Main DishAdded :", mainsPicked)
-        mainsPicked === numberofMeals ? validateMains(true) : validateMains(false)
+        console.log("Main :", mainsPicked, " Salads : ", saladsPicked)
+        mainsPicked === meal_count ? validateMains(true) : validateMains(false)
+        salad_count =  Math.floor(meal_count/4)
+    },[windowWidth,mainsList,allMainsPicked, mainsPicked,saladsPicked])
 
-    },[windowWidth,allMainsPicked, mainsPicked])
-
-    const addDish = (type)=>
+    const addDish = (item)=>
     {
-        switch(type) {
+        let mains = null;
+        switch(item.type) {
             case "main":
-                addMain(mainsPicked+1)
+                mains = mainsList.concat(item.name);
+                if (mainsList.length < meal_count) {
+                    addMain(mainsPicked + 1)
+                    addMainToList(mains)
+                }
+
+
 
                 break;
             case "side":
@@ -48,6 +54,12 @@ const MealsSelector = () => {
                 break;
             case "salad":
                 console.log("Salad Dish To Be Added ")
+
+                if (saladsPicked < salad_count) {
+                    addSalad(saladsPicked+1)
+                    mains = mainsList.concat(item.name);
+                    addMainToList(mains)
+                }
                 break;
             default:
                 console.log("no type bitch")
@@ -71,17 +83,33 @@ const MealsSelector = () => {
                 </Desc>
                 <ButtonContatiner className={"row center"}>
 
-                <Button onClick={()=>addDish("main" )} width={windowWidth}  className={"btn-large col s12 m6"}>Add</Button>
+                <Button onClick={()=>addDish(item )} width={windowWidth}  className={"btn-large col s12 m6"}>Add</Button>
                 </ButtonContatiner>
             </Main>
 
 
         })
-
+    const deleteMeal= (fav) =>{console.log("delete meal")}
     return (
         <MealsSelectorContainer >
-            <MainHeader className={"center"}>
-                <h4>Please Pick Your {numberofMeals} Meals</h4>
+            <MainHeader main={mainsList.length > 0} className={"center"} width={windowWidth}>
+                <MainHeaderText>
+                    <h4> {mainsPicked >0 ? `You have ${meal_count-mainsPicked} left to pick`: `Please Pick Your ${meal_count} Meals.`}</h4>
+                    <h6>Every 4 meals come with a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h6>
+                </MainHeaderText>
+                {mainsList.length > 0  && windowWidth > 650 ? <MainHeaderList>
+                    {
+                        mainsList.length > 0?
+                            <ChosenMealsList  className={`col  center`}>
+                                <h5>Tap Item To Delete</h5>
+                                {<ol>
+                                    {mainsList.map((fav)=>
+                                        <li  onClick={()=>deleteMeal(fav)}><h6>{fav}</h6></li>
+                                    )} </ol>
+                                }
+                            </ChosenMealsList>: null
+                    }
+                </MainHeaderList> : null}
             </MainHeader>
             {/*<Mains className={"row "}>*/}
             {/*    {!allMainsPicked ? mainList: null}*/}
@@ -176,7 +204,6 @@ const Desc = styled.div`
   justify-content: space-around;
   flex-direction: column;
 `;
-
 const SidePhoto = styled.div`
   grid-area: ${props=>props.num ===1 ? "side1":"side2"};
   height: 100%;
@@ -187,9 +214,9 @@ const SidePhoto = styled.div`
   background-size:  cover ;
   background-position: center;
 `;
-
 const MainPhoto = styled.div`
   grid-area: main;
+  
   height: 100%;
   margin: auto;
   width: 100%;
@@ -230,11 +257,42 @@ const Mains = styled.div`
 `;
 
 const MainHeader = styled.div`
+  display: grid;
+  height: 95%;
+  width: 100%;
+  margin: auto;
+  grid-template-columns: 50% 50%;
+  grid-template-areas: ${props=> props.width > 650 && props.main ? "'text list'" : "'text text'"};
+  
+`;
+
+const MainHeaderText = styled.div`
   display: flex;
   height: 95%;
-  width: 98%;
-  margin: auto;
-  grid-area: mainhead;
+  width: 100%;
+  grid-area: text;
   justify-content: center;
-  
+  flex-direction: column;
+`;
+
+const MainHeaderList = styled.div`
+    display: flex;
+    grid-area: list;
+      flex-direction: column;
+
+  height: 95%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+
+const ChosenMealsList = styled.div`
+  text-align: left;
+  padding: 0 30px !important;
+  width: 95%;
+  height: 95%;
+  max-height: 350px;
+  overflow: auto;
+  background-color: rgba(255,255,255, .2);
 `;

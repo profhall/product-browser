@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import styled from "styled-components";
-import {A, navigate} from "hookrouter";
+import {A, navigate, useQueryParams} from "hookrouter";
 import colors from "../../Colors";
 import DayPickerInput from 'react-day-picker';
 
@@ -9,13 +9,22 @@ function getWidth() {
 }
 
 const DeliveryDate = () => {
+    const [queryParams] = useQueryParams()
     const [startDate, setDate] = useState(null);
     const [windowWidth, setWidth] = useState(getWidth);
+    const {u_id,meal_count} = queryParams
+    let currentOrder = {}
+    currentOrder["u_id"]=u_id;
+    currentOrder["meal_count"]=meal_count;
+
 
     useEffect(()=>{
         console.log(getWidth())
         setWidth(getWidth());
 
+        currentOrder["deliver_date"]=startDate
+
+        console.log(currentOrder)
     },[windowWidth,startDate])
 
     const handleResize =()=> setWidth(getWidth());
@@ -38,15 +47,18 @@ const DeliveryDate = () => {
 
     return (
         <DeliveryDateContainer>
-        <CalendarContainer>
-            <h3>When To Deliver</h3>
+        <CalendarContainer className={"center"}>
+            <h2>When To Deliver</h2>
+            <h5> Meals are delivered on Sundays & Wednesday evenings</h5>
+            <h5>Your Chosen Date:<b> {startDate ? `${startDate}` : "pick a day"}</b></h5>
+
             <DayPickerInput
                 disabledDays={{ daysOfWeek: [0,1,2,4,5] }}
                 style={{width:"100%"}}  placeholder={"Start Date"}
                 selectedDays={startDate}
                 onDayClick={handleDayClick} />
         </CalendarContainer>
-            <Button className={"btn-large"} onClick={()=>{navigate("/mealselection")}}>Select Meals</Button>
+            <Button className={"btn-large"} onClick={()=>{navigate("/mealselection", false, currentOrder)}}>Select Meals</Button>
 
         </DeliveryDateContainer>
     );

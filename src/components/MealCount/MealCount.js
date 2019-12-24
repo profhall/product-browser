@@ -14,9 +14,9 @@ const MealCount = () => {
     const [queryParams] = useQueryParams()
     const [windowWidth, setWidth] = useState(getWidth);
     const [meal_count, updateMealCount] = useState(0);
-    console.log(window.location.href)
-    console.log(queryParams)
-    const {userId} = queryParams
+    // console.log(window.location.href)
+    // console.log(queryParams)
+    const {user} = queryParams
     const handleResize =()=> setWidth(getWidth());
     window.addEventListener('resize', handleResize);
     let currentOrder = {}
@@ -24,14 +24,14 @@ const MealCount = () => {
     useEffect(()=>{
         console.log(meal_count)
         setWidth(getWidth());
-
+        currentOrder["u_id"]=user
+        currentOrder["meal_count"]=meal_count
 
         },[windowWidth, meal_count])
 
 
     const setMealCount = (num)=>{
         console.log(num)
-
         updateMealCount(num)
     }
 
@@ -51,7 +51,7 @@ const MealCount = () => {
                 <MealButton width={windowWidth} num={10} ppmeal={11} total={10*11}/>
                 <MealButton width={windowWidth} num={12} ppmeal={10} total={12 *10}/>
             </ButtonsContainer>
-            <Button className={"btn-large"} onClick={()=>{navigate("/deliverydate")}}>Pick A Delivery Date</Button>
+            <Button className={"btn-large"} onClick={()=>{navigate("/deliverydate", false, currentOrder)}}>Pick A Delivery Date</Button>
         </MealCountSelectionContainer>
     );
 };

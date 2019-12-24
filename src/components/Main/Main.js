@@ -18,6 +18,7 @@ function getWidth() {
 
 
 
+
 const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,allMeals, setAllMeals,setMeals,chosenSalads,setSalads, getNumberOfMeals}) => {
     const [windowWidth, setWidth] = useState(getWidth);
     const [currentSlide, changeSlide] = useState(0);
@@ -46,7 +47,6 @@ const Main = ({confirmation, emailSelection,ToggleMeals,chosenMeals,allMeals, se
         setWidth(getWidth());
         if(currentSlide !== 4){ToggleMeals(false)}
         else{ToggleMeals(true)}
-        changeSaladCount(Math.floor(mealCount/4));
     },  [ chosenMeals, chosenSalads, saladCount, mealCount, startDate, restrictions, currentSlide, ToggleMeals, modalOpen]);
 
 
