@@ -8,7 +8,6 @@ import {AuthContext, AuthProvider} from "../../Auth/Auth";
 import Login from "../Login/Login";
 import app from "../../fbase";
 import foodPic from './veganBowl.jpeg'
-import * as firebase from "firebase";
 
 
 

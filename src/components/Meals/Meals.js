@@ -121,14 +121,6 @@ const MealsSelector = () => {
                     }
                 </MainHeaderList> : null}
             </MainHeader>
-<<<<<<< HEAD
-            {/*<Mains className={"row "}>*/}
-            {/*    {!allMainsPicked ? mealList: null}*/}
-            {/*    {allMainsPicked && !allSidesPicked ? sideList: null}*/}
-            {/*    {allMainsPicked && allSidesPicked && !allSaladsPicked  ? saladList: null}*/}
-            {/*</Mains>*/}
-=======
->>>>>>> 03723dad77dc0cb373ac8c6b1c68908be8f7a671
 
             <Mains className={"row "}>
                 {mealList}

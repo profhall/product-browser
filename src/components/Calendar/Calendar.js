@@ -44,29 +44,22 @@ const DeliveryDate = () => {
         <DeliveryDateContainer className={"center"}>
             <h2>When To Deliver</h2>
             <h5> Meals are delivered on Sundays & Wednesday evenings</h5>
-<<<<<<< HEAD
-            <h5>Your Chosen Dat:<b> {startDate ? `${startDate}` : "pick a day"}</b></h5>
+            <h5>Your Chosen Date:<b> {startDate ? `${startDate}` : "pick a day"}</b></h5>
 
             <DayPickerInput
                 disabledDays={{ daysOfWeek: [1,2,4,5,6] }}
                 style={{width:"100%"}}  placeholder={"Start Date"}
                 selectedDays={startDate}
                 onDayClick={handleDayClick} />
-=======
             <h5>Your Chosen Date:<b> {startDate ? `${startDate}` : "pick a day"}</b></h5>
-        <CalendarContainer className={"row"}>
-            <DatePicker
-                onChange={(e)=>handleDayClick(e)}
-                value={del_date}
-                dayAriaLabel = {"Day"}
-            />
-            {/*<DayPickerInput*/}
-            {/*    disabledDays={{ daysOfWeek: [0,1,2,4,5] }} placeholder={"Start Date"}*/}
-            {/*    style={{width:"100%"}}*/}
-            {/*    selectedDays={startDate}*/}
-            {/*    onDayClick={handleDayClick} />*/}
->>>>>>> 03723dad77dc0cb373ac8c6b1c68908be8f7a671
-        </CalendarContainer>
+        {/*<CalendarContainer className={"row"}>*/}
+        {/*    <DatePicker*/}
+        {/*        onChange={(e)=>handleDayClick(e)}*/}
+        {/*        value={del_date}*/}
+        {/*        dayAriaLabel = {"Day"}*/}
+        {/*    />*/}
+
+        {/*</CalendarContainer>*/}
 
             <ButtonContatiner className={"row center"}>
                 <Button className={"btn-large col s12 m5"} onClick={()=>{navigate("/mealcount",false,[],false)}}>Go Back</Button>
