@@ -40,23 +40,22 @@ const MealsSelector = () => {
         let mains = null;
         switch(item.type) {
             case "main":
+
                 mains = mainsList.concat(item.name);
                 if (mainsList.length < meal_count) {
-                    addMain(mainsPicked + 1)
+                    addMain(mainsPicked + 1);
                     addMainToList(mains)
                 }
-
-
-
                 break;
             case "side":
+
                 console.log("Side Dish To Be Added ")
                 break;
             case "salad":
-                console.log("Salad Dish To Be Added ")
 
+                console.log("Salad Dish To Be Added ")
                 if (saladsPicked < salad_count) {
-                    addSalad(saladsPicked+1)
+                    addSalad(saladsPicked+1);
                     mains = mainsList.concat(item.name);
                     addMainToList(mains)
                 }
@@ -65,7 +64,7 @@ const MealsSelector = () => {
                 console.log("no type bitch")
         }
     }
-    const mealList = stuff.map((item) => {
+    const mainList = stuff.map((item) => {
             return  <Main className={"col s12 m5"} >
                 <PhotoGrid full={item.side?true:false}>
                 <MainPhoto photo={item.photo} />
@@ -88,25 +87,14 @@ const MealsSelector = () => {
             </Main>
 
 
-        });
-
-    const deleteMeal= (fav, index) =>{
-        console.log("delete meal", fav, index)
-        mainsList.splice(index,1)
-        addMainToList(mainsList)
-
-        fav.toLowerCase().includes("salad") ?addSalad(saladsPicked-1)  : addMain(mainsPicked-1);
-
-
-    };
-
-
+        })
+    const deleteMeal= (fav) =>{console.log("delete meal")}
     return (
         <MealsSelectorContainer >
             <MainHeader main={mainsList.length > 0} className={"center"} width={windowWidth}>
                 <MainHeaderText>
                     <h4> {mainsPicked >0 ? `You have ${meal_count-mainsPicked} left to pick`: `Please Pick Your ${meal_count} Meals.`}</h4>
-                    <h5>With every 4 meals you get a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h5>
+                    <h6>Every 4 meals come with a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h6>
                 </MainHeaderText>
                 {mainsList.length > 0  && windowWidth > 650 ? <MainHeaderList>
                     {
@@ -114,27 +102,21 @@ const MealsSelector = () => {
                             <ChosenMealsList  className={`col  center`}>
                                 <h5>Tap Item To Delete</h5>
                                 {<ol>
-                                    {mainsList.map((fav,i)=>
-                                        <li id={i}   onClick={()=>deleteMeal(fav,i)}><h5>{fav}</h5></li>
+                                    {mainsList.map((fav)=>
+                                        <li  onClick={()=>deleteMeal(fav)}><h6>{fav}</h6></li>
                                     )} </ol>
                                 }
                             </ChosenMealsList>: null
                     }
                 </MainHeaderList> : null}
             </MainHeader>
-            {/*<Mains className={"row "}>*/}
-            {/*    {!allMainsPicked ? mealList: null}*/}
-            {/*    {allMainsPicked && !allSidesPicked ? sideList: null}*/}
-            {/*    {allMainsPicked && allSidesPicked && !allSaladsPicked  ? saladList: null}*/}
-            {/*</Mains>*/}
 
             <Mains className={"row "}>
-                {mealList}
+                {mainList}
             </Mains>
 
             <ButtonContatiner className={"row center"}>
-                <Button className={"btn-large col s12 m5"} onClick={()=>{navigate("/deliverydate",false,[],false)}}>Go Back</Button>
-                <Button className={"btn-large col s12 m5"} onClick={()=>{navigate("/confirm",false,mainsList,false)}}>Confirm Order</Button>
+                <Button className={"btn-large col s12 m6"} onClick={()=>{navigate("/confirm")}}>Confirm Order</Button>
             </ButtonContatiner>
         </MealsSelectorContainer>
     );
@@ -173,7 +155,7 @@ const MealsSelectorContainer = styled.div`
 `;
 
 const Main = styled.div`
-  border-radius: 5px;
+  border-radius: 15px;
   display: grid;
   min-height: 300px !important;
   height: 300px ;
@@ -258,7 +240,7 @@ const PhotoGrid = styled.div`
 const Mains = styled.div`
   height: 95%;
   max-height: 50vh;
-  width: 100%;
+  width: 98%;
   grid-area: mains;
   overflow: auto;
   display: flex;

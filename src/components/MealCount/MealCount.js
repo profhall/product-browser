@@ -35,23 +35,28 @@ const MealCount = () => {
         updateMealCount(num)
     }
 
-    const MealButton = ({num, ppmeal, total}) =>{
-        return(<Button onClick={() => setMealCount(num)} height={"150px"} >
-            <h6> {num} MEALS<br/>
-                ${ppmeal}/ MEAL <br/>
-                {total} TOTAL</h6>
+    const MealButton = ({width,num, ppmeal, total}) =>{
+        return(<Button onClick={() => setMealCount(num)} height={"225px"} width={width} >
+                <h5> {num} MEALS</h5>
+                <h5> ${ppmeal}/ MEAL </h5>
+                <h5> {total} TOTAL</h5>
         </Button>)
     }
     return (
-        <MealCountSelectionContainer>
-            <h1>{meal_count > 0 ? `You've chosen ${meal_count} meals`:"Pick the number of meals"}</h1>
+        <MealCountSelectionContainer className={"center"}>
+            <h2>{meal_count > 0 ? `You've chosen ${meal_count} meals`:"Pick the number of meals"}</h2>
             <ButtonsContainer width={ windowWidth}>
                 <MealButton width={windowWidth} num={4} ppmeal={13.75} total={4*13.75}/>
                 <MealButton width={windowWidth} num={7} ppmeal={12.14} total={7*12.14}/>
                 <MealButton width={windowWidth} num={10} ppmeal={11} total={10*11}/>
                 <MealButton width={windowWidth} num={12} ppmeal={10} total={12 *10}/>
             </ButtonsContainer>
-            <Button className={"btn-large"} onClick={()=>{navigate("/deliverydate", false, currentOrder)}}>Pick A Delivery Date</Button>
+
+
+            <ButtonContainer className={"row center"}>
+                <Button className={"btn-large col s12 m5"} onClick={()=>{navigate("/",false,[])}}>Go Back</Button>
+                <Button className={"btn-large col s12 m5"} onClick={()=>{navigate("/deliverydate", false, currentOrder)}}> Delivery Date</Button>
+            </ButtonContainer>
         </MealCountSelectionContainer>
     );
 };
@@ -66,8 +71,18 @@ const MealCountSelectionContainer = styled.div`
     flex-direction: column;
     align-items: center;
     align-content: center;
-    justify-content: start;
+    justify-content: space-evenly;
     `;
+
+
+const ButtonContainer = styled.div`
+  grid-area: button;  
+  display: flex;
+  width: 100%;
+  justify-content:center;
+  margin-left: 0 !important;
+
+`;
 
 const ButtonsContainer = styled.div`
     width: 95%;
@@ -75,18 +90,16 @@ const ButtonsContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
-    height: 45%; 
     overflow: auto;
-    max-height:250px;
+    max-height:375px;
     flex-direction: ${props=> props.width > 650  ? "row":"column"};
 
     `
-
 const Button = styled.button`
     color:white;
-    margin: 7px;
-    //align-items: center; 
-    width:${props=> props.width > 650  ? "150px":"75%"};
+    margin: 7px !important;
+    height: ${props=> props.height ? props.height:" "};
+    width:${props=> props.width > 650  ? "225px":"75%"};
     background-color: ${colors.bright};
     &:hover {
       background-color: ${colors.secondaryTwo};

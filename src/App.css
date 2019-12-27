@@ -55,3 +55,7 @@ color: white;
 .App-link {
   color: #09d3ac;
 }
+
+.react-date-picker__inputGroup, .react-date-picker__button {
+  background-color: white !important ;
+}
