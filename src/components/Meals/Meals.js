@@ -37,6 +37,8 @@ const MealsSelector = () => {
 
     const addDish = (item)=>
     {
+        console.log(item)
+
         let mains = null;
         switch(item.type) {
             case "main":

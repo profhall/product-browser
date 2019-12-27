@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {A, navigate, useQueryParams} from "hookrouter";
 import colors from "../../Colors";
 import DayPickerInput from 'react-day-picker';
-// import DatePicker from 'react-date-picker';
+import DatePicker from 'react-date-picker';
 
 function getWidth() {
     return window.innerWidth
@@ -59,7 +59,8 @@ const DeliveryDate = () => {
                     disabledDays={{ daysOfWeek: [1,2,4,5,6] }}
                     style={{width:"100%"}}  placeholder={"Start Date"}
                     selectedDays={startDate}
-                    onDayClick={handleDayClick} />
+                    onDayClick={handleDayClick}
+                    />
                 <h5>Your Chosen Date:<b> {startDate ? `${startDate}` : "pick a day"}</b></h5>
         </CalendarContainer>
 

@@ -1,35 +1,52 @@
-export const sides ={
-    1:{},
-    2: {},
-    3:{},
-    4: {},
-    5: {},
-    6:{},
-    7: {}
-}
-
-export const mains ={
-    1:{},
-    2: {},
-    3:{},
-    4: {},
-    5: {},
-    6:{},
-    7: {}
-}
-
-export const salads ={
-    1:{},
-    2: {},
-    3:{},
-    4: {},
-    5: {},
-    6:{},
-    7: {}
-}
 export const meals = [
+
     {
-        "name": "Caribbean Quinoa Bowl with BBQ Jerked Jackfruit",
+        "name": "BBQ Black Eyed Pea Collard Rolls",
+        "description": "Black Eyed Pea Collard Rolls are hearty, healthy, tangy and plant-based! Comes with brown rice and sauteed greens",
+        "ingredients": ["Collard Greens", "Crimini Mushrooms",  "Black Eyed Peas", "Bourbon BBQ Sauce", "Bell Pepper"],
+        "type":"main",
+        "photo": "https://vanillaandbean.com/wp-content/uploads/2014/04/BBQBlackeyedpeaCollards-5.jpg",
+        "source": "https://vanillaandbean.com/bbq-black-eye-pea-collard-rolls/",
+        "nutrition":{
+            "Calories":"70kcal",
+            "Carbohydrates": "12g",
+            "Protein": "5g",
+            "Fat":"1g",
+            "Saturated Fat": "1g",
+            "Potassium": "394mg",
+            "Fiber": "3g",
+            "Sugar": "3g",
+            "Vitamin A": "132iu",
+            "Vitamin C": "1mg",
+            "Calcium": "27mg",
+            "Iron": "1mg"
+        }
+    },
+    {
+        "name": "Vegan Gumbo",
+        "description": "This vegan gumbo with a mix of beans, mushrooms and okra is hearty, savory, filling and warming. Comes with brown rice & roasted brussel sprouts",
+        "ingredients": ["Onion", "Green Pepper", "Celery", "Garlic", "Okra", "Tomatoes",  "Chickpeas", "Lentils", "Brown Rice"],
+        "type":"main",
+        "photo": "https://www.cilantroandcitronella.com/wp-content/uploads/2017/01/vegan-gumbo-image-1.jpg",
+        "source": "https://www.cilantroandcitronella.com/vegan-gumbo/",
+        "nutrition":{
+            "Calories":"782kcal",
+            "Carbohydrates": "127g",
+            "Protein": "38g",
+            "Fat":"19g",
+            "Saturated Fat": "3g",
+            "Unsaturated Fat": "14g",
+            "Potassium": "394mg",
+            "Fiber": "32g",
+            "Sugar": "32g",
+            "Vitamin A": null,
+            "Vitamin C": null,
+            "Calcium": null,
+            "Iron": null
+        }
+    },
+    {
+        "name": "BBQ Jerked Jackfruit Caribbean Quinoa Bowl",
         "side": {
             1:{
                 "name":"Fried Plantains",
@@ -37,13 +54,45 @@ export const meals = [
             },
             2:{
                 "name":"Sauteed Greens",
-                "url":""
+                "pic":""
             }
         },
         "description": "A tasty bowl combining bbq jerked jackfruit, quinoa and red beans cooked in coconut milk. We use spices and herbs to create a Caribbean taste.",
         "photo": "https://tryveg.com/wp-content/uploads/2018/07/IMG_20180613_150406_086-1024x1024.jpg",
         "type": "main",
         "ingredients": ["scallion","onion","coconut milk", "red beans", "jackfruit", "plantains", "garlic", "spices & herbs"],
+        "nutrition":{
+            "Calories":"",
+            "Carbohydrates": "",
+            "Protein": "",
+            "Fat":"",
+            "Saturated Fat": "",
+            "Potassium": "",
+            "Fiber": "",
+            "Sugar": "",
+            "Vitamin A": "",
+            "Vitamin C": "",
+            "Calcium": "",
+            "Iron": ""
+        }
+    },
+    {
+        "name": "Vegan Pot Pies with Cornbread Crust",
+        "side": {
+            1:{
+                "name":"Roasted Sweet Potatoes",
+                "pic":""
+            },
+            2:{
+                "name":"Sauteed Brussel Sprouts",
+                "pic":""
+            }
+        },
+        "description": "This cozy vegan pot pie is made with tender veggies simmered in savory herbed sauce and baked up under a cornbread crust. Comes with roasted sweet potatoes & sauteed brussel sprouts",
+        "photo": "https://thefitchen.com/wp-content/uploads/2016/09/Vegan-Pot-Pies-with-COrnbread-Crust-4.jpg",
+        "sources": ["https://www.connoisseurusveg.com/vegan-chicken-pot-pie/","https://thefitchen.com/vegan-cornbread-pot-pies/"],
+        "type": "main",
+        "ingredients": ["Vegan Cornbread","Garlic","Mixed Vegetables(peas, carrots, green beans)", "chickpeas", "Spices & Herbs"],
         "nutrition":{
             "Calories":"",
             "Carbohydrates": "",
@@ -113,10 +162,10 @@ export const meals = [
         }
     },
     {
-        "name": "Quinoa Lentil Spinach Burritos",
+        "name": "Lentil Spinach Burritos",
         "side": {
             1:{
-                "name":"Sesame Roasted Sweet Potatoes",
+                "name":" Cajun Quinoa",
                 "pic":null,
                 "ingredients":""
             },
@@ -124,7 +173,7 @@ export const meals = [
                 "name":"Sauteed Brussels Sprouts",
                 "pic":null,
             }
-        },        "description": "A nutrient packed burrito with tons of flavor, served with sauteed brussel sprouts and your salad choice",
+        },        "description": "A nutrient packed burrito with tons of flavor, served with sauteed brussel sprouts and cajun quinoa",
         "photo": "https://www.thegardengrazer.com/wp-content/uploads/2012/03/lentilspinach-burrito.webp",
         "type": "main",
         "ingredients": ["lentils", "tomatoes", "spinach", "onion", " quinoa", "garlic", "tortillas", "herbs & spices"],
@@ -153,7 +202,7 @@ export const meals = [
         "name": "Jackfruit Stir Fry",
         "side": {
             1:{
-                "name":"Sesame Roasted Sweet Potatoes",
+                "name":"Sauteed Greens",
                 "pic":null,
                 "ingredients":""
             },
@@ -162,7 +211,7 @@ export const meals = [
                 "pic":null,
             }
         },
-        "description": "Accompanied by sesame roasted sweet potatoes & sauteed brussel sprouts, this japanese inspired dish packs alot of flavor and nutrition.  ",
+        "description": "Accompanied by sauteed greens & roasted brussel sprouts, this japanese inspired dish packs alot of flavor and nutrition.  ",
         "photo": "https://www.nestleprofessional.us/sites/g/files/gfb131/f/styles/recipe/public/media/young-jackfruit-stir-fry-maggi-nestle-professional-food-service-recipe-540x400.jpg?itok=36eTdMJb",
         "type": "main",
         "ingredients":["sweet potato", "brussel sprouts", "jalapenos", "young jackfruit","lime juice","green peas", "baby corn", "garlic", "herb & spices", "bell pepper"," onion", "grapeseed oil" ],
@@ -182,7 +231,7 @@ export const meals = [
         }
     },
     {
-        "name": "Squash, Zucchini & Quinoa Casserole",
+        "name": "Squash Casserole",
         "side": {
             1:{
                 "name":"Sesame Roasted Sweet Potatoes",
@@ -198,38 +247,6 @@ export const meals = [
         "photo": "https://i0.wp.com/www.fromachefskitchen.com/wp-content/uploads/2019/07/Zucchini-Yellow-Squash-and-Quinoa-Casserole.jpg?w=600&ssl=1",
         "type": "main",
         "ingredients":["garlic", "zucchini","yellow squash", "green chiles", "quinoa", "vegan(soy-free) cheeses"  ],
-        "nutrition":{
-            "Calories":"",
-            "Carbohydrates": "",
-            "Protein": "",
-            "Fat":"",
-            "Saturated Fat": "",
-            "Potassium": "",
-            "Fiber": "",
-            "Sugar": "",
-            "Vitamin A": "",
-            "Vitamin C": "",
-            "Calcium": "",
-            "Iron": ""
-        }
-    },
-    {
-        "name": "Jackfruit Crab Cakes with Lemon Dill Sauce",
-    "side": {
-    1:{
-        "name":"Sesame Roasted Sweet Potatoes",
-            "pic":null,
-            "ingredients":""
-    },
-    2:{
-        "name":"Coucous Veggies",
-            "pic":null,
-    }
-},
-        "description": "Our version of a classic seafood dish made with the versatile Jackfruit. These cakes come with sauteed veggies a salad of your choice and a lemon dill aioli dipping sauce",
-        "photo": "https://dizzybusyandhungry.com/wp-content/uploads/2018/09/crab-cakes-3862-2.jpg",
-        "type": "main",
-        "ingredients": ["young jackfruit", "lemon juice", "bell pepper", "sauteed mixed veggies (zucchini, squash, bell pepper, onion, kale)", "herbs & spices", "cauliflower", "vegan mayo", "onion", "grapeseed oil", "coconut flour"  ],
         "nutrition":{
             "Calories":"",
             "Carbohydrates": "",
@@ -268,7 +285,7 @@ export const meals = [
         }
     },
     {
-        "name": "Caribbean Curry Jackfruit",
+        "name": "Spicy Caribbean Curry w/Jackfruit",
         "sides": ["Brown Rice & Beans", "Sauteed Greens"],
         "description": "A Caribbean Classic prepared with jackfruit instead of traditional meat. This is served with brown rice and beans & sauteed cabbage. Comes with brown rice & beans, and sauteed greens" ,
         "photo": "https://cdn.shortpixel.ai/client/q_lossy,ret_img,w_300/https://thatgirlcookshealthy.com/wp-content/uploads/2018/03/curried-jackfruit-Image-300x300.jpg",
@@ -290,11 +307,12 @@ export const meals = [
         }
     },
     {
-        "name": "Quinoa Cakes with tomato-chickpea relish" ,
-        "description": "Crispy Vegan Quinoa Cakes topped with Tomato Chickpea Relish. Comes with sauteed greens and sauteed veggies",
-        "type":"main",
-        "ingredients": [],
-        "photo": "https://www.feastingathome.com/wp-content/uploads/2012/06/Vegan-quinoa-cake-recipe-15.jpg",
+        "name": "Carolina Style BBQ and Coleslaw",
+        "sides": ["Chickpea Baked BBQ Beans","Roasted Sweet Potatoes" ],
+        "description": "A Carolina Classic! Served with chickpea baked bbq beans & roasted sweet potatoes ",
+        "photo": "https://i.pinimg.com/originals/d7/c7/53/d7c753890cf30de32505bb4e8835afbf.jpg",
+        "ingredients": ["young jackfruit", "chickpeas", "tomato sauce", "sweet potato", "bell pepper", "herbs & spices", "cabbage", "apple cider vinegar","mustard", "vegan mayo"],
+        "type": "main",
         "nutrition":{
             "Calories":"",
             "Carbohydrates": "",
@@ -354,27 +372,6 @@ export const meals = [
         }
     },
     {
-        "name": "Sweet Potato & Black Bean Salad",
-        "description": "Roasted sweet potatoes and black beans tossed in a chili lime dressing! This nutritious meal is packed with lots of flavor and very fulfilling.",
-        "ingredients": ["onions", "black beans", "limes", "cilantro", "grapeseed oil", "chili paste", "fresh lime juice", "garlic","bell pepper", "hempseeds"],
-        "type":"salad",
-        "photo": "https://32lxcujgg9-flywheel.netdna-ssl.com/wp-content/uploads/2011/06/black_bean_salad_sweet_potatoes-10.jpg",
-        "nutrition":{
-            "Calories":"",
-            "Carbohydrates": "",
-            "Protein": "",
-            "Fat":"",
-            "Saturated Fat": "",
-            "Potassium": "",
-            "Fiber": "",
-            "Sugar": "",
-            "Vitamin A": "",
-            "Vitamin C": "",
-            "Calcium": "",
-            "Iron": ""
-        }
-    },
-    {
         "name": "Kale Apple Salad",
         "description": "This Kale Salad recipe is loaded with crisp apples, crunchy pecans, and dried cranberries. Tossed in a simple honey-lemon dressing that coats every bite!",
         "ingredients": ["pecans", "kale", "dried cranberries", "lemon juice", "honey", "apples", "onion", "herbs & spices"],
@@ -415,13 +412,28 @@ export const meals = [
             "Calcium": "",
             "Iron": ""
         }
+    },
+    {
+        "name": "Rainbow Power Greens Salad with Black Eyed Peas",
+        "description": "A healthy gluten free power greens salad packed with lucky black eyed peas and super nutrients.  A great way to start off the new year and get back on track with clean eating.",
+        "type":"salad",
+        "ingredients": ["Quinoa", "Carrots", "Shallots", "Cabbage", "Kale", "Collard Greens", "Black Eyed Peas", "Garlic"],
+        "source": "https://www.cottercrunch.com/rainbow-power-greens-salad-black-eyed-peas-vegan-gluten-free/",
+        "photo": "https://www.cottercrunch.com/wp-content/uploads/2015/12/rainbow-power-greens-salad-with-black-eyed-peas2.jpg",
+        "nutrition":{
+            "Calories":"",
+            "Carbohydrates": "",
+            "Protein": "",
+            "Fat":"",
+            "Saturated Fat": "",
+            "Potassium": "",
+            "Fiber": "",
+            "Sugar": "",
+            "Vitamin A": "",
+            "Vitamin C": "",
+            "Calcium": "",
+            "Iron": ""
+        }
     }
-
-
 ];
 
-export const ThisWeeksMenu = {
-    Entrees: mains,
-    Salads: salads,
-    Sides: sides
-}
