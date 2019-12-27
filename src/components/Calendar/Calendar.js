@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {A, navigate, useQueryParams} from "hookrouter";
 import colors from "../../Colors";
 import DayPickerInput from 'react-day-picker';
+import DatePicker from 'react-date-picker';
 
 function getWidth() {
     return window.innerWidth
@@ -11,6 +12,7 @@ function getWidth() {
 const DeliveryDate = () => {
     const [queryParams] = useQueryParams()
     const [startDate, setDate] = useState(null);
+    const [del_date, delDate] = useState(null);
     const [windowWidth, setWidth] = useState(getWidth);
     const {u_id,meal_count} = queryParams
     let currentOrder = {}
@@ -30,26 +32,19 @@ const DeliveryDate = () => {
     const handleResize =()=> setWidth(getWidth());
     window.addEventListener('resize', handleResize);
 
-    function handleDayClick(day, { selected, disabled }) {
-        if (disabled) {
-            console.log("day is disabled")
-            return;
-        }
-        if (selected) {
-            // Unselect the day if already selected
-            setDate( null );
-            return;
-        }
+    function handleDayClick(day) {
+
         console.log(day.toDateString())
 
         setDate( day.toDateString() );
+        delDate( day);
     }
 
     return (
-        <DeliveryDateContainer>
-        <CalendarContainer className={"center"}>
+        <DeliveryDateContainer className={"center"}>
             <h2>When To Deliver</h2>
             <h5> Meals are delivered on Sundays & Wednesday evenings</h5>
+<<<<<<< HEAD
             <h5>Your Chosen Dat:<b> {startDate ? `${startDate}` : "pick a day"}</b></h5>
 
             <DayPickerInput
@@ -57,6 +52,20 @@ const DeliveryDate = () => {
                 style={{width:"100%"}}  placeholder={"Start Date"}
                 selectedDays={startDate}
                 onDayClick={handleDayClick} />
+=======
+            <h5>Your Chosen Date:<b> {startDate ? `${startDate}` : "pick a day"}</b></h5>
+        <CalendarContainer className={"row"}>
+            <DatePicker
+                onChange={(e)=>handleDayClick(e)}
+                value={del_date}
+                dayAriaLabel = {"Day"}
+            />
+            {/*<DayPickerInput*/}
+            {/*    disabledDays={{ daysOfWeek: [0,1,2,4,5] }} placeholder={"Start Date"}*/}
+            {/*    style={{width:"100%"}}*/}
+            {/*    selectedDays={startDate}*/}
+            {/*    onDayClick={handleDayClick} />*/}
+>>>>>>> 03723dad77dc0cb373ac8c6b1c68908be8f7a671
         </CalendarContainer>
 
             <ButtonContatiner className={"row center"}>
@@ -75,8 +84,8 @@ width:100%;
     display: flex;  
     flex-direction: column;
     align-items: center;
-    align-content: center;
     justify-content: start;
+
 
 `;
 const ButtonContatiner = styled.div`
@@ -89,6 +98,8 @@ const ButtonContatiner = styled.div`
 `;
 const CalendarContainer = styled.div`
 margin : 0 !important;
+ color:black;
+
 
 `;
 
