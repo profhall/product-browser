@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {A, navigate, useQueryParams} from "hookrouter";
 import colors from "../../Colors";
 import DayPickerInput from 'react-day-picker';
-import DatePicker from 'react-date-picker';
+// import DatePicker from 'react-date-picker';
 
 function getWidth() {
     return window.innerWidth
@@ -32,13 +32,21 @@ const DeliveryDate = () => {
     const handleResize =()=> setWidth(getWidth());
     window.addEventListener('resize', handleResize);
 
-    function handleDayClick(day) {
 
-        console.log(day.toDateString())
 
+    function handleDayClick(day, { selected, disabled }) {
+        if (disabled) {
+            console.log("day is disabled")
+            return;
+        }
+        if (selected) {
+            // Unselect the day if already selected
+            setDate( null );
+            return;
+        }
         setDate( day.toDateString() );
-        delDate( day);
     }
+
 
     return (
         <DeliveryDateContainer className={"center"}>
@@ -46,12 +54,15 @@ const DeliveryDate = () => {
             <h5> Meals are delivered on Sundays & Wednesday evenings</h5>
             <h5>Your Chosen Date:<b> {startDate ? `${startDate}` : "pick a day"}</b></h5>
 
-            <DayPickerInput
-                disabledDays={{ daysOfWeek: [1,2,4,5,6] }}
-                style={{width:"100%"}}  placeholder={"Start Date"}
-                selectedDays={startDate}
-                onDayClick={handleDayClick} />
-            <h5>Your Chosen Date:<b> {startDate ? `${startDate}` : "pick a day"}</b></h5>
+        <CalendarContainer className={"row"}>
+                <DayPickerInput
+                    disabledDays={{ daysOfWeek: [1,2,4,5,6] }}
+                    style={{width:"100%"}}  placeholder={"Start Date"}
+                    selectedDays={startDate}
+                    onDayClick={handleDayClick} />
+                <h5>Your Chosen Date:<b> {startDate ? `${startDate}` : "pick a day"}</b></h5>
+        </CalendarContainer>
+
         {/*<CalendarContainer className={"row"}>*/}
         {/*    <DatePicker*/}
         {/*        onChange={(e)=>handleDayClick(e)}*/}
