@@ -8,20 +8,14 @@ import {useQueryParams} from "hookrouter";
 
 
 const OrderSubmitted = () => {
-    const {currentUser} = useContext(AuthContext);
+    const {currentUserProfile, currentUserOrder,nextPage, prevPage} = useContext(AuthContext)
 
-    const [delivery_date, setDate] = useState("");
-    const [price, setPrice] = useState("");
-    const [address, setAddress] = useState("");
-    const [order_time_stamp, setTimestamp] = useState("");
-    const [restrictions, setRestrictions] = useState("");
-    const [numberOfMeals, setMealCount] = useState("");
+
     const db = firebase.firestore(app);
-    const [queryParams] = useQueryParams();
 
-    let {meal_count, deliver_date} = queryParams;
+    let {meal_count,price, address,deliver_date, order_time_stamp, delivery_date, restrictions, meals} = currentUserOrder;
     let ordersDB = db.collection(`orders`);
-    let query = ordersDB.where("uid", "==", currentUser.uid);
+    let query = ordersDB.where("uid", "==", currentUserProfile.uid);
     let latest_order={};
 
 
@@ -39,12 +33,6 @@ const OrderSubmitted = () => {
                 });
 
                 console.log(latest_order);
-                const {address, order_time_stamp, delivery_date, restrictions, meals} =  latest_order;
-                setDate(delivery_date);
-                setAddress(address);
-                setMealCount(meals);
-                setRestrictions(restrictions);
-                setTimestamp(order_time_stamp);
 
 
             })
@@ -58,7 +46,7 @@ const OrderSubmitted = () => {
     return (
         <ReceiptContainer className={""}>
             <h4>
-                Below is a summary of your order, please be sure to send payment to:
+                Thank you {currentUserOrder.name}! Below is a summary of your order, please be sure to send payment to:
                 <a target="_blank" href={"https://www.paypal.com/paypalme2/phalljr"}> <b>paypal.me/phalljr</b></a> <br/><br/><b> Orders aren't final until payment is recieved.</b>
             </h4>
             <form style={{margin:"auto"}} className="col s12 ">
@@ -69,7 +57,7 @@ const OrderSubmitted = () => {
                     <div className="col s12 " style={{fontSize:"25px"}}>
                         Delivery Date:
                         <FormInput className="input-field inline ">
-                            <input id="delivery" style={{fontSize:"1em", fontWeight:"bolder"}} className={"white-text"} type="text" value={`${delivery_date}`} disabled />
+                            <input id="delivery" style={{fontSize:"1em", fontWeight:"bolder"}} className={"white-text"} type="text" value={`${deliver_date}`} disabled />
                         </FormInput>
                     </div>
                     <div className="col s12 " style={{fontSize:"25px"}}>

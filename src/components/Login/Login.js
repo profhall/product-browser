@@ -7,7 +7,7 @@ import {AuthContext} from "../../Auth/Auth";
 function getWidth() {
     return window.innerWidth
 }
-const Login = ({FormValidation, infoValidated, userLogin, userOrder}) => {
+const Login = ({FormValidation, infoValidated, userLogin}) => {
     const [windowWidth, setWidth] = useState(getWidth);
 
     const handleResize =()=> setWidth(getWidth());
@@ -36,8 +36,8 @@ const goToSignup = () =>{
     const {currentUser} = useContext(AuthContext);
     console.log(currentUser?currentUser.uid:"No user")
     return (
-        <LoginForm className="container" >
-            <h1 className="header center ">Delicious Plant-Based Meals Prepared For You.</h1>
+        <LoginForm  >
+            <h2 style={{margin:0}} className="header center ">Delicious Plant-Based Meals Prepared For You.</h2>
             <div className="row center">
                 <h5 className="header col s12 light">
                     <b> Login or <span onClick={goToSignup} ><A href={"#"}>Sign Up</A></span ></b>
@@ -82,7 +82,6 @@ const LoginForm = styled.div`
 color:white;
 margin: auto;
 grid-area: content;
-
 `;
 const FormInput = styled.input`
 color:white;

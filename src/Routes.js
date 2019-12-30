@@ -10,6 +10,7 @@ import DeliveryDate from "./components/Calendar/Calendar";
 import MealsSelector from "./components/Meals/Meals";
 import Confirmation from "./components/Confirmation/Confirmation";
 import OrderSubmitted from "./components/OrderSubmitted/OrderSubmitted";
+import UserProfile from "./components/UserProfile/UserProfile";
 import Home from "./components/Home/Home";
 
 
@@ -22,6 +23,7 @@ const routes = {
     "/mealselection*": () => <MealsSelector/>,
     "/deliverydate*": () => <DeliveryDate/>,
     "/order_submitted*": () => <OrderSubmitted />,
+    "/profile*": () => <UserProfile />,
     "/": () => <Home  />,
     "/signup" : () => <SignUp/>
 };

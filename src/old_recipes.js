@@ -43,6 +43,28 @@ const old_recipes = [
         }
     },
     {
+        "name": "Jambalaya",
+        "sides": ["Cornbread", "Southern Style Collard Greens"],
+        "description": "A super nutritious recipe packed with lots of protein, natural carbs, and flavor. This Louisiana classic will surely fill you up. Served with cornbread and southern style collard greens",
+        "photo": "https://simpleveganblog.com/wp-content/uploads/2018/09/Simple-vegan-jambalaya-3.jpg",
+        "type": "main",
+        "ingredients":["onion", "red and green bell pepper", "herbs & spices", "tomato", "garlic", "soy sauce", "chickpeas", "kidney beans", "brown rice", "quinoa"],
+        "nutrition":{
+            "Calories":"",
+            "Carbohydrates": "",
+            "Protein": "",
+            "Fat":"",
+            "Saturated Fat": "",
+            "Potassium": "",
+            "Fiber": "",
+            "Sugar": "",
+            "Vitamin A": "",
+            "Vitamin C": "",
+            "Calcium": "",
+            "Iron": ""
+        }
+    },
+    {
         "name": "Tikka Masala",
         "description": "Made with coconut milk and comes with brown fluffy basmati rice & quinoa ",
         "type": "entree",

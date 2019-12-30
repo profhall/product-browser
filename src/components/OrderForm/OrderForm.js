@@ -12,7 +12,7 @@ import foodPic from './veganBowl.jpeg'
 
 
 const OrderForm = ({setURL, updateOrder}) => {
-    const userOrder= {};
+    const {currentUser, currentUserProfile, currentUserOrder, setUserProfile,setUserOrder} = useContext(AuthContext)
     const [infoValidated, validateInfo] = useState(false);
     const [userLogin, setLoginInfo] = useState({});
     const routeResult = useRoutes(Routes);
@@ -34,8 +34,6 @@ const OrderForm = ({setURL, updateOrder}) => {
         else { validateInfo(false) }
 
     };
-    const {currentUser} = useContext(AuthContext)
-    console.log(currentUser ?currentUser.uid :null)
 
 const url =window.location.href
     setURL(url)
@@ -44,7 +42,7 @@ const url =window.location.href
                 {
                     !currentUser && !url.includes("signup")
                     ?
-                        <Login userOrder={userOrder} userLogin={userLogin} infoValidated={infoValidated} FormValidation={FormValidation}/>
+                        <Login userLogin={userLogin} infoValidated={infoValidated} FormValidation={FormValidation}/>
                        :
                         routeResult
 
@@ -71,23 +69,3 @@ const TheOrderForm = styled.div`
     'content content content content'
     ;
 `;
-
-const TheButtons = styled.div`
-  grid-area: buttons;
-  color: white;
-  height:100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly ;
-  align-items: center ;
-  background-color: #8b9898;
-`;
-
-
-const Button = styled.div`
-  justify-content: center;
-  display: flex;
-  border: #ff5be8 solid 1px;
-  flex-grow: 1;
-`;
-

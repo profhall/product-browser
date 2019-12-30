@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState,useContext, useEffect} from 'react';
 import styled from "styled-components";
-import Products from "../Products/Products";
 import {meals, salads, mains, sides} from '../../data'
-import Product from "../Product/Product";
 import colors from "../../Colors";
 import {navigate, useQueryParams} from "hookrouter";
+import {AuthContext} from "../../Auth/Auth";
 
 const stuff = meals
 
@@ -12,15 +11,16 @@ function getWidth() {
     return window.innerWidth
 }
 const MealsSelector = () => {
-    const [queryParams] = useQueryParams()
-    const [mealCart, setMeals] = useState({});
+
+
+    const {currentUserOrder,setUserOrder, prevPage} = useContext(AuthContext)
+    let {meal_count} = currentUserOrder
+
     const [windowWidth, setWidth] = useState(getWidth);
     const [allMainsPicked,validateMains] = useState(false);
-    const [allSaladsPicked,validateSalads] = useState(false);
     const [mainsPicked,addMain]= useState(0);
     const [mainsList,addMainToList] = useState([]);
     const [saladsPicked,addSalad] = useState(0);
-    let {meal_count} = queryParams
     let salad_count = Math.floor(meal_count/4)
 
 
@@ -30,10 +30,12 @@ const MealsSelector = () => {
     useEffect(()=>{
         console.log(mainsList)
         setWidth(getWidth());
-        console.log("Main :", mainsPicked, " Salads : ", saladsPicked)
         mainsPicked === meal_count ? validateMains(true) : validateMains(false)
         salad_count =  Math.floor(meal_count/4)
     },[windowWidth,mainsList,allMainsPicked, mainsPicked,saladsPicked])
+
+
+
 
     const addDish = (item)=>
     {
@@ -41,10 +43,12 @@ const MealsSelector = () => {
         switch(item.type) {
             case "main":
 
-                mains = mainsList.concat(item.name);
                 if (mainsList.length < meal_count) {
+                    mains = mainsList.concat(item.name);
                     addMain(mainsPicked + 1);
                     addMainToList(mains)
+                    // addToOrder(mains)
+
                 }
                 break;
             case "side":
@@ -63,6 +67,7 @@ const MealsSelector = () => {
             default:
                 console.log("no type bitch")
         }
+
     }
     const mealList = stuff.map((item) => {
             return  <Main className={"col s12 m5"} >
@@ -99,6 +104,11 @@ const MealsSelector = () => {
 
     };
 
+    const nextPage = () =>{
+        setUserOrder({...currentUserOrder, "meals": mainsList})
+        navigate("/confirm",false,mainsList,false)
+    }
+
 
     return (
         <MealsSelectorContainer >
@@ -127,8 +137,8 @@ const MealsSelector = () => {
             </Mains>
 
             <ButtonContatiner className={"row center"}>
-                <Button className={"btn-large col s12 m5"} onClick={()=>{navigate("/deliverydate",false,[],false)}}>Go Back</Button>
-                <Button className={"btn-large col s12 m5"} onClick={()=>{navigate("/confirm",false,mainsList,false)}}>Confirm Order</Button>
+                <Button className={"btn-large col s12 m5"} onClick={()=>prevPage("/deliverydate")}>Go Back</Button>
+                <Button className={"btn-large col s12 m5"} onClick={nextPage}>Confirm Order</Button>
             </ButtonContatiner>
         </MealsSelectorContainer>
     );
@@ -297,8 +307,8 @@ const ChosenMealsList = styled.div`
   text-align: left;
   padding: 0 30px !important;
   width: 95%;
-  height: 95%;
-  max-height: 350px;
+  height: 80%;
+  max-height: 325px;
   overflow: auto;
   background-color: rgba(255,255,255, .2);
 `;

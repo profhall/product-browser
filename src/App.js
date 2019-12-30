@@ -16,10 +16,14 @@ import {AuthContext, AuthProvider} from "./Auth/Auth";
 function getWidth() {
     return window.innerWidth
 }
+function getHeight() {
+    return window.innerHeight
+}
 
 const stuff = meals;
 function App() {
     const [windowWidth, setWidth] = useState(getWidth);
+    const [windowHeight, setHeight] = useState(getHeight);
 
     const [url, setURL] = useState(window.location.href);
     const [showMenu, setMenuVisibility] = useState(false);
@@ -73,37 +77,11 @@ function App() {
             });
 
     };
-    const addToFavs=(item)=> {
-        // chosenItems.push(<li>{item.name}</li>)
 
-        let items = null;
-        let salads = null;
-        console.log(chosenMeals.length , howManyMeals);
-
-        if (chosenMeals.length < howManyMeals && item.type !== "salad"){
-            console.log("Entree Chosen");
-
-            items = chosenMeals.concat(item.name);
-            // console.log(items)
-            setMeals(items);
-
-
-        }
-        if(chosenSalads.length < Math.floor(howManyMeals/4) && item.type === "salad"){
-            console.log("Salad Chosen");
-            salads = chosenSalads.concat(item.name);
-            // console.log(items)
-            setSalads(salads);
-
-        }
-    };
-
-    const toggleWeeklyMenu = () =>{
-        setMenuVisibility(!showMenu)
-        console.log(`Show Menu: ${showMenu}`)
+    const handleResize =()=> {
+        setWidth(getWidth());
+        setHeight(getHeight());
     }
-
-    const handleResize =()=> setWidth(getWidth());
     const handleUrlChange =()=>  setURL(window.location.href);
     window.addEventListener('resize', handleResize);
     window.addEventListener('hashchange', handleUrlChange);
@@ -111,9 +89,9 @@ function App() {
     return (
 <AuthProvider>
 
-        <TheAppGrid url={url} width={ windowWidth} showMenu={showMenu}>
+        <TheAppGrid url={url} width={ windowWidth} height={windowHeight} showMenu={showMenu}>
             <OrderForm  setURL={handleUrlChange}/>
-            <Navi toggleMenu={toggleWeeklyMenu} />
+            <Navi />
             <Footer/>
             <Contact/>
 
@@ -127,7 +105,7 @@ function App() {
 const TheAppGrid = styled.div`
   height: 100vh;
   display: grid;
-  grid-template-rows: ${ props=>  `58px ${props.width > 650 && !props.url.includes("mealselection") ? "45%" : "90%"} repeat(4, auto)`};
+  grid-template-rows: ${ props=>  `58px ${props.width > 650 && props.height > 500 && !props.url.includes("mealselection") ? "45%" : "95%"} repeat(4, auto)`};
   grid-template-areas: 
   'head head head head' 
   'order order order order' 

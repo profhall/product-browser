@@ -1,7 +1,8 @@
-import React,{useEffect, useState} from 'react';
+import React,{useEffect, useState,useContext} from 'react';
 import styled from "styled-components";
 import {usePath,useQueryParams, navigate} from "hookrouter";
 import colors from "../../Colors";
+import {AuthContext} from "../../Auth/Auth";
 
 
 function getWidth() {
@@ -11,24 +12,43 @@ function getWidth() {
 
 const MealCount = () => {
 
+    const {currentUserOrder, prevPage,setUserOrder, currentUserProfile,nextPage} = useContext(AuthContext)
+
     const [queryParams] = useQueryParams()
     const [windowWidth, setWidth] = useState(getWidth);
-    const [meal_count, updateMealCount] = useState(0);
+    const [meal_count, updateMealCount] = useState(null);
     // console.log(window.location.href)
     // console.log(queryParams)
     const {user} = queryParams
     const handleResize =()=> setWidth(getWidth());
     window.addEventListener('resize', handleResize);
-    let currentOrder = {}
 
     useEffect(()=>{
         console.log(meal_count)
         setWidth(getWidth());
-        currentOrder["u_id"]=user
-        currentOrder["meal_count"]=meal_count
 
         },[windowWidth, meal_count])
 
+    if (meal_count){
+        let price = 0;
+        let deliveryFee = 8;
+        let containerFee = 15;
+        if(meal_count === 4){
+            price = 55;
+        }
+        else if(meal_count === 7){
+            price = 85;
+        }
+        else if(meal_count === 10){
+            price = 110;
+        }
+        else if(meal_count === 12){
+            price = 120;
+        }
+        console.log(currentUserProfile)
+        setUserOrder({...currentUserOrder, "meal_count": meal_count, "price":price+deliveryFee+(currentUserProfile.container_fee_paid === false ? containerFee : 0)})
+
+    }
 
     const setMealCount = (num)=>{
         console.log(num)
@@ -44,7 +64,7 @@ const MealCount = () => {
     }
     return (
         <MealCountSelectionContainer className={"center"}>
-            <h2>{meal_count > 0 ? `You've chosen ${meal_count} meals`:"Pick the number of meals"}</h2>
+            <h2>{meal_count ? `You've chosen ${meal_count} meals`:"Pick the number of meals"}</h2>
             <ButtonsContainer width={ windowWidth}>
                 <MealButton width={windowWidth} num={4} ppmeal={13.75} total={4*13.75}/>
                 <MealButton width={windowWidth} num={7} ppmeal={12.14} total={7*12.14}/>
@@ -54,8 +74,8 @@ const MealCount = () => {
 
 
             <ButtonContainer className={"row center"}>
-                <Button className={"btn-large col s12 m5"} onClick={()=>{navigate("/",false,[])}}>Go Back</Button>
-                <Button className={"btn-large col s12 m5"} onClick={()=>{navigate("/deliverydate", false, currentOrder)}}> Delivery Date</Button>
+                <Button className={"btn-large col s12 m5"} onClick={()=>prevPage("/")}>Go Back</Button>
+                <Button className={"btn-large col s12 m5"} onClick={()=>nextPage("/deliverydate")}> Delivery Date</Button>
             </ButtonContainer>
         </MealCountSelectionContainer>
     );

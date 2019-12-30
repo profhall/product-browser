@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import plateIcon from './assets/lunch-box.svg';
 import colors from "../../Colors";
 import Routes from "../../Routes"
-import {A} from "hookrouter";
 import {AuthContext} from "../../Auth/Auth";
 import app from "../../fbase";
+import {navigate, A} from "hookrouter";
+
 
 
 const Navi = ({toggleMenu}) => {
@@ -22,6 +23,7 @@ const Navi = ({toggleMenu}) => {
                 </a>
                 <ul className="right">
                     {currentUser?<li onClick={()=>app.auth().signOut()}><A href="/">Logout</A></li>:<li><A href="/">Login</A></li>}
+                    {currentUser?<li onClick={()=>navigate('/profile')}><A href="/">Profile</A></li>:null}
                 </ul>
 
 
