@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {A, navigate, useQueryParams} from "hookrouter";
 import colors from "../../Colors";
 import DayPickerInput from 'react-day-picker';
-import DatePicker from 'react-date-picker';
+import 'react-day-picker/lib/style.css';import DatePicker from 'react-date-picker';
 import {AuthContext} from "../../Auth/Auth";
 
 function getWidth() {
@@ -11,12 +11,9 @@ function getWidth() {
 }
 
 const DeliveryDate = () => {
-    const {currentUserProfile, currentUserOrder,setUserOrder, prevPage} = useContext(AuthContext)
-    const [queryParams] = useQueryParams()
+    const {currentUserOrder,setUserOrder, prevPage,nextPage} = useContext(AuthContext)
     const [deliver_date, setDate] = useState(null);
     const [windowWidth, setWidth] = useState(getWidth);
-    const {uid} = currentUserProfile
-    const {meal_count} = currentUserOrder
 
     const handleResize =()=> setWidth(getWidth());
     window.addEventListener('resize', handleResize);
@@ -61,21 +58,13 @@ const DeliveryDate = () => {
                     selectedDays={deliver_date}
                     onDayClick={handleDayClick}
                     />
-                <h5>Your Chosen Date:<b> {deliver_date ? `${deliver_date}` : "pick a day"}</b></h5>
         </CalendarContainer>
+            <h5>Your Chosen Date:<b> {deliver_date ? `${deliver_date}` : "pick a day"}</b></h5>
 
-        {/*<CalendarContainer className={"row"}>*/}
-        {/*    <DatePicker*/}
-        {/*        onChange={(e)=>handleDayClick(e)}*/}
-        {/*        value={del_date}*/}
-        {/*        dayAriaLabel = {"Day"}*/}
-        {/*    />*/}
-
-        {/*</CalendarContainer>*/}
 
             <ButtonContatiner className={"row center"}>
-                <Button className={"btn-large col s12 m5"} onClick={()=>prevPage("/mealcount")}>Go Back</Button>
-                <Button className={"btn-large"} onClick={()=>{navigate("/mealselection", false, currentUserOrder)}}>Select Meals</Button>
+                <Button className={"btn-large col s4"} onClick={()=>prevPage("/mealcount")}>Go Back</Button>
+                <Button className={"btn-large col s5"} onClick={()=>nextPage("/mealselection")}>Select Meals</Button>
             </ButtonContatiner>
         </DeliveryDateContainer>
     );
@@ -103,8 +92,7 @@ const ButtonContatiner = styled.div`
 `;
 const CalendarContainer = styled.div`
 margin : 0 !important;
- color:black;
-
+ color: ${colors.bright};
 
 `;
 
@@ -112,7 +100,6 @@ const Button = styled.button`
     color:white;
     margin: 7px;
     //align-items: center; 
-    width:${props=> props.width > 650  ? "150px":"75%"};
     background-color: ${colors.bright};
     &:hover {
       background-color: ${colors.secondaryTwo};

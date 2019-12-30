@@ -89,8 +89,8 @@ const Confirmation = () => {
 
 
             <ButtonContainer className={"row center"}>
-                <Button className={"btn-large col s12 m4"} onClick={()=>prevPage("/mealselection")}>Go Back</Button>
-                <Button className={"btn-large col s12 m6"} onClick={handleSubmit }>Submit Order</Button>
+                <Button className={"btn-large col  m5"} onClick={()=>prevPage("/mealselection")}>Go Back</Button>
+                <Button className={"btn-large col  m5"} onClick={handleSubmit }>Submit Order</Button>
 
             </ButtonContainer>
         </ConfirmationContainer>
@@ -106,13 +106,15 @@ text-decoration: underline;
 const ConfirmationContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 95%;
+  height: 100%;
   width: 100%;
   max-width:95vw;
   grid-area: content;
   align-items: center;
   justify-self: center;
   padding-top: 10px;
+    overflow: auto;
+
 `;
 const ConfirmInfo = styled.div`
   flex-direction: column;
@@ -120,12 +122,10 @@ const ConfirmInfo = styled.div`
   margin: 12px;
   font-size: 25px;
   font-weight: bold ;
-
 `;
 
 const Button = styled.button`
   margin: auto !important;
-  width:${props=> props.width > 650  ? "60%":"100%"};
   background-color: ${colors.bright};
   &:hover {
     background-color: ${colors.secondaryTwo};

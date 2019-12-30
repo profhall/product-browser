@@ -22,7 +22,7 @@ const Home = () => {
             <HomeInfoBox>
 
             </HomeInfoBox>
-            <Button className={"btn-large"} onClick={selectMealCount}>
+            <Button className={"btn-large"} onClick={()=>nextPage('\mealcount')}>
                 Lets Get Started
             </Button>
         </HomeContainer>
@@ -40,11 +40,10 @@ const HomeContainer = styled.div`
 const HomeInfoBox = styled.div`
   flex-grow: 4;
   background-color: #4a90e2;
-  width: 90vw;
+  width: 100%;
   margin: 12px 0;
 `;
 const Button = styled.button`
-  width:${props=> props.width > 650  ? "60%":"100%"};
   background-color: ${colors.bright};
   &:hover {
     background-color: ${colors.secondaryTwo};

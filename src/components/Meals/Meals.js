@@ -136,9 +136,9 @@ const MealsSelector = () => {
                 {mealList}
             </Mains>
 
-            <ButtonContatiner className={"row center"}>
-                <Button className={"btn-large col s12 m5"} onClick={()=>prevPage("/deliverydate")}>Go Back</Button>
-                <Button className={"btn-large col s12 m5"} onClick={nextPage}>Confirm Order</Button>
+            <ButtonContatiner className={"row "}>
+                <Button className={"btn-large col m5"} onClick={()=>prevPage("/deliverydate")}>Go Back</Button>
+                <Button className={"btn-large col  m5"} onClick={nextPage}>Confirm Order</Button>
             </ButtonContatiner>
         </MealsSelectorContainer>
     );
@@ -167,7 +167,7 @@ const MealsSelectorContainer = styled.div`
   width: 100%;
   max-width:95vw;
   grid-area: content;
-  grid-template-rows: 20% 70% 10%;
+  grid-template-rows: 23% 72% 5%;
   grid-gap: 10px 0;
   grid-template-areas: 
   "mainhead"

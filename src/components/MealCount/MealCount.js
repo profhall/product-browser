@@ -56,7 +56,7 @@ const MealCount = () => {
     }
 
     const MealButton = ({width,num, ppmeal, total}) =>{
-        return(<Button onClick={() => setMealCount(num)} height={"225px"} width={width} >
+        return(<Button style={{width:`${windowWidth > 650  ? "225px":"75%"}`}} onClick={() => setMealCount(num)} height={"225px"} width={width} >
                 <h5> {num} MEALS</h5>
                 <h5> ${ppmeal}/ MEAL </h5>
                 <h5> {total} TOTAL</h5>
@@ -74,8 +74,8 @@ const MealCount = () => {
 
 
             <ButtonContainer className={"row center"}>
-                <Button className={"btn-large col s12 m5"} onClick={()=>prevPage("/")}>Go Back</Button>
-                <Button className={"btn-large col s12 m5"} onClick={()=>nextPage("/deliverydate")}> Delivery Date</Button>
+                <Button className={"btn-large col m5"} onClick={()=>prevPage("/")}>Go Back</Button>
+                <Button className={"btn-large col m5"} onClick={()=>nextPage("/deliverydate")}> Delivery Date</Button>
             </ButtonContainer>
         </MealCountSelectionContainer>
     );
@@ -119,7 +119,6 @@ const Button = styled.button`
     color:white;
     margin: 7px !important;
     height: ${props=> props.height ? props.height:" "};
-    width:${props=> props.width > 650  ? "225px":"75%"};
     background-color: ${colors.bright};
     &:hover {
       background-color: ${colors.secondaryTwo};

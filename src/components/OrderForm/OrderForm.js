@@ -68,4 +68,5 @@ const TheOrderForm = styled.div`
     grid-template-areas:
     'content content content content'
     ;
+    height: 100%;
 `;
