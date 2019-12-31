@@ -10,9 +10,7 @@ import {useQueryParams} from "hookrouter";
 const OrderSubmitted = () => {
     const {currentUserProfile, currentUserOrder,nextPage, prevPage} = useContext(AuthContext)
 
-
     const db = firebase.firestore(app);
-
     let {meal_count,price, address,deliver_date, order_time_stamp, delivery_date, restrictions, meals} = currentUserOrder;
     let ordersDB = db.collection(`orders`);
     let query = ordersDB.where("uid", "==", currentUserProfile.uid);
@@ -46,7 +44,7 @@ const OrderSubmitted = () => {
     return (
         <ReceiptContainer className={""}>
             <h4>
-                Thank you {currentUserOrder.name}! Below is a summary of your order, please be sure to send payment to:
+                Thank you {currentUserProfile.name}! Below is a summary of your order, please be sure to send payment to:
                 <a target="_blank" href={"https://www.paypal.com/paypalme2/phalljr"}> <b>paypal.me/phalljr</b></a> <br/><br/><b> Orders aren't final until payment is recieved.</b>
             </h4>
             <form style={{margin:"auto"}} className="col s12 ">
@@ -93,10 +91,12 @@ const ReceiptContainer = styled.div`
   grid-area: content;
   overflow:scroll ;
   display: flex;
-  width: 100%;
+  width: 95%;
   padding: 5px;
   justify-self: center;
   flex-direction: column;
+  height: 100%;
+  margin: auto;
 `;
 
 const Receipt = styled.div`

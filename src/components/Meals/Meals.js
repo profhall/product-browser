@@ -119,7 +119,7 @@ const MealsSelector = () => {
                     <h4 style={{margin:0}}> {mainsPicked >0 ? `You have ${meal_count-mainsPicked} left to pick`: `Pick Your ${meal_count} Meals.`}</h4>
                     <h5>With every 4 meals you get a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h5>
 
-                    <h5><b>Tap food Item To Delete</b></h5>
+                    {mainsList.length > 0?<h5><b>Tap food Item To Delete</b></h5>:null}
                 </MainHeaderText>
                 {mainsList.length > 0  && windowWidth > 650 ? <MainHeaderList className={"row "}>
                     {
@@ -317,6 +317,7 @@ const Main = styled.div`
   min-height: 300px !important;
   height: 300px ;
   margin: auto !important;
+  margin-bottom: 12px !important;
   grid-template-columns: 45% 55%;
   grid-template-rows: 75% 20%;
   grid-gap: 2px;

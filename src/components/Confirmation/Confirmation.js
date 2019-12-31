@@ -142,7 +142,6 @@ font-size: 25px !important;
 
 
 const ButtonContainer = styled.div`
-  grid-area: button;  
   display: flex;
   width: 100%;
   justify-content:center;
@@ -150,7 +149,7 @@ const ButtonContainer = styled.div`
 
 `;
 const FormInput = styled.input`
-color:${colors.bright};
-font-size: 25px !important;
-font-weight: bolder ;
+    color:${colors.bright};
+    font-size: 25px !important;
+    font-weight: bolder ;
 `;

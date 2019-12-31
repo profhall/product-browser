@@ -102,14 +102,14 @@ const MealCountSelectionContainer = styled.div`
 const ButtonContainer = styled.div`
   grid-area: button;  
   display: flex;
-  width: 100%;
+  width: 65%;
   justify-content:center;
-  margin-left: 0 !important;
+  align-content:center;
 
 `;
 
 const ButtonsContainer = styled.div`
-    width: 95%;
+    width: 75%;
     display: flex;  
     justify-content: space-between;
     align-items: center;
