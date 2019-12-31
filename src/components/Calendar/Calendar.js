@@ -71,7 +71,7 @@ const DeliveryDate = () => {
 
 
             <ButtonContainer className={"row center"}>
-                <Button className={"btn-large col m5"} onClick={()=>gotoPage("/mealcount")}>Go Back</Button>
+                <Button className={"btn-large col m4"} onClick={()=>gotoPage("/mealcount")}>Go Back</Button>
                 <Button className={`btn-large col m5 ${date?"":"disabled"}`} onClick={()=>gotoPage("/mealselection")}>Select Meals</Button>
             </ButtonContainer>
         </DeliveryDateContainer>
@@ -81,14 +81,13 @@ const DeliveryDate = () => {
 export default DeliveryDate;
 
 const DeliveryDateContainer = styled.div`
-width:100%;
+  width:80%;
     grid-area:content;
     display: flex;  
     flex-direction: column;
     align-items: center;
     justify-content: start;
     height: 100%;
-    border: orangered solid 1px;
 
 
 `;
@@ -98,7 +97,6 @@ const ButtonContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content:center;
-  margin-left: 0 !important;
 
 `;
 

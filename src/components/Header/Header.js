@@ -16,10 +16,9 @@ const Navi = ({toggleMenu}) => {
     return (
         <div className="navbar-fixed">
 
-        <TheNav >
-            <div className="nav-wrapper container ">
+        <TheNav className="nav-wrapper  ">
                 <a id="logo-container" href="/" className="brand-logo ">
-                    <h5 className="flow-text" style={{color:colors.bright}}>PJ's Plant-Based Kitchen</h5>
+                    <h5 className="flow-text" style={{color:colors.bright}}>The Tasty Plant-Based Kitchen</h5>
                 </a>
                 <ul className="right">
                     {currentUser?<li onClick={()=>app.auth().signOut()}><A href="/">Logout</A></li>:<li><A href="/">Login</A></li>}
@@ -27,7 +26,6 @@ const Navi = ({toggleMenu}) => {
                 </ul>
 
 
-            </div>
         </TheNav>
         </div>
     );
@@ -35,6 +33,7 @@ const Navi = ({toggleMenu}) => {
 
 const TheNav = styled.nav`
   width: 100%;
+  padding: 0 15px 0 15px;
   background-color: ${colors.primaryTwo} ;
   color: ${colors.bright} ;
   grid-area: head;

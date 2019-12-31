@@ -116,7 +116,7 @@ const MealsSelector = () => {
         <MealsSelectorContainer >
             <MainHeader main={mainsList.length > 0} className={"center"} width={windowWidth}>
                 <MainHeaderText>
-                    <h4 style={{margin:0}}> {mainsPicked >0 ? `You have ${meal_count-mainsPicked} left to pick`: `Pick Your ${meal_count} Meals.`}</h4>
+                    <h4 style={{margin:0}}> {mainsPicked >0 ? `Pick remaining ${meal_count-mainsPicked}`: `Pick Your ${meal_count} Meals.`}</h4>
                     <h5>With every 4 meals you get a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h5>
 
                     {mainsList.length > 0?<h5><b>Tap food Item To Delete</b></h5>:null}
@@ -226,22 +226,24 @@ const ChosenMealsList = styled.div`
 /*
 Buttons Styling
  */
+
 const Button = styled.button`
-  margin: auto !important;
-  background-color: ${colors.bright};
+    color:white;
+    margin: 7px !important;
+    height: ${props=> props.height ? props.height:" "};
+    background-color: ${colors.bright};
     &:hover {
       background-color: ${colors.secondaryTwo};
     }
-`;
+`
+
 const ButtonContainer = styled.div`
   grid-area: button;  
   display: flex;
   width: 100%;
   justify-content:center;
-  margin-left: 0 !important;
 
 `;
-
 
 /*
 * 

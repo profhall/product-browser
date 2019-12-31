@@ -12,6 +12,7 @@ const Login = () => {
     const {currentUser,formValidation,userLogin,infoValidated,gotoPage} = useContext(AuthContext);
     const handleResize =()=> setWidth(getWidth());
     window.addEventListener('resize', handleResize);
+    console.log(currentUser)
 
     useEffect(()=>
     {
@@ -88,7 +89,6 @@ color:white;
 margin: auto;
 grid-area: content;
 height: 100%;
-border: orangered solid 1px;
 display: flex;
 flex-direction: column;
 justify-content: center;

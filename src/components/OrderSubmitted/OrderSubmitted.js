@@ -5,6 +5,8 @@ import * as firebase from "firebase/app";
 import app from "../../fbase";
 import 'firebase/firestore';
 import {useQueryParams} from "hookrouter";
+import colors from "../../Colors";
+
 
 
 const OrderSubmitted = () => {
@@ -45,7 +47,7 @@ const OrderSubmitted = () => {
         <ReceiptContainer className={""}>
             <h4>
                 Thank you {currentUserProfile.name}! Below is a summary of your order, please be sure to send payment to:
-                <a target="_blank" href={"https://www.paypal.com/paypalme2/phalljr"}> <b>paypal.me/phalljr</b></a> <br/><br/><b> Orders aren't final until payment is recieved.</b>
+                <a target="_blank" href={"https://www.paypal.com/paypalme2/phalljr"}> <b>paypal.me/phalljr</b></a> <br/><br/><b style={{color:`${colors.bright}`}}> Orders aren't final until payment is recieved.</b>
             </h4>
             <form style={{margin:"auto"}} className="col s12 ">
 
