@@ -8,7 +8,7 @@ import app from "../../fbase";
 import 'firebase/firestore';
 
 const Confirmation = () => {
-    const {currentUserProfile, currentUserOrder,nextPage, prevPage} = useContext(AuthContext)
+    const {currentUserProfile, currentUserOrder, gotoPage} = useContext(AuthContext)
 
     const user = currentUserProfile;
     const db = firebase.firestore(app);
@@ -40,7 +40,7 @@ const Confirmation = () => {
         ordersDB.add({...currentUserOrder, "order_time_stamp": Date.now()})
             .then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
-                nextPage("/order_submitted")
+                navigate("/order_submitted",true)
             })
             .catch(function(error) {
                 console.error("Error adding document: ", error);
@@ -89,7 +89,7 @@ const Confirmation = () => {
 
 
             <ButtonContainer className={"row center"}>
-                <Button className={"btn-large col  m5"} onClick={()=>prevPage("/mealselection")}>Go Back</Button>
+                <Button className={"btn-large col  m5"} onClick={()=>gotoPage("/mealselection")}>Go Back</Button>
                 <Button className={"btn-large col  m5"} onClick={handleSubmit }>Submit Order</Button>
 
             </ButtonContainer>
@@ -105,13 +105,14 @@ text-decoration: underline;
 
 const ConfirmationContainer = styled.div`
   display: flex;
+  margin: auto;
   flex-direction: column;
   height: 100%;
   width: 100%;
   max-width:95vw;
   grid-area: content;
   align-items: center;
-  justify-self: center;
+  justify-content: space-between;
   padding-top: 10px;
     overflow: auto;
 

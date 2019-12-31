@@ -101,9 +101,8 @@ const ReceiptContainer = styled.div`
 
 const Receipt = styled.div`
   width: 100%;
-    border: #4a90e2 solid 1px;
     min-height: 400px;
-  background-color: rgba(255,255,255,0.3);
+  background-color: rgba(255,255,255,0.2);
   color:white;
   margin: 0 !important;
 `;

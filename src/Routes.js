@@ -25,6 +25,7 @@ const routes = {
     "/order_submitted*": () => <OrderSubmitted />,
     "/profile*": () => <UserProfile />,
     "/": () => <Home  />,
-    "/signup" : () => <SignUp/>
+    "/signup" : () => <SignUp/>,
+    "/login" : () => <Login/>
 };
 export default  routes

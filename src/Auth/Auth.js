@@ -12,17 +12,37 @@ export const AuthProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState(null)
     const [currentUserProfile, setUserProfile] = useState(null)
     const [currentUserOrder, setUserOrder] = useState(null)
+    const [infoValidated, validateInfo] = useState(false);
+    const [userLogin, setLoginInfo] = useState({});
+
     const db = firebase.firestore(app);
     let userDB = db.collection(`users`);
 
-    const prevPage = (location) =>{
+    const formValidation = (e) => {
+        console.log("input id", e.target.id);
+        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+        if (e.target.id === "password"){userLogin["password"] = e.target.value;}
+        else if (e.target.id === "email"){userLogin["email"]= e.target.value;}
+
+        setLoginInfo(userLogin);
+
+        if (userLogin["password"] && userLogin["email"]
+            && userLogin["password"].length >= 6 &&
+            userLogin["email"].match(mailformat))
+        {
+            console.log(userLogin['password'], userLogin['email'])
+            validateInfo(true)
+        }
+        else { validateInfo(false) }
+
+    };
+
+
+    const gotoPage = (location) =>{
 
         navigate(location,false,[],false)
-    }
-    const nextPage = (location) =>{
-
-        navigate(location,false,[],false)
-    }
+    };
 
     useEffect(()=> {
         app.auth().onAuthStateChanged(setCurrentUser)
@@ -54,22 +74,26 @@ export const AuthProvider = ({children}) => {
 
     },[currentUserOrder])
 
+    useEffect(()=> {
+        console.log("Info Validated: ",infoValidated )
+
+    },[infoValidated])
+
 
     useEffect(()=> {
         if(currentUserProfile) {
             setUserOrder({
                 "uid": currentUser.uid,
-                "meals": [],
                 "address": currentUserProfile.address,
                 "restrictions": currentUserProfile.dietary_restrictions
             })
         }
-    },[currentUserProfile])
+    },[currentUserProfile,])
 
 
 
     return (
-        <AuthContext.Provider value={{currentUser, currentUserProfile, currentUserOrder,nextPage, prevPage , setUserProfile,setUserOrder}}>
+        <AuthContext.Provider value={{currentUser, currentUserProfile, currentUserOrder,formValidation,userLogin,infoValidated, gotoPage , setUserProfile,setUserOrder}}>
             {children}
         </AuthContext.Provider>
     );

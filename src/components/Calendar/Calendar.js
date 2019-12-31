@@ -11,7 +11,9 @@ function getWidth() {
 }
 
 const DeliveryDate = () => {
-    const {currentUserOrder,setUserOrder, prevPage,nextPage} = useContext(AuthContext)
+    const {currentUserOrder,setUserOrder, gotoPage} = useContext(AuthContext)
+    let date = currentUserOrder.deliver_date ? currentUserOrder.deliver_date : null
+
     const [deliver_date, setDate] = useState(null);
     const [windowWidth, setWidth] = useState(getWidth);
 
@@ -20,16 +22,21 @@ const DeliveryDate = () => {
 
     useEffect(()=>{
         console.log(getWidth())
-        console.log("Delivery Date Set")
+        console.log("Delivery Date Set: ",deliver_date)
         setWidth(getWidth());
 
     },[windowWidth, deliver_date])
+
+
+
 
     if (deliver_date){
         setUserOrder({...currentUserOrder, "deliver_date": deliver_date})
         console.log(deliver_date)
 
     }
+
+
 
     function handleDayClick(day, { selected, disabled }) {
         if (disabled) {
@@ -49,23 +56,24 @@ const DeliveryDate = () => {
         <DeliveryDateContainer className={"center"}>
             <h2>When To Deliver</h2>
             <h5> Meals are delivered on Sundays & Wednesday evenings</h5>
-            <h5>Your Chosen Date:<b> {deliver_date ? `${deliver_date}` : "pick a day"}</b></h5>
+            <h5>Your Chosen Date:<b> {date ? `${date}` : "pick a day"}</b></h5>
 
         <CalendarContainer className={"row"}>
                 <DayPickerInput
                     disabledDays={{ daysOfWeek: [1,2,4,5,6] }}
                     style={{width:"100%"}}  placeholder={"Start Date"}
-                    selectedDays={deliver_date}
+                    selectedDays={date}
                     onDayClick={handleDayClick}
                     />
         </CalendarContainer>
-            <h5>Your Chosen Date:<b> {deliver_date ? `${deliver_date}` : "pick a day"}</b></h5>
 
 
-            <ButtonContatiner className={"row center"}>
-                <Button className={"btn-large col s4"} onClick={()=>prevPage("/mealcount")}>Go Back</Button>
-                <Button className={"btn-large col s5"} onClick={()=>nextPage("/mealselection")}>Select Meals</Button>
-            </ButtonContatiner>
+
+
+            <ButtonContainer className={"row center"}>
+                <Button className={"btn-large col m5"} onClick={()=>gotoPage("/mealcount")}>Go Back</Button>
+                <Button className={`btn-large col m5 ${date?"":"disabled"}`} onClick={()=>gotoPage("/mealselection")}>Select Meals</Button>
+            </ButtonContainer>
         </DeliveryDateContainer>
     );
 };
@@ -79,10 +87,13 @@ width:100%;
     flex-direction: column;
     align-items: center;
     justify-content: start;
+    height: 100%;
+    border: orangered solid 1px;
 
 
 `;
-const ButtonContatiner = styled.div`
+
+const ButtonContainer = styled.div`
   grid-area: button;  
   display: flex;
   width: 100%;
@@ -90,6 +101,7 @@ const ButtonContatiner = styled.div`
   margin-left: 0 !important;
 
 `;
+
 const CalendarContainer = styled.div`
 margin : 0 !important;
  color: ${colors.bright};
@@ -98,8 +110,8 @@ margin : 0 !important;
 
 const Button = styled.button`
     color:white;
-    margin: 7px;
-    //align-items: center; 
+    margin: 7px !important;
+    height: ${props=> props.height ? props.height:" "};
     background-color: ${colors.bright};
     &:hover {
       background-color: ${colors.secondaryTwo};

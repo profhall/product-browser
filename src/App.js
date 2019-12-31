@@ -105,7 +105,7 @@ function App() {
 const TheAppGrid = styled.div`
   height: 100vh;
   display: grid;
-  grid-template-rows: ${ props=>  `58px ${props.width > 650 && props.height > 500 && !props.url.includes("mealselection") ? "80%" : "90%"} repeat(4, auto)`};
+  grid-template-rows: ${ props=>  `58px ${props.width > 650 && props.height > 500 && !props.url.includes("mealselection") ? "75%" : "90%"} repeat(4, auto)`};
   grid-template-areas: 
   'head head head head' 
   'order order order order' 
