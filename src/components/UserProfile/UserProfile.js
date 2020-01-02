@@ -7,47 +7,34 @@ import app from "../../fbase";
 import 'firebase/firestore';import {navigate} from "hookrouter";
 
 const UserProfile = () => {
-    const {currentUserProfile,nextPage, prevPage} = useContext(AuthContext);
-
-    const [userName, setUserName] = useState(currentUserProfile.name)
-    const [containerFeePaid, setcontainerFeePaid] = useState(currentUserProfile.container_fee_paid)
-    const [city, setCity] = useState(currentUserProfile.address.city)
-    const [zip, setZip] = useState(currentUserProfile.address.zip)
-    const [street, setStreet] = useState(currentUserProfile.address.street)
-    const [phone, setPhone] = useState(currentUserProfile.phone)
-    const [restrictions, setRestrictions] = useState([...currentUserProfile.dietary_restrictions]);
+    const {currentUserProfile,setUserProfile,nextPage, prevPage} = useContext(AuthContext);
+    const {name, phone, address, dietary_restrictions,container_fee_paid} = currentUserProfile
+    const [userName, setUserName] = useState("")
+    const [containerFeePaid, setcontainerFeePaid] = useState("")
+    const [city, setCity] = useState("")
+    const [zip, setZip] = useState("")
+    const [street, setStreet] = useState("")
+    const [userPhone, setPhone] = useState("")
+    const [restrictions, setRestrictions] = useState([]);
 
     useEffect(() => {
+
         console.log(currentUserProfile)
         console.log(userName)
+
+
     }, [ userName, zip, city, phone, street, restrictions]);
 
-    const handleInputChange = (e) => {
-        console.log("input id", e.target.id);
-        if (e.target.id === "name"){
-            setUserName(e.target.value)
-        }
-        else if (e.target.id === "street"){
-            setStreet(e.target.value)
-        }
-        else if (e.target.id === "zip"){
-            setZip(e.target.value)
-        }
-        else if (e.target.id === "phone"){
-            setPhone(e.target.value)
-        }
-
-        else if (e.target.id === "city"){
-            setCity(e.target.value)
-        }
+    useEffect(() => {
+    }, [ ]);
 
 
 
-    };
 
 
     const handleSubmit = useCallback(
         async () => {
+
             // let address = {"street":street,"zip":zip, "city":city}
             // console.log(userName,address, phone, restrictions)
             // console.log(userName,address, phone, restrictions)
@@ -56,18 +43,7 @@ const UserProfile = () => {
                 let userDB = db.collection(`users`)
                 console.log(userName)
 
-                userDB.doc(currentUserProfile.uid).set({
-                        address: {
-                            "street": street,
-                            "city": city,
-                            "zip": zip,
-                        },
-                        phone: phone,
-                        dietary_restrictions: restrictions,
-                        name: userName,
-                    });
-
-
+                userDB.doc(currentUserProfile.uid).set(currentUserProfile);
 
                 console.log(`updated: ${currentUserProfile.name}`)
                 navigate("/profile")
@@ -99,46 +75,46 @@ const UserProfile = () => {
                 <form className="col s12">
                     <div className="row">
                         <div className="input-field col s6">
-                            <FormInput autoFocus id="name" type="text" onChange={handleInputChange} value={`${!!currentUserProfile.name?userName:null}`} className="validate"/>
+                            <FormInput autoFocus id="name" type="text" onChange={(e) => setUserName(e.target.value)} value={`${!!currentUserProfile.name?name:null}`} className="validate"/>
                                 <Label htmlFor="name">Name</Label>
                         </div>
                         <div className="input-field col s12 m6">
-                            <FormInput autoFocus id="phone" type="text" onChange={handleInputChange} value={`${!!currentUserProfile.name?phone:null}`}/>
+                            <FormInput autoFocus id="phone" type="text" onChange={(e) => setPhone(e.target.value)} value={`${!!currentUserProfile.name?phone:null}`}/>
                             <Label htmlFor="phone">Phone</Label>
                         </div>
                         <div className="input-field col s12">
-                            <FormInput autoFocus id="street" type="text" onChange={handleInputChange} value={`${!!currentUserProfile.name?street:null}`} />
+                            <FormInput autoFocus id="street" type="text" onChange={(e) => setStreet(e.target.value)} value={`${!!currentUserProfile.name?address.street:null}`} />
                                 <Label htmlFor="street">Street</Label>
                         </div>
                         <div className="input-field col s12 m6">
-                            <FormInput autoFocus id="city" type="text" onChange={handleInputChange} value={`${!!currentUserProfile.name?city:null}`} />
+                            <FormInput autoFocus id="city" type="text" onChange={(e) => setCity(e.target.value)} value={`${!!currentUserProfile.name?address.city:null}`} />
                                 <Label htmlFor="city">City</Label>
                         </div>
                         <div className="input-field col s12 m6">
-                            <FormInput autoFocus id="zip" type="text" onChange={handleInputChange} value={`${!!currentUserProfile.name?zip:null}`} />
+                            <FormInput autoFocus id="zip" type="text" onChange={(e) => setZip(e.target.value)} value={`${!!currentUserProfile.name?address.zip:null}`} />
                             <Label htmlFor="zip">Zip</Label>
                         </div>
                         <div className="input-field col s12 m6">
-                            <FormInput autoFocus type="text" id="container_fee"  value={containerFeePaid? "Yes":"No"  }/>
+                            <FormInput autoFocus type="text" id="container_fee"  value={container_fee_paid? "Yes":"No"  }/>
                             <Label htmlFor="container_fee">Container Fee Paid</Label>
                         </div>
                         <div className="input-field col s12">
                             <h5>Dietary Restrictions</h5>
                             <p>
                                 <Label>
-                                    <input onClick={handleRestriction} checked={restrictions.includes("gluten")? true:false  }  id="gluten" type="checkbox"/>
+                                    <input onClick={handleRestriction} checked={dietary_restrictions.includes("gluten")? true:false  }  id="gluten" type="checkbox"/>
                                     <span style={{marginRight:5}}>Gluten-Free</span>
                                 </Label>
                                 <Label>
-                                    <input onClick={handleRestriction}  checked={restrictions.includes("nut")? true:false  } id="nut" type="checkbox" />
+                                    <input onClick={handleRestriction}  checked={dietary_restrictions.includes("nut")? true:false  } id="nut" type="checkbox" />
                                     <span style={{marginRight:5}}>Nut-Free</span>
                                 </Label>
                                 <Label>
-                                    <input onClick={handleRestriction} id="wheat" checked={restrictions.includes("wheat")? true:false  } type="checkbox"/>
+                                    <input onClick={handleRestriction} id="wheat" checked={dietary_restrictions.includes("wheat")? true:false  } type="checkbox"/>
                                     <span style={{marginRight:5}}>Wheat-Free</span>
                                 </Label>
                                 <Label>
-                                    <input onClick={handleRestriction} checked={restrictions.includes("soy")? true:false  } id="soy" type="checkbox"/>
+                                    <input onClick={handleRestriction} checked={dietary_restrictions.includes("soy")? true:false  } id="soy" type="checkbox"/>
                                     <span>Soy-Free</span>
                                 </Label>
                             </p>
