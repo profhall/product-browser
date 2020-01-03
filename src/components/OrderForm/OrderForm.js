@@ -20,8 +20,10 @@ const OrderForm = ({setURL, updateOrder}) => {
     const FormValidation = (e) => {
         console.log("input id", e.target.id);
         let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
         if (e.target.id === "password"){userLogin["password"] = e.target.value;}
         else if (e.target.id === "email"){userLogin["email"]= e.target.value;}
+
         setLoginInfo(userLogin);
 
         if (userLogin["password"] && userLogin["email"]
@@ -42,7 +44,7 @@ const url =window.location.href
                 {
                     !currentUser && !url.includes("signup")
                     ?
-                        <Login userLogin={userLogin} infoValidated={infoValidated} FormValidation={FormValidation}/>
+                        <Login userLogin={userLogin} />
                        :
                         routeResult
 
@@ -57,16 +59,18 @@ export default OrderForm;
 
 const TheOrderForm = styled.div`
     grid-area: order;
+      overflow:auto;
     justify-content: center;
     color:white;
-    background:linear-gradient(0deg,rgba(0,0,0,.5),rgba(0,0,0,.5)),url(${foodPic});
+    background:linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,.7)),url(${foodPic});
     background-repeat: no-repeat ;
     background-size:  cover ;
     background-position: center;
-    display: grid;
+    display: flex;
     grid-template-rows: auto ;
     grid-template-areas:
     'content content content content'
     ;
     height: 100%;
+    width: 100%;
 `;

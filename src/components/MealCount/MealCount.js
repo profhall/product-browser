@@ -12,24 +12,32 @@ function getWidth() {
 
 const MealCount = () => {
 
-    const {currentUserOrder, prevPage,setUserOrder, currentUserProfile,nextPage} = useContext(AuthContext)
-
-    const [queryParams] = useQueryParams()
+    const {currentUserOrder,setUserOrder, currentUserProfile,gotoPage} = useContext(AuthContext)
+    let numOfMeals = currentUserOrder.meal_count ? currentUserOrder.meal_count : null
     const [windowWidth, setWidth] = useState(getWidth);
-    const [meal_count, updateMealCount] = useState(null);
-    // console.log(window.location.href)
-    // console.log(queryParams)
-    const {user} = queryParams
+    const [meal_count, updateMealCount] = useState();
     const handleResize =()=> setWidth(getWidth());
     window.addEventListener('resize', handleResize);
 
     useEffect(()=>{
-        console.log(meal_count)
+        console.log(meal_count);
         setWidth(getWidth());
+
 
         },[windowWidth, meal_count])
 
-    if (meal_count){
+
+
+
+    const setMealCount = (num)=>{
+        console.log(num)
+
+        updateMealCount(num)
+
+    };
+
+    if (meal_count > 0){
+        console.log("setting order")
         let price = 0;
         let deliveryFee = 8;
         let containerFee = 15;
@@ -46,13 +54,7 @@ const MealCount = () => {
             price = 120;
         }
         console.log(currentUserProfile)
-        setUserOrder({...currentUserOrder, "meal_count": meal_count, "price":price+deliveryFee+(currentUserProfile.container_fee_paid === false ? containerFee : 0)})
-
-    }
-
-    const setMealCount = (num)=>{
-        console.log(num)
-        updateMealCount(num)
+        setUserOrder({...currentUserOrder, "meal_count": meal_count, "price" :price + deliveryFee + (currentUserProfile.container_fee_paid ? containerFee : 0)})
     }
 
     const MealButton = ({width,num, ppmeal, total}) =>{
@@ -61,10 +63,11 @@ const MealCount = () => {
                 <h5> ${ppmeal}/ MEAL </h5>
                 <h5> {total} TOTAL</h5>
         </Button>)
-    }
+    };
+
     return (
         <MealCountSelectionContainer className={"center"}>
-            <h2>{meal_count ? `You've chosen ${meal_count} meals`:"Pick the number of meals"}</h2>
+            <h2>{numOfMeals > 0 ? `You've chosen ${numOfMeals} meals`:"Choose A Selection"}</h2>
             <ButtonsContainer width={ windowWidth}>
                 <MealButton width={windowWidth} num={4} ppmeal={13.75} total={4*13.75}/>
                 <MealButton width={windowWidth} num={7} ppmeal={12.14} total={7*12.14}/>
@@ -74,8 +77,8 @@ const MealCount = () => {
 
 
             <ButtonContainer className={"row center"}>
-                <Button className={"btn-large col m5"} onClick={()=>prevPage("/")}>Go Back</Button>
-                <Button className={"btn-large col m5"} onClick={()=>nextPage("/deliverydate")}> Delivery Date</Button>
+                <Button className={"btn-large col m5"} onClick={()=>gotoPage("/")}>Go Back</Button>
+                <Button className={`btn-large col m5 ${numOfMeals>0?"":"disabled"}`} onClick={()=>gotoPage("/deliverydate")}> Delivery Date</Button>
             </ButtonContainer>
         </MealCountSelectionContainer>
     );
@@ -89,8 +92,9 @@ const MealCountSelectionContainer = styled.div`
     grid-area:content;
     display: flex;  
     flex-direction: column;
-    align-items: center;
+    height: 100%;
     align-content: center;
+    align-items: center;
     justify-content: space-evenly;
     `;
 
@@ -98,14 +102,14 @@ const MealCountSelectionContainer = styled.div`
 const ButtonContainer = styled.div`
   grid-area: button;  
   display: flex;
-  width: 100%;
+  width: 65%;
   justify-content:center;
-  margin-left: 0 !important;
+  align-content:center;
 
 `;
 
 const ButtonsContainer = styled.div`
-    width: 95%;
+    width: 75%;
     display: flex;  
     justify-content: space-between;
     align-items: center;

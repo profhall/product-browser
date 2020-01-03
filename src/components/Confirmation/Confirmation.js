@@ -8,7 +8,7 @@ import app from "../../fbase";
 import 'firebase/firestore';
 
 const Confirmation = () => {
-    const {currentUserProfile, currentUserOrder,nextPage, prevPage} = useContext(AuthContext)
+    const {currentUserProfile, currentUserOrder, gotoPage} = useContext(AuthContext)
 
     const user = currentUserProfile;
     const db = firebase.firestore(app);
@@ -40,7 +40,7 @@ const Confirmation = () => {
         ordersDB.add({...currentUserOrder, "order_time_stamp": Date.now()})
             .then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
-                nextPage("/order_submitted")
+                navigate("/order_submitted",true)
             })
             .catch(function(error) {
                 console.error("Error adding document: ", error);
@@ -54,34 +54,36 @@ const Confirmation = () => {
                 No deal is final until payment is received. Send payment to:
                 <a target="_blank" href={"https://www.paypal.com/paypalme2/phalljr"}><b>paypal.me/phalljr</b></a>
             </h4>
-            <ConfirmInfo >
-                <form>
-                    Deliver Address: <FormInputDiv className="input-field inline col s12 ">
-                        <FormInput  value={`${currentUserOrder.address ? currentUserOrder.address.street: ""}  ${currentUserOrder.address ? currentUserOrder.address.city: ""}, ${currentUserOrder.address ? currentUserOrder.address.zip: ""} `} />
-                    </FormInputDiv>
-                    <br/>
-
-                    Delivery Date:
+                <ConfirmForm className={"row"}>
                     <FormInputDiv className="input-field inline col s12 ">
-                        <FormInput  value={`${currentUserOrder.deliver_date ? currentUserOrder.deliver_date: ""}`} />
-                    </FormInputDiv>
-                    <br/>
+                        <FormInput autoFocus id="address"  value={`${currentUserOrder.address ? currentUserOrder.address.street: ""}  ${currentUserOrder.address ? currentUserOrder.address.city: ""}, ${currentUserOrder.address ? currentUserOrder.address.zip: ""} `} type="text"/>
+                        <Label htmlFor="address">Delivery Address:</Label>
 
-                    Meal Count: <FormInputDiv className="input-field inline col s12 ">
-                        <FormInput  value={currentUserOrder.meal_count} />
                     </FormInputDiv>
-                    <br/>
-                    Dietary Restrictions: <FormInputDiv className="input-field inline col s12 ">
-                        <FormInput  value={`${currentUserOrder.restrictions ? currentUserOrder.restrictions: ""}`} />
-                    </FormInputDiv>
-                    <br/>
 
-                    Total Charges:
-                    <FormInputDiv className="input-field inline col s12">
-                        <FormInput value={` $${currentUserOrder.price } ($${price} + $${deliveryFee} ${!user.container_fee_paid ? "+ $" +containerFee+ "" : ""})`} />
+                    <FormInputDiv className="input-field col s12 m6 ">
+                        <FormInput autoFocus id="deliver_date" type="text" value={`${currentUserOrder.deliver_date ? currentUserOrder.deliver_date: ""}`} />
+                        <Label htmlFor="deliver_date">Delivery Date:</Label>
                     </FormInputDiv>
-                </form>
-            </ConfirmInfo>
+
+                    <FormInputDiv className="input-field col s12 m6 ">
+                        <FormInput autoFocus  id="meals" type="text" value={currentUserOrder.meal_count}/>
+                        <Label htmlFor="meals" >Meal Count:</Label>
+                    </FormInputDiv>
+
+                    <FormInputDiv className="input-field col s12 m6 ">
+                        <FormInput autoFocus id="dietary_restrictions" type="text" value={`${currentUserOrder.restrictions ? currentUserOrder.restrictions: ""}`} />
+                        <Label htmlFor="dietary_restrictions:">Dietary Restrictions:</Label>
+                    </FormInputDiv>
+
+                    <FormInputDiv className="input-field col s12 m6 ">
+                        <FormInput autoFocus  id="fees" type="text" value={` $${currentUserOrder.price } ($${price} + $${deliveryFee} ${!user.container_fee_paid ? "+ $" +containerFee+ "" : ""})`}/>
+                        <Label htmlFor="fees" >Total Charges:</Label>
+                    </FormInputDiv>
+
+
+
+                </ConfirmForm>
 
             <h4>
             Every order has an <Numbers>${deliveryFee}</Numbers> delivery fee. <br/>There is a one time container fee of <Numbers>${containerFee}</Numbers> for new clients.
@@ -89,7 +91,7 @@ const Confirmation = () => {
 
 
             <ButtonContainer className={"row center"}>
-                <Button className={"btn-large col  m5"} onClick={()=>prevPage("/mealselection")}>Go Back</Button>
+                <Button className={"btn-large col  m5"} onClick={()=>gotoPage("/mealselection")}>Go Back</Button>
                 <Button className={"btn-large col  m5"} onClick={handleSubmit }>Submit Order</Button>
 
             </ButtonContainer>
@@ -105,32 +107,42 @@ text-decoration: underline;
 
 const ConfirmationContainer = styled.div`
   display: flex;
+  margin: auto;
   flex-direction: column;
   height: 100%;
   width: 100%;
-  max-width:95vw;
   grid-area: content;
   align-items: center;
-  justify-self: center;
   padding-top: 10px;
     overflow: auto;
 
 `;
-const ConfirmInfo = styled.div`
-  flex-direction: column;
-  width: 100%;
-  margin: 12px;
+
+const ConfirmForm = styled.form`
+  width: 80%;
+  margin: auto;
+  
   font-size: 25px;
   font-weight: bold ;
 `;
+// const ConfirmInfo = styled.div`
+//   flex-direction: column;
+//   width: 100%;
+//   margin: 12px;
+//   font-size: 25px;
+//   font-weight: bold ;
+// `;
+
 
 const Button = styled.button`
-  margin: auto !important;
-  background-color: ${colors.bright};
-  &:hover {
-    background-color: ${colors.secondaryTwo};
-  }
-`;
+    color:white;
+    margin: 7px !important;
+    height: ${props=> props.height ? props.height:" "};
+    background-color: ${colors.bright};
+    &:hover {
+      background-color: ${colors.secondaryTwo};
+    }
+`
 
 const FormInputDiv = styled.div`
 color:white;
@@ -141,15 +153,21 @@ font-size: 25px !important;
 
 
 const ButtonContainer = styled.div`
-  grid-area: button;  
   display: flex;
   width: 100%;
   justify-content:center;
   margin-left: 0 !important;
 
 `;
+
+const Label = styled.label`
+font-weight: bolder;
+font-size:x-large !important;
+color:${colors.bright} !important;
+
+`;
 const FormInput = styled.input`
-color:${colors.bright};
-font-size: 25px !important;
-font-weight: bolder ;
+    color:white;
+    font-size: 25px !important;
+    font-weight: bolder ;
 `;
