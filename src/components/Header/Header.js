@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useEffect,useContext, useState} from 'react';
 import styled from 'styled-components'
 import plateIcon from './assets/lunch-box.svg';
 import colors from "../../Colors";
@@ -9,9 +9,16 @@ import {navigate, A} from "hookrouter";
 
 
 
-const Navi = ({toggleMenu}) => {
+const Navi = () => {
+    const [navOpen, setSideNav] = useState(false);
     const url =window.location.href
     const {currentUser} = useContext(AuthContext);
+
+    useEffect(() => {
+        console.log(navOpen)
+    }, [navOpen]);
+
+
     return (
         <div className="navbar-fixed">
 
@@ -20,7 +27,7 @@ const Navi = ({toggleMenu}) => {
                     <h5 className="flow-text left" style={{color:colors.bright}}>The Tasty PBK</h5>
                 </a>
 
-            <a href="#" data-target="mobile-demo" className="sidenav-trigger right"><i className="material-icons">menu</i></a>
+            <a href="#" data-target="mobile-demo" onClick={()=>setSideNav(!navOpen)} className="sidenav-trigger right"><i className="material-icons">menu</i></a>
             <ul className="right hide-on-med-and-down">
                     {currentUser?<li onClick={()=>navigate('/menu')}><Link href="#">Menu</Link></li>:null}
 
@@ -32,7 +39,7 @@ const Navi = ({toggleMenu}) => {
 
 
         </TheNav>
-            <SideNav className="sidenav" id="mobile-demo">
+            <SideNav navOpen={navOpen} className="sidenav" id="mobile-demo">
                 {currentUser?
                     <li onClick={()=>navigate('/menu')}><Link href="/">Menu</Link></li>:null}
 
@@ -58,7 +65,7 @@ const SideNav = styled.ul`
   background-color: ${colors.primaryTwo} ;
   li > &{
   background-color: ${colors.primaryTwo} ;
-
+  transform: ${props => props.navOpen ? "translateX(0%)":"translateX(-105%)"} !important;
   }
 `;
 const Link = styled(A)`
