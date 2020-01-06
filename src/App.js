@@ -13,35 +13,27 @@ import OrderForm from "./components/OrderForm/OrderForm";
 import {AuthContext, AuthProvider} from "./Auth/Auth";
 
 
-function getWidth() {
-    return window.innerWidth
-}
-function getHeight() {
-    return window.innerHeight
+function getDimensions() {
+    return {"width":window.innerWidth, "height":window.innerHeight}
 }
 
 const stuff = meals;
 function App() {
-    const [windowWidth, setWidth] = useState(getWidth);
-    const [windowHeight, setHeight] = useState(getHeight);
+    const [windowWidth, setWidth] = useState(getDimensions()["width"]);
+    const [windowHeight, setHeight] = useState(getDimensions()["height"]);
 
     const [url, setURL] = useState(window.location.href);
     const [showMenu, setMenuVisibility] = useState(false);
     const [chosenMeals, setMeals] = useState([]);
     const [chosenSalads, setSalads] = useState([]);
-    const [howManyMeals, getNumberOfMeals] = useState(0);
     const [confirmation, setConfirmation] = useState(false);
     // const [allMeals, setAllMeals] = useState([]);
 
 
     useEffect(() => {
         console.log(chosenMeals,chosenSalads, url);
-        // url =window.location.href
         setURL(window.location.href)
-        // url.includes("mealselection")? setMenuVisibility(true):setMenuVisibility(false)
-
-
-        setWidth(getWidth());
+        setWidth(getDimensions()["width"]);
 
     }, [chosenSalads,chosenMeals,windowWidth,showMenu,url]);
 
@@ -79,9 +71,9 @@ function App() {
     };
 
     const handleResize =()=> {
-        setWidth(getWidth());
-        setHeight(getHeight());
-    }
+        setWidth(getDimensions()["width"]);
+        setHeight(getDimensions()["height"]);
+    };
     const handleUrlChange =()=>  setURL(window.location.href);
     window.addEventListener('resize', handleResize);
     window.addEventListener('hashchange', handleUrlChange);
@@ -105,7 +97,7 @@ function App() {
 const TheAppGrid = styled.div`
   height: 100vh;
   display: grid;
-  grid-template-rows: ${ props=>  `58px ${props.width > 650 && props.height > 500 && !props.url.includes("mealselection") ? "75%" : "90%"} repeat(4, auto)`};
+  grid-template-rows: ${ props=>  `58px ${props.width > 650 && props.height > 500 && !props.url.includes("mealselection") && !props.url.includes("profile")? "75%" : "95%"} repeat(4, auto)`};
   grid-template-areas: 
   'head head head head' 
   'order order order order' 

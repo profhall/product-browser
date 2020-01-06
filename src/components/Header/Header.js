@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useEffect,useContext, useState} from 'react';
 import styled from 'styled-components'
 import plateIcon from './assets/lunch-box.svg';
 import colors from "../../Colors";
@@ -9,24 +9,46 @@ import {navigate, A} from "hookrouter";
 
 
 
-const Navi = ({toggleMenu}) => {
+const Navi = () => {
+    const [navOpen, setSideNav] = useState(false);
     const url =window.location.href
-    const {currentUser} = useContext(AuthContext)
+    const {currentUser} = useContext(AuthContext);
+
+    useEffect(() => {
+        console.log(navOpen)
+    }, [navOpen]);
+
 
     return (
         <div className="navbar-fixed">
 
         <TheNav className="nav-wrapper  ">
-                <a id="logo-container" href="/" className="brand-logo ">
-                    <h5 className="flow-text" style={{color:colors.bright}}>The Tasty Plant-Based Kitchen</h5>
+                <a id="logo-container" href="/" className="">
+                    <h5 className="flow-text left" style={{color:colors.bright}}>The Tasty PBK</h5>
                 </a>
-                <ul className="right">
-                    {currentUser?<li onClick={()=>app.auth().signOut()}><A href="/">Logout</A></li>:<li><A href="/">Login</A></li>}
-                    {currentUser?<li onClick={()=>navigate('/profile')}><A href="/">Profile</A></li>:null}
+
+            <a href="#" data-target="mobile-demo" onClick={()=>setSideNav(!navOpen)} className="sidenav-trigger right"><i className="material-icons">menu</i></a>
+            <ul className="right hide-on-med-and-down">
+                    {currentUser?<li onClick={()=>navigate('/menu')}><Link href="#">Menu</Link></li>:null}
+
+                {currentUser?<li onClick={()=>navigate('/profile')}><Link href="#">Profile</Link></li>:null}
+
+                    {currentUser?<li onClick={()=>app.auth().signOut()}><Link href="/">Logout</Link></li>:<li><Link href="/">Login</Link></li>}
+
                 </ul>
 
 
         </TheNav>
+            <SideNav navOpen={navOpen} className="sidenav" id="mobile-demo">
+                {currentUser?
+                    <li onClick={()=>navigate('/menu')}><Link href="/">Menu</Link></li>:null}
+
+
+                {currentUser?
+                    <li onClick={()=>navigate('/profile')}><Link href="/">Profile</Link></li>:null}
+                {currentUser?
+                    <li onClick={()=>app.auth().signOut()}><Link href="/">Logout</Link></li>:<li><A href="/">Login</A></li>}
+            </SideNav>
         </div>
     );
 };
@@ -39,16 +61,17 @@ const TheNav = styled.nav`
   grid-area: head;
 `;
 
-const HeaderIcon = styled.img`
-  width: 7%;
-  align-self: center;
+const SideNav = styled.ul`
+  background-color: ${colors.primaryTwo} ;
+  li > &{
+  background-color: ${colors.primaryTwo} ;
+  transform: ${props => props.navOpen ? "translateX(0%)":"translateX(-105%)"} !important;
+  }
 `;
-const HeaderTitle = styled.h4`
-  //height: 75%;
-  align-self: center;
-  margin: auto;
-  font-size: 2em;
-  
+const Link = styled(A)`
+    color: ${colors.bright} !important; 
+    font-size: 20px !important;
+    font-weight: bold !important;
 `;
 
 export default Navi;
