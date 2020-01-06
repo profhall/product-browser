@@ -52,11 +52,11 @@ export const meals = [
                 "pic":brown_rice
             },
             2:{
-                "name":"Roasted Brussels",
-                "pic":roasted_brussels
+                "name":"Cornbread Muffins",
+                "pic":cornbread_muffins
             }
         },
-        "description": "This vegan gumbo with a mix of beans, mushrooms and okra is hearty, savory, filling and warming. Comes with brown rice & roasted brussel sprouts",
+        "description": "This vegan gumbo with a mix of beans, mushrooms and okra is hearty, savory, filling and warming. Comes with brown rice & cornbread muffin",
         "ingredients": ["Onion", "Green Pepper", "Celery", "Garlic", "Okra", "Tomatoes",  "Chickpeas", "Lentils", "Brown Rice"],
         "type":"main",
         "photo": "https://www.cilantroandcitronella.com/wp-content/uploads/2017/01/vegan-gumbo-image-1.jpg",
