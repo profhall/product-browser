@@ -1,9 +1,28 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import colors from "../../Colors";
 import basketPhoto from "../media/foodIcons/harvest.png";
+import {AuthContext} from "../../Auth/Auth";
+function getDimensions() {
+    return {"width":window.innerWidth, "height":window.innerHeight}
+}
 
 const Contact = () => {
+    const [windowWidth, setWidth] = useState(getDimensions()["width"]);
+    const [windowHeight, setHeight] = useState(getDimensions()["height"]);
+
+    useEffect(() => {
+        setWidth(getDimensions()["width"]);
+
+    }, [windowWidth]);
+
+    const handleResize =()=> {
+        setWidth(getDimensions()["width"]);
+        setHeight(getDimensions()["height"]);
+    };
+
+    window.addEventListener('resize', handleResize);
+
     return (
         <TheContactSection className="container">
             <div className="section">
@@ -48,4 +67,5 @@ height: 100%;
 const Icon = styled.img`
 width: 75px;
 margin: 0 20px;
+display: ${props=> props.width > 650 ? "":"none"}
 `;

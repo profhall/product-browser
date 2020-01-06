@@ -53,7 +53,7 @@ const MealCount = () => {
         else if(meal_count === 12){
             price = 120;
         }
-        console.log(currentUserProfile)
+        console.log(currentUserProfile);
         setUserOrder({...currentUserOrder, "meal_count": meal_count, "price" :price + deliveryFee + (currentUserProfile.container_fee_paid ? containerFee : 0)})
     }
 
@@ -61,7 +61,7 @@ const MealCount = () => {
         return(<Button style={{width:`${windowWidth > 650  ? "225px":"75%"}`}} onClick={() => setMealCount(num)} height={"225px"} width={width} >
                 <h5> {num} MEALS</h5>
                 <h5> ${ppmeal}/ MEAL </h5>
-                <h5> {total} TOTAL</h5>
+                <h5> ${total} TOTAL</h5>
         </Button>)
     };
 
@@ -77,7 +77,7 @@ const MealCount = () => {
 
 
             <ButtonContainer className={"row center"}>
-                <Button className={"btn-large col m5"} onClick={()=>gotoPage("/")}>Go Back</Button>
+                <Button className={"btn-large col m5 flow-text"} onClick={()=>gotoPage("/")}>Go Back</Button>
                 <Button className={`btn-large col m5 ${numOfMeals>0?"":"disabled"}`} onClick={()=>gotoPage("/deliverydate")}> Delivery Date</Button>
             </ButtonContainer>
         </MealCountSelectionContainer>
@@ -102,14 +102,14 @@ const MealCountSelectionContainer = styled.div`
 const ButtonContainer = styled.div`
   grid-area: button;  
   display: flex;
-  width: 65%;
+  width: 85%;
   justify-content:center;
   align-content:center;
 
 `;
 
 const ButtonsContainer = styled.div`
-    width: 75%;
+    width: 85%;
     display: flex;  
     justify-content: space-between;
     align-items: center;

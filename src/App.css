@@ -1,4 +1,6 @@
-
+.sidenav-overlay{
+  z-index: 3;
+}
 
 .Modal {
   position: absolute;
