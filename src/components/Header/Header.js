@@ -9,14 +9,42 @@ import {navigate, A} from "hookrouter";
 
 
 
-const Navi = () => {
+const Navi = ({windowWidth}) => {
     const [navOpen, setSideNav] = useState(false);
     const url =window.location.href
     const {currentUser} = useContext(AuthContext);
 
+    const elements = document.getElementsByClassName("sidenav-overlay")
+    const nav_elements = document.getElementsByClassName("sidenav")
+    let sidenav_overlay = null
+    let sidenav = null
+
+
     useEffect(() => {
         console.log(navOpen)
-    }, [navOpen]);
+        sidenav_overlay = elements[0]
+        sidenav = nav_elements[0]
+
+        console.log(sidenav_overlay)
+        navOpen && sidenav_overlay ? sidenav_overlay.style.opacity = "1":sidenav_overlay.style.opacity = "0";
+        sidenav_overlay.addEventListener("click", ()=>setSideNav(!navOpen));
+
+
+
+    }, [navOpen,windowWidth]);
+
+    const navButtonHandler = ()=>{
+
+        if (navOpen)  {
+            sidenav.style.transform="translateX(-105%)"
+            setSideNav(false)
+        }else{
+            sidenav.style.transform="translateX(0%)";
+            setSideNav(true)
+        }
+
+    }
+
 
 
     return (
@@ -27,7 +55,7 @@ const Navi = () => {
                     <h5 className="flow-text left" style={{color:colors.bright}}>The Tasty PBK</h5>
                 </a>
 
-            <a href="#" data-target="mobile-demo" onClick={()=>setSideNav(!navOpen)} className="sidenav-trigger right"><i className="material-icons">menu</i></a>
+            <a href="#" data-target="mobile-demo" onClick={navButtonHandler} className="sidenav-trigger right"><i className="material-icons">menu</i></a>
             <ul className="right hide-on-med-and-down">
                     {currentUser?<li onClick={()=>navigate('/menu')}><Link href="#">Menu</Link></li>:null}
 
@@ -63,10 +91,8 @@ const TheNav = styled.nav`
 
 const SideNav = styled.ul`
   background-color: ${colors.primaryTwo} ;
-  li > &{
-  background-color: ${colors.primaryTwo} ;
-  transform: ${props => props.navOpen ? "translateX(0%)":"translateX(-105%)"} !important;
-  }
+  transform: ${props => props.navOpen ? "translateX(0%)":"translateX(-105%)"} ;
+
 `;
 const Link = styled(A)`
     color: ${colors.bright} !important; 

@@ -83,7 +83,7 @@ function App() {
 
         <TheAppGrid url={url} width={ windowWidth} height={windowHeight} showMenu={showMenu}>
             <OrderForm  setURL={handleUrlChange}/>
-            <Navi />
+            <Navi windowWidth={windowWidth}/>
             <Footer/>
             <Contact/>
 
