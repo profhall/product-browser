@@ -21,13 +21,21 @@ const Navi = ({windowWidth}) => {
 
 
     useEffect(() => {
-        console.log(navOpen)
-        sidenav_overlay = elements[0]
-        sidenav = nav_elements[0]
+        console.log("mounted: ", sidenav_overlay)
+        sidenav_overlay = elements[0];
+        sidenav = nav_elements[0];
 
-        console.log(sidenav_overlay)
-        navOpen && sidenav_overlay ? sidenav_overlay.style.opacity = "1":sidenav_overlay.style.opacity = "0";
-        sidenav_overlay.addEventListener("click", ()=>setSideNav(!navOpen));
+
+        if (navOpen && sidenav_overlay ){
+            sidenav_overlay.style.opacity = "1"
+            sidenav_overlay.addEventListener("click", ()=>setSideNav(!navOpen));
+
+        }
+        else if (!navOpen && sidenav_overlay ){
+            sidenav_overlay.style.opacity = "0"
+            sidenav_overlay.addEventListener("click", ()=>setSideNav(!navOpen));
+
+        }
 
 
 
@@ -35,10 +43,10 @@ const Navi = ({windowWidth}) => {
 
     const navButtonHandler = ()=>{
 
-        if (navOpen)  {
+        if (navOpen && sidenav)  {
             sidenav.style.transform="translateX(-105%)"
             setSideNav(false)
-        }else{
+        }else if (sidenav) {
             sidenav.style.transform="translateX(0%)";
             setSideNav(true)
         }

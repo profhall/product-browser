@@ -12,19 +12,15 @@ const Login = () => {
     const {currentUser,formValidation,userLogin,infoValidated,gotoPage} = useContext(AuthContext);
     const handleResize =()=> setWidth(getWidth());
     window.addEventListener('resize', handleResize);
-    console.log(currentUser)
 
     useEffect(()=>
     {
-        if(currentUser ) {
-            gotoPage('/')
-        }
+        if(currentUser)gotoPage('/')
 
     }, [currentUser]);
 
-    const goToSignup = () =>{
-        gotoPage('/signup')
-    };
+
+    const goToSignup=()=>gotoPage('/signup');
 
     const handleLogin = useCallback(
         async () => {

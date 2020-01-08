@@ -13,14 +13,16 @@ function getWidth() {
 const MealCount = () => {
 
     const {currentUserOrder,setUserOrder, currentUserProfile,gotoPage} = useContext(AuthContext)
-    let numOfMeals = currentUserOrder.meal_count ? currentUserOrder.meal_count : null
+    let numOfMeals = currentUserOrder  ? currentUserOrder.meal_count : null
     const [windowWidth, setWidth] = useState(getWidth);
     const [meal_count, updateMealCount] = useState();
     const handleResize =()=> setWidth(getWidth());
     window.addEventListener('resize', handleResize);
 
     useEffect(()=>{
-        console.log(meal_count);
+        currentUserOrder ? console.log(meal_count) : navigate("/")
+
+
         setWidth(getWidth());
 
 
