@@ -164,19 +164,19 @@ const UserProfile = () => {
                             <h6>Dietary Restrictions</h6>
                             <p>
                                 <Label>
-                                    <input onClick={handleRestriction} checked={restrictions.includes("gluten")? true:false  }  id="gluten" type="checkbox"/>
+                                    <input onClick={handleRestriction} checked={currentUserProfile.dietary_restrictions.includes("gluten")  } id="gluten" type="checkbox"/>
                                     <span style={{marginRight:5}}>Gluten-Free</span>
                                 </Label>
                                 <Label>
-                                    <input onClick={handleRestriction}  checked={restrictions.includes("nut")? true:false  } id="nut" type="checkbox" />
+                                    <input onClick={handleRestriction} checked={currentUserProfile.dietary_restrictions.includes("nut")  } id="nut" type="checkbox" />
                                     <span style={{marginRight:5}}>Nut-Free</span>
                                 </Label>
                                 <Label>
-                                    <input onClick={handleRestriction} id="wheat" checked={restrictions.includes("wheat")? true:false  } type="checkbox"/>
+                                    <input onClick={handleRestriction} id="wheat" checked={currentUserProfile.dietary_restrictions.includes("wheat")? true:false  } type="checkbox"/>
                                     <span style={{marginRight:5}}>Wheat-Free</span>
                                 </Label>
                                 <Label>
-                                    <input onClick={handleRestriction} checked={restrictions.includes("soy")? true:false  } id="soy" type="checkbox"/>
+                                    <input onClick={handleRestriction} checked={currentUserProfile.dietary_restrictions.includes("soy")? true:false  } id="soy" type="checkbox"/>
                                     <span>Soy-Free</span>
                                 </Label>
                             </p>

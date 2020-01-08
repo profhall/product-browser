@@ -34,7 +34,12 @@ const MealsSelector = () => {
         mainsPicked+saladsPicked === meal_count+salad_count ? validateMeals(true) : validateMeals(false)
 
 
-    },[windowWidth,mainsList])
+    },[mainsList])
+
+    useEffect(()=>{
+
+
+    },[windowWidth])
 
 
 
