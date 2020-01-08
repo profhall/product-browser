@@ -3,6 +3,8 @@ import styled from "styled-components";
 import {meals, salads, mains, sides} from '../../data'
 import colors from "../../Colors";
 import {AuthContext} from "../../Auth/Auth";
+import Modal from 'react-modal';
+
 
 const stuff = meals
 
@@ -22,6 +24,7 @@ const MealsSelector = () => {
 
     const [allMealsPicked,validateMeals] = useState(false);
     const [mainsPicked,addMain]= useState(0);
+    const [modalOpen,setModal]= useState(false);
     const [mainsList,addMainToList] = useState([]);
     const [saladsPicked,addSalad] = useState(0);
 
@@ -111,6 +114,15 @@ const MealsSelector = () => {
         setUserOrder({...currentUserOrder, "meals": mainsList})
     };
 
+    const handleOpenModal = () =>{
+        setModal(true)
+    };
+    const handleCloseModal = () =>{
+        setModal(false)
+    };
+
+
+
 
     return (
         <MealsSelectorContainer >
@@ -119,7 +131,8 @@ const MealsSelector = () => {
                     <h4 style={{margin:0}}> {mainsPicked >0 ? `Pick remaining ${meal_count-mainsPicked}`: `Pick Your ${meal_count} Meals.`}</h4>
                     <h5>With every 4 meals you get a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h5>
 
-                    {mainsList.length > 0?<h5><b>Tap food Item To Delete</b></h5>:null}
+                    {mainsList.length > 0 && windowWidth > 650 ? <h5><b>Tap food Item To Delete</b></h5>:
+                        mainsList.length > 0 ? <h5 onClick={handleOpenModal}>click to see your selection</h5>: null }
                 </MainHeaderText>
                 {mainsList.length > 0  && windowWidth > 650 ? <MainHeaderList className={"row "}>
                     {
@@ -132,7 +145,23 @@ const MealsSelector = () => {
                                 }
                             </ChosenMealsList>: null
                     }
-                </MainHeaderList> : null}
+                </MainHeaderList> :
+                    null
+                }
+
+
+                <Modal
+                    isOpen={modalOpen}
+                    contentLabel="onRequestClose Example"
+                    onRequestClose={handleCloseModal}
+                    className="Modal"
+                    overlayClassName="Overlay"
+                >
+                    <h5><b>Your Selections</b></h5>
+                    <h5><b>Tap food Item To Delete</b></h5>
+
+                    <Button className="btn-large" onClick={handleCloseModal}>Close</Button>
+                </Modal>
             </MainHeader>
 
             <Mains className={"row center"}>
