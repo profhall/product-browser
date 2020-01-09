@@ -8,11 +8,11 @@ const Menu = () => {
 
     return (
         <TheMenu>
-            <h2> These Are The Meals For the Week</h2>
-
+            <h3> These Are The Meals For the Week</h3>
+            Meal Slides go here
             <ButtonContainer className={"row "}>
-                <Button className={"btn-large col m5"} onClick={()=>gotoPage("/#")}>Salads</Button>
-                <Button className={`btn-large col  m5 ${0>1?"":"disabled"}`} onClick={()=>gotoPage("/#")}>Meals</Button>
+                <Button className={"btn-large col m5"} onClick={()=>gotoPage("#")}>Salads</Button>
+                <Button className={`btn-large col  m5 ${0>1?"":"disabled"}`} onClick={()=>gotoPage("#")}>Meals</Button>
             </ButtonContainer>
         </TheMenu>
     );
@@ -27,6 +27,7 @@ width: 100%;
 grid-area: content;
 display: flex;
 flex-direction: column;
+align-items: center;
 justify-content: space-between;
     `
 
