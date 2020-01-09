@@ -12,6 +12,7 @@ import Confirmation from "./components/Confirmation/Confirmation";
 import OrderSubmitted from "./components/OrderSubmitted/OrderSubmitted";
 import UserProfile from "./components/UserProfile/UserProfile";
 import Home from "./components/Home/Home";
+import Steps from "./components/StepsCarousel/StepsCarousel";
 
 
 
@@ -24,6 +25,7 @@ const routes = {
     "/deliverydate*": () => <DeliveryDate/>,
     "/order_submitted*": () => <OrderSubmitted />,
     "/profile*": () => <UserProfile />,
+    "/steps*": () => <Steps/>,
     "/": () => <Home  />,
     "/signup" : () => <SignUp/>,
     "/login" : () => <Login/>

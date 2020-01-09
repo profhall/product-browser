@@ -69,7 +69,7 @@ const Navi = ({windowWidth}) => {
 
                 {currentUser?<li onClick={()=>navigate('/profile')}><Link href="#">Profile</Link></li>:null}
 
-                    {currentUser?<li onClick={()=>app.auth().signOut()}><Link href="/">Logout</Link></li>:<li><Link href="/">Login</Link></li>}
+                    {currentUser?<li onClick={()=>app.auth().signOut()}><Link href="/">Logout</Link></li>:<li><Link href="/signup">Sign Up</Link></li>}
 
                 </ul>
 
@@ -83,7 +83,7 @@ const Navi = ({windowWidth}) => {
                 {currentUser?
                     <li onClick={()=>navigate('/profile')}><Link href="/">Profile</Link></li>:null}
                 {currentUser?
-                    <li onClick={()=>app.auth().signOut()}><Link href="/">Logout</Link></li>:<li><A href="/">Login</A></li>}
+                    <li onClick={()=>app.auth().signOut()}><Link href="/">Logout</Link></li>:<li><A href="/signup">Sign Up</A></li>}
             </SideNav>
         </div>
     );

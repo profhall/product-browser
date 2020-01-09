@@ -42,7 +42,7 @@ const url =window.location.href
     return (
             <TheOrderForm className={""}>
                 {
-                    !currentUser && !url.includes("signup")
+                    !currentUser && !url.includes("signup") && !url.includes("steps")
                     ?
                         <Login userLogin={userLogin} />
                        :
