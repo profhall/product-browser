@@ -20,7 +20,6 @@ const Login = () => {
     }, [currentUser]);
 
 
-    const goToSignup=()=>gotoPage('/signup');
 
     const handleLogin = useCallback(
         async () => {
@@ -42,8 +41,11 @@ const Login = () => {
         <LoginForm  >
             <h2 style={{margin:0}} className="header center ">Delicious Plant-Based Meals Prepared For You.</h2>
             <div className="row center">
+                <h5 className="header col s12 light" >
+                    <b> <span onClick={()=>gotoPage("/steps")} style={{color:`${colors.bright}`, fontWeight:"bold"}} >See How The Process Works Here</span ></b>
+                </h5>
                 <h5 className="header col s12 light">
-                    <b> Login or <span onClick={goToSignup} style={{color:`${colors.bright}`, fontWeight:"bolder"}} >Sign Up</span ></b>
+                    <b> Login or <span onClick={()=>gotoPage("/signup")} style={{color:`${colors.bright}`, fontWeight:"bolder"}} >Sign Up</span ></b>
                 </h5>
                 <form className="col s12" >
                     <div className="row">

@@ -65,7 +65,7 @@ const Navi = ({windowWidth}) => {
 
             <a href="#" data-target="mobile-demo" onClick={navButtonHandler} className="sidenav-trigger right"><i className="material-icons">menu</i></a>
             <ul className="right hide-on-med-and-down">
-                    {currentUser?<li onClick={()=>navigate('/menu')}><Link href="#">Menu</Link></li>:null}
+                    <li onClick={()=>navigate('/menu')}><Link href="#">Menu</Link></li>
 
                 {currentUser?<li onClick={()=>navigate('/profile')}><Link href="#">Profile</Link></li>:null}
 
@@ -76,14 +76,12 @@ const Navi = ({windowWidth}) => {
 
         </TheNav>
             <SideNav navOpen={navOpen} className="sidenav" id="mobile-demo">
-                {currentUser?
-                    <li onClick={()=>navigate('/menu')}><Link href="/">Menu</Link></li>:null}
-
+                    <li onClick={()=>navigate('/menu')}><Link href="/">Menu</Link></li>
 
                 {currentUser?
                     <li onClick={()=>navigate('/profile')}><Link href="/">Profile</Link></li>:null}
                 {currentUser?
-                    <li onClick={()=>app.auth().signOut()}><Link href="/">Logout</Link></li>:<li><A href="/signup">Sign Up</A></li>}
+                    <li onClick={()=>app.auth().signOut()}><Link href="/">Logout</Link></li>:<li><Link href="/signup">Sign Up</Link></li>}
             </SideNav>
         </div>
     );
