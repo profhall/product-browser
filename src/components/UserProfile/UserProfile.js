@@ -10,7 +10,7 @@ function getWidth() {
 }
 const UserProfile = () => {
     const {currentUserProfile,setUserProfile,nextPage, prevPage} = useContext(AuthContext);
-    const [userProf ,setUserProf] = useState({address:{}})
+    const [userProf ,setUserProf] = useState({})
 
     const {name, phone, city, zip, street, dietary_restrictions,container_fee_paid} = !!userProf ? userProf : ""
     const [windowWidth, setWidth] = useState(getWidth);
@@ -42,6 +42,16 @@ const UserProfile = () => {
 
 
     }, [userProf]);
+    useEffect(() => {
+        setUserProf({...userProf, dietary_restrictions: restrictions})
+    }, [restrictions]);
+    useEffect(() => {
+        setUserProf(currentUserProfile ? currentUserProfile: userProf)
+        setRestrictions(currentUserProfile ? currentUserProfile.dietary_restrictions: restrictions)
+        // setUserName(currentUserProfile ? currentUserProfile.name: userName)
+
+    }, []);
+
 
 
 
@@ -60,9 +70,17 @@ const UserProfile = () => {
             userProf["name"]= e.target.value;
 
         }
-        else if (e.target.id === "city"){userProf["address"]["city"]= e.target.value;}
-        else if (e.target.id === "zip"){userProf["address"]["zip"]= e.target.value;}
-        else if (e.target.id === "street"){userProf["address"]["street"]= e.target.value;}
+        else if (e.target.id === "city"){
+            userProf["address"] ? userProf["address"]["city"]= e.target.value: userProf["address"] ={} ;
+        }
+        else if (e.target.id === "zip"){
+
+            userProf["address"] ? userProf["address"]["zip"]= e.target.value: userProf["address"] ={} ;
+        }
+        else if (e.target.id === "street"){
+
+            userProf["address"] ? userProf["address"]["street"]= e.target.value: userProf["address"] ={} ;
+        }
 
 
         if (
@@ -84,36 +102,37 @@ const UserProfile = () => {
         {
             console.log(userProf['name'], userProf['email'])
         }
+        setUserProf({...currentUserProfile,...userProf})
+
 
     };
 
-    const handleSubmit = () =>
-    {
-        console.log(userProf)
-        setUserProf(userProf)
+    // const handleSubmit = () =>
+    // {
+    //     console.log(userProf)
+    //
+    // }
 
-    }
+    const handleSubmit =
+        async () => {
 
-    // const handleSubmit = useCallback(
-    //     async () => {
-    //
-    //         console.log(userName)
-    //         // console.log(userName,address, phone, restrictions)
-    //         const db = firebase.firestore(app);
-    //         try{
-    //             let userDB = db.collection(`users`)
-    //             console.log(userName)
-    //
-    //             // userDB.doc(currentUserProfile.uid).set(currentUserProfile);
-    //
-    //             console.log(`updated: ${currentUserProfile.name}`)
-    //             navigate("/profile")
-    //
-    //         } catch (error){
-    //             alert(error)
-    //         }
-    //
-    //     },[])
+            console.log(userProf.name)
+            // console.log(userName,address, phone, restrictions)
+            const db = firebase.firestore(app);
+            try{
+                let userDB = await db.collection(`users`)
+                console.log(userProf)
+
+                userDB.doc(currentUserProfile.uid).set(userProf);
+
+                console.log(`updated: ${userProf.name}`)
+                navigate("/profile")
+
+            } catch (error){
+                alert(error)
+            }
+
+        }
 
     const handleRestriction = (e) => {
         const checkbox = e.target;
@@ -137,7 +156,7 @@ const UserProfile = () => {
                 <form className="col s12">
                     <div className="row">
                         <div className="input-field col s12 m6">
-                            <FormInput autoFocus id="name" type="text" placeholder={"Update Name Here"} onChange={FormValidation} value={name}/>
+                            <FormInput autoFocus id="name" type="text" placeholder={"Update Name Here"} onChange={FormValidation} value={userProf.name}/>
                             <Label>Name: {currentUserProfile.name}</Label>
                         </div>
                         <div className="input-field col s12 m6">
@@ -156,27 +175,27 @@ const UserProfile = () => {
                             <FormInput autoFocus id="zip" type="text" placeholder={"Update Zip Here"} onChange={FormValidation} value={zip} />
                             <Label htmlFor="zip">Zip: {currentUserProfile.address.zip}</Label>
                         </div>
-                        <div className="input-field col s12 m4">
-                            <FormInput  type="text" id="container_fee"  value={containerFeePaid ? "Yes":"No"  }/>
+                        <div className="input-field col s12 m3">
+                            <FormInput autoFocus type="text" id="container_fee"  value={containerFeePaid ? "Yes":"No"  }/>
                             <Label htmlFor="container_fee">Container Fee Paid</Label>
                         </div>
-                        <div className="input-field col s12 m8">
+                        <div className="input-field col s12 m9">
                             <h6>Dietary Restrictions</h6>
                             <p>
                                 <Label>
-                                    <input onClick={handleRestriction} checked={restrictions.includes("gluten")? true:false  }  id="gluten" type="checkbox"/>
+                                    <input onClick={handleRestriction} checked={restrictions.includes("gluten")  } id="gluten" type="checkbox"/>
                                     <span style={{marginRight:5}}>Gluten-Free</span>
                                 </Label>
                                 <Label>
-                                    <input onClick={handleRestriction}  checked={restrictions.includes("nut")? true:false  } id="nut" type="checkbox" />
+                                    <input onClick={handleRestriction} checked={restrictions.includes("nut")  } id="nut" type="checkbox" />
                                     <span style={{marginRight:5}}>Nut-Free</span>
                                 </Label>
                                 <Label>
-                                    <input onClick={handleRestriction} id="wheat" checked={restrictions.includes("wheat")? true:false  } type="checkbox"/>
+                                    <input onClick={handleRestriction} id="wheat" checked={restrictions.includes("wheat")  } type="checkbox"/>
                                     <span style={{marginRight:5}}>Wheat-Free</span>
                                 </Label>
                                 <Label>
-                                    <input onClick={handleRestriction} checked={restrictions.includes("soy")? true:false  } id="soy" type="checkbox"/>
+                                    <input onClick={handleRestriction} checked={restrictions.includes("soy")  } id="soy" type="checkbox"/>
                                     <span>Soy-Free</span>
                                 </Label>
                             </p>
@@ -209,7 +228,7 @@ const UserProfileContainer = styled.div`
 `;
 
 
-const Label = styled.span`
+const Label = styled.label`
 font-weight: bolder;
 font-size: larger;
 margin: 0;

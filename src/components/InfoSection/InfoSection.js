@@ -39,7 +39,7 @@ const Main = () => {
                             <Icon className="responsive-img" src={deliciousPhoto}/>
                             <h5 ><b>100% Delicious</b></h5>
 
-                            <h5 className={"light"}  >Who says plant-based cant be delicious! Our meals leave you with a happy palette and tummy. Packed with minerals and nutirients from plants and seasoned to perfection.</h5>
+                            <h5 className={"light"}  >Who says plant-based cant be delicious! Our meals leave you with a happy palate and tummy. Packed with minerals and nutirients from plants and seasoned to perfection.</h5>
                         </div>
                     </div>
                 </div>

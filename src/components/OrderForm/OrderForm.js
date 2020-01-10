@@ -42,7 +42,7 @@ const url =window.location.href
     return (
             <TheOrderForm className={""}>
                 {
-                    !currentUser && !url.includes("signup")
+                    !currentUser && !url.includes("menu")&& !url.includes("signup") && !url.includes("steps")
                     ?
                         <Login userLogin={userLogin} />
                        :
@@ -71,6 +71,6 @@ const TheOrderForm = styled.div`
     grid-template-areas:
     'content content content content'
     ;
-    height: 100%;
+    //height: 100%;
     width: 100%;
 `;

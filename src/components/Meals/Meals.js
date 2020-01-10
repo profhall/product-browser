@@ -3,6 +3,8 @@ import styled from "styled-components";
 import {meals, salads, mains, sides} from '../../data'
 import colors from "../../Colors";
 import {AuthContext} from "../../Auth/Auth";
+import Modal from 'react-modal';
+
 
 const stuff = meals
 
@@ -22,6 +24,7 @@ const MealsSelector = () => {
 
     const [allMealsPicked,validateMeals] = useState(false);
     const [mainsPicked,addMain]= useState(0);
+    const [modalOpen,setModal]= useState(false);
     const [mainsList,addMainToList] = useState([]);
     const [saladsPicked,addSalad] = useState(0);
 
@@ -31,7 +34,12 @@ const MealsSelector = () => {
         mainsPicked+saladsPicked === meal_count+salad_count ? validateMeals(true) : validateMeals(false)
 
 
-    },[windowWidth,mainsList])
+    },[mainsList])
+
+    useEffect(()=>{
+
+
+    },[windowWidth])
 
 
 
@@ -69,7 +77,7 @@ const MealsSelector = () => {
         }
 
     }
-    
+
     const mealList = stuff.map((item) => {
             return  (
         <Main className={"col s12 m5"} >
@@ -88,7 +96,7 @@ const MealsSelector = () => {
                 <TheDescr>{item.description}</TheDescr>
             </Desc>
             <ButtonContainer className={"row center"}>
-                <Button onClick={()=>addDish(item )} width={windowWidth}  className={"btn-large col s12 m6"}>Add</Button>
+                <Button onClick={()=>addDish(item )} width={windowWidth}  className={"btn-large col s12 m6 "}><h5><b>Add</b></h5></Button>
             </ButtonContainer>
         </Main>
             )
@@ -111,6 +119,15 @@ const MealsSelector = () => {
         setUserOrder({...currentUserOrder, "meals": mainsList})
     };
 
+    const handleOpenModal = () =>{
+        setModal(true)
+    };
+    const handleCloseModal = () =>{
+        setModal(false)
+    };
+
+
+
 
     return (
         <MealsSelectorContainer >
@@ -119,7 +136,8 @@ const MealsSelector = () => {
                     <h4 style={{margin:0}}> {mainsPicked >0 ? `Pick remaining ${meal_count-mainsPicked}`: `Pick Your ${meal_count} Meals.`}</h4>
                     <h5>With every 4 meals you get a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h5>
 
-                    {mainsList.length > 0?<h5><b>Tap food Item To Delete</b></h5>:null}
+                    {mainsList.length > 0 && windowWidth > 650 ? <h5><b>Tap food Item To Delete</b></h5>:
+                        mainsList.length > 0 ? <h5 onClick={handleOpenModal}>Click Here To See Your Selection</h5>: null }
                 </MainHeaderText>
                 {mainsList.length > 0  && windowWidth > 650 ? <MainHeaderList className={"row "}>
                     {
@@ -132,7 +150,37 @@ const MealsSelector = () => {
                                 }
                             </ChosenMealsList>: null
                     }
-                </MainHeaderList> : null}
+                </MainHeaderList> :
+                    null
+                }
+
+
+                <MealsModal
+                    isOpen={modalOpen}
+                    contentLabel="onRequestClose Example"
+                    onRequestClose={handleCloseModal}
+                    className="Modal"
+                    overlayClassName="Overlay"
+                >
+                    <ModalHeader>
+                        <h5><b>Tap food Item To Delete</b></h5>
+                    </ModalHeader>
+
+                    <ModalList>
+                        {
+                            mainsList.length > 0?
+                                <ChosenMealsList  className={`col s12 center`}>
+                                    {<ol>
+                                        {mainsList.map((fav,i)=>
+                                            <li id={i}   onClick={()=>deleteMeal(fav,i)}><h5>{fav}</h5></li>
+                                        )} </ol>
+                                    }
+                                </ChosenMealsList>: null
+                        }
+                    </ModalList>
+                    <ModalButton>
+                        <Button className="btn-large" onClick={handleCloseModal}>Close</Button></ModalButton>
+                    </MealsModal>
             </MainHeader>
 
             <Mains className={"row center"}>
@@ -165,6 +213,50 @@ const MealsSelectorContainer = styled.div`
   padding-bottom: 15px;
   margin: auto;
 `;
+const MealsModal = styled(Modal)`
+  border-radius: 5px 5px;
+  background-color: ${colors.primaryTwo};
+  color: ${colors.bright} !important;
+  display: grid;
+  justify-content: center;
+  grid-template-rows: auto 65% auto;
+  align-items: center;
+  grid-template-areas: 
+    'header'  
+    'list'
+    'button'  
+  ;
+`;
+const ModalButton = styled.div`
+  grid-area: button;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center; 
+  ;
+`;
+
+const ModalHeader = styled.div`
+  grid-area: header;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center; 
+  ;
+`;
+
+const ModalList = styled.div`
+  grid-area: list;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  height: 100%; 
+  overflow: scroll;
+  ;
+`;
+
+
 const Mains = styled.div`
   height: 100%;
   width: 100%;
@@ -242,13 +334,14 @@ const ButtonContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content:center;
+  margin: auto !important;
 
 `;
 
 /*
-* 
-    Meal Card Styling 
-* 
+*
+    Meal Card Styling
+*
 */
 
 const Desc = styled.div`

@@ -16,12 +16,12 @@ const Home = () => {
 
     return (
         <HomeContainer className={"container"}>
-            <h3 style={{margin:0}}>Welcome back {currentUserProfile? currentUserProfile.name :  null}</h3>
+            <h3 style={{margin:0}}>Greetings{currentUserProfile? " " +currentUserProfile.name+ "!" :  "!"}</h3>
             <HomeInfoBox>
-                <h5>First of all thanks for eating with us at The Tasty Plant-Based Kitchen, we are so glad you have chosen to eat with us. We hope you enjoy this weeks menu (<span onClick={()=>gotoPage('\menu')}>See Menu</span>)</h5>
+                <h4>Thank you for eating with at The Tasty Plant-Based Kitchen, we're so glad you came. We hope you enjoy this weeks menu. (<span style={{color:colors.bright}} onClick={()=>gotoPage('\menu')}>See Menu</span>)</h4>
             </HomeInfoBox>
             <Button className={"btn-large"} onClick={()=>gotoPage('\mealcount')}>
-                Start Order
+                Start Your Order
             </Button>
         </HomeContainer>
     );
@@ -31,14 +31,14 @@ export default Home;
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-content: center;
-  height: 100%;
+  height: 80%;
   margin: auto;
   padding: 15px 0 ;
 `;
 const HomeInfoBox = styled.div`
-  flex-grow: 4;
+  height: 40% ;
   font-size: large;
   width: 100%;
   margin: 12px 0;

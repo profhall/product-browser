@@ -36,7 +36,7 @@ const Contact = () => {
 
                         </h4>
                         <h5 className=" left-align ">
-                            Plant-based diets are often shown to be good for health. Plant-based diets are high in vegetables, whole grains bread, legumes and whole fruits, yet can still contain <b>small amounts of lean meats and reduced-fat dairy products.</b> Studies have shown that eliminating meat and dairy products altogether can be very beneficial to an individuals overall health.
+                            Plant-based diets are often shown to be good for health. This is because they are high in vegetables, whole grains bread, legumes and whole fruits, yet can still contain <b>small amounts of lean meats and reduced-fat dairy products.</b> Studies have shown that eliminating meat and dairy products altogether can be very beneficial to an individuals overall health.
                         </h5>
 
                         <h5 className=" left-align ">

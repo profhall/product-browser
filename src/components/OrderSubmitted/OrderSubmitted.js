@@ -4,13 +4,15 @@ import {AuthContext, AuthProvider} from "../../Auth/Auth";
 import * as firebase from "firebase/app";
 import app from "../../fbase";
 import 'firebase/firestore';
-import {useQueryParams} from "hookrouter";
+import {useQueryParams, navigate} from "hookrouter";
 import colors from "../../Colors";
 
 
 
 const OrderSubmitted = () => {
     const {currentUserProfile, currentUserOrder,nextPage, prevPage} = useContext(AuthContext)
+
+
 
     const db = firebase.firestore(app);
     let {meal_count,price, address,deliver_date, order_time_stamp, delivery_date, restrictions, meals} = currentUserOrder;
@@ -20,19 +22,20 @@ const OrderSubmitted = () => {
 
 
     useEffect(() => {
+
         query.get()
             .then(function(querySnapshot) {
                 let delivery_time = 0;
                 querySnapshot.forEach(function(doc) {
-                    console.log(doc.data());
+                    // console.log(doc.data());
                     if (doc.data().order_time_stamp > delivery_time){
                         delivery_time = doc.data().order_time_stamp
                         latest_order = doc.data()
                     }
-                    console.log("Date as string", ":: ", new Date(delivery_time));
+                    // console.log("Date as string", ":: ", new Date(delivery_time));
                 });
 
-                console.log(latest_order);
+                // console.log(latest_order);
 
 
             })
@@ -75,7 +78,7 @@ const OrderSubmitted = () => {
                     <div className="col s12  " style={{fontSize:"25px"}} >
                         Total Charges:
                         <FormInput className="input-field inline">
-                            <input style={{fontSize:"1em", fontWeight:"bolder"}} id="charges"  className={"white-text"} type="text" value={`${price}`}  />
+                            <input style={{fontSize:"1em", fontWeight:"bolder"}} id="charges"  className={"white-text"} type="text" value={`$${price}.00`}  />
                         </FormInput>
                     </div>
         </Receipt>
