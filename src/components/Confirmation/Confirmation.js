@@ -40,8 +40,19 @@ const Confirmation = () => {
         ordersDB.add({...currentUserOrder, "order_time_stamp": Date.now()})
             .then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
+                const theSubmitInfo =
+                    {
 
-                emailjs.send('meal_prep', 'template_awzr3ptv', {...currentUserOrder,...currentUserProfile}, "user_p8ucvKr8lnqx5SwxOEshJ")
+                        "chosen_items":currentUserOrder? currentUserOrder.meals : null,
+                        "name":currentUserProfile ? currentUserProfile["name"]: null,
+                        "email":currentUserProfile ? currentUserProfile["email"]: null,
+                        "state":currentUserProfile && currentUserProfile["address"].state ? currentUserProfile["address"].state : null,
+                        "city":currentUserProfile ? currentUserProfile["address"]["city"]: null,
+                        "zip":currentUserProfile ? currentUserProfile["address"]["zip"]: null,
+                        "street": currentUserProfile ? currentUserProfile["address"]["street"]: null
+
+                    };
+                emailjs.send('meal_prep', 'template_awzr3ptv', theSubmitInfo, "user_p8ucvKr8lnqx5SwxOEshJ")
                         .then(function(response) {
                             console.log('SUCCESS!', response.status, response.text);
                         }, function(error) {
