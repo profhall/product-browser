@@ -38,8 +38,8 @@ export default Footer;
 
 const TheFooter = styled.footer`
   width: 100%;
-  background-color: ${colors.primaryTwo} ;
-  color: ${colors.bright};
+  background-color: ${colors.primaryTwo} !important; ;
+  color: ${colors.bright} !important;
   bottom: 0;
   position: relative ;
   grid-area: footer;

@@ -82,12 +82,13 @@ function App() {
 <AuthProvider>
 
         <TheAppGrid url={url} width={ windowWidth} height={windowHeight} showMenu={showMenu}>
-            <OrderForm  setURL={handleUrlChange}/>
             <Navi windowWidth={windowWidth}/>
-            <Footer/>
-            <Contact/>
 
-            <Main/>
+            <OrderForm  setURL={handleUrlChange}/>
+            {!url.includes("admin") ?<Contact/>:null}
+                {!url.includes("admin") ?<Main/>:null}
+                {!url.includes("admin") ?<Footer/>:null}
+
         </TheAppGrid>
 </AuthProvider>
     )
@@ -97,14 +98,18 @@ function App() {
 const TheAppGrid = styled.div`
   height: 100vh;
   display: grid;
-  grid-template-rows: ${ props=>  `58px ${props.width > 650 && props.height > 500 && !props.url.includes("mealselection") && !props.url.includes("profile")? "75%" : "95%"} repeat(4, auto)`};
-  grid-template-areas: 
-  'head head head head' 
-  'order order order order' 
-  'info info info info'
-  'info info info info'
-  'contact contact contact contact'
-  'footer footer footer footer'
+  grid-template-rows: ${ props=>  `65px ${props.width > 650 && props.height > 500 && !props.url.includes("mealselection") && !props.url.includes("profile")
+    ? 
+    props.url.includes("admin")
+        ? "1fr" 
+        :"75%" 
+    :"95% repeat(4, auto)"} `};
+  
+  grid-template-areas: ${props => !props.url.includes("admin") ?
+    "'head head head head''order order order order''info info info info''info info info info''contact contact contact contact''footer footer footer footer'"
+    :
+    "'head head head head''order order order order' "
+    }
   ;
   width:100vw;
   `;
