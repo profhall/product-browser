@@ -55,6 +55,7 @@ const Steps = () => {
 
     return (
         <Wrapper windowWidth={windowWidth}>
+
             {SlideList}
             <ButtonContainer grisArea={"next"} >
                 <a href={"#"} onClick={()=>setSlide(currentSlide < 6 ? currentSlide+1:currentSlide)}>
@@ -77,7 +78,7 @@ export default Steps;
 
 const Wrapper = styled.div`
 grid-area: content;
-//height: 75%;
+height: 75%;
 width: ${props => props.windowWidth < 650 ?"98%":"65%"};
 display: grid;
 grid-template-columns:10% auto 10% ;
@@ -89,16 +90,17 @@ margin:auto;
 const StyledSlide = styled.div`
 // background-color:${props => props.background};
 border-radius: 10px 10px;
-
 grid-area: card;
 width: ${props => props.id === props.currentSlide ? "100%":"0px"};
-opacity: ${props => props.id === props.currentSlide ? 1:0};
-display: flex;
-min-height: 80%;
+//opacity: ${props => props.id === props.currentSlide ? 1:0};
+display: ${props => props.id === props.currentSlide ? "flex":"none"};
+//display: flex;
+//min-height: 80%;
 height: ${props =>props.windowWidth > 650 ? "450px":"650px"};
 flex-direction: column;
 justify-content: flex-start;
 align-content: center;
+align-self:center ;
  background:linear-gradient(0deg,rgba(215,185,86,.3),rgba(0,0,0,.3));
 
   transition: all .5s linear;

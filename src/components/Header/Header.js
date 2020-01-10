@@ -60,7 +60,7 @@ const Navi = ({windowWidth}) => {
 
         <TheNav className="nav-wrapper  ">
                 <a id="logo-container" href="/" className="">
-                    <h5 className="flow-text left" style={{color:colors.bright}}>The Tasty PBK</h5>
+                    <h3 className="flow-text left" style={{color:colors.bright}}>The Tasty Plant-Based Kitchen</h3>
                 </a>
 
             <a href="#" data-target="mobile-demo" onClick={navButtonHandler} className="sidenav-trigger right"><i className="material-icons">menu</i></a>

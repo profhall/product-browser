@@ -71,6 +71,6 @@ const TheOrderForm = styled.div`
     grid-template-areas:
     'content content content content'
     ;
-    height: 100%;
+    //height: 100%;
     width: 100%;
 `;

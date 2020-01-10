@@ -3,10 +3,15 @@ const sauteed_brussels = "https://www.simplyrecipes.com/wp-content/uploads/2009/
 
 const roasted_brussels = "https://www.fifteenspatulas.com/wp-content/uploads/2011/03/Roasted-Brussel-Sprouts-Fifteen-Spatulas-3-640x959.jpg"
 const brown_rice = "https://mymontanakitchen.com/wp-content/uploads/2019/05/instant-pot-brown-rice-10-720x720.jpg"
+const brown_rice_beans = "https://www.gatheranddine.com/wp-content/uploads/2014/04/Chorizo-Rice-2.jpg"
 const cornbread_muffins = "https://www.recipetineats.com/wp-content/uploads/2014/10/Cornbread-Muffins_9.jpg"
 const roasted_sweet_potatoes = "https://spicysouthernkitchen.com/wp-content/uploads/roasted-sweet-potatoes-11.jpg"
 
-const mixed_veggies = "https://dailyezcooking.files.wordpress.com/2014/02/img_3264_e589afe69cac.jpg";
+const mixed_veggies = "http://chefyan.ca/files/2012/01/Broccoli-in-Garlic-Sauce-Chinese-Food2.jpg";
+const quinoa = "https://dinnerthendessert.com/wp-content/uploads/2019/04/How-to-Cook-Quinoa-3.jpg";
+const plantains = "https://i.pinimg.com/originals/56/a9/d3/56a9d3c141c356c25ea68b3e727dde39.jpg";
+const coleslaw = "https://i0.wp.com/passtheplants.com/wp-content/uploads/2017/07/perfect-vegan-coleslaw-in-bowl.jpg?resize=680%2C1020&ssl=1";
+const chickpea_baked = "http://www.picklesnhoney.com/wp-content/uploads/2012/01/MG_3447.jpg";
 
 export const meals = [
 
@@ -83,7 +88,7 @@ export const meals = [
         "side": {
             1:{
                 "name":"Fried Plantains",
-                "pic":null
+                "pic":plantains
             },
             2:{
                 "name":"Sauteed Greens",
@@ -247,12 +252,12 @@ export const meals = [
         "side": {
             1:{
                 "name":"Cajun Quinoa",
-                "pic":null,
+                "pic":quinoa,
                 "ingredients":""
             },
             2:{
                 "name":"Sauteed Brussels Sprouts",
-                "pic":null,
+                "pic":sauteed_brussels,
             }
         },
         "description": "A nutrient packed burrito with tons of flavor, served with sauteed brussel sprouts and cajun quinoa",
@@ -318,12 +323,12 @@ export const meals = [
         "side": {
             1:{
                 "name":"Sesame Roasted Sweet Potatoes",
-                "pic":null,
+                "pic":roasted_sweet_potatoes,
                 "ingredients":""
             },
             2:{
                 "name":"Sauteed Brussels Sprouts",
-                "pic":null,
+                "pic":sauteed_brussels,
             }
         },
         "description": "Served with sauteed greens & roasted brussels spouts. ",
@@ -348,6 +353,17 @@ export const meals = [
     {
         "name": "Spicy Caribbean Curry w/Jackfruit",
         "available": true,
+        "side": {
+            1:{
+                "name":"Brown Rice & Beans",
+                "pic":brown_rice_beans,
+                "ingredients":""
+            },
+            2:{
+                "name":"Sauteed Greens",
+                "pic":sauteed_kale,
+            }
+        },
         "sides": ["Brown Rice & Beans", "Sauteed Greens"],
         "description": "A Caribbean Classic prepared with jackfruit instead of traditional meat. This is served with brown rice and beans & sauteed cabbage. Comes with brown rice & beans, and sauteed greens" ,
         "photo": "https://cdn.shortpixel.ai/client/q_lossy,ret_img,w_300/https://thatgirlcookshealthy.com/wp-content/uploads/2018/03/curried-jackfruit-Image-300x300.jpg",
@@ -369,10 +385,21 @@ export const meals = [
         }
     },
     {
-        "name": "Carolina Style BBQ and Coleslaw",
+        "name": "Carolina Style BBQ ",
         "available": true,
+        "side": {
+            1:{
+                "name":"Coleslaw",
+                "pic":coleslaw,
+                "ingredients":""
+            },
+            2:{
+                "name":"Chickpea Baked Beans",
+                "pic":chickpea_baked,
+            }
+        },
         "sides": ["Chickpea Baked BBQ Beans","Roasted Sweet Potatoes" ],
-        "description": "A Carolina Classic! Served with chickpea baked bbq beans & roasted sweet potatoes ",
+        "description": "A Carolina Classic! Served with chickpea baked bbq beans & coleslaw ",
         "photo": "https://i.pinimg.com/originals/d7/c7/53/d7c753890cf30de32505bb4e8835afbf.jpg",
         "ingredients": ["young jackfruit", "chickpeas", "tomato sauce", "sweet potato", "bell pepper", "herbs & spices", "cabbage", "apple cider vinegar","mustard", "vegan mayo"],
         "type": "main",
@@ -396,7 +423,7 @@ export const meals = [
         "available": true,
         "description": "Healthy burrito bowls made with roasted sweet potato, green rice and black beans! This delicious, vegan dinner reheats well for lunch.",
         "type":"main",
-        "ingredients": [] ,
+        "sides": [] ,
         "photo": "https://cookieandkate.com/images/2015/01/sweet-potato-green-rice-burrito-bowls-recipe-1.jpg",
         "nutrition":{
             "Calories":"",
@@ -481,7 +508,7 @@ export const meals = [
         }
     },
     {
-        "name": "Rainbow Power Greens Salad with Black Eyed Peas",
+        "name": "Rainbow Greens Salad with Black Eyed Peas",
         "available": true,
         "description": "A healthy gluten free power greens salad packed with lucky black eyed peas and super nutrients.  A great way to start off the new year and get back on track with clean eating.",
         "type":"salad",

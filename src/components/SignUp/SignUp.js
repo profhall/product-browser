@@ -25,20 +25,29 @@ const SignUp = ({}) => {
     }, [ userSignUp,passwordsMatch,signupValidated, restrictions]);
 
     const FormValidation = (e) => {
+        let passwordsMatch =true
+
         console.log("input id", e.target.id);
         let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (e.target.id === "password"){userSignUp["password"] = e.target.value;}
+        if (e.target.id === "password"){
+            userSignUp["password"] = e.target.value;
+            console.log(e.target.value ,":",  userSignUp["password"]);
+
+            e.target.value === userSignUp["password"] ? passwordsMatch=true:passwordsMatch=false
+            setPWMatch(passwordsMatch)
+        }
         else if (e.target.id === "email"){userSignUp["email"]= e.target.value;}
         else if (e.target.id === "name"){userSignUp["name"]= e.target.value;}
         else if (e.target.id === "city"){userSignUp["city"]= e.target.value;}
         else if (e.target.id === "zip"){userSignUp["zip"]= e.target.value;}
         else if (e.target.id === "street"){userSignUp["street"]= e.target.value;}
         else if(e.target.id === "password_val"){
-            console.log(e.target.value ,":",  userSignUp["password"]);
-            e.target.value === userSignUp["password"] ? setPWMatch(true):setPWMatch(false)
+            console.log(e.target.value ,":",  userSignUp["password"], e.target.value === userSignUp["password"]);
 
+            e.target.value === userSignUp["password"] ? passwordsMatch=true:passwordsMatch=false
+            console.log(passwordsMatch)
+            setPWMatch(passwordsMatch)
         }
-        setSignUpInfo(userSignUp);
 
         if (
                 (
@@ -54,13 +63,15 @@ const SignUp = ({}) => {
                 userSignUp["name"].length > 2 &&
                 userSignUp["city"].length > 2 &&
                 userSignUp["street"].length > 4 &&
-                userSignUp["zip"].length === 5
+                userSignUp["zip"].length === 5 && passwordsMatch
         )
         {
-            console.log(userSignUp['name'], userSignUp['email'])
+            console.log("Yay!!x"+userSignUp['name'], userSignUp['email'])
             validateSignUp(true)
         }
         else { validateSignUp(false) }
+
+        setSignUpInfo(userSignUp);
 
     };
 
