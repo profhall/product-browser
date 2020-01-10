@@ -6,7 +6,7 @@ import colors from "../../Colors";
 import * as firebase from "firebase/app";
 import app from "../../fbase";
 import 'firebase/firestore';
-
+import emailjs from "emailjs-com";
 const Confirmation = () => {
     const {currentUserProfile, currentUserOrder, gotoPage} = useContext(AuthContext)
 
@@ -40,7 +40,16 @@ const Confirmation = () => {
         ordersDB.add({...currentUserOrder, "order_time_stamp": Date.now()})
             .then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
+
+                emailjs.send('meal_prep', 'template_awzr3ptv', {...currentUserOrder,...currentUserProfile}, "user_p8ucvKr8lnqx5SwxOEshJ")
+                        .then(function(response) {
+                            console.log('SUCCESS!', response.status, response.text);
+                        }, function(error) {
+                            console.log('FAILED...', error);
+                        });
+
                 navigate("/order_submitted",true)
+
             })
             .catch(function(error) {
                 console.error("Error adding document: ", error);
