@@ -69,11 +69,12 @@ const Confirmation = () => {
     return (
         <ConfirmationContainer className={"center"}>
 
-            <h4 style={{margin:0}}>
-                {user.name}, confirm the information below. <br/>
-                No deal is final until payment is received. Send payment to:
-                <a target="_blank" href={"https://www.paypal.com/paypalme2/phalljr"}><b>paypal.me/phalljr</b></a>
-            </h4>
+            <h5 style={{margin:0}}>
+                Confirm the information below. <br/>
+                {/*Send payment to:*/}
+                {/*<a target="_blank" href={"https://www.paypal.com/paypalme2/phalljr"}><b>paypal.me/phalljr</b></a>*/}
+            </h5>
+
                 <ConfirmForm className={"row"}>
                     <FormInputDiv className="input-field inline col s12 ">
                         <FormInput autoFocus id="address"  value={`${currentUserOrder.address ? currentUserOrder.address.street: ""}  ${currentUserOrder.address ? currentUserOrder.address.city: ""}, ${currentUserOrder.address ? currentUserOrder.address.zip: ""} `} type="text"/>
@@ -105,9 +106,9 @@ const Confirmation = () => {
 
                 </ConfirmForm>
 
-            <h4>
+            <h5>
             Every order has an <Numbers>${deliveryFee}</Numbers> delivery fee. <br/>There is a one time container fee of <Numbers>${containerFee}</Numbers> for new clients.
-            </h4>
+            </h5>
 
 
             <ButtonContainer className={"row center"}>
@@ -126,6 +127,7 @@ text-decoration: underline;
 `
 
 const ConfirmationContainer = styled.div`
+justify-content: space-around;
   display: flex;
   margin: auto;
   flex-direction: column;
@@ -140,9 +142,8 @@ const ConfirmationContainer = styled.div`
 
 const ConfirmForm = styled.form`
   width: 80%;
-  margin: auto;
-  
-  font-size: 25px;
+  margin: 0 !important;
+  font-size: 22px;
   font-weight: bold ;
 `;
 // const ConfirmInfo = styled.div`
@@ -186,6 +187,11 @@ font-size:x-large !important;
 color:${colors.bright} !important;
 
 `;
+
+const PaymentButtons = styled.div`
+display: flex;
+
+`
 const FormInput = styled.input`
     color:white;
     font-size: 25px !important;

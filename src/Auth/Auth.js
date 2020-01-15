@@ -19,7 +19,7 @@ export const AuthProvider = ({children}) => {
     let userDB = db.collection(`users`);
 
     const formValidation = (e) => {
-        console.log("input id", e.target.id);
+        // console.log("input id", e.target.id);
         let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
         if (e.target.id === "password"){userLogin["password"] = e.target.value;}
@@ -31,7 +31,7 @@ export const AuthProvider = ({children}) => {
             && userLogin["password"].length >= 6 &&
             userLogin["email"].match(mailformat))
         {
-            console.log(userLogin['password'], userLogin['email'])
+            // console.log(userLogin['password'], userLogin['email'])
             validateInfo(true)
         }
         else { validateInfo(false) }
@@ -52,10 +52,10 @@ export const AuthProvider = ({children}) => {
              userDB.doc(currentUser.uid).get().then(   function(doc) {
                 if (doc.exists) {
                     setUserProfile({...doc.data(),"uid": currentUser.uid});
-                    console.log("User Profile Set: ", doc.data());
+                    // console.log("User Profile Set: ", doc.data());
                 } else {
                     // doc.data() will be undefined in this case
-                    console.log("No such document!");
+                    // console.log("No such document!");
                 }
                 return () => {
                     // removing the listener when props.x changes

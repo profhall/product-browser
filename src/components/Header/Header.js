@@ -60,6 +60,7 @@ const Navi = ({windowWidth}) => {
 
         <TheNav className="nav-wrapper  ">
                 <a id="logo-container" href="/" className="">
+
                     <h3 className="flow-text left" style={{color:colors.bright}}>The Tasty Plant-Based Kitchen</h3>
                 </a>
 

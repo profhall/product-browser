@@ -6,7 +6,7 @@ import {AuthContext} from "../../Auth/Auth";
 import Modal from 'react-modal';
 
 
-const stuff = meals
+const thisWeeksMeals = meals.filter((item)=>item.available)
 
 function getWidth() {
     return window.innerWidth
@@ -78,7 +78,7 @@ const MealsSelector = () => {
 
     }
 
-    const mealList = stuff.map((item) => {
+    const mealList = thisWeeksMeals.map((item) => {
             return  (
         <Main className={"col s12 m5"} >
             <PhotoGrid full={!!item.side}>
@@ -123,6 +123,7 @@ const MealsSelector = () => {
         setModal(true)
     };
     const handleCloseModal = () =>{
+
         setModal(false)
     };
 
@@ -134,7 +135,7 @@ const MealsSelector = () => {
             <MainHeader main={mainsList.length > 0} className={"center"} width={windowWidth}>
                 <MainHeaderText>
                     <h4 style={{margin:0}}> {mainsPicked >0 ? `Pick remaining ${meal_count-mainsPicked}`: `Pick Your ${meal_count} Meals.`}</h4>
-                    <h5>With every 4 meals you get a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h5>
+                    <h6>With every 4 meals you get a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h6>
 
                     {mainsList.length > 0 && windowWidth > 650 ? <h5><b>Tap food Item To Delete</b></h5>:
                         mainsList.length > 0 ? <h5 onClick={handleOpenModal}>Click Here To See Your Selection</h5>: null }
@@ -200,21 +201,20 @@ export default MealsSelector;
 
 const MealsSelectorContainer = styled.div`
   display: grid;
-  height: 100%;
+  height: 90%;
   width: 100%;
   grid-area: content;
   grid-template-rows: 20% 70% 10%;
-  grid-gap: 10px 0;
   grid-template-areas: 
   "mainhead"
   "mains"
   "button"
   ;
   padding-bottom: 15px;
-  margin: auto;
 `;
 const MealsModal = styled(Modal)`
   border-radius: 5px 5px;
+  height: 75%;
   background-color: ${colors.primaryTwo};
   color: ${colors.bright} !important;
   display: grid;
@@ -240,7 +240,6 @@ const ModalHeader = styled.div`
   grid-area: header;
   display: flex;
   flex-direction: column; 
-  justify-content: center;
   align-items: center; 
   ;
 `;
@@ -272,9 +271,8 @@ const Mains = styled.div`
 const MainHeader = styled.div`
   display: grid;
   grid-area: mainhead;
-  height: 95%;
+  height: 75%;
   width: 100%;
-  margin: auto;
   grid-template-columns: 50% 50%;
   grid-template-areas: ${props=> props.width > 650 && props.main ? "'text list'" : "'text text'"};
   

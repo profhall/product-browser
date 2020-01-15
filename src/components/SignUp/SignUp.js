@@ -14,6 +14,7 @@ const SignUp = ({}) => {
     const [signupValidated, validateSignUp] = useState(false);
     const [userSignUp, setSignUpInfo] = useState({});
     const [passwordsMatch, setPWMatch] = useState(false);
+    const [verifyPW, setPWVerify] = useState("");
     let SignUp={}
     useEffect( () =>  {
         console.log(" signup comp mounted with: \n Restrictions:", restrictions)
@@ -25,16 +26,16 @@ const SignUp = ({}) => {
     }, [ userSignUp,passwordsMatch,signupValidated, restrictions]);
 
     const FormValidation = (e) => {
-        let passwordsMatch =true
+        let passwordsMatch =false
 
-        console.log("input id", e.target.id);
+        // console.log("input id", e.target.id);
         let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (e.target.id === "password"){
             userSignUp["password"] = e.target.value;
             console.log(e.target.value ,":",  userSignUp["password"]);
 
-            e.target.value === userSignUp["password"] ? passwordsMatch=true:passwordsMatch=false
-            setPWMatch(passwordsMatch)
+            // e.target.value === userSignUp["password"] ? passwordsMatch=true:passwordsMatch=false
+            // setPWMatch(passwordsMatch)
         }
         else if (e.target.id === "email"){userSignUp["email"]= e.target.value;}
         else if (e.target.id === "name"){userSignUp["name"]= e.target.value;}
@@ -42,10 +43,10 @@ const SignUp = ({}) => {
         else if (e.target.id === "zip"){userSignUp["zip"]= e.target.value;}
         else if (e.target.id === "street"){userSignUp["street"]= e.target.value;}
         else if(e.target.id === "password_val"){
-            console.log(e.target.value ,":",  userSignUp["password"], e.target.value === userSignUp["password"]);
+            // console.log(e.target.value ,":",  userSignUp["password"], e.target.value === userSignUp["password"]);
 
             e.target.value === userSignUp["password"] ? passwordsMatch=true:passwordsMatch=false
-            console.log(passwordsMatch)
+            // console.log(passwordsMatch)
             setPWMatch(passwordsMatch)
         }
 
@@ -63,10 +64,10 @@ const SignUp = ({}) => {
                 userSignUp["name"].length > 2 &&
                 userSignUp["city"].length > 2 &&
                 userSignUp["street"].length > 4 &&
-                userSignUp["zip"].length === 5 && passwordsMatch
+                userSignUp["zip"].length === 5
         )
         {
-            console.log("Yay!!x"+userSignUp['name'], userSignUp['email'])
+            // console.log("Yay!!x"+userSignUp['name'], userSignUp['email'])
             validateSignUp(true)
         }
         else { validateSignUp(false) }
@@ -74,6 +75,38 @@ const SignUp = ({}) => {
         setSignUpInfo(userSignUp);
 
     };
+
+    const handlePhone = (e) => {
+        setSignUpInfo({...userSignUp, 'phone': e.target.value})
+    }
+
+    const handleCity = (e) => {
+        setSignUpInfo({...userSignUp, 'address': {"city":e.target.value}})
+    }
+    const handleStreet = (e) => {
+        setSignUpInfo({...userSignUp, 'address': {"street":e.target.value}})
+    }
+    const handleZip = (e) => {
+        setSignUpInfo({...userSignUp, 'address': {"zip":e.target.value}})
+    }
+
+    const handlePassword = (e) => {
+        setSignUpInfo({...userSignUp, 'password': e.target.value})
+        if(verifyPW ===  e.target.value &&  e.target.value !== ""){
+            console.log("match")
+            setPWMatch(true)
+        }else setPWMatch(false)
+
+    }
+    const handlePasswordVerify = (e) => {
+        console.log(userSignUp['password'], " : ",e.target.value )
+        setPWVerify(e.target.value)
+        if(e.target.value === userSignUp['password']){
+            console.log("match")
+            setPWMatch(true)
+        }else setPWMatch(false)
+    }
+
 
     const handleSignUp = useCallback(
         async () => {
@@ -96,7 +129,7 @@ const SignUp = ({}) => {
                         container_fee_paid: false
                     });
 
-                    console.log(user.user)
+                    // console.log(user.user)
 
                 });
                 console.log(`created: ${email} : ${password}`)
@@ -141,24 +174,24 @@ const SignUp = ({}) => {
                         </div>
 
                         <div className="input-field col s12 m6">
-                            <FormInput onChange={FormValidation} id="password" placeholder={"Password"} type="password" />
+                            <FormInput onChange={handlePassword} id="password" placeholder={"Password"} type="password" />
                         </div>
 
                         <div className="input-field col s12 m6">
-                            <FormInput onChange={FormValidation} id="password_val" placeholder={"Verify Password"} type="password" />
+                            <FormInput onChange={handlePasswordVerify} id="password_val" placeholder={"Verify Password"} type="password" />
                         </div>
 
                         <div className="input-field col s12 m6">
-                            <FormInput onChange={FormValidation} id="street" placeholder={"Number & Street"} />
+                            <FormInput onChange={handleStreet} id="street" placeholder={"Number & Street"} />
                         </div>
 
 
                         <div className="input-field col s6 m3 ">
-                            <FormInput onChange={FormValidation} id="city" placeholder={"City"} />
+                            <FormInput onChange={handleCity} id="city" placeholder={"City"} />
                         </div>
 
                         <div className="input-field col s6 m3">
-                            <FormInput onChange={FormValidation} id="zip" placeholder={"Zip"} />
+                            <FormInput onChange={handleZip} id="zip" placeholder={"Zip"} />
                         </div>
 
                         <div className="input-field col s12 m6 offset-m3">

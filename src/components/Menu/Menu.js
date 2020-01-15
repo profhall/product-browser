@@ -4,7 +4,7 @@ import colors from "../../Colors";
 import {AuthContext, AuthProvider} from "../../Auth/Auth";
 
 import {meals, salads, mains, sides} from '../../data'
-
+const thisWeeksMeals = meals.filter((item)=>item.available)
 function getWidth() {
     return window.innerWidth
 }
@@ -19,13 +19,14 @@ const Menu = () => {
     window.addEventListener('resize', handleResize);
 
     useEffect(()=>{
-        console.log(currentSlide)
-        console.log(meals.length)
+        // console.log(currentSlide)
+        // console.log(meals.length)
 
     },[windowWidth, currentSlide])
-    const mealList = meals.map((item,i) => {
+    const mealList = thisWeeksMeals.map((item,i) => {
         return  (
             <Meal key={i} id={i} className={"container"} >
+
                 <Title>
                     <h4>{item.name}</h4>
                 </Title>
@@ -40,21 +41,29 @@ const Menu = () => {
                             :null}
                     </PhotoGrid>
                 </Photos>
-                <Desc>
-                    <h5>{item.description}</h5>
-                </Desc>
                 <Buttons>
 
-                    <a onClick={()=>setSlide(currentSlide-1)} href={"#"}>
-                        <i  style={{color: colors.bright,display:currentSlide === 0?  "none":""}} className="material-icons large">chevron_left</i>
+                    <a onClick={(e)=>{
+                        e.preventDefault()
+                        currentSlide > 0 ? setSlide(currentSlide-1) : setSlide(currentSlide)
+                    }} href={"#"}>
+                        <i  style={{color: currentSlide > 0?  colors.bright: "grey"}} className="material-icons medium">chevron_left</i>
 
                     </a>
 
-                    <a onClick={()=>setSlide(currentSlide+1)} href={"#"} >
-                        <i style={{color: colors.bright,display:currentSlide < meals.length-1?  "":"none"}}  className="material-icons large">chevron_right</i>
+                    <a onClick={(e)=>{
+                        e.preventDefault()
+                        currentSlide < thisWeeksMeals.length-1? setSlide(currentSlide+1) : setSlide(currentSlide)
+                    }} href={"#"} >
+                        <i style={{color: currentSlide < thisWeeksMeals.length-1?  colors.bright: "grey"}}  className="material-icons medium">chevron_right</i>
 
                     </a>
                 </Buttons>
+                <Desc>
+                    {item.description}
+                </Desc>
+                {/*<div className="card small">*/}
+                {/*</div>*/}
 
             </Meal>
 
@@ -66,12 +75,8 @@ const Menu = () => {
 
     return (
         <TheMenu windowWidth={windowWidth}>
-            <h3> This Weeks Menu</h3>
-            <h6>Nutritional Information Coming Soon...</h6>
-
             <Meals>
                 {mealList[currentSlide]}
-
             </Meals>
             {/*<ButtonContainer className={"row "}>*/}
             {/*    <Button className={`btn-large col m5 ${0<1?"":"disabled"}`} onClick={()=>selected("salads")}>Salads</Button>*/}
@@ -104,15 +109,16 @@ width: 100%;
 
     `;
 const Meal = styled.div`
-height:100%;
+height:90%;
 grid-area: content;
 display: grid;
-grid-template-rows: 10% 50% 30% 10%;
+grid-gap: 12px;
+grid-template-rows: 10% 50% 7% 31%;
 grid-template-areas: 
   'title'
   'photos'
-  'desc'
   'buttons'
+  'desc'
 ;
     `;
 
@@ -140,20 +146,19 @@ align-items: center;
 const Desc = styled.div`
 height:100%;
 width: 100%;
+font-size: large;
 overflow: auto;
 grid-area: desc;
 display: flex;
 flex-direction: column;
-justify-content: center;
 align-items: center;
-
 `
 const Buttons = styled.div`
 height:100%;
 width: 100%;
 grid-area: buttons;
 display: flex;
-justify-content: center;
+justify-content: space-between;
 align-items: center;
 
 `
