@@ -4,7 +4,7 @@ import {AuthContext} from "../../Auth/Auth";
 import styled from "styled-components";
 import colors from "../../Colors";
 
-const Home = () => {
+const Home =  () =>  {
     const {currentUser, currentUserProfile, currentUserOrder,gotoPage} = useContext(AuthContext)
     console.log(currentUser?currentUser.uid:"No user");
     // console.log("The User: "+currentUser.uid)
@@ -14,16 +14,16 @@ const Home = () => {
     }, [currentUserProfile])
 
 
-    return (
-        <HomeContainer className={"container"}>
-            <h3 style={{margin:0}}>Greetings{currentUserProfile? " " +currentUserProfile.name+ "!" :  "!"}</h3>
+    return  (
+        currentUserProfile? <HomeContainer className={"container"}>
+            <h3 style={{margin:0}}>Greetings { currentUserProfile.name } !</h3>
             <HomeInfoBox>
                 <h4>Thank you for eating with at The Tasty Plant-Based Kitchen, we're so glad you came. We hope you enjoy this weeks menu. (<span style={{color:colors.bright}} onClick={()=>gotoPage('\menu')}>See Menu</span>)</h4>
             </HomeInfoBox>
             <Button className={"btn-large"} onClick={()=>gotoPage('\mealcount')}>
                 Start Your Order
             </Button>
-        </HomeContainer>
+        </HomeContainer> : <h1>Loading...</h1>
     );
 };
 

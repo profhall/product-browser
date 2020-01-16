@@ -8,7 +8,7 @@ export const AuthContext = React.createContext();
 
 
 
-export const AuthProvider = ({children}) => {
+export const  AuthProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState(null)
     const [currentUserProfile, setUserProfile] = useState(null)
     const [currentUserOrder, setUserOrder] = useState(null)
