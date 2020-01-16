@@ -27,6 +27,14 @@ function App() {
     const [chosenMeals, setMeals] = useState([]);
     const [chosenSalads, setSalads] = useState([]);
     const [confirmation, setConfirmation] = useState(false);
+
+    const handleResize =()=> {
+        setWidth(getDimensions()["width"]);
+        setHeight(getDimensions()["height"]);
+    };
+    const handleUrlChange =()=>  setURL(window.location.href);
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('hashchange', handleUrlChange);
     // const [allMeals, setAllMeals] = useState([]);
 
 
@@ -70,19 +78,11 @@ function App() {
 
     };
 
-    const handleResize =()=> {
-        setWidth(getDimensions()["width"]);
-        setHeight(getDimensions()["height"]);
-    };
-    const handleUrlChange =()=>  setURL(window.location.href);
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('hashchange', handleUrlChange);
 
     return (
 <AuthProvider>
 
         <TheAppGrid url={url} width={ windowWidth} height={windowHeight} showMenu={showMenu}>
-            <OrderForm  setURL={handleUrlChange}/>
             <Navi windowWidth={windowWidth}/>
             <Footer/>
             <Contact/>
@@ -97,7 +97,7 @@ function App() {
 const TheAppGrid = styled.div`
   height: 100vh;
   display: grid;
-  grid-template-rows: ${ props=>  `58px ${props.width > 650 && props.height > 500 && !props.url.includes("mealselection") && !props.url.includes("profile")? "75%" : "95%"} repeat(4, auto)`};
+  grid-template-rows: 58px 75% repeat(4, auto);
   grid-template-areas: 
   'head head head head' 
   'order order order order' 

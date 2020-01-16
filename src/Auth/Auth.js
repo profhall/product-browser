@@ -44,8 +44,8 @@ export const AuthProvider = ({children}) => {
         navigate(location,false,[],false)
     };
 
-    useEffect(()=> {
-        app.auth().onAuthStateChanged(setCurrentUser)
+    useEffect(async ()=> {
+        await app.auth().onAuthStateChanged(setCurrentUser)
         console.log(currentUser ? ("user Set! ", currentUser):null)
 
         if(currentUser) {
