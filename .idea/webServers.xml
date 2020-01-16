@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="702c61bb-d7d9-45d1-8a50-f2fbf1c4bdf9" name="TPBK" url="http://107.180.34.197">
+        <fileTransfer host="107.180.34.197" port="21" rootFolder="/public_html/thekitchen">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

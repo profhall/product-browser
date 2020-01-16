@@ -25,7 +25,9 @@ const Footer = () => {
             </div>
             <div className="footer-copyright">
                 <div className="container">
-                    Made by <a className="brown-text text-lighten-3" href="#">PJ The Developer</a>
+                    <p>Made by <a className="brown-text text-lighten-3" href="#">PJ The Developer</a></p>
+                    <div>Icons made by <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp">Eucalyp</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                 </div>
             </div>
         </TheFooter>
@@ -40,4 +42,5 @@ const TheFooter = styled.footer`
   color: ${colors.bright};
   bottom: 0;
   position: relative ;
+  grid-area: footer;
 `;

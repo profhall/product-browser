@@ -1,41 +1,41 @@
-import React, {useEffect,useState} from 'react';
+import React, {useEffect,useState, useContext} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Navi from "./components/Header/Header"
 import styled from 'styled-components'
-import About from "./components/About/About";
-import PnC from "./components/ProductsAndCart/ProductsAndCart";
-import IntroHero from "./components/Hero/Hero";
-import Products from "./components/Products/Products";
 import colors from "./Colors"
 import Footer from "./components/Footer/Footer";
-import MainIntro from "./components/Main/Main";
-import MainInfo from "./components/InfoSection/InfoSection";
+import Main from "./components/InfoSection/InfoSection";
 import Contact from "./components/Contact/Contact";
 import {meals} from "./data";
 import emailjs from "emailjs-com";
+import OrderForm from "./components/OrderForm/OrderForm";
+import {AuthContext, AuthProvider} from "./Auth/Auth";
+
+
+function getDimensions() {
+    return {"width":window.innerWidth, "height":window.innerHeight}
+}
+
 const stuff = meals;
 function App() {
+    const [windowWidth, setWidth] = useState(getDimensions()["width"]);
+    const [windowHeight, setHeight] = useState(getDimensions()["height"]);
 
+    const [url, setURL] = useState(window.location.href);
+    const [showMenu, setMenuVisibility] = useState(false);
     const [chosenMeals, setMeals] = useState([]);
     const [chosenSalads, setSalads] = useState([]);
-    const [howManyMeals, getNumberOfMeals] = useState(0);
-    const [mealViewOpen, ToggleMeals] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
     // const [allMeals, setAllMeals] = useState([]);
 
-    const ToggleMealsView = (toToggle) =>{
-        console.log("See Meals...")
-        ToggleMeals(toToggle)
-    };
-
-    let everything = []
 
     useEffect(() => {
-        console.log(chosenMeals,chosenSalads);
+        console.log(chosenMeals,chosenSalads, url);
+        setURL(window.location.href)
+        setWidth(getDimensions()["width"]);
 
-    }, [chosenSalads,chosenMeals]);
-
+    }, [chosenSalads,chosenMeals,windowWidth,showMenu,url]);
 
     const emailSelection = (chosenItems, chosenSalads,userInfo) => {
         const Info = userInfo;
@@ -70,69 +70,41 @@ function App() {
 
     };
 
-
-    const addToFavs=(item)=> {
-        // chosenItems.push(<li>{item.name}</li>)
-
-        let items = null;
-        let salads = null;
-        console.log(chosenMeals.length , howManyMeals);
-
-        if (chosenMeals.length < howManyMeals && item.type !== "salad"){
-            console.log("Entree Chosen");
-
-            items = chosenMeals.concat(item.name);
-            // console.log(items)
-            setMeals(items);
-
-
-        }
-        if(chosenSalads.length < Math.floor(howManyMeals/4) && item.type === "salad"){
-            console.log("Salad Chosen");
-            salads = chosenSalads.concat(item.name);
-            // console.log(items)
-            setSalads(salads);
-
-        }
+    const handleResize =()=> {
+        setWidth(getDimensions()["width"]);
+        setHeight(getDimensions()["height"]);
     };
+    const handleUrlChange =()=>  setURL(window.location.href);
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('hashchange', handleUrlChange);
+
     return (
-        <TheApp>
-            <Navi/>
-            <MainIntro confirmation={confirmation}  emailSelection={emailSelection} chosenMeals={chosenMeals} getNumberOfMeals={getNumberOfMeals} setMeals={setMeals} chosenSalads={chosenSalads} setSalads={setSalads} ToggleMeals={ToggleMealsView}/>
-            {mealViewOpen ?
-              <Meals>{<Products addToFavs={addToFavs}/>}</Meals> : null}
-            <MainInfo/>
-            <Contact/>
+<AuthProvider>
+
+        <TheAppGrid url={url} width={ windowWidth} height={windowHeight} showMenu={showMenu}>
+            <OrderForm  setURL={handleUrlChange}/>
+            <Navi windowWidth={windowWidth}/>
             <Footer/>
-        </TheApp>
+            <Contact/>
+
+            <Main/>
+        </TheAppGrid>
+</AuthProvider>
     )
 };
 
-const TheApp = styled.div`
-  height: 100vh;
-  position: relative;
-  //width: 100%;
-  `;
-
-const Meals = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-content: space-between;
-  max-width:100%;
-  height: 75% ;
-  // background-color: ${colors.primaryTwo } ;
-  `;
 
 const TheAppGrid = styled.div`
   height: 100vh;
   display: grid;
+  grid-template-rows: ${ props=>  `58px ${props.width > 650 && props.height > 500 && !props.url.includes("mealselection") && !props.url.includes("profile")? "75%" : "95%"} repeat(4, auto)`};
   grid-template-areas: 
-  'hero hero hero hero' 
-  'sider main main main' 
-  'sider main main main' 
-  'sider main main main'
-  'sider main main main'
-  'sider main main main'
+  'head head head head' 
+  'order order order order' 
+  'info info info info'
+  'info info info info'
+  'contact contact contact contact'
+  'footer footer footer footer'
   ;
   width:100vw;
   `;
