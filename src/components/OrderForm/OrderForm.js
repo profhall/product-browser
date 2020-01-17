@@ -1,4 +1,4 @@
-import React, {useCallback,useState, useContext} from 'react';
+import React, {useEffect,useState, useContext} from 'react';
 import styled from "styled-components";
 import {useRoutes, A, useRedirect, navigate} from 'hookrouter';
 import Main from "../InfoSection/InfoSection";
@@ -11,44 +11,30 @@ import foodPic from './veganBowl.jpeg'
 
 
 
-const OrderForm = ({setURL, updateOrder}) => {
-    const {currentUser, currentUserProfile, currentUserOrder, setUserProfile,setUserOrder} = useContext(AuthContext)
-    const [infoValidated, validateInfo] = useState(false);
-    const [userLogin, setLoginInfo] = useState({});
+const OrderForm =  () => {
+    const {currentUser, currentUserProfile, currentUserOrder, setUserProfile,setUserOrder} =  useContext( AuthContext)
     const routeResult = useRoutes(Routes);
 
-    const FormValidation = (e) => {
-        console.log("input id", e.target.id);
-        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    useEffect(() => {
+        console.log(currentUser)
+    }, [currentUser]);
 
-        if (e.target.id === "password"){userLogin["password"] = e.target.value;}
-        else if (e.target.id === "email"){userLogin["email"]= e.target.value;}
 
-        setLoginInfo(userLogin);
 
-        if (userLogin["password"] && userLogin["email"]
-            && userLogin["password"].length >= 6 &&
-            userLogin["email"].match(mailformat))
-        {
-            console.log(userLogin['password'], userLogin['email'])
-            validateInfo(true)
-        }
-        else { validateInfo(false) }
-
-    };
 
 const url =window.location.href
-    setURL(url)
     return (
             <TheOrderForm className={""}>
-                {
-                    !currentUser && !url.includes("menu")&& !url.includes("signup") && !url.includes("steps")
-                    ?
-                        <Login userLogin={userLogin} />
-                       :
-                        routeResult
 
-                }
+                {!currentUser?<Login />:null}
+                {/*{*/}
+                {/*    !currentUser && !url.includes("menu")&& !url.includes("signup") && !url.includes("steps")*/}
+                {/*    ?*/}
+                {/*        <Login userLogin={userLogin} />*/}
+                {/*       :*/}
+                {/*        routeResult*/}
+
+                {/*}*/}
 
             </TheOrderForm>
     );

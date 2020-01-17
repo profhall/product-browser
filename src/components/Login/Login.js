@@ -9,22 +9,37 @@ function getWidth() {
 }
 const Login = () => {
     const [windowWidth, setWidth] = useState(getWidth);
-    const {currentUser,formValidation,userLogin,infoValidated,gotoPage} = useContext(AuthContext);
+    const [email, setEmail] = useState(null);
+    const [password, setPW] = useState(null);
+    const [infoValidated, setinfoValidated] = useState(false);
+    const {currentUser,formValidation,userLogin,gotoPage} = useContext(AuthContext);
     const handleResize =()=> setWidth(getWidth());
     window.addEventListener('resize', handleResize);
 
     useEffect(()=>
     {
+        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
         if(currentUser)gotoPage('/')
+        console.log(email, password)
+        email && password && email.match(mailformat) && password.length > 5 ? setinfoValidated(true):setinfoValidated(false)
 
-    }, [currentUser]);
+    }, [currentUser,email,password]);
 
+    const handleEmail = (e) => {
+        setEmail(e.target.value)
+    }
+    const handlePW = (e) => {
+        setPW(e.target.value)
+    }
 
-
-    const handleLogin = useCallback(
+    const handleLogin =
         async () => {
-            const {email, password} = {...userLogin}
+            // const {email, password} = {...userLogin}
+            console.log(email, password)
+
             try{
+
                 await app.auth()
                     .signInWithEmailAndPassword(email,password).then(()=>{
                         console.log(`User Logged In!`);
@@ -34,8 +49,7 @@ const Login = () => {
                 alert(error)
             }
 
-        },[]
-    );
+        };
 
     return (
         <LoginForm  >
@@ -53,11 +67,11 @@ const Login = () => {
                 <form className="col s12" >
                     <div className="row">
                         <div className="input-field col s12 m6">
-                            <FormInput onChange={formValidation} id="email" placeholder={"Email"} type="email"  className="validate"/>
+                            <FormInput onChange={handleEmail} id="email" placeholder={"Email"} type="email"  className="validate"/>
                         </div>
 
                         <div className="input-field col s12 m6">
-                            <FormInput onChange={formValidation} id="password" placeholder={"Password"} type="password" />
+                            <FormInput onChange={handlePW} id="password" placeholder={"Password"} type="password" />
                         </div>
 
                     </div>
@@ -79,9 +93,9 @@ const Login = () => {
 export default Login;
 
 const LoginButton = styled.div`
-background-color: ${colors.bright};
+background-color: ${colors.bright} !important;
 &:hover {
-  background-color: ${colors.secondaryTwo};
+  background-color: ${colors.secondaryTwo} !important;
 }
 
 `;

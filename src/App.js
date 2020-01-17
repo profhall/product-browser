@@ -11,6 +11,7 @@ import {meals} from "./data";
 import emailjs from "emailjs-com";
 import OrderForm from "./components/OrderForm/OrderForm";
 import {AuthContext, AuthProvider} from "./Auth/Auth";
+import Sidebar from "./components/SideBar/SideBar";
 
 
 function getDimensions() {
@@ -81,11 +82,13 @@ function App() {
 
     return (
 <AuthProvider>
+    <Sidebar/>
 
         <TheAppGrid url={url} width={ windowWidth} height={windowHeight} showMenu={showMenu}>
             <Navi windowWidth={windowWidth}/>
             <Footer/>
             <Contact/>
+            <OrderForm/>
 
             <Main/>
         </TheAppGrid>

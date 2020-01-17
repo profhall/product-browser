@@ -18,35 +18,19 @@ export const AuthProvider = ({children}) => {
     const db = firebase.firestore(app);
     let userDB = db.collection(`users`);
 
-    const formValidation = (e) => {
-        // console.log("input id", e.target.id);
-        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-        if (e.target.id === "password"){userLogin["password"] = e.target.value;}
-        else if (e.target.id === "email"){userLogin["email"]= e.target.value;}
-
-        setLoginInfo(userLogin);
-
-        if (userLogin["password"] && userLogin["email"]
-            && userLogin["password"].length >= 6 &&
-            userLogin["email"].match(mailformat))
-        {
-            // console.log(userLogin['password'], userLogin['email'])
-            validateInfo(true)
-        }
-        else { validateInfo(false) }
-
-    };
-
-
     const gotoPage = (location) =>{
 
         navigate(location,false,[],false)
     };
 
-    useEffect(async ()=> {
-        await app.auth().onAuthStateChanged(setCurrentUser)
-        console.log(currentUser ? ("user Set! ", currentUser):null)
+    useEffect( ()=> {
+        async function userStateChange() {
+            await app.auth().onAuthStateChanged(setCurrentUser)
+            console.log(currentUser ? ("user Set! ", currentUser):null)
+
+        }
+        userStateChange();
+
 
         if(currentUser) {
              userDB.doc(currentUser.uid).get().then(   function(doc) {
@@ -68,32 +52,22 @@ export const AuthProvider = ({children}) => {
 
     },[currentUser])
 
-    useEffect(()=> {
-        console.log("User Order", currentUserOrder)
-        console.log("User Profile", currentUserProfile)
-
-    },[currentUserOrder])
-
-    useEffect(()=> {
-        console.log("Info Validated: ",infoValidated )
-
-    },[infoValidated])
 
 
-    useEffect(()=> {
-        if(currentUserProfile) {
-            setUserOrder({
-                "uid": currentUser.uid,
-                "address": currentUserProfile.address,
-                "restrictions": currentUserProfile.dietary_restrictions
-            })
-        }
-    },[currentUserProfile,])
+    // useEffect(()=> {
+    //     if(currentUserProfile) {
+    //         setUserOrder({
+    //             "uid": currentUser.uid,
+    //             "address": currentUserProfile.address,
+    //             "restrictions": currentUserProfile.dietary_restrictions
+    //         })
+    //     }
+    // },[currentUserProfile,])
 
 
 
     return (
-        <AuthContext.Provider value={{currentUser, currentUserProfile, currentUserOrder,formValidation,userLogin,infoValidated, gotoPage , setUserProfile,setUserOrder}}>
+        <AuthContext.Provider value={{currentUser, currentUserProfile, currentUserOrder,userLogin,infoValidated, gotoPage , setUserProfile,setUserOrder}}>
             {children}
         </AuthContext.Provider>
     );

@@ -64,26 +64,26 @@ const Navi = ({windowWidth}) => {
                     <h3 className="flow-text left" style={{color:colors.bright}}>The Tasty Plant-Based Kitchen</h3>
                 </a>
 
-            <a href="#" data-target="mobile-demo" onClick={navButtonHandler} className="sidenav-trigger right"><i className="material-icons">menu</i></a>
-            <ul className="right hide-on-med-and-down">
-                    <li onClick={()=>navigate('/menu')}><Link href="#">Menu</Link></li>
+            {/*<a href="#" data-target="mobile-demo" onClick={navButtonHandler} className="sidenav-trigger right"><i className="material-icons">menu</i></a>*/}
+            {/*<ul className="right hide-on-med-and-down">*/}
+            {/*        <li onClick={()=>navigate('/menu')}><Link href="#">Menu</Link></li>*/}
 
-                {currentUser?<li onClick={()=>navigate('/profile')}><Link href="#">Profile</Link></li>:null}
+            {/*    {currentUser?<li onClick={()=>navigate('/profile')}><Link href="#">Profile</Link></li>:null}*/}
 
-                    {currentUser?<li onClick={()=>app.auth().signOut()}><Link href="/">Logout</Link></li>:<li><Link href="/signup">Sign Up</Link></li>}
+            {/*        {currentUser?<li onClick={()=>app.auth().signOut()}><Link href="/">Logout</Link></li>:<li><Link href="/signup">Sign Up</Link></li>}*/}
 
-                </ul>
+            {/*    </ul>*/}
 
 
         </TheNav>
-            <SideNav navOpen={navOpen} className="sidenav" id="mobile-demo">
-                    <li onClick={()=>navigate('/menu')}><Link href="/">Menu</Link></li>
+            {/*<SideNav navOpen={navOpen} className="sidenav" id="mobile-demo">*/}
+            {/*        <li onClick={()=>navigate('/menu')}><Link href="/">Menu</Link></li>*/}
 
-                {currentUser?
-                    <li onClick={()=>navigate('/profile')}><Link href="/">Profile</Link></li>:null}
-                {currentUser?
-                    <li onClick={()=>app.auth().signOut()}><Link href="/">Logout</Link></li>:<li><Link href="/signup">Sign Up</Link></li>}
-            </SideNav>
+            {/*    {currentUser?*/}
+            {/*        <li onClick={()=>navigate('/profile')}><Link href="/">Profile</Link></li>:null}*/}
+            {/*    {currentUser?*/}
+            {/*        <li onClick={()=>app.auth().signOut()}><Link href="/">Logout</Link></li>:<li><Link href="/signup">Sign Up</Link></li>}*/}
+            {/*</SideNav>*/}
         </div>
     );
 };
