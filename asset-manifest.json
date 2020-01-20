@@ -1,31 +1,32 @@
 {
   "files": {
-    "main.css": "/static/css/main.ec115d96.chunk.css",
-    "main.js": "/static/js/main.bba4ad01.chunk.js",
-    "main.js.map": "/static/js/main.bba4ad01.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.22d856d9.js",
-    "runtime-main.js.map": "/static/js/runtime-main.22d856d9.js.map",
-    "static/css/2.35d306cf.chunk.css": "/static/css/2.35d306cf.chunk.css",
-    "static/js/2.fe80f1e3.chunk.js": "/static/js/2.fe80f1e3.chunk.js",
-    "static/js/2.fe80f1e3.chunk.js.map": "/static/js/2.fe80f1e3.chunk.js.map",
+    "main.css": "/static/css/main.3e147e6e.chunk.css",
+    "main.js": "/static/js/main.55d3aa35.chunk.js",
+    "main.js.map": "/static/js/main.55d3aa35.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.d32654fc.js",
+    "runtime-main.js.map": "/static/js/runtime-main.d32654fc.js.map",
+    "static/css/2.852fb3f0.chunk.css": "/static/css/2.852fb3f0.chunk.css",
+    "static/js/2.51df392e.chunk.js": "/static/js/2.51df392e.chunk.js",
+    "static/js/2.51df392e.chunk.js.map": "/static/js/2.51df392e.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.2e161ac9a65dd7480da332ebfbfd8a86.js": "/precache-manifest.2e161ac9a65dd7480da332ebfbfd8a86.js",
+    "precache-manifest.b9b70b8521236b89638ca0a855d93549.js": "/precache-manifest.b9b70b8521236b89638ca0a855d93549.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.35d306cf.chunk.css.map": "/static/css/2.35d306cf.chunk.css.map",
-    "static/css/main.ec115d96.chunk.css.map": "/static/css/main.ec115d96.chunk.css.map",
+    "static/css/2.852fb3f0.chunk.css.map": "/static/css/2.852fb3f0.chunk.css.map",
+    "static/css/main.3e147e6e.chunk.css.map": "/static/css/main.3e147e6e.chunk.css.map",
     "static/media/cereal.png": "/static/media/cereal.fd6932be.png",
     "static/media/delicious.png": "/static/media/delicious.0366b5e5.png",
     "static/media/harvest.png": "/static/media/harvest.c02bfcde.png",
     "static/media/logo.svg": "/static/media/logo.25bf045c.svg",
     "static/media/lunch-box.svg": "/static/media/lunch-box.2a1ae021.svg",
+    "static/media/menu.png": "/static/media/menu.66e24a8f.png",
     "static/media/veganBowl.jpeg": "/static/media/veganBowl.d53fc7aa.jpeg",
     "static/media/vegetarian.png": "/static/media/vegetarian.7748a401.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.22d856d9.js",
-    "static/css/2.35d306cf.chunk.css",
-    "static/js/2.fe80f1e3.chunk.js",
-    "static/css/main.ec115d96.chunk.css",
-    "static/js/main.bba4ad01.chunk.js"
+    "static/js/runtime-main.d32654fc.js",
+    "static/css/2.852fb3f0.chunk.css",
+    "static/js/2.51df392e.chunk.js",
+    "static/css/main.3e147e6e.chunk.css",
+    "static/js/main.55d3aa35.chunk.js"
   ]
 }
