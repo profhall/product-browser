@@ -16,7 +16,7 @@ const OrderForm =  () => {
     const routeResult = useRoutes(Routes);
 
     useEffect(() => {
-        console.log(currentUser)
+        // console.log(currentUser)
     }, [currentUser]);
 
 

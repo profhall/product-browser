@@ -17,8 +17,8 @@ const SignUp = ({}) => {
     const [verifyPW, setPWVerify] = useState("");
     let SignUp={}
     useEffect( () =>  {
-        console.log(" signup comp mounted with: \n Restrictions:", restrictions)
-        console.log(userSignUp, passwordsMatch, signupValidated)
+        // console.log(" signup comp mounted with: \n Restrictions:", restrictions)
+        // console.log(userSignUp, passwordsMatch, signupValidated)
         // return () => {
         //     effect
         // };
@@ -32,7 +32,7 @@ const SignUp = ({}) => {
         let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (e.target.id === "password"){
             userSignUp["password"] = e.target.value;
-            console.log(e.target.value ,":",  userSignUp["password"]);
+            // console.log(e.target.value ,":",  userSignUp["password"]);
 
             // e.target.value === userSignUp["password"] ? passwordsMatch=true:passwordsMatch=false
             // setPWMatch(passwordsMatch)
@@ -99,7 +99,7 @@ const SignUp = ({}) => {
 
     }
     const handlePasswordVerify = (e) => {
-        console.log(userSignUp['password'], " : ",e.target.value )
+        // console.log(userSignUp['password'], " : ",e.target.value )
         setPWVerify(e.target.value)
         if(e.target.value === userSignUp['password']){
             console.log("match")
@@ -132,7 +132,7 @@ const SignUp = ({}) => {
                     // console.log(user.user)
 
                 });
-                console.log(`created: ${email} : ${password}`)
+                // console.log(`created: ${email} : ${password}`)
                 navigate("/")
 
             } catch (error){

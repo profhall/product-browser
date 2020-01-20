@@ -32,14 +32,14 @@ const Confirmation = () => {
     //I need 2 useEffects or else i kept getting an indefinite loop because i was tryin to track iteam that kept getting update
     useEffect(()=>
     {
-        console.log(currentUserOrder)
+        // console.log(currentUserOrder)
     }, [])
 
     const handleSubmit = () =>{
         const ordersDB = db.collection(`orders`)
         ordersDB.add({...currentUserOrder, "order_time_stamp": Date.now()})
             .then(function(docRef) {
-                console.log("Document written with ID: ", docRef.id);
+                // console.log("Document written with ID: ", docRef.id);
                 const theSubmitInfo =
                     {
 
@@ -54,7 +54,7 @@ const Confirmation = () => {
                     };
                 emailjs.send('meal_prep', 'template_awzr3ptv', theSubmitInfo, "user_p8ucvKr8lnqx5SwxOEshJ")
                         .then(function(response) {
-                            console.log('SUCCESS!', response.status, response.text);
+                            // console.log('SUCCESS!', response.status, response.text);
                         }, function(error) {
                             console.log('FAILED...', error);
                         });

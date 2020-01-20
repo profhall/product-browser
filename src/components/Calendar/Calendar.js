@@ -67,23 +67,23 @@ const DeliveryDate = () => {
                 let deliver_date_array = deliver_date.split(" ")
                 deliver_date_array.shift()
                 deliver_date_array = deliver_date_array.join("-")
-                console.log( deliver_date_array)
+                // console.log( deliver_date_array)
                 querySnapshot.forEach(function(doc) {
                     // doc.data() is never undefined for query doc snapshots
                     // console.log(doc.id, " => ", doc.data());
                     numberOfMealsOnThisDay += Number(doc.data()["meal_count"])
-                    console.log("number of meals on this order => ", doc.data()["meal_count"]);
+                    // console.log("number of meals on this order => ", doc.data()["meal_count"]);
 
                 });
-                console.log("number of meals on this day => ", numberOfMealsOnThisDay);
+                // console.log("number of meals on this day => ", numberOfMealsOnThisDay);
 
 
                 if(numberOfMealsOnThisDay >= maxMealsADay){
                     setTooManyMeals(true)
                     daysToIgnore.push(new Date(deliver_date_array))
-                    console.log(daysToIgnore)
+                    // console.log(daysToIgnore)
                     updateDisabledDays(daysToIgnore)
-                    console.log("too many meals")
+                    // console.log("too many meals")
                 }
                 else{
                     setTooManyMeals(false)
@@ -97,7 +97,7 @@ const DeliveryDate = () => {
 
     },[windowWidth, deliver_date])
     useEffect(()=>{
-        console.log(disabledDays)
+        // console.log(disabledDays)
         // console.log("Delivery Date Set: ",deliver_date)
 
 

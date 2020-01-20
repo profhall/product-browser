@@ -20,7 +20,7 @@ const Sidebar = ()=> {
             edge: "left",
             inDuration: 250
         });
-        console.log(elem.style)
+        // console.log(elem.style)
     },[])
 
     const toggleSider= () => {
@@ -34,7 +34,7 @@ const Sidebar = ()=> {
                         <div className="user-view">
                             <div className="background">
                             </div>
-                            <a href="#user"><img className="circle" src={"../media/foodIcons/menu.png"}/></a>
+                            <a href="#user" style={{margin:"auto"}}><img className="circle" src={basketPhoto}/></a>
                             {currentUserProfile?<a href="#name"><span className="white-text name">{currentUserProfile.name}</span></a>:null}
                             {currentUserProfile?<a href="#email"><span className="white-text email">{currentUserProfile.email}</span></a>:null}
                         </div>

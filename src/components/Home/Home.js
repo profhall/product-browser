@@ -6,11 +6,11 @@ import colors from "../../Colors";
 
 const Home = () => {
     const {currentUser, currentUserProfile, currentUserOrder,gotoPage} = useContext(AuthContext)
-    console.log(currentUser?currentUser.uid:"No user");
+    // console.log(currentUser?currentUser.uid:"No user");
     // console.log("The User: "+currentUser.uid)
     useEffect(()=>
     {
-        console.log(currentUserProfile);
+        // console.log(currentUserProfile);
     }, [currentUserProfile])
 
 

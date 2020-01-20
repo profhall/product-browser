@@ -14,7 +14,57 @@ const coleslaw = "https://i0.wp.com/passtheplants.com/wp-content/uploads/2017/07
 const chickpea_baked = "http://www.picklesnhoney.com/wp-content/uploads/2012/01/MG_3447.jpg";
 
 export const meals = [
+    {
+        "name": "Jackfruit Crab Cakes with Lemon Dill Sauce",
+        "available": true,
+        "side": {
+            1:{
+                "name":"sweet potatoes",
+                "pic":roasted_sweet_potatoes
+            },
+            2:{
+                "name":"Sauteed Greens",
+                "pic":sauteed_kale
+            }
+        },
+        "description": "Our version of a classic seafood dish made with the versatile Jackfruit. These cakes come with Sauteed veggies and roasted sweet potato salad. ",
+        "ingredients": [],
+        "photo": "https://dizzybusyandhungry.com/wp-content/uploads/2018/09/crab-cakes-3862-2.jpg",
+        "type": "main"
+    },
 
+    {
+        "name": "Homemade Vegan Chili",
+        "available": true,
+        "description": "This a great meal for the cold months made with simple ingredients  like onion, carrot, tomatoes, celery and garlic. Served with brown rice and vegan cornbread.",
+        "ingredients": [],
+        "side":{
+            1:{
+                "name":"Cornbread",
+                "pic":cornbread_muffins
+            },
+            2:{
+                "name":"Basmati Rice",
+                "pic":brown_rice,
+            }
+        },
+        "type":"entree",
+        "photo": "https://cookieandkate.com/images/2015/11/vegetarian-chili-recipe-6.jpg",
+        "nutrition":{
+            "Calories":"",
+            "Carbohydrates": "",
+            "Protein": "",
+            "Fat":"",
+            "Saturated Fat": "",
+            "Potassium": "",
+            "Fiber": "",
+            "Sugar": "",
+            "Vitamin A": "",
+            "Vitamin C": "",
+            "Calcium": "",
+            "Iron": ""
+        }
+    },
     {
         "name": "BBQ Black Eyed Pea Collard Rolls",
         "available": false,
@@ -299,7 +349,7 @@ export const meals = [
             }
         },
         "description": "Accompanied by sauteed greens & roasted brussel sprouts, this asian inspired dish packs alot of flavor and nutrition.  ",
-        "photo": "https://www.nestleprofessional.us/sites/g/files/gfb131/f/styles/recipe/public/media/young-jackfruit-stir-fry-maggi-nestle-professional-food-service-recipe-540x400.jpg?itok=36eTdMJb",
+        "photo": "https://1iyg1fpr5u43muz2368ns59r-wpengine.netdna-ssl.com/wp-content/uploads/2015/08/seasameJinger-stirFry-rice.jpg",
         "type": "main",
         "ingredients":["sweet potato", "brussel sprouts", "jalapenos", "young jackfruit","lime juice","green peas", "baby corn", "garlic", "herb & spices", "bell pepper"," onion", "grapeseed oil" ],
         "nutrition":{
@@ -335,6 +385,28 @@ export const meals = [
         "photo": "https://i0.wp.com/www.fromachefskitchen.com/wp-content/uploads/2019/07/Zucchini-Yellow-Squash-and-Quinoa-Casserole.jpg?w=600&ssl=1",
         "type": "main",
         "ingredients":["garlic", "zucchini","yellow squash", "green chiles", "quinoa", "vegan(soy-free) cheeses"  ],
+        "nutrition":{
+            "Calories":"",
+            "Carbohydrates": "",
+            "Protein": "",
+            "Fat":"",
+            "Saturated Fat": "",
+            "Potassium": "",
+            "Fiber": "",
+            "Sugar": "",
+            "Vitamin A": "",
+            "Vitamin C": "",
+            "Calcium": "",
+            "Iron": ""
+        }
+    },
+    {
+        "name": "Vegan Chik'n Salad",
+        "available": true,
+        "description": "Chicken salad made with jackfruit",
+        "photo": "https://i.pinimg.com/736x/c0/c0/45/c0c0455be08db07b3de2dbecfd02e8e6.jpg",
+        "type": "salad",
+        "ingredients":[],
         "nutrition":{
             "Calories":"",
             "Carbohydrates": "",
@@ -562,37 +634,5 @@ export const meals = [
             "Iron": ""
         }
     },
-    {
-        "name": "Homemade Vegan Chili",
-        "available": true,
-        "description": "This a great meal for the cold months made with simple ingredients  like onion, carrot, tomatoes, celery and garlic. Served with brown rice and vegan cornbread.",
-        "ingredients": [],
-        "side":{
-            1:{
-                "name":"Cornbread",
-                "pic":cornbread_muffins
-            },
-            2:{
-                "name":"Basmati Rice",
-                "pic":brown_rice,
-            }
-        },
-        "type":"entree",
-        "photo": "https://cookieandkate.com/images/2015/11/vegetarian-chili-recipe-6.jpg",
-        "nutrition":{
-            "Calories":"",
-            "Carbohydrates": "",
-            "Protein": "",
-            "Fat":"",
-            "Saturated Fat": "",
-            "Potassium": "",
-            "Fiber": "",
-            "Sugar": "",
-            "Vitamin A": "",
-            "Vitamin C": "",
-            "Calcium": "",
-            "Iron": ""
-        }
-    }
 ];
 

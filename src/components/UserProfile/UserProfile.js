@@ -21,7 +21,7 @@ const UserProfile = () => {
 
     const [userName, setUserName] = useState("")
     const [containerFeePaid, setcontainerFeePaid] = useState("")
-    // const [city, setCity] = useState("")
+    const [ref, refresh] = useState(0)
     // const [zip, setZip] = useState("")
     // const [street, setStreet] = useState("")
     const [userPhone, setPhone] = useState("")
@@ -29,7 +29,7 @@ const UserProfile = () => {
 
     useEffect(() => {
 
-        console.log(userProf)
+        // console.log(userProf)
         // console.log(userProf)
         // if(currentUserProfile) {
         //     setUserName(name)
@@ -41,7 +41,7 @@ const UserProfile = () => {
         // }
 
 
-    }, [userProf]);
+    }, [userProf,ref]);
     useEffect(() => {
         setUserProf({...userProf, dietary_restrictions: restrictions})
     }, [restrictions]);
@@ -56,7 +56,7 @@ const UserProfile = () => {
 
 
     const FormValidation = (e) => {
-        console.log("input id", e.target.id);
+        // console.log("input id", e.target.id);
         let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (e.target.id === "phone"){
 
@@ -100,33 +100,31 @@ const UserProfile = () => {
             userProf["address"]["zip"].length === 5
         )
         {
-            console.log(userProf['name'], userProf['email'])
+            // console.log(userProf['name'], userProf['email'])
         }
         setUserProf({...currentUserProfile,...userProf})
 
 
     };
 
-    // const handleSubmit = () =>
-    // {
-    //     console.log(userProf)
-    //
-    // }
+    const refreshPage = () => {
+        refresh(ref+1)
+        // window.location.reload(true)
+    }
 
     const handleSubmit =
         async () => {
 
-            console.log(userProf.name)
+            // console.log(userProf.name)
             // console.log(userName,address, phone, restrictions)
             const db = firebase.firestore(app);
             try{
                 let userDB = await db.collection(`users`)
-                console.log(userProf)
+                // console.log(userProf)
 
-                userDB.doc(currentUserProfile.uid).set(userProf);
+                userDB.doc(currentUserProfile.uid).set(userProf).then(()=>refreshPage());
 
-                console.log(`updated: ${userProf.name}`)
-                navigate("/profile")
+                // console.log(`updated: ${userProf.name}`)
 
             } catch (error){
                 alert(error)

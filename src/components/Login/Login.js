@@ -21,7 +21,7 @@ const Login = () => {
         let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
         if(currentUser)gotoPage('/')
-        console.log(email, password)
+        // console.log(email, password)
         email && password && email.match(mailformat) && password.length > 5 ? setinfoValidated(true):setinfoValidated(false)
 
     }, [currentUser,email,password]);
