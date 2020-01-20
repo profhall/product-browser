@@ -82,7 +82,7 @@ function App() {
 
     return (
 <AuthProvider>
-    <Sidebar/>
+    {/*<Sidebar/>*/}
 
         <TheAppGrid url={url} width={ windowWidth} height={windowHeight} showMenu={showMenu}>
             <Navi windowWidth={windowWidth}/>

@@ -26,7 +26,7 @@ const url =window.location.href
     return (
             <TheOrderForm className={""}>
 
-                {!currentUser?<Login />:null}
+                {!!!currentUserProfile?<Login />:routeResult}
                 {/*{*/}
                 {/*    !currentUser && !url.includes("menu")&& !url.includes("signup") && !url.includes("steps")*/}
                 {/*    ?*/}

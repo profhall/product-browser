@@ -72,7 +72,7 @@ const MealCount = () => {
             <h2>{numOfMeals > 0 ? `You've chosen ${numOfMeals} meals`:"Choose A Selection"}</h2>
             <ButtonsContainer width={ windowWidth}>
                 <MealButton width={windowWidth} num={4} ppmeal={13.75} total={4*13.75}/>
-                <MealButton width={windowWidth} num={7} ppmeal={12.14} total={7*12.14}/>
+                <MealButton width={windowWidth} num={7} ppmeal={12.14} total={85}/>
                 <MealButton width={windowWidth} num={10} ppmeal={11} total={10*11}/>
                 <MealButton width={windowWidth} num={12} ppmeal={10} total={12 *10}/>
             </ButtonsContainer>

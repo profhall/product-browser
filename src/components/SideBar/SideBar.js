@@ -1,4 +1,4 @@
-import React, {useContext, useEffect } from "react";
+import React, {useContext, useEffect,useState } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 import "materialize-css/dist/css/materialize.min.css";
 import styled from "styled-components";
@@ -6,9 +6,12 @@ import {navigate} from "hookrouter";
 import app from "../../fbase";
 import {AuthContext} from "../../Auth/Auth";
 import colors from "../../Colors";
+import menuPhoto from '../media/foodIcons/menu.png'
+import basketPhoto from "../media/foodIcons/vegetarian.png";
 
 const Sidebar = ()=> {
-    const {currentUser} = useContext(AuthContext);
+    const {currentUser,currentUserProfile} = useContext(AuthContext);
+    const [navOpen,setNav] = useState(false);
 
     useEffect(() => {
 
@@ -17,25 +20,39 @@ const Sidebar = ()=> {
             edge: "left",
             inDuration: 250
         });
+        console.log(elem.style)
     },[])
+
+    const toggleSider= () => {
+        setNav(!navOpen)
+    }
 
         return (
             <NavContainer >
                 <ul id="slide-out" className="sidenav" style={{color:colors.bright,backgroundColor:colors.primaryTwo}}>
-                    <li   onClick={()=>navigate('/menu')}>
+                    <li>
+                        <div className="user-view">
+                            <div className="background">
+                            </div>
+                            <a href="#user"><img className="circle" src={"../media/foodIcons/menu.png"}/></a>
+                            {currentUserProfile?<a href="#name"><span className="white-text name">{currentUserProfile.name}</span></a>:null}
+                            {currentUserProfile?<a href="#email"><span className="white-text email">{currentUserProfile.email}</span></a>:null}
+                        </div>
+                    </li>
+                    <li   className="sidenav-close " onClick={()=>navigate('/menu')}>
                         <a  style={{color:colors.bright}} href="#!">
+                            {/*<Icon className="responsive-img" src={menuPhoto}/>*/}
                             Weekly Menu
                         </a>
                     </li>
-                    {currentUser?<li onClick={()=>navigate('/profile')}><a  style={{color:colors.bright}} href="#!">Profile</a></li>:null}
+                    {currentUserProfile?<li className="sidenav-close"  onClick={()=>navigate('/profile')}><a  style={{color:colors.bright}} href="#!">Account</a></li>:null}
 
                     <li><div  style={{backgroundColor:colors.bright}} className="divider" /></li>
-                    {/*<li><a href="#!" className="subheader">Logout</a></li>*/}
-                    {currentUser?<li  onClick={()=>app.auth().signOut()}><a style={{color:colors.bright}}  href="/">Logout</a></li>:<li onClick={()=>navigate('/signup')}><a  style={{color:colors.bright}} href="#!">Sign Up</a></li>}
+                    {currentUserProfile?<li className="sidenav-close " onClick={()=>app.auth().signOut()}><a style={{color:colors.bright}}  href="/">Logout</a></li>:<li className="sidenav-close " onClick={()=>navigate('/signup')}><a  style={{color:colors.bright}} href="#!">Sign Up</a></li>}
 
                 </ul>
-                <a href="#" data-target="slide-out" className="sidenav-trigger ">
-                    <i className="material-icons small" style={{color:colors.bright}}>menu</i>
+                <a href="#" data-target="slide-out" onClick={toggleSider} className="sidenav-trigger ">
+                    <i className="material-icons small" style={{color:colors.bright,zIndex:990}}>menu</i>
                 </a>
             </NavContainer>
         );
@@ -51,3 +68,7 @@ const NavContainer = styled.div`
     right: 0;
     margin: 20px;
 `
+const Icon = styled.img`
+width: 25px;
+margin: 0 0 0 0;
+`;

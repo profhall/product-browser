@@ -1,5 +1,5 @@
 .sidenav-overlay{
-  z-index: 3;
+  z-index: 3 !important;
 }
 
 .Modal {

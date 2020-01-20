@@ -6,6 +6,7 @@ import Routes from "../../Routes"
 import {AuthContext} from "../../Auth/Auth";
 import app from "../../fbase";
 import {navigate, A} from "hookrouter";
+import Sidebar from "../SideBar/SideBar";
 
 
 
@@ -20,40 +21,6 @@ const Navi = ({windowWidth}) => {
     let sidenav = null
 
 
-    useEffect(() => {
-        console.log("mounted: ", sidenav_overlay)
-        sidenav_overlay = elements[0];
-        sidenav = nav_elements[0];
-
-
-        if (navOpen && sidenav_overlay ){
-            sidenav_overlay.style.opacity = "1"
-            sidenav_overlay.addEventListener("click", ()=>setSideNav(!navOpen));
-
-        }
-        else if (!navOpen && sidenav_overlay ){
-            sidenav_overlay.style.opacity = "0"
-            sidenav_overlay.addEventListener("click", ()=>setSideNav(!navOpen));
-
-        }
-
-
-
-    }, [navOpen,windowWidth]);
-
-    const navButtonHandler = ()=>{
-
-        if (navOpen && sidenav)  {
-            sidenav.style.transform="translateX(-105%)"
-            setSideNav(false)
-        }else if (sidenav) {
-            sidenav.style.transform="translateX(0%)";
-            setSideNav(true)
-        }
-
-    }
-
-
 
     return (
         <div className="navbar-fixed">
@@ -64,26 +31,10 @@ const Navi = ({windowWidth}) => {
                     <h3 className="flow-text left" style={{color:colors.bright}}>The Tasty Plant-Based Kitchen</h3>
                 </a>
 
-            {/*<a href="#" data-target="mobile-demo" onClick={navButtonHandler} className="sidenav-trigger right"><i className="material-icons">menu</i></a>*/}
-            {/*<ul className="right hide-on-med-and-down">*/}
-            {/*        <li onClick={()=>navigate('/menu')}><Link href="#">Menu</Link></li>*/}
-
-            {/*    {currentUser?<li onClick={()=>navigate('/profile')}><Link href="#">Profile</Link></li>:null}*/}
-
-            {/*        {currentUser?<li onClick={()=>app.auth().signOut()}><Link href="/">Logout</Link></li>:<li><Link href="/signup">Sign Up</Link></li>}*/}
-
-            {/*    </ul>*/}
 
 
         </TheNav>
-            {/*<SideNav navOpen={navOpen} className="sidenav" id="mobile-demo">*/}
-            {/*        <li onClick={()=>navigate('/menu')}><Link href="/">Menu</Link></li>*/}
-
-            {/*    {currentUser?*/}
-            {/*        <li onClick={()=>navigate('/profile')}><Link href="/">Profile</Link></li>:null}*/}
-            {/*    {currentUser?*/}
-            {/*        <li onClick={()=>app.auth().signOut()}><Link href="/">Logout</Link></li>:<li><Link href="/signup">Sign Up</Link></li>}*/}
-            {/*</SideNav>*/}
+            <Sidebar/>
         </div>
     );
 };

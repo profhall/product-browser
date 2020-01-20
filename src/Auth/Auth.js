@@ -26,7 +26,7 @@ export const AuthProvider = ({children}) => {
     useEffect( ()=> {
         async function userStateChange() {
             await app.auth().onAuthStateChanged(setCurrentUser)
-            console.log(currentUser ? ("user Set! ", currentUser):null)
+            console.log(currentUser ? `user Set!  ${currentUser}`:null)
 
         }
         userStateChange();
@@ -36,7 +36,7 @@ export const AuthProvider = ({children}) => {
              userDB.doc(currentUser.uid).get().then(   function(doc) {
                 if (doc.exists) {
                     setUserProfile({...doc.data(),"uid": currentUser.uid});
-                    // console.log("User Profile Set: ", doc.data());
+                    console.log("User Profile Set: ", doc.data());
                 } else {
                     // doc.data() will be undefined in this case
                     // console.log("No such document!");
@@ -54,15 +54,15 @@ export const AuthProvider = ({children}) => {
 
 
 
-    // useEffect(()=> {
-    //     if(currentUserProfile) {
-    //         setUserOrder({
-    //             "uid": currentUser.uid,
-    //             "address": currentUserProfile.address,
-    //             "restrictions": currentUserProfile.dietary_restrictions
-    //         })
-    //     }
-    // },[currentUserProfile,])
+    useEffect(()=> {
+        if(currentUserProfile) {
+            setUserOrder({
+                "uid": currentUser.uid,
+                "address": currentUserProfile.address,
+                "restrictions": currentUserProfile.dietary_restrictions
+            })
+        }
+    },[currentUserProfile,])
 
 
 
