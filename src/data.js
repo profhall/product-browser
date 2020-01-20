@@ -17,7 +17,7 @@ export const meals = [
 
     {
         "name": "BBQ Black Eyed Pea Collard Rolls",
-        "available": true,
+        "available": false,
         "side": {
             1:{
                 "name":"Brown Rice",
@@ -116,7 +116,7 @@ export const meals = [
     },
     {
         "name": "Vegan Pot Pie with Cornbread Crust",
-        "available": true,
+        "available": false,
         "side": {
             1:{
                 "name":"Roasted Sweet Potatoes",
@@ -351,6 +351,38 @@ export const meals = [
         }
     },
     {
+        "name": "Tikka Masala",
+        "available":true,
+        "side":{
+            1:{
+                "name":"Quinoa",
+                "pic":quinoa
+            },
+            2:{
+                "name":"Basmati Rice",
+                "pic":brown_rice,
+            }
+        },
+        "description": "Made with coconut milk and comes with brown fluffy basmati rice & quinoa ",
+        "type": "entree",
+        "ingredients": [],
+        "photo": "https://www.feastingathome.com/wp-content/uploads/2017/05/vegan-tikka-masala-with-cauliflower-100-3.jpg",
+        "nutrition":{
+            "Calories":"",
+            "Carbohydrates": "",
+            "Protein": "",
+            "Fat":"",
+            "Saturated Fat": "",
+            "Potassium": "",
+            "Fiber": "",
+            "Sugar": "",
+            "Vitamin A": "",
+            "Vitamin C": "",
+            "Calcium": "",
+            "Iron": ""
+        }
+    },
+    {
         "name": "Spicy Caribbean Curry w/Jackfruit",
         "available": true,
         "side": {
@@ -515,6 +547,38 @@ export const meals = [
         "ingredients": ["Quinoa", "Carrots", "Shallots", "Cabbage", "Kale", "Collard Greens", "Black Eyed Peas", "Garlic"],
         "source": "https://www.cottercrunch.com/rainbow-power-greens-salad-black-eyed-peas-vegan-gluten-free/",
         "photo": "https://www.cottercrunch.com/wp-content/uploads/2015/12/rainbow-power-greens-salad-with-black-eyed-peas2.jpg",
+        "nutrition":{
+            "Calories":"",
+            "Carbohydrates": "",
+            "Protein": "",
+            "Fat":"",
+            "Saturated Fat": "",
+            "Potassium": "",
+            "Fiber": "",
+            "Sugar": "",
+            "Vitamin A": "",
+            "Vitamin C": "",
+            "Calcium": "",
+            "Iron": ""
+        }
+    },
+    {
+        "name": "Homemade Vegan Chili",
+        "available": true,
+        "description": "This a great meal for the cold months made with simple ingredients  like onion, carrot, tomatoes, celery and garlic. Served with brown rice and vegan cornbread.",
+        "ingredients": [],
+        "side":{
+            1:{
+                "name":"Cornbread",
+                "pic":cornbread_muffins
+            },
+            2:{
+                "name":"Basmati Rice",
+                "pic":brown_rice,
+            }
+        },
+        "type":"entree",
+        "photo": "https://cookieandkate.com/images/2015/11/vegetarian-chili-recipe-6.jpg",
         "nutrition":{
             "Calories":"",
             "Carbohydrates": "",
