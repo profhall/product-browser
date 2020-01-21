@@ -9,16 +9,16 @@ const Footer = () => {
                 <div className="row">
                     <div className="col l6 s12">
                         <h5>PJ's Plant-Based Kitchen</h5>
-                        <p className="grey-text text-lighten-4">Thanks</p>
+                        <p className="grey-text text-lighten-4">Thank You For Visiting!</p>
 
 
                     </div>
                     <div className="col l3 s12">
                         <h5 >Connect</h5>
                         <ul>
-                            <li><a className="white-text" href="#!">Instagram</a></li>
-                            <li><a className="white-text" href="#!">Youtube</a></li>
-                            <li><a className="white-text" href="#!">Facebook</a></li>
+                            <li><a className="white-text" href="https://www.instagram.com/thetastyplantbased.kitchen/">Instagram</a></li>
+                            {/*<li><a className="white-text" href="#!">Youtube</a></li>*/}
+                            {/*<li><a className="white-text" href="#!">Facebook</a></li>*/}
                         </ul>
                     </div>
                 </div>
