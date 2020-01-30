@@ -9,6 +9,8 @@ import {AuthContext} from "../../Auth/Auth";
 import * as firebase from "firebase/app";
 import app from "../../fbase";
 import 'firebase/firestore';
+import {Button} from "../Styles";
+
 
 function getWidth() {
     return window.innerWidth
@@ -235,13 +237,3 @@ margin : 0 !important;
  color: ${colors.bright};
 
 `;
-
-const Button = styled.button`
-    color:white;
-    margin: 7px !important;
-    height: ${props=> props.height ? props.height:" "};
-    background-color: ${colors.bright};
-    &:hover {
-      background-color: ${colors.secondaryTwo};
-    }
-`

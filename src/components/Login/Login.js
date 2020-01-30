@@ -2,6 +2,8 @@ import React, {useCallback,useState,useEffect, useContext} from 'react';
 import styled from "styled-components";
 import {A } from 'hookrouter';
 import colors from "../../Colors";
+import {Button} from "../Styles";
+
 import app from "../../fbase"
 import {AuthContext} from "../../Auth/Auth";
 function getWidth() {
@@ -77,9 +79,9 @@ const Login = () => {
                     </div>
                     <div className="row">
 
-                    <LoginButton onClick={handleLogin} className={`btn-large col s12 m6 offset-m3 ${infoValidated?"":"disabled"}`}>
+                    <Button onClick={handleLogin} className={`btn-large col s12 m6 offset-m3 ${infoValidated?"":"disabled"}`}>
                         Login
-                    </LoginButton>
+                    </Button>
                     </div>
                 </form>
             </div>
@@ -92,13 +94,7 @@ const Login = () => {
 
 export default Login;
 
-const LoginButton = styled.div`
-background-color: ${colors.bright} !important;
-&:hover {
-  background-color: ${colors.secondaryTwo} !important;
-}
 
-`;
 const LoginForm = styled.div`
 color:white;
 margin: auto;

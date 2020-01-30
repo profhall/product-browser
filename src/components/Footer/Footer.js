@@ -16,7 +16,7 @@ const Footer = () => {
                     <div className="col l3 s12">
                         <h5 >Connect</h5>
                         <ul>
-                            <li><a className="white-text" href="https://www.instagram.com/thetastyplantbased.kitchen/">Instagram</a></li>
+                            <li><a className="white-text" href="https://www.instagram.com/thetastyplantbased.kitchen/" target="_blank">Instagram</a></li>
                             {/*<li><a className="white-text" href="#!">Youtube</a></li>*/}
                             {/*<li><a className="white-text" href="#!">Facebook</a></li>*/}
                         </ul>
@@ -38,8 +38,8 @@ export default Footer;
 
 const TheFooter = styled.footer`
   width: 100%;
-  background-color: ${colors.primaryTwo} ;
-  color: ${colors.bright};
+  background-color: ${colors.secondaryTwo} !important ;
+  color: ${colors.bright} !important;
   bottom: 0;
   position: relative ;
   grid-area: footer;

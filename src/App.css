@@ -1,7 +1,9 @@
-.sidenav-overlay{
-  z-index: 3 !important;
+/*.sidenav-overlay{*/
+/*  z-index: 3 !important;*/
+/*}*/
+.navbar-fixed{
+  z-index: 0 !important;
 }
-
 .Modal {
   position: absolute;
   top: 20%;

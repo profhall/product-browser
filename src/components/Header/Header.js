@@ -7,6 +7,7 @@ import {AuthContext} from "../../Auth/Auth";
 import app from "../../fbase";
 import {navigate, A} from "hookrouter";
 import Sidebar from "../SideBar/SideBar";
+import Logo from "../media/logo-01.png";
 
 
 
@@ -24,27 +25,27 @@ const Navi = ({windowWidth}) => {
 
     return (
         <div className="navbar-fixed">
-
+            {windowWidth<990?
         <TheNav className="nav-wrapper  ">
-                <a id="logo-container" href="/" className="">
-
-                    <h3 className="flow-text left" style={{color:colors.bright}}>The Tasty Plant-Based Kitchen</h3>
+            <a  href="/"  className="">
+                    <img style={{height:55}} src={Logo}/>
                 </a>
 
 
 
-        </TheNav>
-            <Sidebar/>
+        </TheNav>:null}
         </div>
     );
 };
 
 const TheNav = styled.nav`
   width: 100%;
-  padding: 0 15px 0 15px;
+  padding: 0;
   background-color: ${colors.primaryTwo} ;
   color: ${colors.bright} ;
   grid-area: head;
+  display: flex;
+  flex-direction: column;
 `;
 
 const SideNav = styled.ul`

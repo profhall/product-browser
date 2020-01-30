@@ -7,7 +7,7 @@ import app from "../../fbase";
 import {AuthContext} from "../../Auth/Auth";
 import colors from "../../Colors";
 import menuPhoto from '../media/foodIcons/menu.png'
-import basketPhoto from "../media/foodIcons/vegetarian.png";
+import Logo from "../media/logo-01.png";
 
 const Sidebar = ()=> {
     const {currentUser,currentUserProfile} = useContext(AuthContext);
@@ -29,14 +29,14 @@ const Sidebar = ()=> {
 
         return (
             <NavContainer >
-                <ul id="slide-out" className="sidenav" style={{color:colors.bright,backgroundColor:colors.primaryTwo}}>
+                <ul id="slide-out" className="sidenav sidenav-fixed" style={{color:colors.bright,backgroundColor:colors.primaryTwo}}>
                     <li>
                         <div className="user-view">
-                            <div className="background">
+                            <div onClick={()=>navigate('/')} className="sidenav-close" style={{width:"100%"}}>
+                                <img style={{width:"100%"}} src={Logo}/>
                             </div>
-                            <a href="#user" style={{margin:"auto"}}><img className="circle" src={basketPhoto}/></a>
-                            {currentUserProfile?<a href="#name"><span className="white-text name">{currentUserProfile.name}</span></a>:null}
-                            {currentUserProfile?<a href="#email"><span className="white-text email">{currentUserProfile.email}</span></a>:null}
+                            {currentUserProfile?<a href="#name"><span className=" name">{currentUserProfile.name}</span></a>:null}
+                            {currentUserProfile?<a href="#email"><span className=" email">{currentUserProfile.email}</span></a>:null}
                         </div>
                     </li>
                     <li   className="sidenav-close " onClick={()=>navigate('/menu')}>
@@ -51,9 +51,6 @@ const Sidebar = ()=> {
                     {currentUserProfile?<li className="sidenav-close " onClick={()=>app.auth().signOut()}><a style={{color:colors.bright}}  href="/">Logout</a></li>:<li className="sidenav-close " onClick={()=>navigate('/signup')}><a  style={{color:colors.bright}} href="#!">Sign Up</a></li>}
 
                 </ul>
-                <a href="#" data-target="slide-out" onClick={toggleSider} className="sidenav-trigger ">
-                    <i className="material-icons small" style={{color:colors.bright,zIndex:990}}>menu</i>
-                </a>
             </NavContainer>
         );
 

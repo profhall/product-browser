@@ -7,6 +7,8 @@ import * as firebase from "firebase/app";
 import app from "../../fbase";
 import 'firebase/firestore';
 import emailjs from "emailjs-com";
+import {Button} from "../Styles";
+
 const Confirmation = () => {
     const {currentUserProfile, currentUserOrder, gotoPage} = useContext(AuthContext)
 
@@ -155,15 +157,6 @@ const ConfirmForm = styled.form`
 // `;
 
 
-const Button = styled.button`
-    color:white;
-    margin: 7px !important;
-    height: ${props=> props.height ? props.height:" "};
-    background-color: ${colors.bright};
-    &:hover {
-      background-color: ${colors.secondaryTwo};
-    }
-`
 
 const FormInputDiv = styled.div`
 color:white;

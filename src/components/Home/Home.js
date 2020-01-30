@@ -3,6 +3,7 @@ import {A, navigate} from "hookrouter";
 import {AuthContext} from "../../Auth/Auth";
 import styled from "styled-components";
 import colors from "../../Colors";
+import {Button} from "../Styles";
 
 const Home = () => {
     const {currentUser, currentUserProfile, currentUserOrder,gotoPage} = useContext(AuthContext)
@@ -42,12 +43,4 @@ const HomeInfoBox = styled.div`
   font-size: large;
   width: 100%;
   margin: 12px 0;
-`;
-const Button = styled.button`
-  width: 65%;
-  align-self: center;
-  background-color: ${colors.bright};
-  &:hover {
-    background-color: ${colors.secondaryTwo};
-  }
 `;

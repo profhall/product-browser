@@ -4,7 +4,7 @@ import {meals, salads, mains, sides} from '../../data'
 import colors from "../../Colors";
 import {AuthContext} from "../../Auth/Auth";
 import Modal from 'react-modal';
-
+import {Button} from "../Styles";
 
 const thisWeeksMeals = meals.filter((item)=>item.available)
 
@@ -78,31 +78,52 @@ const MealsSelector = () => {
 
     }
 
-    const mealList = thisWeeksMeals.map((item) => {
-            return  (
-        <Main className={"col s12 m5"} >
-            <PhotoGrid full={!!item.side}>
-            <MainPhoto photo={item.photo} />
-                {item.side?
-                    <SidePhoto photo={item.side ? item.side[1].pic : null} num={1}/>
-                :null}
-                {item.side && item.type!=="salad"?
-                    < SidePhoto  photo={item.side ? item.side[2].pic:null} num={2}/>
-                :null}
-            </PhotoGrid>
-            <Desc>
-                <I className="material-icons">info</I>
-                <h5>{item.name}</h5>
-                <TheDescr>{item.description}</TheDescr>
-            </Desc>
-            <ButtonContainer className={"row center"}>
-                <Button onClick={()=>addDish(item )} width={windowWidth}  className={"btn-large col s12 m6 "}><h5><b>Add</b></h5></Button>
-            </ButtonContainer>
-        </Main>
-            )
+    // const mealList = thisWeeksMeals.map((item) => {
+    //         return  (
+    //     <Main className={"col s12 m5"} >
+    //         <PhotoGrid full={!!item.side}>
+    //         <MainPhoto photo={item.photo} />
+    //             {item.side?
+    //                 <SidePhoto photo={item.side ? item.side[1].pic : null} num={1}/>
+    //             :null}
+    //             {item.side && item.type!=="salad"?
+    //                 < SidePhoto  photo={item.side ? item.side[2].pic:null} num={2}/>
+    //             :null}
+    //         </PhotoGrid>
+    //         <Desc>
+    //             <I className="material-icons">info</I>
+    //             <h5>{item.name}</h5>
+    //             <TheDescr>{item.description}</TheDescr>
+    //         </Desc>
+    //         <ButtonContainer className={"row center"}>
+    //             <Button onClick={()=>addDish(item )} width={windowWidth}  className={"btn-large col s12 m6 "}><h5><b>Add</b></h5></Button>
+    //         </ButtonContainer>
+    //     </Main>
+    //         )
+    //
+    //
+    //     });
 
-
-        });
+    const mealList = thisWeeksMeals.map((item) =>
+        <div className="col s12 m6 l4">
+            <div className="card medium" style={{
+                backgroundColor: colors.primaryTwo}}>
+                <div className="card-image waves-effect waves-block waves-light">
+                    <img className="activator" src={item.photo}/>
+                </div>
+                <div className="card-content">
+                    <span className="card-title activator grey-text text-darken-4">{item.name}<i
+                        className="material-icons right">more_vert</i></span>
+                    <p><a href="#">This is a link</a></p>
+                </div>
+                <div className="card-reveal">
+                    <span className="card-title grey-text text-darken-4">{item.name}<i
+                        className="material-icons right">close</i></span>
+                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                </div>
+            </div>
+        </div>
+    )
 
     const deleteMeal= (fav, index) =>{
         console.log("delete meal", fav.toLowerCase(), index)
@@ -317,15 +338,6 @@ const ChosenMealsList = styled.div`
 Buttons Styling
  */
 
-const Button = styled.button`
-    color:white;
-    margin: 7px !important;
-    height: ${props=> props.height ? props.height:" "};
-    background-color: ${colors.bright};
-    &:hover {
-      background-color: ${colors.secondaryTwo};
-    }
-`
 
 const ButtonContainer = styled.div`
   grid-area: button;  

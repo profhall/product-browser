@@ -5,6 +5,7 @@ import styled from "styled-components";
 import colors from "../../Colors";
 import * as firebase from "firebase/app";
 import 'firebase/firestore';
+import {Button} from "../Styles";
 
 
 import {AuthContext} from "../../Auth/Auth";
@@ -219,9 +220,9 @@ const SignUp = ({}) => {
 
                     </div>
                     <div className="row">
-                        <LoginButton onClick={handleSignUp}  className={`${signupValidated?"":"disabled"} btn-large col s12 m6 offset-m3 `}>
+                        <Button onClick={handleSignUp}  className={`${signupValidated?"":"disabled"} btn-large col s12 m6 offset-m3 `}>
                             Sign Up
-                        </LoginButton>
+                        </Button>
                     </div>
                 </SignUpFormForm>
             </div>
@@ -231,14 +232,6 @@ const SignUp = ({}) => {
 
 export default SignUp;
 
-const LoginButton = styled.div`
-margin: auto;
-background-color: ${colors.bright};
-&:hover {
-  background-color: ${colors.secondaryTwo};
-}
-
-`;
 const SignUpFormForm = styled.form`
 color:white;
 

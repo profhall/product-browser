@@ -4,7 +4,9 @@ import styled from "styled-components";
 import colors from "../../Colors";
 import * as firebase from "firebase/app";
 import app from "../../fbase";
-import 'firebase/firestore';import {navigate} from "hookrouter";
+import 'firebase/firestore';
+import {Button} from "../Styles";
+
 function getWidth() {
     return window.innerWidth
 }
@@ -243,16 +245,6 @@ color:white!important;
 /*
 Buttons Styling
  */
-
-const Button = styled.button`
-    color:white;
-    margin: 7px !important;
-    height: ${props=> props.height ? props.height:" "};
-    background-color: ${colors.bright};
-    &:hover {
-      background-color: ${colors.secondaryTwo};
-    }
-`
 
 const ButtonContainer = styled.div`
   grid-area: button;  

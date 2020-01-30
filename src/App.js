@@ -82,9 +82,13 @@ function App() {
 
     return (
 <AuthProvider>
-    {/*<Sidebar/>*/}
+    <Sidebar/>
 
         <TheAppGrid url={url} width={ windowWidth} height={windowHeight} showMenu={showMenu}>
+
+            <a href="#" data-target="slide-out" className="sidenav-trigger ">
+                <i className="material-icons medium" style={{color:colors.bright,zIndex:990, position:"fixed", top: 3, right:5, display: windowWidth > 990 ? "none" : ""}}>menu</i>
+            </a>
             <Navi windowWidth={windowWidth}/>
             <Footer/>
             <Contact/>
@@ -100,7 +104,7 @@ function App() {
 const TheAppGrid = styled.div`
   height: 100vh;
   display: grid;
-  grid-template-rows: 58px 75% repeat(4, auto);
+  grid-template-rows: 58px 85% repeat(4, auto);
   grid-template-areas: 
   'head head head head' 
   'order order order order' 
@@ -109,7 +113,8 @@ const TheAppGrid = styled.div`
   'contact contact contact contact'
   'footer footer footer footer'
   ;
-  width:100vw;
+  width:${ props=>props.width > 990 ? "calc(100% - 300px)": "100%"};
+  float:${ props=>props.width > 990 ? "right": "none"};
   `;
 
 export default App;

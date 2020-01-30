@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {usePath,useQueryParams, navigate} from "hookrouter";
 import colors from "../../Colors";
 import {AuthContext} from "../../Auth/Auth";
+import {Button} from "../Styles";
 
 
 function getWidth() {
@@ -120,13 +121,4 @@ const ButtonsContainer = styled.div`
     max-height:375px;
     flex-direction: ${props=> props.width > 650  ? "row":"column"};
 
-    `
-const Button = styled.button`
-    color:white;
-    margin: 7px !important;
-    height: ${props=> props.height ? props.height:" "};
-    background-color: ${colors.bright};
-    &:hover {
-      background-color: ${colors.secondaryTwo};
-    }
-`
+    `;
