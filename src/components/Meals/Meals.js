@@ -104,17 +104,29 @@ const MealsSelector = () => {
     //
     //     });
 
+    const showNutri = () => {
+        alert("show nutrition!")
+    };
+
     const mealList = thisWeeksMeals.map((item) =>
-        <div className="col s12 m6 l4">
-            <div className="card medium" style={{
-                backgroundColor: colors.primaryTwo}}>
+        <div className="col s12 m6 ">
+            <div className="card medium" >
                 <div className="card-image waves-effect waves-block waves-light">
                     <img className="activator" src={item.photo}/>
                 </div>
-                <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">{item.name}<i
+                <div className="card-content center" style={{
+                    display:"flex",
+                    flexDirection:"column",
+                    justifyContent:"space-between",
+                    alignItems:"center",
+                    padding: "10px 0",
+                    height:"100%"
+                }}>
+                    <span className="card-title flow-text activator grey-text text-darken-4">{item.name}<i
                         className="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
+                    <a href="#!"><h6 onClick={()=>showNutri( )} >Nutritional Info</h6></a>
+                    <Button onClick={()=>addDish(item )} width={windowWidth}  className={"btn s10 center "}><b>Add</b></Button>
+
                 </div>
                 <div className="card-reveal">
                     <span className="card-title grey-text text-darken-4">{item.name}<i
@@ -123,7 +135,7 @@ const MealsSelector = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 
     const deleteMeal= (fav, index) =>{
         console.log("delete meal", fav.toLowerCase(), index)

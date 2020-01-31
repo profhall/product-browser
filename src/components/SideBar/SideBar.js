@@ -29,7 +29,7 @@ const Sidebar = ()=> {
 
         return (
             <NavContainer >
-                <ul id="slide-out" className="sidenav sidenav-fixed" style={{color:colors.bright,backgroundColor:colors.primaryTwo}}>
+                <ul id="slide-out" className="sidenav sidenav-fixed" style={{color:colors.bright}}>
                     <li>
                         <div className="user-view">
                             <div onClick={()=>navigate('/')} className="sidenav-close" style={{width:"100%"}}>

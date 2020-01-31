@@ -349,7 +349,7 @@ export const meals = [
             }
         },
         "description": "Accompanied by sauteed greens & roasted brussel sprouts, this asian inspired dish packs alot of flavor and nutrition.  ",
-        "photo": "https://1iyg1fpr5u43muz2368ns59r-wpengine.netdna-ssl.com/wp-content/uploads/2015/08/seasameJinger-stirFry-rice.jpg",
+        "photo": "https://cdn77-s3.lazycatkitchen.com/wp-content/uploads/2018/09/pulled-jackfruit-bowl-800x1200.jpg",
         "type": "main",
         "ingredients":["sweet potato", "brussel sprouts", "jalapenos", "young jackfruit","lime juice","green peas", "baby corn", "garlic", "herb & spices", "bell pepper"," onion", "grapeseed oil" ],
         "nutrition":{
@@ -470,7 +470,8 @@ export const meals = [
         },
         "sides": ["Brown Rice & Beans", "Sauteed Greens"],
         "description": "A Caribbean Classic prepared with jackfruit instead of traditional meat. This is served with brown rice and beans & sauteed cabbage. Comes with brown rice & beans, and sauteed greens" ,
-        "photo": "https://cdn.shortpixel.ai/client/q_lossy,ret_img,w_300/https://thatgirlcookshealthy.com/wp-content/uploads/2018/03/curried-jackfruit-Image-300x300.jpg",
+        "photo": "https://noeggsorham.files.wordpress.com/2017/09/img_2469.jpg?w=2200",
+        "source": "https://noeggsorham.com/2017/09/22/jamaican-jackfruit-curry-with-rice-peas/",
         "type": "main",
         "ingredients":["young jackfruit", "sweet potato", "garlic", "ginger", "onion", "scallion", "herbs & spices", "tomato", "coconut milk", "coconut oil", "rice", "kidney beans", "kale", "red cabbage", "carrots" ],
         "nutrition":{
