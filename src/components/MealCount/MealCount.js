@@ -61,17 +61,22 @@ const MealCount = () => {
     }
 
     const MealButton = ({width,num, ppmeal, total}) =>{
-        return(<Button style={{width:`${windowWidth > 650  ? "225px":"75%"}`}} onClick={() => setMealCount(num)} height={"225px"} width={width} >
-                <h5> {num} MEALS</h5>
-                <h5> ${ppmeal}/ MEAL </h5>
-                <h5> ${total} TOTAL</h5>
-        </Button>)
+        return(
+            <div className="col s12 m5" onClick={() => setMealCount(num)} >
+                <Card className="card-panel ">
+                    <span className="white-text">
+                        <h5> {num} MEALS</h5>
+                        <h5> ${ppmeal}/ MEAL </h5>
+                        <h5> ${total} TOTAL</h5>
+                    </span>
+                </Card>
+            </div>)
     };
 
     return (
         <MealCountSelectionContainer className={"center"}>
             <h2>{numOfMeals > 0 ? `You've chosen ${numOfMeals} meals`:"Choose A Selection"}</h2>
-            <ButtonsContainer width={ windowWidth}>
+            <ButtonsContainer width={ windowWidth} className={"row"}>
                 <MealButton width={windowWidth} num={4} ppmeal={13.75} total={4*13.75}/>
                 <MealButton width={windowWidth} num={7} ppmeal={12.14} total={85}/>
                 <MealButton width={windowWidth} num={10} ppmeal={11} total={10*11}/>
@@ -101,24 +106,33 @@ const MealCountSelectionContainer = styled.div`
     justify-content: space-evenly;
     `;
 
+const Card = styled.div`
+background-color: ${colors.secondaryTwo} !important;
+
+&:hover {
+    background-color: ${colors.bright} !important;
+
+  }
+`;
 
 const ButtonContainer = styled.div`
   grid-area: button;  
   display: flex;
-  width: 85%;
+  width: 90%;
   justify-content:center;
-  align-content:center;
+  align-content:space-around;
 
 `;
 
 const ButtonsContainer = styled.div`
-    width: 85%;
+    width: 90%;
     display: flex;  
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     margin-bottom: 25px;
     overflow: auto;
-    max-height:375px;
-    flex-direction: ${props=> props.width > 650  ? "row":"column"};
+    max-height:400px;
+    flex-wrap: wrap;
+    // flex-direction: ${props=> props.width > 650  ? "row":"column"};
 
     `;

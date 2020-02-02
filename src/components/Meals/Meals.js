@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {meals, salads, mains, sides} from '../../data'
 import colors from "../../Colors";
 import {AuthContext} from "../../Auth/Auth";
-import Modal from 'react-modal';
+import {Modal, Button as But} from 'react-materialize';
 import {Button} from "../Styles";
 
 const thisWeeksMeals = meals.filter((item)=>item.available)
@@ -78,35 +78,13 @@ const MealsSelector = () => {
 
     }
 
-    // const mealList = thisWeeksMeals.map((item) => {
-    //         return  (
-    //     <Main className={"col s12 m5"} >
-    //         <PhotoGrid full={!!item.side}>
-    //         <MainPhoto photo={item.photo} />
-    //             {item.side?
-    //                 <SidePhoto photo={item.side ? item.side[1].pic : null} num={1}/>
-    //             :null}
-    //             {item.side && item.type!=="salad"?
-    //                 < SidePhoto  photo={item.side ? item.side[2].pic:null} num={2}/>
-    //             :null}
-    //         </PhotoGrid>
-    //         <Desc>
-    //             <I className="material-icons">info</I>
-    //             <h5>{item.name}</h5>
-    //             <TheDescr>{item.description}</TheDescr>
-    //         </Desc>
-    //         <ButtonContainer className={"row center"}>
-    //             <Button onClick={()=>addDish(item )} width={windowWidth}  className={"btn-large col s12 m6 "}><h5><b>Add</b></h5></Button>
-    //         </ButtonContainer>
-    //     </Main>
-    //         )
-    //
-    //
-    //     });
+
 
     const showNutri = () => {
         alert("show nutrition!")
     };
+
+    const trigger = <a ><h6 >Nutritional Info</h6></a>
 
     const mealList = thisWeeksMeals.map((item) =>
         <div className="col s12 m6 ">
@@ -114,18 +92,42 @@ const MealsSelector = () => {
                 <div className="card-image waves-effect waves-block waves-light">
                     <img className="activator" src={item.photo}/>
                 </div>
-                <div className="card-content center" style={{
+                <div className="card-content center row col s12" style={{
                     display:"flex",
                     flexDirection:"column",
                     justifyContent:"space-between",
                     alignItems:"center",
-                    padding: "10px 0",
+                    padding: "5px 0",
                     height:"100%"
                 }}>
-                    <span className="card-title flow-text activator grey-text text-darken-4">{item.name}<i
-                        className="material-icons right">more_vert</i></span>
-                    <a href="#!"><h6 onClick={()=>showNutri( )} >Nutritional Info</h6></a>
-                    <Button onClick={()=>addDish(item )} width={windowWidth}  className={"btn s10 center "}><b>Add</b></Button>
+                    <span className="card-title flow-text activator grey-text text-darken-4">{item.name}</span>
+                    <Modal
+                        actions={[
+                            <But flat waves="light" modal="close" node="button" ><i className="material-icons" >close</i></But>
+                        ]}
+                        bottomSheet={true}
+                        fixedFooter={false}
+                        header="Nutritional Information"
+                        id="modal-0"
+                        options={{
+                            dismissible: true,
+                            endingTop: '10%',
+                            inDuration: 250,
+                            onCloseEnd: null,
+                            onCloseStart: null,
+                            onOpenEnd: null,
+                            onOpenStart: null,
+                            opacity: 0.5,
+                            outDuration: 250,
+                            preventScrolling: true,
+                            startingTop: '4%'
+                        }}
+                        trigger={trigger}>
+
+                        {item.nutrition? Object.keys(item.nutrition).map((nut)=><h6>{nut}: {item.nutrition[nut]} </h6> ) : null}
+
+                    </Modal>
+                    <Button onClick={()=>addDish(item )} width={windowWidth}  className={"btn-large col s10"} style={{margin:0}}><b>Add</b></Button>
 
                 </div>
                 <div className="card-reveal">
@@ -136,6 +138,7 @@ const MealsSelector = () => {
             </div>
         </div>
     );
+
 
     const deleteMeal= (fav, index) =>{
         console.log("delete meal", fav.toLowerCase(), index)
@@ -155,17 +158,15 @@ const MealsSelector = () => {
     const handleOpenModal = () =>{
         setModal(true)
     };
-    const handleCloseModal = () =>{
-
-        setModal(false)
-    };
 
 
 
 
     return (
-        <MealsSelectorContainer >
+        <MealsSelectorContainer>
+
             <MainHeader main={mainsList.length > 0} className={"center"} width={windowWidth}>
+
                 <MainHeaderText>
                     <h4 style={{margin:0}}> {mainsPicked >0 ? `Pick remaining ${meal_count-mainsPicked}`: `Pick Your ${meal_count} Meals.`}</h4>
                     <h6>With every 4 meals you get a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h6>
@@ -173,6 +174,7 @@ const MealsSelector = () => {
                     {mainsList.length > 0 && windowWidth > 650 ? <h5><b>Tap food Item To Delete</b></h5>:
                         mainsList.length > 0 ? <h5 onClick={handleOpenModal}>Click Here To See Your Selection</h5>: null }
                 </MainHeaderText>
+
                 {mainsList.length > 0  && windowWidth > 650 ? <MainHeaderList className={"row "}>
                     {
                         mainsList.length > 0?
@@ -188,33 +190,6 @@ const MealsSelector = () => {
                     null
                 }
 
-
-                <MealsModal
-                    isOpen={modalOpen}
-                    contentLabel="onRequestClose Example"
-                    onRequestClose={handleCloseModal}
-                    className="Modal"
-                    overlayClassName="Overlay"
-                >
-                    <ModalHeader>
-                        <h5><b>Tap food Item To Delete</b></h5>
-                    </ModalHeader>
-
-                    <ModalList>
-                        {
-                            mainsList.length > 0?
-                                <ChosenMealsList  className={`col s12 center`}>
-                                    {<ol>
-                                        {mainsList.map((fav,i)=>
-                                            <li id={i}   onClick={()=>deleteMeal(fav,i)}><h5>{fav}</h5></li>
-                                        )} </ol>
-                                    }
-                                </ChosenMealsList>: null
-                        }
-                    </ModalList>
-                    <ModalButton>
-                        <Button className="btn-large" onClick={handleCloseModal}>Close</Button></ModalButton>
-                    </MealsModal>
             </MainHeader>
 
             <Mains className={"row center"}>
@@ -225,6 +200,9 @@ const MealsSelector = () => {
                 <Button className={"btn-large col m4"} onClick={()=>gotoPage("/deliverydate")}>Go Back</Button>
                 <Button className={`btn-large col  m5 ${allMealsPicked?"":"disabled"}`} onClick={nextPage}>Confirm Order</Button>
             </ButtonContainer>
+
+
+
         </MealsSelectorContainer>
     );
 };

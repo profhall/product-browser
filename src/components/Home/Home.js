@@ -33,8 +33,8 @@ const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
-  height: 80%;
+  align-content: space-between;
+  height: 100%;
   margin: auto;
   padding: 15px 0 ;
 `;

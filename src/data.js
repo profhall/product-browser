@@ -315,12 +315,7 @@ export const meals = [
         "type": "main",
         "ingredients": ["lentils", "tomatoes", "spinach", "onion", " quinoa", "garlic", "tortillas", "herbs & spices"],
         "nutrition":{
-            "Calories":{
-               "total": "450",
-                "fat":"3%",
-                "carbs": "67%",
-                "protein":"30%",
-            },
+            "Calories":"450",
             "Carbohydrates": "78g",
             "Protein": "35g",
             "Fat":"16g",
