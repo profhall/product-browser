@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {usePath,useQueryParams, navigate} from "hookrouter";
 import colors from "../../Colors";
 import {AuthContext} from "../../Auth/Auth";
-import {Button} from "../Styles";
+import {Button, ButtonContainer} from "../Styles";
 
 
 function getWidth() {
@@ -84,8 +84,8 @@ const MealCount = () => {
             </ButtonsContainer>
 
 
-            <ButtonContainer className={"row center"}>
-                <Button className={"btn-large col m5 flow-text"} onClick={()=>gotoPage("/")}>Go Back</Button>
+            <ButtonContainer className={"row "}>
+                <Button className={"btn-large col m5 "} onClick={()=>gotoPage("/")}>Go Back</Button>
                 <Button className={`btn-large col m5 ${numOfMeals>0?"":"disabled"}`} onClick={()=>gotoPage("/deliverydate")}> Delivery Date</Button>
             </ButtonContainer>
         </MealCountSelectionContainer>
@@ -103,7 +103,7 @@ const MealCountSelectionContainer = styled.div`
     height: 100%;
     align-content: center;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     `;
 
 const Card = styled.div`
@@ -115,14 +115,7 @@ background-color: ${colors.secondaryTwo} !important;
   }
 `;
 
-const ButtonContainer = styled.div`
-  grid-area: button;  
-  display: flex;
-  width: 90%;
-  justify-content:center;
-  align-content:space-around;
 
-`;
 
 const ButtonsContainer = styled.div`
     width: 90%;

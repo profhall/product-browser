@@ -36,7 +36,8 @@ const Login = () => {
     }
 
     const handleLogin =
-        async () => {
+        async (e) => {
+            e.preventDefault()
             // const {email, password} = {...userLogin}
             console.log(email, password)
 
@@ -77,7 +78,7 @@ const Login = () => {
                         </div>
 
                     </div>
-                    <div className="row">
+                    <div className="row" style={{display:"flex", justifyContent:"center"}}>
 
                     <Button onClick={handleLogin} className={`btn-large col s12 m6 offset-m3 ${infoValidated?"":"disabled"}`}>
                         Login

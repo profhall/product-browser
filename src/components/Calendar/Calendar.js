@@ -9,7 +9,7 @@ import {AuthContext} from "../../Auth/Auth";
 import * as firebase from "firebase/app";
 import app from "../../fbase";
 import 'firebase/firestore';
-import {Button} from "../Styles";
+import {Button, ButtonContainer} from "../Styles";
 
 
 function getWidth() {
@@ -160,9 +160,6 @@ const DeliveryDate = () => {
 
 
 
-
-
-
     function handleDayClick(day, { selected, disabled }) {
         console.log(day)
 
@@ -188,7 +185,7 @@ const DeliveryDate = () => {
         <DeliveryDateContainer className={"center"}>
             <h2>When To Deliver</h2>
             <h5> Meals are delivered on Sundays & Wednesday evenings</h5>
-            <h5>Your Chosen Date:<b> {date ? `${date}` : "pick a day"}</b></h5>
+            <h5>Your Chosen Date:<b style={{color:colors.bright}}> {date ? `${date}` : "pick a day"}</b></h5>
 
         <CalendarContainer className={"row"}>
                 <DayPickerInput
@@ -203,7 +200,7 @@ const DeliveryDate = () => {
 
 
             <ButtonContainer className={"row center"}>
-                <Button className={"btn-large col m4"} onClick={()=>gotoPage("/mealcount")}>Go Back</Button>
+                <Button className={"btn-large col m5"} onClick={()=>gotoPage("/mealcount")}>Go Back</Button>
                 <Button className={`btn-large col m5 ${date?"":"disabled"}`} onClick={()=>gotoPage("/mealselection")}>Select Meals</Button>
             </ButtonContainer>
         </DeliveryDateContainer>
@@ -224,16 +221,10 @@ const DeliveryDateContainer = styled.div`
 
 `;
 
-const ButtonContainer = styled.div`
-  grid-area: button;  
-  display: flex;
-  width: 100%;
-  justify-content:center;
-
-`;
 
 const CalendarContainer = styled.div`
 margin : 0 !important;
  color: ${colors.bright};
+ font-weight: bolder;
 
 `;

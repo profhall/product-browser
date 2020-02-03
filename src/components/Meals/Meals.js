@@ -4,7 +4,8 @@ import {meals, salads, mains, sides} from '../../data'
 import colors from "../../Colors";
 import {AuthContext} from "../../Auth/Auth";
 import {Modal, Button as But} from 'react-materialize';
-import {Button} from "../Styles";
+import {Button, ButtonContainer} from "../Styles";
+import foodPic from "../OrderForm/veganBowl.jpeg";
 
 const thisWeeksMeals = meals.filter((item)=>item.available)
 
@@ -16,37 +17,109 @@ const MealsSelector = () => {
     const [windowWidth, setWidth] = useState(getWidth);
     const handleResize =()=> setWidth(getWidth());
     window.addEventListener('resize', handleResize);
-
     const {currentUserOrder,setUserOrder, gotoPage} = useContext(AuthContext);
 
-    let {meal_count} = currentUserOrder ? currentUserOrder : 0 ;
-    let salad_count = Math.floor(meal_count/4)
+    let {meal_count, meals} = currentUserOrder ? currentUserOrder : 0 ;
+    let salad_count =  Math.floor(meal_count/4);
 
     const [allMealsPicked,validateMeals] = useState(false);
-    const [mainsPicked,addMain]= useState(0);
-    const [modalOpen,setModal]= useState(false);
+    const [mainsPicked,addMain]= useState(meals.length > 0 ?meals.length-salad_count:0);
     const [mainsList,addMainToList] = useState([]);
-    const [saladsPicked,addSalad] = useState(0);
+    const [saladsPicked,addSalad] = useState(meals ? meals.filter((meal)=>meal.includes("Salad")).length : 0);
+
+
+    console.log(meals.filter((meal)=>meal.includes("Salad")))
 
     useEffect(()=>{
         console.log(mainsList, meal_count)
-        salad_count =  Math.floor(meal_count/4)
         mainsPicked+saladsPicked === meal_count+salad_count ? validateMeals(true) : validateMeals(false)
 
 
     },[mainsList])
 
+
     useEffect(()=>{
 
+        addMainToList(meals?meals:mainsList )
 
-    },[windowWidth])
+    },[])
+    const mealList = thisWeeksMeals.map((item) =>
+        <div className="col s12 m4 ">
+            <div className="card medium" >
+                <div style={{height:"60%"}} className="card-image  waves-effect waves-block " >
+                    <CardImage pic={item.photo}  className="activator center" />
+                </div>
+                <div className="card-content center row col s12" style={{
+                    display:"flex",
+                    flexDirection:"column",
+                    justifyContent:"space-between",
+                    alignItems:"center",
+                    padding: "5px 0",
+                    height:"100%"
+                }}>
+                    <span style={{marginBottom:0, lineHeight:"22px", fontSize:24}} className="card-title flow-text activator grey-text text-darken-4">{item.name}</span>
+
+                    <Modal
+                        actions={[
+                            <But flat waves="light" modal="close" node="button" ><i className="material-icons" >close</i></But>
+                        ]}
+                        bottomSheet={true}
+                        fixedFooter={false}
+                        header="Nutritional Information"
+                        id="modal-0"
+                        options={{
+                            dismissible: true,
+                            endingTop: '10%',
+                            inDuration: 250,
+                            onCloseEnd: null,
+                            onCloseStart: null,
+                            onOpenEnd: null,
+                            onOpenStart: null,
+                            opacity: 0.5,
+                            outDuration: 250,
+                            preventScrolling: true,
+                            startingTop: '4%'
+                        }}
+                        trigger={<a ><h6 >Nutritional Info</h6></a>}>
+
+                        {item.nutrition? Object.keys(item.nutrition).map((nut)=><h6>{nut}: {item.nutrition[nut]} </h6> ) : null}
+
+                    </Modal>
+
+                    <Button onClick={()=>addDish(item )} width={windowWidth}  className={"btn-large col s10"} style={{margin:0}}><b>Add</b></Button>
+
+                </div>
+                <div className="card-reveal">
+                    <h4 className="grey-text card-title text-darken-4"><i className="material-icons right ">close</i>{item.name}</h4>
+                    <span className="grey-text text-darken-4" >{item.description}</span>
+                    <div style={{height: 150,width:"100%",display:"flex"}}>
+                        {item.side ? <SideImage pic={ item.side[1].pic}>
+
+                        </SideImage>:null}
+                        {item.side ? <SideImage pic={item.side[2].pic}>
+
+                        </SideImage>:null}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    );
 
 
+    const deleteMeal= (fav, index) =>{
+        console.log("delete meal", fav.toLowerCase(), index)
+        mainsList.splice(index,1)
+        addMainToList(mainsList)
 
+        fav.toLowerCase().includes("salad") ?addSalad(saladsPicked-1)  : addMain(mainsPicked-1);
+
+
+    };
 
     const addDish = (item)=>
     {
-        let mains = null;
+        let mains = mainsList;
         switch(item.type) {
             case "main":
 
@@ -78,117 +151,59 @@ const MealsSelector = () => {
 
     }
 
-
-
-    const showNutri = () => {
-        alert("show nutrition!")
-    };
-
-    const trigger = <a ><h6 >Nutritional Info</h6></a>
-
-    const mealList = thisWeeksMeals.map((item) =>
-        <div className="col s12 m6 ">
-            <div className="card medium" >
-                <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src={item.photo}/>
-                </div>
-                <div className="card-content center row col s12" style={{
-                    display:"flex",
-                    flexDirection:"column",
-                    justifyContent:"space-between",
-                    alignItems:"center",
-                    padding: "5px 0",
-                    height:"100%"
-                }}>
-                    <span className="card-title flow-text activator grey-text text-darken-4">{item.name}</span>
-                    <Modal
-                        actions={[
-                            <But flat waves="light" modal="close" node="button" ><i className="material-icons" >close</i></But>
-                        ]}
-                        bottomSheet={true}
-                        fixedFooter={false}
-                        header="Nutritional Information"
-                        id="modal-0"
-                        options={{
-                            dismissible: true,
-                            endingTop: '10%',
-                            inDuration: 250,
-                            onCloseEnd: null,
-                            onCloseStart: null,
-                            onOpenEnd: null,
-                            onOpenStart: null,
-                            opacity: 0.5,
-                            outDuration: 250,
-                            preventScrolling: true,
-                            startingTop: '4%'
-                        }}
-                        trigger={trigger}>
-
-                        {item.nutrition? Object.keys(item.nutrition).map((nut)=><h6>{nut}: {item.nutrition[nut]} </h6> ) : null}
-
-                    </Modal>
-                    <Button onClick={()=>addDish(item )} width={windowWidth}  className={"btn-large col s10"} style={{margin:0}}><b>Add</b></Button>
-
-                </div>
-                <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">{item.name}<i
-                        className="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-    );
-
-
-    const deleteMeal= (fav, index) =>{
-        console.log("delete meal", fav.toLowerCase(), index)
-        mainsList.splice(index,1)
-        addMainToList(mainsList)
-
-        fav.toLowerCase().includes("salad") ?addSalad(saladsPicked-1)  : addMain(mainsPicked-1);
-
-
-    };
-
     const nextPage = () =>{
         gotoPage("/confirm")
         setUserOrder({...currentUserOrder, "meals": mainsList})
     };
 
     const handleOpenModal = () =>{
-        setModal(true)
     };
-
-
-
 
     return (
         <MealsSelectorContainer>
 
-            <MainHeader main={mainsList.length > 0} className={"center"} width={windowWidth}>
+            <MainHeader className={"center"} width={windowWidth}>
 
                 <MainHeaderText>
-                    <h4 style={{margin:0}}> {mainsPicked >0 ? `Pick remaining ${meal_count-mainsPicked}`: `Pick Your ${meal_count} Meals.`}</h4>
-                    <h6>With every 4 meals you get a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h6>
+                    <h4 style={{margin:0}}> {mainsPicked >0 ? `${meal_count-mainsPicked} Meals Remaining`: `Pick Your ${meal_count} Meals.`}</h4>
+                    <h5>With every 4 meals you get a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h5>
 
-                    {mainsList.length > 0 && windowWidth > 650 ? <h5><b>Tap food Item To Delete</b></h5>:
-                        mainsList.length > 0 ? <h5 onClick={handleOpenModal}>Click Here To See Your Selection</h5>: null }
+                    {mainsList && mainsList.length > 0 ? <Modal
+                            actions={[
+                                <But flat waves="light" modal="close" node="button" ><i className="material-icons" >close</i></But>
+                            ]}
+                            bottomSheet={true}
+                            fixedFooter={false}
+                            header="Selected Meals"
+                            id="modal-0"
+                            options={{
+                                dismissible: true,
+                                endingTop: '10%',
+                                inDuration: 250,
+                                onCloseEnd: null,
+                                onCloseStart: null,
+                                onOpenEnd: null,
+                                onOpenStart: null,
+                                opacity: 0.5,
+                                outDuration: 250,
+                                preventScrolling: true,
+                                startingTop: '4%'
+                            }}
+                            trigger={<h5 style={{color:colors.bright}} onClick={handleOpenModal}>Edit Your Selection</h5>}>
+                            {
+                                mainsList.length > 0?
+                                    <ChosenMealsList  className={`col s12 center`}>
+                                        {<ol>
+                                            {mainsList.map((fav,i)=>
+                                                <li id={i}   onClick={()=>deleteMeal(fav,i)}><h5>{fav} <i className="material-icons red" >close</i></h5> </li>
+                                            )} </ol>
+                                        }
+                                    </ChosenMealsList>: null
+                            }
+                        </Modal>: null }
                 </MainHeaderText>
 
-                {mainsList.length > 0  && windowWidth > 650 ? <MainHeaderList className={"row "}>
-                    {
-                        mainsList.length > 0?
-                            <ChosenMealsList  className={`col s12 center`}>
-                                {<ol>
-                                    {mainsList.map((fav,i)=>
-                                        <li id={i}   onClick={()=>deleteMeal(fav,i)}><h5>{fav}</h5></li>
-                                    )} </ol>
-                                }
-                            </ChosenMealsList>: null
-                    }
-                </MainHeaderList> :
-                    null
-                }
+
 
             </MainHeader>
 
@@ -197,7 +212,7 @@ const MealsSelector = () => {
             </Mains>
 
             <ButtonContainer className={"row "}>
-                <Button className={"btn-large col m4"} onClick={()=>gotoPage("/deliverydate")}>Go Back</Button>
+                <Button className={"btn-large col m5"} onClick={()=>gotoPage("/deliverydate")}>Go Back</Button>
                 <Button className={`btn-large col  m5 ${allMealsPicked?"":"disabled"}`} onClick={nextPage}>Confirm Order</Button>
             </ButtonContainer>
 
@@ -209,63 +224,35 @@ const MealsSelector = () => {
 
 export default MealsSelector;
 
-
+const SideImage = styled.div`
+    background-image:url(${props => props.pic});
+    background-repeat: no-repeat ;
+    background-size:  cover ;
+    background-position: center;
+    height: 100%;
+    width: 50%;
+    
+`;
+const CardImage = styled.div`
+    background-image:url(${props => props.pic});
+    background-repeat: no-repeat ;
+    background-size:  cover ;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    
+`;
 const MealsSelectorContainer = styled.div`
-  display: grid;
-  height: 90%;
+  display: flex;
+  height: 100%;
   width: 100%;
+  padding-top:10px;
   grid-area: content;
-  grid-template-rows: 20% 70% 10%;
-  grid-template-areas: 
-  "mainhead"
-  "mains"
-  "button"
-  ;
+  flex-direction: column;
+  justify-content: space-between;
+  
   padding-bottom: 15px;
 `;
-const MealsModal = styled(Modal)`
-  border-radius: 5px 5px;
-  height: 75%;
-  background-color: ${colors.primaryTwo};
-  color: ${colors.bright} !important;
-  display: grid;
-  justify-content: center;
-  grid-template-rows: auto 65% auto;
-  align-items: center;
-  grid-template-areas: 
-    'header'  
-    'list'
-    'button'  
-  ;
-`;
-const ModalButton = styled.div`
-  grid-area: button;
-  display: flex;
-  flex-direction: column; 
-  justify-content: center;
-  align-items: center; 
-  ;
-`;
-
-const ModalHeader = styled.div`
-  grid-area: header;
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  ;
-`;
-
-const ModalList = styled.div`
-  grid-area: list;
-  display: flex;
-  flex-direction: column; 
-  justify-content: center;
-  align-items: center;
-  height: 100%; 
-  overflow: scroll;
-  ;
-`;
-
 
 const Mains = styled.div`
   height: 100%;
@@ -282,10 +269,10 @@ const Mains = styled.div`
 const MainHeader = styled.div`
   display: grid;
   grid-area: mainhead;
-  height: 75%;
+  height: 25%;
   width: 100%;
   grid-template-columns: 50% 50%;
-  grid-template-areas: ${props=> props.width > 650 && props.main ? "'text list'" : "'text text'"};
+  grid-template-areas: 'text text';
   
 `;
 
@@ -298,19 +285,6 @@ const MainHeaderText = styled.div`
   flex-direction: column;
 `;
 
-const MainHeaderList = styled.div`
-    display: flex;
-    grid-area: list;
-      flex-direction: column;
-
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  justify-content: center;
-  align-items: center;
-`;
-
-
 const ChosenMealsList = styled.div`
   text-align: left;
   padding: 0 30px !important;
@@ -322,105 +296,3 @@ const ChosenMealsList = styled.div`
 
 
 
-
-
-/*
-Buttons Styling
- */
-
-
-const ButtonContainer = styled.div`
-  grid-area: button;  
-  display: flex;
-  width: 100%;
-  justify-content:center;
-  margin: auto !important;
-
-`;
-
-/*
-*
-    Meal Card Styling
-*
-*/
-
-const Desc = styled.div`
-  grid-area: desc;
-  height: 95%;
-  color: ${colors.secondaryTwo};
-  margin: auto;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-`;
-
-const TheDescr = styled.p`
-align-self: center;
-height: 75%;
-overflow: scroll;
-`;
-
-
-const I = styled.i`
-align-self: flex-end;
-right: 0;
-margin-bottom: -25px;
-`;
-
-const SidePhoto = styled.div`
-  grid-area: ${props=>props.num ===1 ? "side1":"side2"};
-  height: 100%;
-  margin: auto;
-  width: 100%;
-  background:url(${props=> props.photo ? props.photo:"https://cdn.pixabay.com/photo/2018/02/13/09/06/sea-3150196_1280.jpg"});
-  background-repeat: no-repeat ;
-  background-size:  cover ;
-  background-position: center;
-`;
-const MainPhoto = styled.div`
-  grid-area: main;
-  
-  height: 100%;
-  margin: auto;
-  width: 100%;
-  background:url(${props=> props.photo ? props.photo:"https://cdn.pixabay.com/photo/2018/02/13/09/06/sea-3150196_1280.jpg"});
-  background-repeat: no-repeat ;
-  background-size:  cover ;
-  background-position: center;
-`;
-const PhotoGrid = styled.div`
-  grid-area: photo;
-  height: 95%;
-  grid-template-rows: 70% 30%;
-  border-radius: 5px;
-  margin: auto;
-  width: 100%;
-  grid-gap: 2px;
-  display: grid;
-  grid-template-areas:${ props=>props.full ?
-    '"main main" "side1 side2"'
-    :
-    '"main main" "main main"'
-    };
-  
-`;
-
-const Main = styled.div`
-  border-radius: 5px;
-  display: grid;
-  min-height: 300px !important;
-  height: 300px ;
-  margin: auto !important;
-  margin-bottom: 12px !important;
-  grid-template-columns: 45% 55%;
-  grid-template-rows: 75% 20%;
-  grid-gap: 2px;
-  grid-template-areas: 
-  "photo desc"
-  "button button"
-  ;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.5s;
-  background-color: white;
-  `;

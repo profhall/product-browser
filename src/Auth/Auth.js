@@ -59,7 +59,8 @@ export const AuthProvider = ({children}) => {
             setUserOrder({
                 "uid": currentUser.uid,
                 "address": currentUserProfile.address,
-                "restrictions": currentUserProfile.dietary_restrictions
+                "restrictions": currentUserProfile.dietary_restrictions,
+                "meals":[]
             })
         }
     },[currentUserProfile,])

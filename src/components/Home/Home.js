@@ -11,7 +11,7 @@ const Home = () => {
     // console.log("The User: "+currentUser.uid)
     useEffect(()=>
     {
-        // console.log(currentUserProfile);
+        console.log(currentUserProfile,currentUserOrder);
     }, [currentUserProfile])
 
 
@@ -22,7 +22,7 @@ const Home = () => {
                 <h4>Thank you for eating with at The Tasty Plant-Based Kitchen, we're so glad you came. We hope you enjoy this weeks menu. (<span style={{color:colors.bright}} onClick={()=>gotoPage('\menu')}>See Menu</span>)</h4>
             </HomeInfoBox>
             <Button className={"btn-large"} onClick={()=>gotoPage('\mealcount')}>
-                Start Your Order
+                {currentUserOrder && currentUserOrder.meal_count ? "Continue Order" : "Start Your Order"}
             </Button>
         </HomeContainer>
     );

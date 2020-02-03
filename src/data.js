@@ -48,7 +48,7 @@ export const meals = [
                 "pic":brown_rice,
             }
         },
-        "type":"entree",
+        "type":"main",
         "photo": "https://cookieandkate.com/images/2015/11/vegetarian-chili-recipe-6.jpg",
         "nutrition":{
             "Calories":"",
