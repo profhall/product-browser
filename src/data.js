@@ -12,6 +12,9 @@ const quinoa = "https://dinnerthendessert.com/wp-content/uploads/2019/04/How-to-
 const plantains = "https://i.pinimg.com/originals/56/a9/d3/56a9d3c141c356c25ea68b3e727dde39.jpg";
 const coleslaw = "https://i0.wp.com/passtheplants.com/wp-content/uploads/2017/07/perfect-vegan-coleslaw-in-bowl.jpg?resize=680%2C1020&ssl=1";
 const chickpea_baked = "http://www.picklesnhoney.com/wp-content/uploads/2012/01/MG_3447.jpg";
+const sauteed_broccoli = "https://www.farmfreshtoyou.com/recipes/50/broccoli-saut-ed-in-wine-and-garlic";
+const mashed_cauliflower = "https://media.chefdehome.com/740/0/0/cauliflower/mashed-cauliflower-recipe.jpg";
+const cauliflower_rice = "https://www.veganricha.com/wp-content/uploads/2018/02/Cauliflower-Fried-Rice-with-Tofu-Eggplant-in-Soy-Lime-Sauce-veganricha-7293.CR2_.HR_.jpg";
 
 export const meals = [
     {
@@ -133,6 +136,41 @@ export const meals = [
         }
     },
     {
+        "name": "Lasagna",
+        "available": false,
+        "side": {
+            1:{
+                "name":"Brocolli",
+                "pic":sauteed_broccoli
+            },
+            2:{
+                "name":"Cauliflower Mashed 'Potatoes'" ,
+                "pic":mashed_cauliflower
+            }
+        },
+        "description": "",
+        "ingredients": ["Onion", "Green Pepper", "Celery", "Garlic", "Okra", "Tomatoes",  "Chickpeas", "Lentils", "Brown Rice"],
+        "type":"main",
+        "photo": "https://www.noracooks.com/wp-content/uploads/2018/04/IMG_8639.jpg",
+        "source": "https://www.noracooks.com/best-vegan-lasagna/",
+        "source2": "https://minimalistbaker.com/easy-vegan-lasagna/",
+        "nutrition":{
+            "Calories":"782kcal",
+            "Carbohydrates": "127g",
+            "Protein": "38g",
+            "Fat":"19g",
+            "Saturated Fat": "3g",
+            "Unsaturated Fat": "14g",
+            "Potassium": "394mg",
+            "Fiber": "32g",
+            "Sugar": "32g",
+            "Vitamin A": null,
+            "Vitamin C": null,
+            "Calcium": null,
+            "Iron": null
+        }
+    },
+    {
         "name": "BBQ Jerked Jackfruit Caribbean Quinoa Bowl",
         "available": true,
         "side": {
@@ -199,7 +237,7 @@ export const meals = [
     },
     {
         "name": "Glazed Orange Cauliflower \"Chicken\"",
-        "available": true,
+        "available": false,
         "side": {
             1:{
                 "name":"Brown Rice",
