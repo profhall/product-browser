@@ -2,9 +2,10 @@ import React, {useEffect,useState, useContext} from 'react';
 import styled from "styled-components";
 import colors from "../../Colors"
 import {AuthContext} from "../../Auth/Auth";
-
 import {navigate } from 'hookrouter';
-
+import M from "materialize-css/dist/js/materialize.min.js";
+import "materialize-css/dist/css/materialize.min.css";
+import {Button, ButtonContainer} from "../Styles";
 
 
 const steps_content = [
@@ -19,30 +20,48 @@ const steps_content = [
 
 function getDimensions() {
     return {"width":window.innerWidth, "height":window.innerHeight}
-}
+};
 
 
-const Slide = ({id, currentSlide, step,windowWidth,currentUser}) =>{
-    return (<StyledSlide windowWidth={windowWidth}  id={id} currentSlide={currentSlide}>
-        <SlideTextContainer className={"container "}>
-            <h1 style={{margin:"auto"}}>Step {currentSlide +1}</h1>
+const Slide2 = ({id, currentSlide, step,windowWidth,currentUser}) =>{
+    return (
+        <Slider className="carousel-item white-text" href={`#${id +1}!`}>
+            <h1 style={{margin:"auto"}}>Step {id +1}</h1>
+            <SlideTextContainer>
             <SlideText dangerouslySetInnerHTML={{__html: step }}/>
             {currentSlide === 6 ?<Button className={"btn-large"} onClick={()=> navigate(currentUser === 6 ? "/":"/signup")}>Get Started! </Button>:null}
-        </SlideTextContainer>
-    </StyledSlide>)
-}
+
+            </SlideTextContainer>
+        </Slider>)
+
+};
 
 
 const Steps = () => {
-    const {currentUser,formValidation,userLogin,infoValidated,gotoPage} = useContext(AuthContext);
+    const {currentUser} = useContext(AuthContext);
 
     const [windowWidth, setWidth] = useState(getDimensions()["width"]);
     const [windowHeight, setHeight] = useState(getDimensions()["height"]);
     const [currentSlide, setSlide]=useState(0);
+    const [carInstance, setInstance]=useState(null);
+    var instance = null
+
     useEffect(() => {
-        console.log(currentSlide)
         setWidth(getDimensions()["width"]);
-    }, [currentSlide,windowHeight]);
+    }, [currentSlide,windowHeight,carInstance]);
+
+    useEffect(() => {
+
+        var elem = document.querySelector(".carousel");
+        instance = M.Carousel.init(elem,{
+            fullWidth: true,
+            indicators: false,
+            noWrap:true,
+            duration:50
+        });
+        setInstance(instance)
+        // console.log(elem.style)
+    },[])
 
 
     const handleResize =()=> {
@@ -51,92 +70,58 @@ const Steps = () => {
     };
     window.addEventListener('resize', handleResize);
 
-    const SlideList = steps_content.map((step, index)=><Slide currentUser={currentUser} windowWidth={windowWidth} key={index} id={index} step={step} currentSlide={currentSlide}/>)
+    const SlideList = steps_content.map((step, index)=><Slide2 currentUser={currentUser} windowWidth={windowWidth} key={index} id={index} step={step} currentSlide={currentSlide}/>)
 
     return (
         <Wrapper windowWidth={windowWidth}>
 
-            {SlideList}
-            <ButtonContainer grisArea={"next"} >
-                <a href={"#"} onClick={()=>setSlide(currentSlide < 6 ? currentSlide+1:currentSlide)}>
-                    <i style={{color: colors.bright,display:currentSlide <6?  "":"none"}}  className="material-icons large">chevron_right</i>
+            <CarWrapper className="carousel carousel-slider center">
+                {SlideList}
+            </CarWrapper>
+            <ButtonContainer>
+                <Button border="none"  bgcolor={"transparent"} onClick={carInstance ? ()=>carInstance.prev(): ()=>console.log("no instance yet")}><i
+                    className="material-icons large">keyboard_arrow_left</i></Button>
 
-                </a>
+                <Button border="none"   bgcolor={"transparent"} onClick={carInstance ? ()=>carInstance.next(): ()=>console.log("no instance yet")}><i
+                    className="material-icons large">keyboard_arrow_right</i></Button>
             </ButtonContainer>
-            <ButtonContainer grisArea={"prev"} >
 
-                <a href={"#"} onClick={()=>setSlide(currentSlide > 0 ? currentSlide-1:currentSlide)}>
-                    <i style={{color: colors.bright, display:currentSlide > 0 ? "":"none"}} className="material-icons large">chevron_left</i>
-
-                </a>
-            </ButtonContainer>
         </Wrapper>
     );
 };
 
 export default Steps;
 
+const CarWrapper = styled.div`
+height: 90% !important;
+ width: 100%;
+    `;
+
 const Wrapper = styled.div`
 grid-area: content;
-height: 75%;
-width: ${props => props.windowWidth < 650 ?"98%":"65%"};
-display: grid;
-grid-template-columns:10% auto 10% ;
-grid-template-areas: 'prev card next';
-margin:auto;
+height: ${props => props.windowWidth < 650 ?"100%":"65% "};
+ width: ${props => props.windowWidth < 650 ?"99%":"50%"};
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin:auto;
+ flex-direction: column;
     `;
 
-
-const StyledSlide = styled.div`
-// background-color:${props => props.background};
-border-radius: 10px 10px;
-grid-area: card;
-width: ${props => props.id === props.currentSlide ? "100%":"0px"};
-//opacity: ${props => props.id === props.currentSlide ? 1:0};
-display: ${props => props.id === props.currentSlide ? "flex":"none"};
-//display: flex;
-//min-height: 80%;
-height: ${props =>props.windowWidth > 650 ? "450px":"650px"};
-flex-direction: column;
-justify-content: flex-start;
-align-content: center;
-align-self:center ;
- background:linear-gradient(0deg,rgba(215,185,86,.3),rgba(0,0,0,.3));
-
-  transition: all .5s linear;
-    `;
-
-const ButtonContainer = styled.div`
-//background-color:${colors.primaryTwo};
-border-radius: 75%;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-align-self: center;
-grid-area: ${props => props.grisArea};
-height: 25%;
-width: 100%;
-display: flex;
+const Slider = styled.div`
+height: 100%;
     `;
 
 const SlideTextContainer = styled.div`
-display: flex;
-
-flex-direction: column;
-color: white;
-margin-top: 25px;
+max-height: 80% ;
+overflow-y: auto;
     `;
+
+
+
 const SlideText = styled.h5`
 color: white;
 margin-top: 25px;
     `;
 
-const Button = styled.div`
-width: 75%;
-align-self: center;
-background-color: ${colors.bright};
-&:hover {
-  background-color: ${colors.secondaryTwo};
-}
-    `;
 

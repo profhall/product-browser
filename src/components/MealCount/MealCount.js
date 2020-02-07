@@ -22,19 +22,14 @@ const MealCount = () => {
 
     useEffect(()=>{
         currentUserOrder ? console.log(meal_count) : navigate("/")
-
-
         setWidth(getWidth());
-
 
         },[windowWidth, meal_count])
 
 
 
-
     const setMealCount = (num)=>{
         console.log(num)
-
         updateMealCount(num)
 
     };
