@@ -62,7 +62,7 @@ const Login = () => {
                     <b> <span onClick={()=>gotoPage("/steps")} style={{color:`${colors.bright}`, fontWeight:"bold"}} >Click Here To See How The Process Works</span ></b>
                 </h6>
                 <h5 className="header col s12 light" >
-                    <b> <span onClick={()=>gotoPage("/menu")} style={{color:`${colors.bright}`, fontWeight:"bold"}} >This Weeks Menu</span ></b>
+                    <b> <span onClick={()=>gotoPage("/menu")} style={{color:`${colors.bright}`, fontWeight:"bold"}} >See This Weeks Menu</span ></b>
                 </h5>
                 <h5 className="header col s12 light">
                     <b> Login or <span onClick={()=>gotoPage("/signup")} style={{color:`${colors.bright}`, fontWeight:"bolder"}} >Sign Up</span ></b>
