@@ -18,12 +18,64 @@ const Menu = () => {
     const handleResize =()=> setWidth(getWidth());
     window.addEventListener('resize', handleResize);
 
+
     useEffect(()=>{
         // console.log(currentSlide)
         // console.log(meals.length)
 
-    },[windowWidth, currentSlide])
+    },[windowWidth, currentSlide]);
+
+
     const mealList = thisWeeksMeals.map((item,i) => {
+        return  (
+            <Meal key={i} id={i} className={"container"} >
+
+                <Title>
+                    <h4>{item.name}</h4>
+                </Title>
+                <Photos>
+                    <PhotoGrid windowWidth={windowWidth} full={!!item.side}>
+                        <MainPhoto photo={item.photo} />
+                        {item.side?
+                            <SidePhoto photo={item.side ? item.side[1].pic : null} num={1}/>
+                            :null}
+                        {item.side && item.type!=="salad"?
+                            < SidePhoto  photo={item.side ? item.side[2].pic:null} num={2}/>
+                            :null}
+                    </PhotoGrid>
+                </Photos>
+                <Buttons>
+
+                    <a onClick={(e)=>{
+                        e.preventDefault()
+                        currentSlide > 0 ? setSlide(currentSlide-1) : setSlide(currentSlide)
+                    }} href={"#"}>
+                        <i  style={{color: currentSlide > 0?  colors.bright: "grey"}} className="material-icons medium">chevron_left</i>
+
+                    </a>
+
+                    <a onClick={(e)=>{
+                        e.preventDefault()
+                        currentSlide < thisWeeksMeals.length-1? setSlide(currentSlide+1) : setSlide(currentSlide)
+                    }} href={"#"} >
+                        <i style={{color: currentSlide < thisWeeksMeals.length-1?  colors.bright: "grey"}}  className="material-icons medium">chevron_right</i>
+
+                    </a>
+                </Buttons>
+                <Desc>
+                    {item.description}
+                </Desc>
+                {/*<div className="card small">*/}
+                {/*</div>*/}
+
+            </Meal>
+
+        )
+
+
+    });
+
+    const mealList2 = thisWeeksMeals.map((item,i) => {
         return  (
             <Meal key={i} id={i} className={"container"} >
 
@@ -78,6 +130,7 @@ const Menu = () => {
             <Meals>
                 {mealList[currentSlide]}
             </Meals>
+
             {/*<ButtonContainer className={"row "}>*/}
             {/*    <Button className={`btn-large col m5 ${0<1?"":"disabled"}`} onClick={()=>selected("salads")}>Salads</Button>*/}
             {/*    <Button className={`btn-large col  m5 ${selected==="meals"?"":"disabled"}`} onClick={()=>setSelected("meals")}>Meals</Button>*/}

@@ -5,91 +5,79 @@ import styled from "styled-components";
 import colors from "../../Colors";
 import * as firebase from "firebase/app";
 import 'firebase/firestore';
-import {Button} from "../Styles";
+import {Button, ButtonContainer} from "../Styles";
 
 
 import {AuthContext} from "../../Auth/Auth";
 
 const SignUp = ({}) => {
     const [restrictions, setRestrictions] = useState([]);
+    const [nameValidated, validateName] = useState(false);
+    const [zipValidated, validateZip] = useState(false);
+    const [cityValidated, validateCity] = useState(false);
+    const [streetValidated, validateStreet] = useState(false);
+    const [emailValidated, validateEmail] = useState(false);
     const [signupValidated, validateSignUp] = useState(false);
     const [userSignUp, setSignUpInfo] = useState({});
     const [passwordsMatch, setPWMatch] = useState(false);
     const [verifyPW, setPWVerify] = useState("");
     let SignUp={}
+
     useEffect( () =>  {
-        // console.log(" signup comp mounted with: \n Restrictions:", restrictions)
-        // console.log(userSignUp, passwordsMatch, signupValidated)
-        // return () => {
-        //     effect
-        // };
-        userSignUp["restrictions"] = restrictions
-    }, [ userSignUp,passwordsMatch,signupValidated, restrictions]);
 
-    const FormValidation = (e) => {
-        let passwordsMatch =false
-
-        // console.log("input id", e.target.id);
-        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (e.target.id === "password"){
-            userSignUp["password"] = e.target.value;
-            // console.log(e.target.value ,":",  userSignUp["password"]);
-
-            // e.target.value === userSignUp["password"] ? passwordsMatch=true:passwordsMatch=false
-            // setPWMatch(passwordsMatch)
-        }
-        else if (e.target.id === "email"){userSignUp["email"]= e.target.value;}
-        else if (e.target.id === "name"){userSignUp["name"]= e.target.value;}
-        else if (e.target.id === "city"){userSignUp["city"]= e.target.value;}
-        else if (e.target.id === "zip"){userSignUp["zip"]= e.target.value;}
-        else if (e.target.id === "street"){userSignUp["street"]= e.target.value;}
-        else if(e.target.id === "password_val"){
-            // console.log(e.target.value ,":",  userSignUp["password"], e.target.value === userSignUp["password"]);
-
-            e.target.value === userSignUp["password"] ? passwordsMatch=true:passwordsMatch=false
-            // console.log(passwordsMatch)
-            setPWMatch(passwordsMatch)
-        }
-
-        if (
-                (
-                    userSignUp["name"] &&
-                    userSignUp["email"] &&
-                    userSignUp["city"] &&
-                    userSignUp["street"] &&
-                    userSignUp["zip"]
-                )
-            &&
-
-                userSignUp["email"].match(mailformat) &&
-                userSignUp["name"].length > 2 &&
-                userSignUp["city"].length > 2 &&
-                userSignUp["street"].length > 4 &&
-                userSignUp["zip"].length === 5
-        )
-        {
-            // console.log("Yay!!x"+userSignUp['name'], userSignUp['email'])
+        if(zipValidated && nameValidated && emailValidated && passwordsMatch){
+            console.log("validated")
             validateSignUp(true)
         }
-        else { validateSignUp(false) }
+
+        userSignUp["restrictions"] = restrictions
+
+    }, [ userSignUp,passwordsMatch,emailValidated, streetValidated,cityValidated,zipValidated,nameValidated, restrictions]);
+
+    const handleCity = (e) => {
+        setSignUpInfo({...userSignUp, 'address': {"city":e}})
+    }
+    const handleStreet = (e) => {
+        setSignUpInfo({...userSignUp, 'address': {"street":e}})
+    }
+    const handleZip = (e) => {
+        setSignUpInfo({...userSignUp, 'address': {"zip":e}})
+    }
+    const FormValidation = (e) => {
+        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+        if (e.target.id === "email"){
+            userSignUp["email"]= e.target.value;
+            userSignUp["email"].match(mailformat) ? validateEmail(true):validateEmail(false)
+        }
+        else if (e.target.id === "name"){
+            userSignUp["name"]= e.target.value;
+            userSignUp["name"].length > 3 ? validateName(true): validateName(false)
+        }
+        else if (e.target.id === "city"){
+            let city = e.target.value;
+            city.length > 3 ? validateCity(true): validateCity(false)
+            handleCity(city)
+        }
+        else if (e.target.id === "zip"){
+            let zip = e.target.value;
+            zip.length === 5 ? validateZip(true): validateZip(false)
+            console.log(zip.length)
+
+            handleZip(zip)
+        }
+        else if (e.target.id === "street") {
+            let street = e.target.value;
+            street.length > 4 ? validateStreet(true) : validateStreet(false);
+            handleStreet(street)
+        }
+
 
         setSignUpInfo(userSignUp);
 
     };
 
-    const handlePhone = (e) => {
-        setSignUpInfo({...userSignUp, 'phone': e.target.value})
-    }
 
-    const handleCity = (e) => {
-        setSignUpInfo({...userSignUp, 'address': {"city":e.target.value}})
-    }
-    const handleStreet = (e) => {
-        setSignUpInfo({...userSignUp, 'address': {"street":e.target.value}})
-    }
-    const handleZip = (e) => {
-        setSignUpInfo({...userSignUp, 'address': {"zip":e.target.value}})
-    }
 
     const handlePassword = (e) => {
         setSignUpInfo({...userSignUp, 'password': e.target.value})
@@ -183,16 +171,16 @@ const SignUp = ({}) => {
                         </div>
 
                         <div className="input-field col s12 m6">
-                            <FormInput onChange={handleStreet} id="street" placeholder={"Number & Street"} />
+                            <FormInput onChange={FormValidation} id="street" placeholder={"Number & Street"} />
                         </div>
 
 
                         <div className="input-field col s6 m3 ">
-                            <FormInput onChange={handleCity} id="city" placeholder={"City"} />
+                            <FormInput onChange={FormValidation} id="city" placeholder={"City"} />
                         </div>
 
                         <div className="input-field col s6 m3">
-                            <FormInput onChange={handleZip} id="zip" placeholder={"Zip"} />
+                            <FormInput onChange={FormValidation} id="zip" placeholder={"Zip"} />
                         </div>
 
                         <div className="input-field col s12 m6 offset-m3">
@@ -219,11 +207,9 @@ const SignUp = ({}) => {
 
 
                     </div>
-                    <div className="row">
-                        <Button onClick={handleSignUp}  className={`${signupValidated?"":"disabled"} btn-large col s12 m6 offset-m3 `}>
+                        <Button onClick={handleSignUp}  className={`${signupValidated?"":"disabled"} btn-large col s12 m6`} >
                             Sign Up
                         </Button>
-                    </div>
                 </SignUpFormForm>
             </div>
         </SignUpForm>
