@@ -25,16 +25,20 @@ const SignUp = ({}) => {
 
     useEffect( () =>  {
 
+        userSignUp["restrictions"] = restrictions
+
         if(zipValidated && nameValidated && emailValidated && passwordsMatch){
             console.log("validated")
             validateSignUp(true)
-        }
+            setSignUpInfo(userSignUp)
+        }else{validateSignUp(false)}
 
-        userSignUp["restrictions"] = restrictions
+        // console.log(userSignUp)
 
     }, [ userSignUp,passwordsMatch,emailValidated, streetValidated,cityValidated,zipValidated,nameValidated, restrictions]);
 
     const handleCity = (e) => {
+        console.log(e)
         setSignUpInfo({...userSignUp, 'address': {"city":e}})
     }
     const handleStreet = (e) => {
@@ -45,6 +49,9 @@ const SignUp = ({}) => {
     }
     const FormValidation = (e) => {
         let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        let street = userSignUp["address"] && userSignUp["address"]["street"] ? userSignUp["address"]["street"] : null;
+        let zip = userSignUp["address"] && userSignUp["address"]["zip"] ? userSignUp["address"]["zip"] :null;
+        let city = userSignUp["address"] && userSignUp["address"]["city"] ? userSignUp["address"]["city"] :null;
 
         if (e.target.id === "email"){
             userSignUp["email"]= e.target.value;
@@ -55,40 +62,39 @@ const SignUp = ({}) => {
             userSignUp["name"].length > 3 ? validateName(true): validateName(false)
         }
         else if (e.target.id === "city"){
-            let city = e.target.value;
+             city = e.target.value;
             city.length > 3 ? validateCity(true): validateCity(false)
-            handleCity(city)
         }
         else if (e.target.id === "zip"){
-            let zip = e.target.value;
+             zip = e.target.value;
             zip.length === 5 ? validateZip(true): validateZip(false)
             console.log(zip.length)
 
-            handleZip(zip)
         }
         else if (e.target.id === "street") {
-            let street = e.target.value;
+             street = e.target.value;
             street.length > 4 ? validateStreet(true) : validateStreet(false);
-            handleStreet(street)
         }
 
 
-        setSignUpInfo(userSignUp);
+        setSignUpInfo({...userSignUp, "address":{"city":city,"street":street,"zip":zip,}});
 
     };
 
 
 
     const handlePassword = (e) => {
+        console.log(e.target.value.length )
+
         setSignUpInfo({...userSignUp, 'password': e.target.value})
-        if(verifyPW ===  e.target.value &&  e.target.value !== ""){
+        if(verifyPW ===  e.target.value &&  e.target.value !== "" && e.target.value.length > 6){
             console.log("match")
             setPWMatch(true)
         }else setPWMatch(false)
 
     }
     const handlePasswordVerify = (e) => {
-        // console.log(userSignUp['password'], " : ",e.target.value )
+        console.log(e.target.value.length )
         setPWVerify(e.target.value)
         if(e.target.value === userSignUp['password']){
             console.log("match")
@@ -97,21 +103,17 @@ const SignUp = ({}) => {
     }
 
 
-    const handleSignUp = useCallback(
-        async () => {
-            const {email, password,name, zip, city, street, restrictions} = {...userSignUp};
+    const handleSignUp =  async (e) => {
+            e.preventDefault()
+            const {email, password,name, address, restrictions} = {...userSignUp};
             const db = firebase.firestore(app);
+            console.log(address)
             try{
                 await app.auth().createUserWithEmailAndPassword(email,password).then(function(user){
                     // dispatch({type: USER_SIGNUP_SUCCESS}); // I dispatched some message.
                     let userDB = db.collection(`users`)
                     userDB.doc(user.user.uid).set({
-                        address: {
-                            "street":street,
-                            "city":city,
-                            "zip": zip,
-
-                        },
+                        address: address,
                         email: email,
                         dietary_restrictions: restrictions,
                         name: name,
@@ -128,8 +130,8 @@ const SignUp = ({}) => {
                 alert(error)
             }
 
-        },[]
-    );
+        }
+
 
     const {currentUser} =  useContext(AuthContext);
     if(currentUser) navigate('/');
@@ -163,11 +165,11 @@ const SignUp = ({}) => {
                         </div>
 
                         <div className="input-field col s12 m6">
-                            <FormInput onChange={handlePassword} id="password" placeholder={"Password"} type="password" />
+                            <FormInput data-length="6" onChange={handlePassword} id="password" placeholder={"Password"} type="password" />
                         </div>
 
                         <div className="input-field col s12 m6">
-                            <FormInput onChange={handlePasswordVerify} id="password_val" placeholder={"Verify Password"} type="password" />
+                            <FormInput data-length="6" onChange={handlePasswordVerify} id="password_val" placeholder={"Verify Password"} type="password" />
                         </div>
 
                         <div className="input-field col s12 m6">
@@ -207,9 +209,11 @@ const SignUp = ({}) => {
 
 
                     </div>
-                        <Button onClick={handleSignUp}  className={`${signupValidated?"":"disabled"} btn-large col s12 m6`} >
+                    <div className={"row"}>
+                        <Button onClick={handleSignUp}  className={`${signupValidated?"":"disabled"} btn-large col s12 `} >
                             Sign Up
                         </Button>
+                    </div>
                 </SignUpFormForm>
             </div>
         </SignUpForm>

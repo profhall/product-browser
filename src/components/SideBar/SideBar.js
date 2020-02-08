@@ -45,10 +45,10 @@ const Sidebar = ()=> {
                             Weekly Menu
                         </a>
                     </li>
-                    {currentUserProfile?<li className="sidenav-close"  onClick={()=>navigate('/profile')}><a  style={{color:colors.bright}} href="#!">Account</a></li>:null}
+                    {currentUser?<li className="sidenav-close"  onClick={()=>navigate('/profile')}><a  style={{color:colors.bright}} href="#!">Account</a></li>:null}
 
                     <li><div  style={{backgroundColor:colors.bright}} className="divider" /></li>
-                    {currentUserProfile?<li className="sidenav-close " onClick={()=>app.auth().signOut()}><a style={{color:colors.bright}}  href="/">Logout</a></li>:<li className="sidenav-close " onClick={()=>navigate('/signup')}><a  style={{color:colors.bright}} href="#!">Sign Up</a></li>}
+                    {currentUser?<li className="sidenav-close " onClick={()=>app.auth().signOut()}><a style={{color:colors.bright}}  href="/">Logout</a></li>:<li className="sidenav-close " onClick={()=>navigate('/signup')}><a  style={{color:colors.bright}} href="/signup">Sign Up</a></li>}
 
                 </ul>
             </NavContainer>

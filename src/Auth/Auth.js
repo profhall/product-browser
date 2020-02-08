@@ -26,7 +26,7 @@ export const AuthProvider = ({children}) => {
     useEffect( ()=> {
         async function userStateChange() {
             await app.auth().onAuthStateChanged(setCurrentUser)
-            // console.log(currentUser ? `user Set!  ${currentUser}`:null)
+            console.log(currentUser ? `user Set!  ${currentUser}`:null)
 
         }
         userStateChange();
