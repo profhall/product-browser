@@ -19,7 +19,7 @@ const Home = () => {
         <HomeContainer className={"container"}>
             <h3 style={{margin:0}}>Greetings{currentUserProfile? " " +currentUserProfile.name+ "!" :  "!"}</h3>
             <HomeInfoBox>
-                <h4>Thank you for eating with at The Tasty Plant-Based Kitchen, we're so glad you came. We hope you enjoy this weeks menu. (<span style={{color:colors.bright}} onClick={()=>gotoPage('\menu')}>See Menu</span>)</h4>
+                <h4>Thank you for eating at The Tasty Plant-Based Kitchen, we're so glad you came. We hope you enjoy <span style={{color:colors.bright}} onClick={()=>gotoPage('\menu')}>this weeks menu</span>.</h4>
             </HomeInfoBox>
             <Button className={"btn-large"} onClick={()=>gotoPage('\mealcount')}>
                 {currentUserOrder && currentUserOrder.meal_count ? "Continue Order" : "Start Your Order"}

@@ -117,12 +117,12 @@ const UserProfile = () => {
     const handleSubmit =
         async () => {
 
-            // console.log(userProf.name)
+            console.log(userProf.name)
             // console.log(userName,address, phone, restrictions)
             const db = firebase.firestore(app);
             try{
                 let userDB = await db.collection(`users`)
-                // console.log(userProf)
+                console.log(userProf)
 
                 userDB.doc(currentUserProfile.uid).set(userProf).then(()=>refreshPage());
 
