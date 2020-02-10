@@ -31,22 +31,12 @@ const UserProfile = () => {
 
     useEffect(() => {
 
-        // console.log(userProf)
-        // console.log(userProf)
-        // if(currentUserProfile) {
-        //     setUserName(name)
-        //     setStreet(address.street)
-        //     setZip(address.zip)
-        //     setCity(address.city)
-        //     setPhone(phone)
-        //     setcontainerFeePaid(container_fee_paid)
-        // }
-
-
     }, [userProf,ref]);
+
     useEffect(() => {
         setUserProf({...userProf, dietary_restrictions: restrictions})
     }, [restrictions]);
+
     useEffect(() => {
         setUserProf(currentUserProfile ? currentUserProfile: userProf)
         setRestrictions(currentUserProfile ? currentUserProfile.dietary_restrictions: restrictions)
@@ -117,12 +107,12 @@ const UserProfile = () => {
     const handleSubmit =
         async () => {
 
-            console.log(userProf.name)
+            console.log("Updating name to:",userProf.name)
             // console.log(userName,address, phone, restrictions)
             const db = firebase.firestore(app);
             try{
                 let userDB = await db.collection(`users`)
-                console.log(userProf)
+                // console.log(userProf)
 
                 userDB.doc(currentUserProfile.uid).set(userProf).then(()=>refreshPage());
 

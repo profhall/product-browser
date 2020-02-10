@@ -80,7 +80,7 @@ const MealsSelector = () => {
                             preventScrolling: true,
                             startingTop: '4%'
                         }}
-                        trigger={<a ><h6 >Nutritional Info</h6></a>}>
+                        trigger={item.nutrition && item.nutrition["Calories"] != "" ?<a ><h6 >Nutritional Info</h6></a> : null}>
 
                         {item.nutrition? Object.keys(item.nutrition).map((nut)=><h6>{nut}: {item.nutrition[nut]} </h6> ) : null}
 

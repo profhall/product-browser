@@ -49,10 +49,10 @@ const OrderSubmitted = () => {
 
     return (
         <ReceiptContainer className={""}>
-            <h4>
-                Thank you {currentUserProfile.name}! Below is a summary of your order, please be sure to send payment to:
+            <h5>
+                Thank you {currentUserProfile.name}! Below is a summary of your order, payments can be sent to: <br/> <a target="_blank" href={"https://cash.app/$TTPBK"}>Cash App <b>$TTPBK</b></a> OR
                 <a target="_blank" href={"https://www.paypal.com/paypalme2/phalljr"}> <b>paypal.me/phalljr</b></a> <br/><br/><b style={{color:`${colors.bright}`}}> Orders aren't final until payment is recieved.</b>
-            </h4>
+            </h5>
             <form style={{margin:"auto"}} className="col s12 ">
 
             <Receipt className={'container row'} >
