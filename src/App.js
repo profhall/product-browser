@@ -90,11 +90,11 @@ function App() {
                 <i className="material-icons medium" style={{color:colors.bright,zIndex:990, position:"fixed", top: 3, right:5, display: windowWidth > 990 ? "none" : ""}}>menu</i>
             </a>
             <Navi windowWidth={windowWidth}/>
-            <Footer/>
-            <Contact/>
+            {!url.includes("admin") ? <Footer/>: null}
+            {!url.includes("admin") ? <Contact/> :null}
             <OrderForm/>
 
-            <Main/>
+            {!url.includes("admin") ? <Main/>: null}
         </TheAppGrid>
 </AuthProvider>
     )
@@ -105,16 +105,12 @@ const TheAppGrid = styled.div`
   height: 100vh;
   display: grid;
   grid-template-rows: 58px 85% repeat(4, auto);
-  grid-template-areas: 
-  'head head head head' 
-  'order order order order' 
-  'info info info info'
-  'info info info info'
-  'contact contact contact contact'
-  'footer footer footer footer'
+  grid-template-areas: ${props=>!!!props.url.includes("admin") ? "'head head head head''order order order order''info info info info''info info info info''contact contact contact contact''footer footer footer footer' " : "'order' 'order' 'order' 'footer'"}
   ;
   width:${ props=>props.width > 990 ? "calc(100% - 300px)": "100%"};
   float:${ props=>props.width > 990 ? "right": "none"};
+  overflow:${props=>props.url.includes('admin')? "none":"auto"};
+
   `;
 
 export default App;

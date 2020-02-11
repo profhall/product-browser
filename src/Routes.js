@@ -14,6 +14,7 @@ import OrderSubmitted from "./components/OrderSubmitted/OrderSubmitted";
 import UserProfile from "./components/UserProfile/UserProfile";
 import Home from "./components/Home/Home";
 import Steps from "./components/StepsCarousel/StepsCarousel";
+import Admin from "./components/Admin/Admin";
 
 
 
@@ -30,6 +31,7 @@ const routes = {
     "/steps*": () => <Steps/>,
     "/": () => <Home  />,
     "/signup" : () => <SignUp/>,
-    "/login" : () => <Login/>
+    "/login" : () => <Login/>,
+    "/admin" : () => <Admin/>
 };
 export default  routes

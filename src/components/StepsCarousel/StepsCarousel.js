@@ -6,10 +6,14 @@ import {navigate } from 'hookrouter';
 import M from "materialize-css/dist/js/materialize.min.js";
 import "materialize-css/dist/css/materialize.min.css";
 import {Button, ButtonContainer} from "../Styles";
+import deliciousPhoto from '../media/foodIcons/delicious.png'
 
-
+const Icon = styled.img`
+width: 75px;
+margin: 25px 0 0 0;
+`;
 const steps_content = [
-    "<b>Login/Sign Up</b><br/><br/>  If you don't have an account with <b>The Tasty Plant-Based Kitchen</b>, register for a new account by pressing the <b>Sign Up</b> button on the header menu.",
+    `<b>Login/Sign Up</b><br/> <br/>  If you don't have an account with <b>The Tasty Plant-Based Kitchen</b>, register for a new account by pressing the <b>Sign Up</b> button on the header menu.`,
     "<b>Start Ordering Process On The Homepage.</b> <br/><br/> You can go back and edit your order at any point in the ordering process. <br/><br/>  Keep in mind that we update the menu on Tuesday. <br/><br/> The ordering system will be down and will be back up on the following day (Wednesday).",
     "<b>Choose Meal Quantity</b> <br/><br/>  The price you pay per meal goes down as the more meals you get. <br/><br/> Starting at $55 ($13.75/meal) for 4 meals and $120 ($10/meal) for 12 meals. <br/><br/> New Clients are asked to pay a one time conainer fee of $15.00.",
     "<b>Choose Delivery Date</b> <br/><br/> We currently deliver on Sundays and Wednesdays. <br/><br/> A delivery fee of $8.00 is added to every order. <br/><br/> In the future clients will have the option to pick up their orders to avoid this fee.",

@@ -12,7 +12,7 @@ import foodPic from './veganBowl.jpeg'
 
 
 const OrderForm =  () => {
-    const {currentUser, currentUserProfile, currentUserOrder, setUserProfile,setUserOrder} =  useContext( AuthContext)
+    const {currentUser} =  useContext( AuthContext)
     const routeResult = useRoutes(Routes);
 
     useEffect(() => {
@@ -24,17 +24,9 @@ const OrderForm =  () => {
 
 const url =window.location.href
     return (
-            <TheOrderForm className={""}>
+            <TheOrderForm url={url} className={""}>
 
                 {!!!currentUser && !url.includes("menu")&& !url.includes("signup") && !url.includes("steps")?<Login />:routeResult}
-                {/*{*/}
-                {/*    !currentUser && !url.includes("menu")&& !url.includes("signup") && !url.includes("steps")*/}
-                {/*    ?*/}
-                {/*        <Login userLogin={userLogin} />*/}
-                {/*       :*/}
-                {/*        routeResult*/}
-
-                {/*}*/}
 
             </TheOrderForm>
     );
@@ -48,7 +40,7 @@ const TheOrderForm = styled.div`
       overflow:auto;
     justify-content: center;
     color:white;
-    background:linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,.7)),url(${foodPic});
+    background:${props=>props.url.includes('admin')? "" :"linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,.7)),url("+foodPic+")"};
     background-repeat: no-repeat ;
     background-size:  cover ;
     background-position: center;
@@ -57,6 +49,6 @@ const TheOrderForm = styled.div`
     grid-template-areas:
     'content content content content'
     ;
-    //height: 100%;
+    height:${props=>props.url.includes('admin')? '100vh': ""} ;
     width: 100%;
 `;

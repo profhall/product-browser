@@ -1,4 +1,4 @@
-const sauteed_kale = "https://www.lifeisbutadish.com/wp-content/uploads/2019/06/Simple-Saut%C3%A9ed-Kale-2.jpg"
+const sauteed_kale = "https://10ydgx69ny82dxci5228c171-wpengine.netdna-ssl.com/wp-content/uploads/2014/10/IMG_2711-640x400.jpg"
 const sauteed_brussels = "https://www.simplyrecipes.com/wp-content/uploads/2009/11/brussels-sprouts-black-bean-garlic-sauce-vertical-a-1600.jpg"
 const roasted_brussels = "https://www.fifteenspatulas.com/wp-content/uploads/2011/03/Roasted-Brussel-Sprouts-Fifteen-Spatulas-3-640x959.jpg"
 const brown_rice = "https://mymontanakitchen.com/wp-content/uploads/2019/05/instant-pot-brown-rice-10-720x720.jpg"
@@ -10,11 +10,15 @@ const quinoa = "https://dinnerthendessert.com/wp-content/uploads/2019/04/How-to-
 const plantains = "https://i.pinimg.com/originals/56/a9/d3/56a9d3c141c356c25ea68b3e727dde39.jpg";
 const coleslaw = "https://i0.wp.com/passtheplants.com/wp-content/uploads/2017/07/perfect-vegan-coleslaw-in-bowl.jpg?resize=680%2C1020&ssl=1";
 const chickpea_baked = "http://www.picklesnhoney.com/wp-content/uploads/2012/01/MG_3447.jpg";
-const sauteed_broccoli = "https://www.farmfreshtoyou.com/recipes/50/broccoli-saut-ed-in-wine-and-garlic";
+const sauteed_broccoli = "https://contenthandler.azureedge.net/recp/50/2000/0/3351.jpg";
 const mashed_cauliflower = "https://media.chefdehome.com/740/0/0/cauliflower/mashed-cauliflower-recipe.jpg";
 const cauliflower_rice = "https://www.veganricha.com/wp-content/uploads/2018/02/Cauliflower-Fried-Rice-with-Tofu-Eggplant-in-Soy-Lime-Sauce-veganricha-7293.CR2_.HR_.jpg";
+const cauliflower_green_rice = "https://minimalistbaker.com/wp-content/uploads/2019/06/DELICIOUS-Cauliflower-Green-Rice-infused-with-lime-herbs-and-peppers-8-ingredients-FRESH-flavor-perfect-for-Mexican-night-glutenfree-plantbased-cauliflowerrice-recipe-minimalistbaker_-9-768x1152.jpg";
+const fried_okra = "https://images.abeautifulmess.com/uploads/2018/11/air-fried-okra.jpg"
+const black_beans = "https://i2.wp.com/belleofthekitchen.com/wp-content/uploads/2018/06/mexican-black-beans2.jpg?resize=680%2C1020&ssl=1"
 
-export const meals = [{
+export const meals = [
+    {
         "name": "Jackfruit Crab Cakes with Lemon Dill Sauce",
         "available": true,
         "side": {
@@ -32,20 +36,19 @@ export const meals = [{
         "photo": "https://dizzybusyandhungry.com/wp-content/uploads/2018/09/crab-cakes-3862-2.jpg",
         "type": "main"
     },
-
     {
         "name": "Homemade Vegan Chili",
         "available": true,
-        "description": "This a great meal for the cold months made with simple ingredients  like onion, carrot, tomatoes, celery and garlic. Served with brown rice and vegan cornbread.",
+        "description": "This a great meal for the cold months made with simple ingredients  like onion, carrot, tomatoes, celery and garlic. Served with cauliflower rice and air fried okra.",
         "ingredients": [],
         "side": {
             1: {
-                "name": "Cornbread",
-                "pic": cornbread_muffins
+                "name": "Okra",
+                "pic": fried_okra
             },
             2: {
-                "name": "Basmati Rice",
-                "pic": brown_rice,
+                "name": "Cauliflower Rice",
+                "pic": cauliflower_rice,
             }
         },
         "type": "main",
@@ -65,7 +68,6 @@ export const meals = [{
             "Iron": ""
         }
     },
-
     {
         "name": "Yellow Curry with Chikpeas & Roasted Veggies",
         "available": false,
@@ -100,7 +102,7 @@ export const meals = [{
     },
     {
         "name": "BBQ Black Eyed Pea Collard Rolls",
-        "available": false,
+        "available": true,
         "side": {
             1: {
                 "name": "Brown Rice",
@@ -136,15 +138,15 @@ export const meals = [{
         "available": true,
         "side": {
             1: {
-                "name": "Brown Rice",
-                "pic": brown_rice
+                "name": "Cauliflower Rice",
+                "pic": cauliflower_rice
             },
             2: {
                 "name": "Cornbread Muffins",
                 "pic": cornbread_muffins
             }
         },
-        "description": "This vegan gumbo with a mix of beans, mushrooms and okra is hearty, savory, filling and warming. Comes with brown rice & cornbread muffin",
+        "description": "This vegan gumbo with a mix of beans, mushrooms and okra is hearty, savory, filling and warming. Comes with yummy cauliflower rice & cornbread muffin",
         "ingredients": ["Onion", "Green Pepper", "Celery", "Garlic", "Okra", "Tomatoes", "Chickpeas", "Lentils", "Brown Rice"],
         "type": "main",
         "photo": "https://www.cilantroandcitronella.com/wp-content/uploads/2017/01/vegan-gumbo-image-1.jpg",
@@ -166,8 +168,8 @@ export const meals = [{
         }
     },
     {
-        "name": "Lasagna",
-        "available": false,
+        "name": "Vegan Lasagna",
+        "available": true,
         "side": {
             1: {
                 "name": "Brocolli",
@@ -178,22 +180,23 @@ export const meals = [{
                 "pic": mashed_cauliflower
             }
         },
-        "description": "",
-        "ingredients": ["Onion", "Green Pepper", "Celery", "Garlic", "Okra", "Tomatoes", "Chickpeas", "Lentils", "Brown Rice"],
+        "description": "Incredibly flavorful, hearty vegan lasagna! Tender lasagna noodles are layered with Macadamia Nut Ricotta and Marinara Sauce. Comes with mashed cauliflower 'potatoes' & sauteed broccoli." ,
+        "ingredients": [],
+        "instructions":[],
         "type": "main",
         "photo": "https://www.noracooks.com/wp-content/uploads/2018/04/IMG_8639.jpg",
         "source": "https://www.noracooks.com/best-vegan-lasagna/",
         "source2": "https://minimalistbaker.com/easy-vegan-lasagna/",
         "nutrition": {
-            "Calories": "782kcal",
-            "Carbohydrates": "127g",
-            "Protein": "38g",
-            "Fat": "19g",
-            "Saturated Fat": "3g",
-            "Unsaturated Fat": "14g",
-            "Potassium": "394mg",
-            "Fiber": "32g",
-            "Sugar": "32g",
+            "Calories": "",
+            "Carbohydrates": "",
+            "Protein": "",
+            "Fat": "",
+            "Saturated Fat": "",
+            "Unsaturated Fat": "",
+            "Potassium": "",
+            "Fiber": "",
+            "Sugar": "",
             "Vitamin A": null,
             "Vitamin C": null,
             "Calcium": null,
@@ -233,7 +236,7 @@ export const meals = [{
         }
     },
     {
-        "name": "Vegan Pot Pie with Cornbread Crust",
+        "name": "Vegan Pot Pie",
         "available": false,
         "side": {
             1: {
@@ -245,11 +248,11 @@ export const meals = [{
                 "pic": sauteed_brussels
             }
         },
-        "description": "This cozy vegan pot pie is made with tender veggies simmered in savory herbed sauce and baked up under a cornbread crust. Comes with roasted sweet potatoes & sauteed brussel sprouts",
-        "photo": "https://thefitchen.com/wp-content/uploads/2016/09/Vegan-Pot-Pies-with-COrnbread-Crust-4.jpg",
-        "sources": ["https://www.connoisseurusveg.com/vegan-chicken-pot-pie/", "https://thefitchen.com/vegan-cornbread-pot-pies/"],
+        "description": "This cozy vegan pot pie is made with tender veggies simmered in savory herbed sauce and baked up under a chickpea flour pie crust. Comes with roasted sweet potatoes & sauteed brussel sprouts",
+        "photo": "https://frommybowl.com/wp-content/uploads/2019/02/Chickpea_Pot_Pie_Vegan_Grain_Free_FromMyBowl-6.jpg",
+        "source": "https://frommybowl.com/vegan-chickpea-pot-pie/",
         "type": "main",
-        "ingredients": [" Cornbread", "Garlic", "Mixed Vegetables(peas, carrots, green beans)", "chickpeas", "Spices & Herbs"],
+        "ingredients": [ "Garlic", "Mixed Vegetables(peas, carrots, green beans)", "chickpeas", "Spices & Herbs"],
         "nutrition": {
             "Calories": "296",
             "Carbohydrates": "32.4g",
@@ -266,19 +269,19 @@ export const meals = [{
         }
     },
     {
-        "name": "Glazed Orange Cauliflower \"Chicken\"",
+        "name": "Glazed Orange Cauliflower 'Chicken'",
         "available": false,
         "side": {
             1: {
-                "name": "Brown Rice",
-                "pic": brown_rice
+                "name": "cauliflower rice",
+                "pic": cauliflower_rice
             },
             2: {
                 "name": "Mixed Veggies",
                 "pic": mixed_veggies
             }
         },
-        "description": "Comes with brown jasmine rice and mixed veggies w/ garlic sauce",
+        "description": "Comes with cauliflower rice and mixed veggies w/ garlic sauce",
         "ingredients": ["Cauliflower", "Coconut", "Orange Juice", "Maple Syrup"],
         "type": "main",
         "source": "https://www.thefoodietakesflight.com/post/2018/12/03/glazed-orange-cauliflower-chicken",
@@ -337,15 +340,15 @@ export const meals = [{
         "side": {
             1: {
                 "name": "Green Rice",
-                "pic": "https://minimalistbaker.com/wp-content/uploads/2019/06/AMAZING-Green-Rice-infused-with-peppers-and-herbs-7-ingredients-VIBRANT-flavor-perfect-for-Mexican-night-and-beyond-glutenfree-plantbased-rice-recipe-minimalistbaker_-16.jpg",
+                "pic": cauliflower_green_rice,
                 "ingredients": ""
             },
             2: {
                 "name": "Mexican Black Beans",
-                "pic": "https://i2.wp.com/belleofthekitchen.com/wp-content/uploads/2018/06/mexican-black-beans2.jpg?resize=680%2C1020&ssl=1",
+                "pic": black_beans,
             }
         },
-        "description": "A veggie medley sauteed with garlic & mexican spices delivering a delicious mouth watering meal. Served with green rice (cilantro lime rice) and mexican black beans, and guacamole. ",
+        "description": "A veggie medley sauteed with garlic & mexican spices delivering a delicious mouth watering meal. Served with cauliflower green rice (cilantro lime cauliflower rice) and mexican black beans, and guacamole. ",
         "photo": "https://karylskulinarykrusade.com/wp-content/uploads/2018/07/Grilled-Vegetable-Fajitas-Feature.jpg",
         "type": "main",
         "ingredients": ["Red & Green Bell Pepper", "Red Onion", "Garlic", "Mexican Spices & Herbs", "Tortillas", ],
@@ -371,7 +374,6 @@ export const meals = [{
             1: {
                 "name": "Cajun Quinoa",
                 "pic": quinoa,
-                "ingredients": ""
             },
             2: {
                 "name": "Sauteed Brussels Sprouts",
@@ -399,7 +401,7 @@ export const meals = [{
 
     },
     {
-        "name": "Jackfruit Stir Fry",
+        "name": "Teriyaki Jackfruit Stir Fry",
         "available": true,
         "side": {
             1: {
@@ -437,7 +439,6 @@ export const meals = [{
             1: {
                 "name": "Sesame Roasted Sweet Potatoes",
                 "pic": roasted_sweet_potatoes,
-                "ingredients": ""
             },
             2: {
                 "name": "Sauteed Brussels Sprouts",
@@ -518,7 +519,7 @@ export const meals = [{
         }
     },
     {
-        "name": "Spicy Caribbean Curry w/Jackfruit",
+        "name": "Spicy Caribbean Jackfruit Curry",
         "available": true,
         "side": {
             1: {
