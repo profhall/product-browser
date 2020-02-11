@@ -469,12 +469,12 @@ export const meals = [
         "available": true,
         "side": {
             1: {
-                "name": "Quinoa",
-                "pic": quinoa
+                "name": "Sprouted Wheat Cornbread Muffin",
+                "pic": cornbread_muffins
             },
             2: {
-                "name": "Basmati Rice",
-                "pic": brown_rice,
+                "name": "Sauteed Brussels",
+                "pic": sauteed_brussels,
             }
         },
         "description": "Made with coconut milk and comes with brown fluffy basmati rice & quinoa ",

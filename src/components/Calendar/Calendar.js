@@ -4,20 +4,27 @@ import {A, navigate, useQueryParams} from "hookrouter";
 import colors from "../../Colors";
 import DayPickerInput from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import DatePicker from 'react-date-picker';
 import {AuthContext} from "../../Auth/Auth";
 import * as firebase from "firebase/app";
 import app from "../../fbase";
 import 'firebase/firestore';
 import {Button, ButtonContainer} from "../Styles";
+import today from "../../testDays/testDays"
 
 
 function getWidth() {
     return window.innerWidth
 }
+const days ={
+    "Sunday":0,
+    "Monday":1,
+    "Tuesday":2,
+    "Wednesday":3,
+    "Thursday":4,
+    "Friday":5,
+    "Saturday":6
+}
 
-let today = new Date(Date.now() );
-// let today = new Date( 2020,0,11);
 let todays_date_number = today.getDay()
 
 let yesterday = new Date();
@@ -28,22 +35,25 @@ var daysInAWeek = 7;
 
 let weekFromToday = new Date( );
 let threeDaysFromToday = new Date( );
+let twoDaysFromToday = new Date( );
 weekFromToday.setDate(today.getDate() + daysInAWeek);
 threeDaysFromToday.setDate(today.getDate() + 3);
+twoDaysFromToday.setDate(today.getDate() + 2);
 
 const DeliveryDate = () => {
+
+
+
     const maxMealsADay = 30
     const daysToIgnore = [
         todays_date_number === 6 ?  tomorrow:null,
         {
-            before: todays_date_number === 3 ||
-            todays_date_number === 0
-                ? tomorrow: today,
-            after:todays_date_number === 0 ||
-            todays_date_number === 1
-                ?  threeDaysFromToday  :weekFromToday },
+            before:  todays_date_number === days.Tuesday? twoDaysFromToday:tomorrow ,
+            after:todays_date_number === 0 ?  threeDaysFromToday  : todays_date_number === days.Monday ? twoDaysFromToday :weekFromToday },
         { daysOfWeek:[1,2,4,5,6]}
     ]
+    console.log(daysToIgnore,tomorrow)
+
     const db = firebase.firestore(app);
 
     const {currentUserOrder,setUserOrder, gotoPage} = useContext(AuthContext)

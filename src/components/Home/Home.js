@@ -4,6 +4,18 @@ import {AuthContext} from "../../Auth/Auth";
 import styled from "styled-components";
 import colors from "../../Colors";
 import {Button} from "../Styles";
+import today from "../../testDays/testDays"
+
+const days ={
+    "Sunday":0,
+    "Monday":1,
+    "Tuesday":2,
+    "Wednesday":3,
+    "Thursday":4,
+    "Friday":5,
+    "Saturday":6
+}
+let todays_date_number = today.getDay()
 
 const Home = () => {
     const {currentUser, currentUserProfile, currentUserOrder,gotoPage} = useContext(AuthContext)
@@ -17,13 +29,14 @@ const Home = () => {
 
     return (
         <HomeContainer className={"container"}>
-            <h3 style={{margin:0}}>Greetings{currentUserProfile? " " +currentUserProfile.name+ "!" :  "!"}</h3>
+            <h3 style={{margin:0}}> Happy {Object.keys(days).find(key => days[key] === todays_date_number)} {currentUserProfile? " " +currentUserProfile.name+ "!" :  "!"}</h3>
             <HomeInfoBox>
-                <h4>Thank you for eating at The Tasty Plant-Based Kitchen, we're so glad you came. We hope you enjoy <span style={{color:colors.bright}} onClick={()=>gotoPage('\menu')}>this weeks menu</span>.</h4>
+                <h4>Thank you for eating at The Tasty Plant-Based Kitchen, we're so glad you came. We hope you enjoy <span style={{color:colors.bright}} onClick={()=>gotoPage('\menu')}>this weeks menu</span>.</h4> <br/>
+                {todays_date_number === days.Tuesday ? <h3 >Today is Tuesday! That means we are updating our menu. Orders can resume on Wednesday. Thanks for your patience!</h3>: null}
             </HomeInfoBox>
-            <Button className={"btn-large"} onClick={()=>gotoPage('\mealcount')}>
+            {todays_date_number === days.Tuesday ? null :<Button className={"btn-large"} onClick={()=>gotoPage('\mealcount')}>
                 {currentUserOrder && currentUserOrder.meal_count ? "Continue Order" : "Start Your Order"}
-            </Button>
+            </Button>}
         </HomeContainer>
     );
 };
