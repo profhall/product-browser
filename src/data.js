@@ -38,7 +38,7 @@ export const meals = [
     },
     {
         "name": "Homemade Vegan Chili",
-        "available": true,
+        "available": false,
         "description": "This a great meal for the cold months made with simple ingredients  like onion, carrot, tomatoes, celery and garlic. Served with cauliflower rice and air fried okra.",
         "ingredients": [],
         "side": {
@@ -205,7 +205,7 @@ export const meals = [
     },
     {
         "name": "BBQ Jerked Jackfruit Caribbean Quinoa Bowl",
-        "available": true,
+        "available": false,
         "side": {
             1: {
                 "name": "Fried Plantains",
@@ -465,28 +465,6 @@ export const meals = [
         }
     },
     {
-        "name": "Vegan Chik'n Salad",
-        "available": true,
-        "description": "Chicken salad made with jackfruit",
-        "photo": "https://i.pinimg.com/736x/c0/c0/45/c0c0455be08db07b3de2dbecfd02e8e6.jpg",
-        "type": "salad",
-        "ingredients": [],
-        "nutrition": {
-            "Calories": "",
-            "Carbohydrates": "",
-            "Protein": "",
-            "Fat": "",
-            "Saturated Fat": "",
-            "Potassium": "",
-            "Fiber": "",
-            "Sugar": "",
-            "Vitamin A": "",
-            "Vitamin C": "",
-            "Calcium": "",
-            "Iron": ""
-        }
-    },
-    {
         "name": "Tikka Masala",
         "available": true,
         "side": {
@@ -589,11 +567,33 @@ export const meals = [
     },
     {
         "name": "Spicy Sweet Potato and Green Rice Burrito Bowls",
-        "available": true,
+        "available": false,
         "description": "Healthy burrito bowls made with roasted sweet potato, green rice and black beans! This delicious, vegan dinner reheats well for lunch.",
         "type": "main",
         "sides": [],
         "photo": "https://cookieandkate.com/images/2015/01/sweet-potato-green-rice-burrito-bowls-recipe-1.jpg",
+        "nutrition": {
+            "Calories": "",
+            "Carbohydrates": "",
+            "Protein": "",
+            "Fat": "",
+            "Saturated Fat": "",
+            "Potassium": "",
+            "Fiber": "",
+            "Sugar": "",
+            "Vitamin A": "",
+            "Vitamin C": "",
+            "Calcium": "",
+            "Iron": ""
+        }
+    },
+    {
+        "name": "Vegan Chik'n Salad",
+        "available": true,
+        "description": "Chicken salad made with jackfruit",
+        "photo": "https://i.pinimg.com/736x/c0/c0/45/c0c0455be08db07b3de2dbecfd02e8e6.jpg",
+        "type": "salad",
+        "ingredients": [],
         "nutrition": {
             "Calories": "",
             "Carbohydrates": "",
@@ -678,7 +678,7 @@ export const meals = [
     },
     {
         "name": "Rainbow Greens Salad with Black Eyed Peas",
-        "available": true,
+        "available": false,
         "description": "A healthy gluten free power greens salad packed with lucky black eyed peas and super nutrients.  A great way to start off the new year and get back on track with clean eating.",
         "type": "salad",
         "ingredients": ["Quinoa", "Carrots", "Shallots", "Cabbage", "Kale", "Collard Greens", "Black Eyed Peas", "Garlic"],

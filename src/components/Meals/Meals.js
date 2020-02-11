@@ -167,11 +167,13 @@ const MealsSelector = () => {
             <MainHeader className={"center"} width={windowWidth}>
 
                 <MainHeaderText>
-                    <h4 style={{margin:0}}> {mainsPicked >0 ? `${meal_count-mainsPicked} Meals Remaining`: `Pick Your ${meal_count} Meals.`}</h4>
+                    <h4 style={{margin:0}}> {mainsPicked >0 ? `${meal_count-mainsPicked} Meals Remaining`: `Pick Your ${meal_count} Meals.`} </h4>
                     <h5>With every 4 meals you get a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h5>
-                    <div className={"row container center"} style={{ width: "60%"}}>
-                        <Button className={"col s6 btn "} onClick={()=>setSelected(selected==="main"? "all":"main")} bgcolor={selected==="main"? colors.bright: colors.secondaryTwo }>Meals</Button>
-                        <Button className={"col s6 btn "} onClick={()=>setSelected(selected==="salad"? "all":"salad")} bgcolor={selected==="salad"? colors.bright: colors.secondaryTwo }>Salads</Button>
+                    <div className={"row container center"} style={{ width: "75%", marginBottom: 5}}>
+                        <Button className={"col s4 btn "} onClick={()=>setSelected("all")} bgcolor={selected==="all"? colors.bright: colors.secondaryTwo }>All</Button>
+                        <Button className={`col s4 btn `} onClick={()=>setSelected(selected==="main"? "all":"main")} bgcolor={selected==="main"? colors.bright: colors.secondaryTwo }>Meals</Button>
+                        <Button className={`col s4 btn `} onClick={()=>setSelected(selected==="salad"? "all":"salad")} bgcolor={selected==="salad"? colors.bright: colors.secondaryTwo }>Salads</Button>
+
                     </div>
 
                     {mainsList && mainsList.length > 0 ? <Modal
@@ -208,8 +210,6 @@ const MealsSelector = () => {
                             }
                         </Modal>: null }
                 </MainHeaderText>
-
-
 
             </MainHeader>
 
@@ -261,7 +261,6 @@ const MealsSelectorContainer = styled.div`
 `;
 
 const Mains = styled.div`
-  height: 100%;
   width: 100%;
   grid-area: mains;
   overflow: auto;
@@ -275,7 +274,7 @@ const Mains = styled.div`
 const MainHeader = styled.div`
   display: grid;
   grid-area: mainhead;
-  height: 25%;
+  height: 30%;
   width: 100%;
   grid-template-columns: 50% 50%;
   grid-template-areas: 'text text';
