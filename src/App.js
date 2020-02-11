@@ -12,6 +12,7 @@ import emailjs from "emailjs-com";
 import OrderForm from "./components/OrderForm/OrderForm";
 import {AuthContext, AuthProvider} from "./Auth/Auth";
 import Sidebar from "./components/SideBar/SideBar";
+import Prices from "./components/Prices/Prices";
 
 
 function getDimensions() {
@@ -92,6 +93,8 @@ function App() {
             <Navi windowWidth={windowWidth}/>
             {!url.includes("admin") ? <Footer/>: null}
             {!url.includes("admin") ? <Contact/> :null}
+            {!url.includes("admin") ? <Prices/> :null}
+
             <OrderForm/>
 
             {!url.includes("admin") ? <Main/>: null}
@@ -104,8 +107,8 @@ function App() {
 const TheAppGrid = styled.div`
   height: 100vh;
   display: grid;
-  grid-template-rows: 58px 85% repeat(4, auto);
-  grid-template-areas: ${props=>!!!props.url.includes("admin") ? "'head head head head''order order order order''info info info info''info info info info''contact contact contact contact''footer footer footer footer' " : "'order' 'order' 'order' 'footer'"}
+  grid-template-rows: 58px 85% repeat(5, auto);
+  grid-template-areas: ${props=>!!!props.url.includes("admin") ? "'head head head head''order order order order''info info info info''info info info info''price price price price''contact contact contact contact''footer footer footer footer' " : "'order' 'order' 'order' 'order' 'footer'"}
   ;
   width:${ props=>props.width > 990 ? "calc(100% - 300px)": "100%"};
   float:${ props=>props.width > 990 ? "right": "none"};

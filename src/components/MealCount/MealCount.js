@@ -55,31 +55,39 @@ const MealCount = () => {
         setUserOrder({...currentUserOrder, "meal_count": meal_count, "price" :price + deliveryFee + (currentUserProfile.container_fee_paid ? containerFee : 0)})
     }
 
-    const MealButton = ({width,num, ppmeal, total}) =>{
+    const handleSelect = (e,num) => {
+        console.log(e.target)
+        setMealCount(num)
+    }
+
+    const MealButton = ({selected,num, ppmeal, total}) =>{
         return(
-            <div className="col s12 m5" onClick={() => setMealCount(num)} >
-                <Card className="card-panel ">
-                    <span className="white-text">
-                        <h5> {num} MEALS</h5>
-                        <h5> ${ppmeal}/ MEAL </h5>
-                        <h5> ${total} TOTAL</h5>
-                    </span>
-                </Card>
+            <div className="col s12 m6 center-align" onClick={(e) => handleSelect(e,num)} style={{borderRadius:"10px 10px 0 0"}}>
+                <div className="card " style={{borderRadius:"10px 10px 0 0"}}>
+                    <CardDiv selected={selected} className="card-content center ">
+                        <span className="card-title bold">{num} Meals</span>
+                        <b><h4>${total}.00</h4></b>
+
+
+                        <b><p>${ppmeal}/meal</p></b>
+                    </CardDiv>
+                </div>
             </div>)
     };
+
 
     return (
         <MealCountSelectionContainer className={"center"}>
             <h2>{numOfMeals > 0 ? `You've chosen ${numOfMeals} meals`:"Choose A Selection"}</h2>
-            <ButtonsContainer width={ windowWidth} className={"row"}>
-                <MealButton width={windowWidth} num={4} ppmeal={13.75} total={4*13.75}/>
-                <MealButton width={windowWidth} num={7} ppmeal={12.14} total={85}/>
-                <MealButton width={windowWidth} num={10} ppmeal={11} total={10*11}/>
-                <MealButton width={windowWidth} num={12} ppmeal={10} total={12 *10}/>
+            <ButtonsContainer width={ windowWidth} className={"row "}>
+                <MealButton  width={windowWidth} num={4} ppmeal={13.75} total={4*13.75} />
+                <MealButton   width={windowWidth} num={7} ppmeal={12.14} total={85}  />
+                <MealButton  width={windowWidth} num={10} ppmeal={11} total={10*11} />
+                <MealButton width={windowWidth} num={12} ppmeal={10} total={12 *10} />
             </ButtonsContainer>
 
 
-            <ButtonContainer className={"row "}>
+            <ButtonContainer className={"row  "}>
                 <Button className={"btn-large col m5 "} onClick={()=>gotoPage("/")}>Go Back</Button>
                 <Button className={`btn-large col m5 ${numOfMeals>0?"":"disabled"}`} onClick={()=>gotoPage("/deliverydate")}> Delivery Date</Button>
             </ButtonContainer>
@@ -104,23 +112,22 @@ const MealCountSelectionContainer = styled.div`
 const Card = styled.div`
 background-color: ${colors.secondaryTwo} !important;
 
-&:hover {
-    background-color: ${colors.bright} !important;
 
-  }
 `;
-
-
+const CardDiv = styled.div`
+  background-color: ${props=> props.selected ? colors.primaryOne : colors.secondaryTwo};
+  border-radius: 10px 10px 0 0 !important;
+  &:hover {
+    background-color: ${colors.bright} !important;
+    color : ${colors.secondaryTwo} !important;
+  }
+`
 
 const ButtonsContainer = styled.div`
     width: 90%;
-    display: flex;  
-    justify-content: space-evenly;
-    align-items: center;
     margin-bottom: 25px;
     overflow: auto;
     max-height:400px;
-    flex-wrap: wrap;
     // flex-direction: ${props=> props.width > 650  ? "row":"column"};
 
     `;

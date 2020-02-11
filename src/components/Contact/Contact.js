@@ -31,16 +31,16 @@ const Contact = () => {
                     <div className="col s12 ">
                         <h4>
                             <Icon className="responsive-img" src={basketPhoto}/>
-                            Why Plant-Based?
+                            Why Go Plant-Based?
                             <Icon className="responsive-img" src={basketPhoto}/>
 
                         </h4>
                         <h5 className=" left-align ">
-                            Plant-based diets are often shown to be good for health. This is because they are high in vegetables, whole grains bread, legumes and whole fruits, yet can still contain <b>small amounts of lean meats and reduced-fat dairy products.</b> Studies have shown that eliminating meat and dairy products altogether can be very beneficial to an individuals overall health.
+                            Plant-based diets are often shown to be good for health. This is because they are high in vegetables, whole grains, legumes and whole fruits, yet can still contain <b>small amounts of lean meats and reduced-fat dairy products.</b> Studies have shown that eliminating meat and dairy products altogether can be very beneficial to an individuals overall health.
                         </h5>
 
                         <h5 className=" left-align ">
-                            Plants are rich sources of many nutrients that are important for good health, including unsaturated fats, vitamins (such as folate), minerals (such as potassium), fibre and protein.
+                            Plants are rich sources of many nutrients that are important for good health, including unsaturated fats, vitamins (such as folate), minerals (such as potassium), fiber and protein.
                         </h5>
                         <h5 className=" left-align ">
                             Plant-based diets have been linked to lower risk of obesity and many chronic diseases, such as heart disease, type 2 diabetes, inflammation and cancer. Eating a variety of unprocessed fruits, vegetables, whole grains and legumes is key when it comes to maintaining a healthy, balanced diet.

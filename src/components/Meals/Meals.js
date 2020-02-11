@@ -23,6 +23,7 @@ const MealsSelector = () => {
     let salad_count =  Math.floor(meal_count/4);
 
     const [allMealsPicked,validateMeals] = useState(false);
+    const [selected,setSelected] = useState("all");
     const [mainsPicked,addMain]= useState(meals.length > 0 ?meals.length-salad_count:0);
     const [mainsList,addMainToList] = useState([]);
     const [saladsPicked,addSalad] = useState(meals ? meals.filter((meal)=>meal.includes("Salad")).length : 0);
@@ -43,11 +44,12 @@ const MealsSelector = () => {
         addMainToList(meals?meals:mainsList )
 
     },[])
-    const mealList = thisWeeksMeals.map((item) =>
+    const mealList = thisWeeksMeals.filter(item=> selected !== "all" ? item.type === selected : item.type !== "all" ).map((item) =>
         <div className="col s12 m4 ">
             <div className="card medium" >
                 <div style={{height:"60%"}} className="card-image  waves-effect waves-block " >
-                    <CardImage pic={item.photo}  className="activator center" />
+                    <CardImage pic={item.photo}  className="activator center" >
+                        <i className="material-icons right" style={{color:"white"}}>info</i></CardImage>
                 </div>
                 <div className="card-content center row col s12" style={{
                     display:"flex",
@@ -167,6 +169,10 @@ const MealsSelector = () => {
                 <MainHeaderText>
                     <h4 style={{margin:0}}> {mainsPicked >0 ? `${meal_count-mainsPicked} Meals Remaining`: `Pick Your ${meal_count} Meals.`}</h4>
                     <h5>With every 4 meals you get a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h5>
+                    <div className={"row container center"} style={{ width: "60%"}}>
+                        <Button className={"col s6 btn "} onClick={()=>setSelected(selected==="main"? "all":"main")} bgcolor={selected==="main"? colors.bright: colors.secondaryTwo }>Meals</Button>
+                        <Button className={"col s6 btn "} onClick={()=>setSelected(selected==="salad"? "all":"salad")} bgcolor={selected==="salad"? colors.bright: colors.secondaryTwo }>Salads</Button>
+                    </div>
 
                     {mainsList && mainsList.length > 0 ? <Modal
                             actions={[
@@ -189,7 +195,7 @@ const MealsSelector = () => {
                                 preventScrolling: true,
                                 startingTop: '4%'
                             }}
-                            trigger={<h5 style={{color:colors.bright}} onClick={handleOpenModal}>Edit Your Selection</h5>}>
+                            trigger={<h5 style={{color:colors.bright, margin: 0}} onClick={handleOpenModal}><b>Edit Your Selection</b></h5>}>
                             {
                                 mainsList.length > 0?
                                     <ChosenMealsList  className={`col s12 center`}>
