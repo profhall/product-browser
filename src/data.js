@@ -753,4 +753,27 @@ export const meals = [
             "Iron": ""
         }
     },
+    {
+        "name": "Green Stew",
+        "available": true,
+        "description": "A hearty steamed stew of seasoned deep green veggies like asparagusm kale, peas, broccoli, green beans & bak choy.",
+        "type": "salad",
+        "ingredients": [],
+        "source": "https://www.foodnetwork.ca/recipe/green-stew/15782/",
+        "photo": "https://media.foodnetwork.ca/recipetracker/60d5cc3e-dc8c-4384-aa27-3aa13c2acc5a_Green_Stew_WebReady.jpg",
+        "nutrition": {
+            "Calories": "",
+            "Carbohydrates": "",
+            "Protein": "",
+            "Fat": "",
+            "Saturated Fat": "",
+            "Potassium": "",
+            "Fiber": "",
+            "Sugar": "",
+            "Vitamin A": "",
+            "Vitamin C": "",
+            "Calcium": "",
+            "Iron": ""
+        }
+    },
 ];
