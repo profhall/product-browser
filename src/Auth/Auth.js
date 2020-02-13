@@ -14,6 +14,7 @@ export const AuthProvider = ({children}) => {
     const [currentUserOrder, setUserOrder] = useState(null)
     const [infoValidated, validateInfo] = useState(false);
     const [userLogin, setLoginInfo] = useState({});
+    const [adminStuff, setAdminStuff] = useState({orders:[], recipes: []});
 
     const db = firebase.firestore(app);
     let userDB = db.collection(`users`);
@@ -26,7 +27,7 @@ export const AuthProvider = ({children}) => {
     useEffect( ()=> {
         async function userStateChange() {
             await app.auth().onAuthStateChanged(setCurrentUser)
-            console.log(currentUser ? `user Set!  ${currentUser}`:null)
+            // console.log(currentUser ? `user Set!  ${currentUser}`:null)
 
         }
         userStateChange();
@@ -63,12 +64,31 @@ export const AuthProvider = ({children}) => {
                 "meals":[]
             })
         }
+
+        if (currentUserProfile && currentUserProfile.admin){
+            getAdminStuff()
+        }
     },[currentUserProfile,])
 
+    useEffect(()=> {
+
+    },[adminStuff,])
+
+    function getAdminStuff ()  {
+        let odersDB = db.collection(`orders`);
+        odersDB.get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                // doc.data() is never undefined for query doc snapshots
+                // console.log(doc.id, " => ", doc.data());
+                adminStuff.orders.push(doc.data())
+                setAdminStuff({...adminStuff, orders: [...adminStuff.orders]})
+            });
+        });
+    }
 
 
     return (
-        <AuthContext.Provider value={{currentUser, currentUserProfile, currentUserOrder,userLogin,infoValidated, gotoPage , setUserProfile,setUserOrder}}>
+        <AuthContext.Provider value={{currentUser,adminStuff, currentUserProfile, currentUserOrder,userLogin,infoValidated, gotoPage , setUserProfile,setUserOrder}}>
             {children}
         </AuthContext.Provider>
     );

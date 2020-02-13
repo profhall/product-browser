@@ -29,6 +29,8 @@ let todays_date_number = today.getDay()
 
 let yesterday = new Date();
 let tomorrow = new Date();
+let clearDays = [ new Date(2020, 1, 19), new Date(2020, 1, 26)  ]
+
 tomorrow.setDate(today.getDate() + 1);
 yesterday.setDate(today.getDate() - 1);
 var daysInAWeek = 7;
@@ -46,6 +48,7 @@ const DeliveryDate = () => {
 
     const maxMealsADay = 30
     const daysToIgnore = [
+            ...clearDays,
         todays_date_number === 6 ?  tomorrow:null,
         {
             before:  todays_date_number === days.Tuesday? twoDaysFromToday:tomorrow ,
