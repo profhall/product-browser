@@ -27,7 +27,7 @@ const url =window.location.href
     return (
             <TheOrderForm admin={currentUserProfile ? currentUserProfile.admin : false} url={url} className={""}>
 
-                {!!!currentUser && !url.includes("menu")&& !url.includes("signup") && !url.includes("steps")?<Login />:routeResult}
+                {!!!currentUser && !!!url.includes("menu") && !!!url.includes("signup") && !!!url.includes("steps") ? <Login />:routeResult}
 
             </TheOrderForm>
     );
@@ -41,7 +41,8 @@ const TheOrderForm = styled.div`
       overflow:auto;
     justify-content: center;
     color:white;
-    background:${props=>props.url.includes('admin') && props.admin ? "" :"linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,.7)),url("+foodPic+")"};
+    // background:${props=>props.url.includes('admin') && props.admin ? "" :"linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,.7)),url("+foodPic+")"};
+    background:linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,.7)),url(${foodPic});
     background-repeat: no-repeat ;
     background-size:  cover ;
     background-position: center;

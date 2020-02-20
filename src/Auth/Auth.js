@@ -6,7 +6,9 @@ import 'firebase/firestore';
 
 export const AuthContext = React.createContext();
 
-
+function getDimensions() {
+    return {"width":window.innerWidth, "height":window.innerHeight}
+}
 
 export const AuthProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState(null)
@@ -76,6 +78,7 @@ export const AuthProvider = ({children}) => {
 
     function getAdminStuff ()  {
         let odersDB = db.collection(`orders`);
+        let recipesDB = db.collection(`recipes`);
         odersDB.get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
                 // doc.data() is never undefined for query doc snapshots
@@ -84,11 +87,19 @@ export const AuthProvider = ({children}) => {
                 setAdminStuff({...adminStuff, orders: [...adminStuff.orders]})
             });
         });
+        recipesDB.get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                // doc.data() is never undefined for query doc snapshots
+                // console.log(doc.id, " => ", doc.data());
+                adminStuff.recipes.push(doc.data())
+                setAdminStuff({...adminStuff, recipes: [...adminStuff.recipes]})
+            });
+        });
     }
 
 
     return (
-        <AuthContext.Provider value={{currentUser,adminStuff, currentUserProfile, currentUserOrder,userLogin,infoValidated, gotoPage , setUserProfile,setUserOrder}}>
+        <AuthContext.Provider value={{getDimensions, currentUser,adminStuff, currentUserProfile, currentUserOrder,userLogin,infoValidated, gotoPage , setUserProfile,setUserOrder}}>
             {children}
         </AuthContext.Provider>
     );

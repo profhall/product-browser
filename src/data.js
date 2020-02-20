@@ -52,7 +52,22 @@ export const meals = [
             }
         },
         "description": "Our version of a classic seafood dish made with the versatile Jackfruit. These cakes come with sauteed greens and roasted sweet potatos. ",
-        "ingredients": [],
+        "ingredients": ["Young Jackfruit"],
+        "recipe":
+            [
+                "Preheat oven to 375 degrees. Line a large baking sheet with parchment paper.",
+                "Steam or boil the cauliflower florets until they are tender. Drain and allow to cool.",
+                "Drain and rinse jackfruit. Place in a small saucepan, cover with water. Over medium heat, bring to a boil. Cook for 10 minutes at a slow boil, until jackfruit is fork tender. Drain and allow to cool.",
+                "While jackfruit is cooling, using a fork gently mash the cauliflower florets. You don't want this to be a smooth puree, leaving a few pieces about the size of a pea or so.",
+                "Next chop the jackfruit until it is flaky with just a few bite sized chunks left intact.",
+                "In a large mixing bowl, combine all ingredients except coconut flour. Stir to combine.",
+                "Last, gently fold in coconut flour.",
+                "In a large skillet, heat the 2 Tablespoons of oil over medium heat. While pan is heating, make the mixture into cakes/patties.",
+                "Using a large scoop (use roughly 1/3 of a cup), scoop out the mixture into your hands, press into a patty about 3\" in diameter.",
+                "Place the jackfruit crab cakes into the skillet. Over medium heat, cook about 3 minutes on each side until they are nicely browned.",
+                "Remove to the parchment lined baking sheet. Bake for 10 minutes at 375 degrees.",
+                "Serve with a slice of lemon and a tasty zesty aoli."
+            ],
         "photo": "https://dizzybusyandhungry.com/wp-content/uploads/2018/09/crab-cakes-3862-2.jpg",
         "type": "main"
     },
@@ -289,7 +304,7 @@ export const meals = [
         }
     },
     {
-        "name": "Glazed Orange Cauliflower 'Chicken'",
+        "name": 'Glazed Orange Cauliflower "Chicken"',
         "available": false,
         "side": {
             1: {
