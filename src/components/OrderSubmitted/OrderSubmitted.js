@@ -13,8 +13,6 @@ import {Button} from "../Styles";
 const OrderSubmitted = () => {
     const {currentUserProfile, currentUserOrder,nextPage, prevPage} = useContext(AuthContext)
 
-
-
     const db = firebase.firestore(app);
     let {meal_count,price, address,deliver_date, order_time_stamp, delivery_date, restrictions, meals} = currentUserOrder;
     let ordersDB = db.collection(`orders`);
