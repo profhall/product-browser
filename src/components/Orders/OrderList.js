@@ -1,7 +1,7 @@
 import React from 'react';
 import {meals} from "../../data";
 import colors from "../../Colors";
-import {RecipeModal} from "../Modals";
+import {RecipeModal} from "../shared_comps/Modals";
 
 const OrderList = ({orders}) => {
     const todaysDate = new Date();

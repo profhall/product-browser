@@ -1,5 +1,5 @@
 import React from 'react';
-import {ButtonContainer} from "../Styles";
+import {ButtonContainer} from "../shared_comps/Styles";
 import styled from "styled-components";
 import colors from "../../Colors";
 

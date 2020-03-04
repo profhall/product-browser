@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import {Button as But, Modal} from "react-materialize";
-import colors from "../Colors";
-import {ChosenMealsList} from "./Meals/Styles";
+import colors from "../../Colors";
+import {ChosenMealsList} from "../Meals/Styles";
 import {Button} from "./Styles";
 const bottomModalOptions = {
     dismissible: true,

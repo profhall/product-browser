@@ -1,19 +1,47 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext,useEffect} from 'react';
 import styled from "styled-components";
 import app from "../../fbase"
 import * as firebase from "firebase/app";
 import 'firebase/firestore';
-import {NutriModal,RecipeModal} from "../Modals";
+import {NutriModal,RecipeModal} from "../shared_comps/Modals";
+import {AuthContext} from "../../Auth/Auth";
+
 
 
 const Recipe =({item})=>{
+    const [avail, setAvail] = useState(item.available ? "checked": "")
+    const [meal, setMeal] = useState(item)
+    const {updateMenu, adminStuff } =  useContext( AuthContext)
+
+    useEffect(()=>{
+        // console.log(item.name, "is", avail ==="checked"? "available" : "not available")
+    }, [avail, adminStuff])
+
+    const handleCheckbox = (e, meal) => {
+        const checkbox = e.target;
+        if (checkbox.checked===true ) {
+            updateMenu({item: {...item, available: true}})
+
+            setAvail('checked')
+        } else {
+            setAvail('')
+            updateMenu({item: {...item, available: false}})
+
+        }
+
+
+    };
     return(
     <div style={{height:250,minWidth:250, margin: '0 10px'}}>
         <div className="card small" >
 
             <div style={{height:300}}  className="card-image  waves-effect waves-block " >
                 <CardImage pic={item.photo}  className="activator center" >
-                    <i className="material-icons right" style={{color:"white"}}>info</i></CardImage>
+
+
+                    <span className={`badge black-text ${avail ==="checked" ? "green":"red"}`}>{avail ==="checked" ? "":"Not"} Available</span>
+                    {/*<i className="material-icons right" style={{color:"white", backgroundColor:item.available ? }}>check</i>*/}
+                </CardImage>
             </div>
 
             <div className="card-content center row col s12" style={{
@@ -27,7 +55,13 @@ const Recipe =({item})=>{
                 <span style={{marginBottom:0, lineHeight:"18px", fontSize:18}} className="card-title flow-text activator grey-text text-darken-4">
                     {item.name}
                 </span>
+                <p>
+                    <label>
+                        <input onChange={handleCheckbox} id="gluten" type="checkbox" checked={avail}/>
 
+                        <span>Make Available</span>
+                    </label>
+                </p>
                 <RecipeModal item={item}/>
 
             </div>
@@ -35,7 +69,9 @@ const Recipe =({item})=>{
             <div className="card-reveal">
                 <h6 className="grey-text card-title text-darken-4"><i className="material-icons right ">close</i>{item.name}</h6>
                 <NutriModal item={item}/>
+
                 <span className="grey-text text-darken-4" >{item.description}</span>
+
                 <div style={{height: 150,width:"100%",display:"flex"}}>
                     {item.side ? <SideImage pic={ item.side[1].pic}>
 

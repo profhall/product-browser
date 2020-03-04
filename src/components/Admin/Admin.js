@@ -8,6 +8,7 @@ import Orders from "../Orders/Orders";
 import Recipes from "../Recipes/Recipes";
 import colors from "../../Colors";
 import {createRecipesCollection} from "../../workers/createCollection";
+import {Anchor} from "../shared_comps/Styles";
 
 // createRecipesCollection()
 
@@ -67,6 +68,4 @@ flex-direction: column;
 // border: ${colors.bright} 2px solid !important;
 `;
 
-const Anchor = styled.a`
-color:${colors.bright};
-`
+

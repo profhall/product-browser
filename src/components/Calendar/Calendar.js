@@ -8,7 +8,7 @@ import {AuthContext} from "../../Auth/Auth";
 import * as firebase from "firebase/app";
 import app from "../../fbase";
 import 'firebase/firestore';
-import {Button, ButtonContainer} from "../Styles";
+import {Button, ButtonContainer} from "../shared_comps/Styles";
 import today from "../../testDays/testDays"
 
 

@@ -3,7 +3,7 @@ import {A, navigate} from "hookrouter";
 import {AuthContext} from "../../Auth/Auth";
 import styled from "styled-components";
 import colors from "../../Colors";
-import {Button} from "../Styles";
+import {Button} from "../shared_comps/Styles";
 import today from "../../testDays/testDays"
 
 const days ={

@@ -3,8 +3,6 @@ import styled from "styled-components";
 import colors from "../../Colors";
 import {AuthContext, AuthProvider} from "../../Auth/Auth";
 
-import {meals, salads, mains, sides} from '../../data'
-const thisWeeksMeals = meals.filter((item)=>item.available)
 function getWidth() {
     return window.innerWidth
 }
@@ -13,10 +11,12 @@ function getWidth() {
 const Menu = () => {
     const [currentSlide, setSlide]=useState(0);
     const [selected, setSelected]=useState("meals");
+    const {adminStuff} = useContext(AuthContext)
 
     const [windowWidth, setWidth] = useState(getWidth);
     const handleResize =()=> setWidth(getWidth());
     window.addEventListener('resize', handleResize);
+    const [thisWeeksMeals, setMeals] = useState(adminStuff ? adminStuff.recipes.filter((item)=>item.available) : null);
 
 
     useEffect(()=>{
@@ -76,7 +76,7 @@ const Menu = () => {
     });
 
     const mealList2 = thisWeeksMeals.map((item,i) => {
-        console.log(item.side)
+        // console.log(item.side)
         return  (
             <Meal key={i} id={i} className={"container"} >
 

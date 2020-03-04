@@ -5,7 +5,7 @@ import {AuthContext} from "../../Auth/Auth";
 import {navigate } from 'hookrouter';
 import M from "materialize-css/dist/js/materialize.min.js";
 import "materialize-css/dist/css/materialize.min.css";
-import {Button, ButtonContainer} from "../Styles";
+import {Button, ButtonContainer} from "../shared_comps/Styles";
 import deliciousPhoto from '../media/foodIcons/delicious.png'
 
 const Icon = styled.img`

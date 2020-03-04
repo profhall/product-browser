@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button as But, Modal} from "react-materialize";
-import {Button} from "../Styles";
+import {Button} from "../shared_comps/Styles";
 import styled from "styled-components";
 
 const RecipeModal =({item})=>{

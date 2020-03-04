@@ -8,7 +8,7 @@ import app from "../../fbase";
 import {navigate, A} from "hookrouter";
 import Sidebar from "../SideBar/SideBar";
 import Logo from "../media/logo-01.png";
-import {Button} from "../Styles";
+import {Button} from "../shared_comps/Styles";
 import {Button as But, Modal} from "react-materialize";
 
 

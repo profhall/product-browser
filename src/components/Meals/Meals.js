@@ -1,8 +1,8 @@
 import React, {useState,useContext, useEffect} from 'react';
 import colors from "../../Colors";
 import {AuthContext} from "../../Auth/Auth";
-import {Button, ButtonContainer} from "../Styles";
-import {SelectionModal} from "../Modals";
+import {Button, ButtonContainer} from "../shared_comps/Styles";
+import {SelectionModal} from "../shared_comps/Modals";
 import MealList from "./MealList";
 import {MainHeader, MainHeaderText, Mains, MealsSelectorContainer} from "./Styles";
 

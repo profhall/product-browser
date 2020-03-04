@@ -21,6 +21,9 @@ export const AuthProvider = ({children}) => {
     const db = firebase.firestore(app);
     let userDB = db.collection(`users`);
 
+    let odersDB = db.collection(`orders`);
+    let recipesDB = db.collection(`recipes`);
+
     const gotoPage = (location) =>{
 
         navigate(location,false,[],false)
@@ -77,29 +80,51 @@ export const AuthProvider = ({children}) => {
     },[adminStuff,])
 
     function getAdminStuff ()  {
-        let odersDB = db.collection(`orders`);
-        let recipesDB = db.collection(`recipes`);
+        getOrders()
+        getRecipes()
+    }
+
+    const getOrders = ()=>{
+
+        adminStuff.orders = []
         odersDB.get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
-                // doc.data() is never undefined for query doc snapshots
-                // console.log(doc.id, " => ", doc.data());
+
                 adminStuff.orders.push(doc.data())
                 setAdminStuff({...adminStuff, orders: [...adminStuff.orders]})
             });
         });
+    }
+
+    const getRecipes = ()=>{
+        adminStuff.recipes = []
         recipesDB.get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
-                // doc.data() is never undefined for query doc snapshots
-                // console.log(doc.id, " => ", doc.data());
+
                 adminStuff.recipes.push(doc.data())
                 setAdminStuff({...adminStuff, recipes: [...adminStuff.recipes]})
             });
         });
     }
 
+    function updateMenu ({item, meal, available})  {
+
+        console.log(item)
+        recipesDB.doc(item.name).update({
+            available: item.available
+        }).then(function() {
+            console.log(item.name, "updated!");
+            getRecipes()
+        })
+            .catch(function(error) {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
+    }
+
 
     return (
-        <AuthContext.Provider value={{getDimensions, currentUser,adminStuff, currentUserProfile, currentUserOrder,userLogin,infoValidated, gotoPage , setUserProfile,setUserOrder}}>
+        <AuthContext.Provider value={{getDimensions,updateMenu , currentUser,adminStuff, currentUserProfile, currentUserOrder,userLogin,infoValidated, gotoPage , setUserProfile,setUserOrder}}>
             {children}
         </AuthContext.Provider>
     );

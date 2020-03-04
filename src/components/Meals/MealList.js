@@ -1,13 +1,13 @@
 import React from 'react';
-import {NutriModal} from "../Modals";
-import {Button} from "../Styles";
+import {NutriModal} from "../shared_comps/Modals";
+import {Button} from "../shared_comps/Styles";
 import styled from "styled-components";
 
 const MealList = ({thisWeeksMeals, selected, windowWidth, addDish}) => {
 
     return (
-        thisWeeksMeals.filter(item => item.available && selected !== "all" ? item.available && item.type === selected : item.available && item.type !== "all" ).map((item) =>
-            <div className="col s12 m4 ">
+        thisWeeksMeals.filter(item => item.available && selected !== "all" ? item.available && item.type === selected : item.available && item.type !== "all" ).map((item,i) =>
+            <div className="col s12 m4 " key={i}>
                 <div className="card medium" >
                     <div style={{height:"60%"}} className="card-image  waves-effect waves-block " >
                         <CardImage pic={item.photo}  className="activator center" >

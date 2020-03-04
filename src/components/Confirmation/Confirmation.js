@@ -7,7 +7,7 @@ import * as firebase from "firebase/app";
 import app from "../../fbase";
 import 'firebase/firestore';
 import emailjs from "emailjs-com";
-import {Button} from "../Styles";
+import {Button} from "../shared_comps/Styles";
 
 const Confirmation = () => {
     const {currentUserProfile, currentUserOrder, gotoPage} = useContext(AuthContext)
