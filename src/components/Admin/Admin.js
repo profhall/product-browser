@@ -26,9 +26,7 @@ const Admin = () => {
         // console.log(currentUser)
         // console.log(adminStuff)
 
-        // if(!!currentUser ){
-        //     navigate('/')
-        // }
+
     }, [currentUser,currentUserProfile,adminStuff]);
 
     const newRecipe = () => {
