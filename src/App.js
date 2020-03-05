@@ -19,11 +19,10 @@ function getDimensions() {
 }
 
 function App() {
-    const {getDimensions} = useContext(AuthContext);
+    const {getDimensions, url, setURL} = useContext(AuthContext);
 
     const [windowWidth, setWidth] = useState(getDimensions()["width"]);
     const [windowHeight, setHeight] = useState(getDimensions()["height"]);
-    const [url, setURL] = useState(window.location.href);
     const [showMenu, setMenuVisibility] = useState(false);
     const [chosenMeals, setMeals] = useState([]);
     const [chosenSalads, setSalads] = useState([]);
@@ -39,7 +38,6 @@ function App() {
 
 
     useEffect(() => {
-        setURL(window.location.href)
         setWidth(getDimensions()["width"]);
 
     }, [chosenSalads,chosenMeals,windowWidth,showMenu,url]);

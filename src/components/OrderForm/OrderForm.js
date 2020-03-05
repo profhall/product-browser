@@ -13,8 +13,12 @@ import foodPic from './veganBowl.jpeg'
 
 
 const OrderForm =  () => {
-    const {currentUser,currentUserProfile} =  useContext( AuthContext)
+    const {currentUser,currentUserProfile,  url, setURL} =  useContext( AuthContext)
     const routeResult = useRoutes(Routes);
+    setURL(window.location.href)
+    useEffect(() => {
+        console.log(url)
+    }, [url]);
 
     useEffect(() => {
         // console.log(currentUserProfile)
@@ -23,7 +27,6 @@ const OrderForm =  () => {
 
 
 
-const url =window.location.href
     return (
             <TheOrderForm admin={currentUserProfile ? currentUserProfile.admin : false} url={url} className={""}>
 

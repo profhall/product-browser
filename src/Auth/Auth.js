@@ -17,6 +17,7 @@ export const AuthProvider = ({children}) => {
     const [infoValidated, validateInfo] = useState(false);
     const [userLogin, setLoginInfo] = useState({});
     const [adminStuff, setAdminStuff] = useState({orders:[], recipes: []});
+    const [url, setURL] = useState(window.location.href);
 
     const db = firebase.firestore(app);
     let userDB = db.collection(`users`);
@@ -124,7 +125,7 @@ export const AuthProvider = ({children}) => {
 
 
     return (
-        <AuthContext.Provider value={{getDimensions,updateMenu , currentUser,adminStuff, currentUserProfile, currentUserOrder,userLogin,infoValidated, gotoPage , setUserProfile,setUserOrder}}>
+        <AuthContext.Provider value={{getDimensions,updateMenu ,setURL,url, currentUser,adminStuff, currentUserProfile, currentUserOrder,userLogin,infoValidated, gotoPage , setUserProfile,setUserOrder}}>
             {children}
         </AuthContext.Provider>
     );
