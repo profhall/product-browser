@@ -3,7 +3,7 @@ import {A, navigate} from "hookrouter";
 import {AuthContext} from "../../Auth/Auth";
 import styled from "styled-components";
 import colors from "../../Colors";
-import {Button} from "../shared_comps/Styles";
+import {Button, ButtonContainer} from "../shared_comps/Styles";
 import today from "../../testDays/testDays"
 
 const days ={
@@ -23,7 +23,7 @@ const Home = () => {
     // console.log("The User: "+currentUser.uid)
     useEffect(()=>
     {
-        console.log(currentUserProfile,currentUserOrder);
+        console.log(currentUser, currentUserProfile);
     }, [currentUserProfile])
 
 
@@ -34,9 +34,14 @@ const Home = () => {
                 <h4>Thank you for eating at The Tasty Plant-Based Kitchen, we're so glad you came. We hope you enjoy <span style={{color:colors.bright}} onClick={()=>gotoPage('\menu')}>this weeks menu</span>.</h4> <br/>
                 {todays_date_number === days.Tuesday ? <h3 >Today is Tuesday! That means we are updating our menu. Orders can resume on Wednesday. Thanks for your patience!</h3>: null}
             </HomeInfoBox>
+            <ButtonContainer>
             {todays_date_number === days.Tuesday ? null :<Button className={"btn-large"} onClick={()=>gotoPage('\mealcount')}>
                 {currentUserOrder && currentUserOrder.meal_count ? "Continue Order" : "Start Your Order"}
             </Button>}
+
+            {currentUserProfile && currentUserProfile.admin ?
+                <Button className={"btn-large"} onClick={()=>gotoPage('\admin')} > Admin Page </Button> : null}
+            </ButtonContainer>
         </HomeContainer>
     );
 };

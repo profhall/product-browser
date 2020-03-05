@@ -41,9 +41,15 @@ const Admin = () => {
             </div>
 
             <div className='container'>
-                <Anchor href={"#recipes"} name={"recipes"}><h1> Recipes <a className="btn-floating btn-small waves-effect waves-light red"><i onClick={newRecipe}
-                    className="material-icons">add</i></a>
-                </h1></Anchor>
+                <Anchor href={"#recipes"} name={"recipes"}>
+                    <h1> Recipes
+                        <a className="btn-floating btn-small waves-effect waves-light red">
+                            <i onClick={newRecipe} className="material-icons">
+                            add
+                            </i>
+                        </a>
+                    </h1>
+                </Anchor>
                 <Recipes width={windowWidth} recipes={adminStuff ? adminStuff.recipes : null}/>
             </div>
 

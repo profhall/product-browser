@@ -33,8 +33,8 @@ const OrderList = ({orders}) => {
                             <p>Order Date: { d.toDateString()}</p>
 
                             {
-                                order.meals.map((meal,i)=> <a href="#!">
-                                    <div key={i} className="card" >
+                                order.meals.map((meal,i)=> <a key={i} href="#!">
+                                    <div className="card" >
                                         <div className="col s12 m4 l3 ">
                                             <div className="card-image" >
                                                 <img alt={meal} style={{maxHeight: 150, objectFit:"cover"}} src={meals.filter((m)=> m.name === meal  )[0].photo}/>

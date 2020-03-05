@@ -59,7 +59,7 @@ const Recipe =({item})=>{
                     <label>
                         <input onChange={handleCheckbox} id="gluten" type="checkbox" checked={avail}/>
 
-                        <span>Make Available</span>
+                        <span>available</span>
                     </label>
                 </p>
                 <RecipeModal item={item}/>
