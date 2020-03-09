@@ -11,22 +11,26 @@ import foodPic from './veganBowl.jpeg'
 
 
 
+
 const OrderForm =  () => {
-    const {currentUser} =  useContext( AuthContext)
+    const {currentUser,currentUserProfile,  url, setURL} =  useContext( AuthContext)
     const routeResult = useRoutes(Routes);
+    setURL(window.location.href)
+    useEffect(() => {
+        console.log(url)
+    }, [url]);
 
     useEffect(() => {
-        // console.log(currentUser)
-    }, [currentUser]);
+        // console.log(currentUserProfile)
+    }, [currentUser,currentUserProfile]);
 
 
 
 
-const url =window.location.href
     return (
-            <TheOrderForm url={url} className={""}>
+            <TheOrderForm admin={currentUserProfile ? currentUserProfile.admin : false} url={url} className={""}>
 
-                {!!!currentUser && !url.includes("menu")&& !url.includes("signup") && !url.includes("steps")?<Login />:routeResult}
+                {!!!currentUser && !!!url.includes("menu") && !!!url.includes("signup") && !!!url.includes("steps") ? <Login />:routeResult}
 
             </TheOrderForm>
     );
@@ -40,7 +44,8 @@ const TheOrderForm = styled.div`
       overflow:auto;
     justify-content: center;
     color:white;
-    background:${props=>props.url.includes('admin')? "" :"linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,.7)),url("+foodPic+")"};
+    // background:${props=>props.url.includes('admin') && props.admin ? "" :"linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,.7)),url("+foodPic+")"};
+    background:linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,.7)),url(${foodPic});
     background-repeat: no-repeat ;
     background-size:  cover ;
     background-position: center;

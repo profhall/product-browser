@@ -6,7 +6,9 @@ import 'firebase/firestore';
 
 export const AuthContext = React.createContext();
 
-
+function getDimensions() {
+    return {"width":window.innerWidth, "height":window.innerHeight}
+}
 
 export const AuthProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState(null)
@@ -14,9 +16,14 @@ export const AuthProvider = ({children}) => {
     const [currentUserOrder, setUserOrder] = useState(null)
     const [infoValidated, validateInfo] = useState(false);
     const [userLogin, setLoginInfo] = useState({});
+    const [adminStuff, setAdminStuff] = useState({orders:[], recipes: []});
+    const [url, setURL] = useState(window.location.href);
 
     const db = firebase.firestore(app);
     let userDB = db.collection(`users`);
+
+    let odersDB = db.collection(`orders`);
+    let recipesDB = db.collection(`recipes`);
 
     const gotoPage = (location) =>{
 
@@ -26,7 +33,7 @@ export const AuthProvider = ({children}) => {
     useEffect( ()=> {
         async function userStateChange() {
             await app.auth().onAuthStateChanged(setCurrentUser)
-            console.log(currentUser ? `user Set!  ${currentUser}`:null)
+            // console.log(currentUser ? `user Set!  ${currentUser}`:null)
 
         }
         userStateChange();
@@ -63,12 +70,62 @@ export const AuthProvider = ({children}) => {
                 "meals":[]
             })
         }
+
+        if (currentUserProfile && currentUserProfile.admin){
+            getAdminStuff()
+        }
     },[currentUserProfile,])
 
+    useEffect(()=> {
+
+    },[adminStuff,])
+
+    function getAdminStuff ()  {
+        getOrders()
+        getRecipes()
+    }
+
+    const getOrders = ()=>{
+
+        adminStuff.orders = []
+        odersDB.get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+
+                adminStuff.orders.push(doc.data())
+                setAdminStuff({...adminStuff, orders: [...adminStuff.orders]})
+            });
+        });
+    }
+
+    const getRecipes = ()=>{
+        adminStuff.recipes = []
+        recipesDB.get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+
+                adminStuff.recipes.push(doc.data())
+                setAdminStuff({...adminStuff, recipes: [...adminStuff.recipes]})
+            });
+        });
+    }
+
+    function updateMenu ({item, meal, available})  {
+
+        console.log(item)
+        recipesDB.doc(item.name).update({
+            available: item.available
+        }).then(function() {
+            console.log(item.name, "updated!");
+            getRecipes()
+        })
+            .catch(function(error) {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
+    }
 
 
     return (
-        <AuthContext.Provider value={{currentUser, currentUserProfile, currentUserOrder,userLogin,infoValidated, gotoPage , setUserProfile,setUserOrder}}>
+        <AuthContext.Provider value={{getDimensions,updateMenu ,setURL,url, currentUser,adminStuff, currentUserProfile, currentUserOrder,userLogin,infoValidated, gotoPage , setUserProfile,setUserOrder}}>
             {children}
         </AuthContext.Provider>
     );

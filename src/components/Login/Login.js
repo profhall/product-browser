@@ -2,7 +2,7 @@ import React, {useCallback,useState,useEffect, useContext} from 'react';
 import styled from "styled-components";
 import {A } from 'hookrouter';
 import colors from "../../Colors";
-import {Button} from "../Styles";
+import {Button} from "../shared_comps/Styles";
 
 import app from "../../fbase"
 import {AuthContext} from "../../Auth/Auth";

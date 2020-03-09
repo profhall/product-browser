@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import colors from "../Colors";
+import colors from "../../Colors";
 
 export const Button = styled.button`
   width:  ${props=>props.width ? props.width : ""}  ;
@@ -24,3 +24,6 @@ export const ButtonContainer = styled.div`
 
 `;
 
+export const Anchor = styled.a`
+color:${colors.bright};
+`

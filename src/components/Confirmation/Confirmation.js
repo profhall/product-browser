@@ -7,7 +7,7 @@ import * as firebase from "firebase/app";
 import app from "../../fbase";
 import 'firebase/firestore';
 import emailjs from "emailjs-com";
-import {Button} from "../Styles";
+import {Button} from "../shared_comps/Styles";
 
 const Confirmation = () => {
     const {currentUserProfile, currentUserOrder, gotoPage} = useContext(AuthContext)
@@ -42,24 +42,41 @@ const Confirmation = () => {
         ordersDB.add({...currentUserOrder, "order_time_stamp": Date.now()})
             .then(function(docRef) {
                 // console.log("Document written with ID: ", docRef.id);
+
                 const theSubmitInfo =
                     {
 
-                        "chosen_items":currentUserOrder? currentUserOrder.meals : null,
+                        "chosen_items":currentUserOrder? currentUserOrder.meals.map((meal,i)=><h2>/n/ {i}. {meal}</h2>) : null,
                         "name":currentUserProfile ? currentUserProfile["name"]: null,
                         "email":currentUserProfile ? currentUserProfile["email"]: null,
                         "state":currentUserProfile && currentUserProfile["address"].state ? currentUserProfile["address"].state : null,
                         "city":currentUserProfile ? currentUserProfile["address"]["city"]: null,
                         "zip":currentUserProfile ? currentUserProfile["address"]["zip"]: null,
-                        "street": currentUserProfile ? currentUserProfile["address"]["street"]: null
+                        "street": currentUserProfile ? currentUserProfile["address"]["street"]: null,
+                        "delivery_date": currentUserOrder ? currentUserOrder["delivery_date"]: null,
+                        "restrictions": currentUserOrder ? currentUserOrder["restrictions"]: null,
+                        "meal_count": currentUserOrder ? currentUserOrder["price"]: null,
+                        "total": currentUserOrder ? currentUserOrder["meal_count"]: null,
 
                     };
+
                 emailjs.send('meal_prep', 'template_awzr3ptv', theSubmitInfo, "user_p8ucvKr8lnqx5SwxOEshJ")
                         .then(function(response) {
                             // console.log('SUCCESS!', response.status, response.text);
+
+                            emailjs.send('receiptemail', 'customer_receipt', theSubmitInfo, "user_p8ucvKr8lnqx5SwxOEshJ")
+                                .then(function(response) {
+                                    // console.log('SUCCESS!', response.status, response.text);
+                                }, function(error) {
+                                    console.log('FAILED...', error);
+                                });
+
                         }, function(error) {
+
                             console.log('FAILED...', error);
                         });
+
+
 
                 navigate("/order_submitted",true)
 
@@ -148,15 +165,6 @@ const ConfirmForm = styled.form`
   font-size: 22px;
   font-weight: bold ;
 `;
-// const ConfirmInfo = styled.div`
-//   flex-direction: column;
-//   width: 100%;
-//   margin: 12px;
-//   font-size: 25px;
-//   font-weight: bold ;
-// `;
-
-
 
 const FormInputDiv = styled.div`
 color:white;

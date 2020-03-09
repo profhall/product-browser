@@ -5,7 +5,7 @@ import styled from "styled-components";
 import colors from "../../Colors";
 import * as firebase from "firebase/app";
 import 'firebase/firestore';
-import {Button, ButtonContainer} from "../Styles";
+import {Button, ButtonContainer} from "../shared_comps/Styles";
 
 
 import {AuthContext} from "../../Auth/Auth";
@@ -37,16 +37,7 @@ const SignUp = ({}) => {
 
     }, [ userSignUp,passwordsMatch,emailValidated, streetValidated,cityValidated,zipValidated,nameValidated, restrictions]);
 
-    const handleCity = (e) => {
-        console.log(e)
-        setSignUpInfo({...userSignUp, 'address': {"city":e}})
-    }
-    const handleStreet = (e) => {
-        setSignUpInfo({...userSignUp, 'address': {"street":e}})
-    }
-    const handleZip = (e) => {
-        setSignUpInfo({...userSignUp, 'address': {"zip":e}})
-    }
+
     const FormValidation = (e) => {
         let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         let street = userSignUp["address"] && userSignUp["address"]["street"] ? userSignUp["address"]["street"] : null;

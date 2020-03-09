@@ -64,6 +64,7 @@ const NavContainer = styled.div`
     z-index: 999;
     right: 0;
     margin: 20px;
+
 `
 const Icon = styled.img`
 width: 25px;

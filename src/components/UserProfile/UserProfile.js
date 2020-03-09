@@ -5,7 +5,7 @@ import colors from "../../Colors";
 import * as firebase from "firebase/app";
 import app from "../../fbase";
 import 'firebase/firestore';
-import {Button} from "../Styles";
+import {Button} from "../shared_comps/Styles";
 
 function getWidth() {
     return window.innerWidth

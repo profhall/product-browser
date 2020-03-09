@@ -6,14 +6,12 @@ import app from "../../fbase";
 import 'firebase/firestore';
 import {useQueryParams, navigate} from "hookrouter";
 import colors from "../../Colors";
-import {Button} from "../Styles";
+import {Button} from "../shared_comps/Styles";
 
 
 
 const OrderSubmitted = () => {
     const {currentUserProfile, currentUserOrder,nextPage, prevPage} = useContext(AuthContext)
-
-
 
     const db = firebase.firestore(app);
     let {meal_count,price, address,deliver_date, order_time_stamp, delivery_date, restrictions, meals} = currentUserOrder;

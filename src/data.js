@@ -15,9 +15,29 @@ const mashed_cauliflower = "https://media.chefdehome.com/740/0/0/cauliflower/mas
 const cauliflower_rice = "https://www.veganricha.com/wp-content/uploads/2018/02/Cauliflower-Fried-Rice-with-Tofu-Eggplant-in-Soy-Lime-Sauce-veganricha-7293.CR2_.HR_.jpg";
 const cauliflower_green_rice = "https://minimalistbaker.com/wp-content/uploads/2019/06/DELICIOUS-Cauliflower-Green-Rice-infused-with-lime-herbs-and-peppers-8-ingredients-FRESH-flavor-perfect-for-Mexican-night-glutenfree-plantbased-cauliflowerrice-recipe-minimalistbaker_-9-768x1152.jpg";
 const fried_okra = "https://images.abeautifulmess.com/uploads/2018/11/air-fried-okra.jpg"
+const radish_slaw = "https://www.healthyseasonalrecipes.com/wp-content/uploads/2015/03/ginger-carrot-radish-salad-017.jpg"
 const black_beans = "https://i2.wp.com/belleofthekitchen.com/wp-content/uploads/2018/06/mexican-black-beans2.jpg?resize=680%2C1020&ssl=1"
 
 export const meals = [
+    {
+        "name": "Vegan Dynamite Rolls",
+        "available": false,
+        "source":"https://olivesfordinner.com/2016/01/vegan-dynamite-rolls.html",
+        "side": {
+            1: {
+                "name": "sweet potatoes",
+                "pic": roasted_sweet_potatoes
+            },
+            2: {
+                "name": "Sauteed Greens",
+                "pic": sauteed_kale
+            }
+        },
+        "description": "Our version of a classic seafood dish made with the versatile Jackfruit. These cakes come with Sauteed veggies and roasted sweet potato salad. ",
+        "ingredients": [],
+        "photo": "https://farm2.staticflickr.com/1676/23790494769_81fecd5dc7_b.jpg",
+        "type": "main"
+    },
     {
         "name": "Jackfruit Crab Cakes with Lemon Dill Sauce",
         "available": true,
@@ -31,8 +51,23 @@ export const meals = [
                 "pic": sauteed_kale
             }
         },
-        "description": "Our version of a classic seafood dish made with the versatile Jackfruit. These cakes come with Sauteed veggies and roasted sweet potato salad. ",
-        "ingredients": [],
+        "description": "Our version of a classic seafood dish made with the versatile Jackfruit. These cakes come with sauteed greens and roasted sweet potatos. ",
+        "ingredients": ["Young Jackfruit"],
+        "recipe":
+            [
+                "Preheat oven to 375 degrees. Line a large baking sheet with parchment paper.",
+                "Steam or boil the cauliflower florets until they are tender. Drain and allow to cool.",
+                "Drain and rinse jackfruit. Place in a small saucepan, cover with water. Over medium heat, bring to a boil. Cook for 10 minutes at a slow boil, until jackfruit is fork tender. Drain and allow to cool.",
+                "While jackfruit is cooling, using a fork gently mash the cauliflower florets. You don't want this to be a smooth puree, leaving a few pieces about the size of a pea or so.",
+                "Next chop the jackfruit until it is flaky with just a few bite sized chunks left intact.",
+                "In a large mixing bowl, combine all ingredients except coconut flour. Stir to combine.",
+                "Last, gently fold in coconut flour.",
+                "In a large skillet, heat the 2 Tablespoons of oil over medium heat. While pan is heating, make the mixture into cakes/patties.",
+                "Using a large scoop (use roughly 1/3 of a cup), scoop out the mixture into your hands, press into a patty about 3\" in diameter.",
+                "Place the jackfruit crab cakes into the skillet. Over medium heat, cook about 3 minutes on each side until they are nicely browned.",
+                "Remove to the parchment lined baking sheet. Bake for 10 minutes at 375 degrees.",
+                "Serve with a slice of lemon and a tasty zesty aoli."
+            ],
         "photo": "https://dizzybusyandhungry.com/wp-content/uploads/2018/09/crab-cakes-3862-2.jpg",
         "type": "main"
     },
@@ -70,8 +105,8 @@ export const meals = [
     },
     {
         "name": "Yellow Curry with Chikpeas & Roasted Veggies",
-        "available": false,
-        "description": "",
+        "available": true,
+        "description": "This yellow curry is loaded with chickpeas, coconut milk, and roasted vegetables and makes a delicious, comforting, nourishing weeknight meal. Comes with sauteed brussels and basmati rice.",
         "ingredients": [],
         "side": {
             1: {
@@ -79,21 +114,21 @@ export const meals = [
                 "pic": brown_rice
             },
             2: {
-                "name": "Sauteed Kale",
-                "pic": sauteed_kale,
+                "name": "Sauteed Brussels",
+                "pic": sauteed_brussels,
             }
         },
         "type": "main",
-        "photo": "https://i2.wp.com/www.yummymummykitchen.com/wp-content/uploads/2018/03/4b3d6-vegan-chickpea-curry.jpg",
+        "photo": "https://i2.wp.com/www.yummymummykitchen.com/wp-content/uploads/2018/03/1bc31-chickpea-coconut-curry.jpg",
         "nutrition": {
-            "Calories": "",
-            "Carbohydrates": "",
-            "Protein": "",
-            "Fat": "",
-            "Saturated Fat": "",
+            "Calories": "633",
+            "Carbohydrates": "75g",
+            "Protein": "14g",
+            "Fat": "34g",
+            "Saturated Fat": "26g",
             "Potassium": "",
-            "Fiber": "",
-            "Sugar": "",
+            "Fiber": "11g",
+            "Sugar": "18g",
             "Vitamin A": "",
             "Vitamin C": "",
             "Calcium": "",
@@ -269,7 +304,7 @@ export const meals = [
         }
     },
     {
-        "name": "Glazed Orange Cauliflower 'Chicken'",
+        "name": 'Glazed Orange Cauliflower "Chicken"',
         "available": false,
         "side": {
             1: {
@@ -405,15 +440,15 @@ export const meals = [
         "available": true,
         "side": {
             1: {
-                "name": "Sauteed Greens",
-                "pic": sauteed_kale
+                "name": "Radish Slaw",
+                "pic": radish_slaw
             },
             2: {
-                "name": "Roasted Brussels Sprouts",
-                "pic": roasted_brussels,
+                "name": "Brown Rice",
+                "pic": brown_rice,
             }
         },
-        "description": "Accompanied by sauteed greens & roasted brussel sprouts, this asian inspired dish packs alot of flavor and nutrition.  ",
+        "description": "Accompanied by radish slaw & brown rice, this asian inspired dish packs alot of flavor and nutrition.  ",
         "photo": "https://cdn77-s3.lazycatkitchen.com/wp-content/uploads/2018/09/pulled-jackfruit-bowl-800x1200.jpg",
         "type": "main",
         "ingredients": ["sweet potato", "brussel sprouts", "jalapenos", "young jackfruit", "lime juice", "green peas", "baby corn", "garlic", "herb & spices", "bell pepper", " onion", "grapeseed oil"],
@@ -469,12 +504,12 @@ export const meals = [
         "available": true,
         "side": {
             1: {
-                "name": "Quinoa",
-                "pic": quinoa
+                "name": "Sprouted Wheat Cornbread Muffin",
+                "pic": cornbread_muffins
             },
             2: {
-                "name": "Basmati Rice",
-                "pic": brown_rice,
+                "name": "Sauteed Brussels",
+                "pic": sauteed_brussels,
             }
         },
         "description": "Made with coconut milk and comes with brown fluffy basmati rice & quinoa ",
@@ -498,7 +533,7 @@ export const meals = [
     },
     {
         "name": "Spicy Caribbean Jackfruit Curry",
-        "available": true,
+        "available": false,
         "side": {
             1: {
                 "name": "Brown Rice & Beans",
@@ -533,7 +568,7 @@ export const meals = [
     },
     {
         "name": "Carolina Style BBQ ",
-        "available": true,
+        "available": false,
         "side": {
             1: {
                 "name": "Coleslaw",
@@ -572,6 +607,40 @@ export const meals = [
         "type": "main",
         "sides": [],
         "photo": "https://cookieandkate.com/images/2015/01/sweet-potato-green-rice-burrito-bowls-recipe-1.jpg",
+        "nutrition": {
+            "Calories": "",
+            "Carbohydrates": "",
+            "Protein": "",
+            "Fat": "",
+            "Saturated Fat": "",
+            "Potassium": "",
+            "Fiber": "",
+            "Sugar": "",
+            "Vitamin A": "",
+            "Vitamin C": "",
+            "Calcium": "",
+            "Iron": ""
+        }
+    },
+    {
+        "name": "Top Ramen with Zucchini Noodles",
+        "available": true,
+        "description": "This Ramen meal is chocked full of veggies and flavor. Comes with sauteed broccoli and radish slaw",
+        "photo": "https://i1.wp.com/stephaniesain.com/wp-content/uploads/2019/09/Vegan-Ramen-Soup11.jpg?w=926&ssl=1",
+        "source": "https://stephaniesain.com/vegan-ramen-zoodle-soup-gluten-free/",
+        "type": "main",
+        "ingredients": [],
+        "side": {
+            1: {
+                "name": "sauteed broccoli",
+                "pic": sauteed_broccoli,
+                "ingredients": ""
+            },
+            2: {
+                "name": "Radish Slaw",
+                "pic": radish_slaw,
+            }
+        },
         "nutrition": {
             "Calories": "",
             "Carbohydrates": "",
@@ -684,6 +753,29 @@ export const meals = [
         "ingredients": ["Quinoa", "Carrots", "Shallots", "Cabbage", "Kale", "Collard Greens", "Black Eyed Peas", "Garlic"],
         "source": "https://www.cottercrunch.com/rainbow-power-greens-salad-black-eyed-peas-vegan-gluten-free/",
         "photo": "https://www.cottercrunch.com/wp-content/uploads/2015/12/rainbow-power-greens-salad-with-black-eyed-peas2.jpg",
+        "nutrition": {
+            "Calories": "",
+            "Carbohydrates": "",
+            "Protein": "",
+            "Fat": "",
+            "Saturated Fat": "",
+            "Potassium": "",
+            "Fiber": "",
+            "Sugar": "",
+            "Vitamin A": "",
+            "Vitamin C": "",
+            "Calcium": "",
+            "Iron": ""
+        }
+    },
+    {
+        "name": "Green Stew",
+        "available": true,
+        "description": "A hearty steamed stew of seasoned deep green veggies like asparagusm kale, peas, broccoli, green beans & bak choy.",
+        "type": "salad",
+        "ingredients": [],
+        "source": "https://www.foodnetwork.ca/recipe/green-stew/15782/",
+        "photo": "https://media.foodnetwork.ca/recipetracker/60d5cc3e-dc8c-4384-aa27-3aa13c2acc5a_Green_Stew_WebReady.jpg",
         "nutrition": {
             "Calories": "",
             "Carbohydrates": "",

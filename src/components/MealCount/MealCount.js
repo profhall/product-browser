@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {usePath,useQueryParams, navigate} from "hookrouter";
 import colors from "../../Colors";
 import {AuthContext} from "../../Auth/Auth";
-import {Button, ButtonContainer} from "../Styles";
+import {Button, ButtonContainer} from "../shared_comps/Styles";
 
 
 function getWidth() {

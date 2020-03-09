@@ -3,8 +3,6 @@ import styled from "styled-components";
 import colors from "../../Colors";
 import {AuthContext, AuthProvider} from "../../Auth/Auth";
 
-import {meals, salads, mains, sides} from '../../data'
-const thisWeeksMeals = meals.filter((item)=>item.available)
 function getWidth() {
     return window.innerWidth
 }
@@ -13,10 +11,12 @@ function getWidth() {
 const Menu = () => {
     const [currentSlide, setSlide]=useState(0);
     const [selected, setSelected]=useState("meals");
+    const {adminStuff} = useContext(AuthContext)
 
     const [windowWidth, setWidth] = useState(getWidth);
     const handleResize =()=> setWidth(getWidth());
     window.addEventListener('resize', handleResize);
+    const [thisWeeksMeals, setMeals] = useState(adminStuff ? adminStuff.recipes.filter((item)=>item.available) : null);
 
 
     useEffect(()=>{
@@ -76,6 +76,7 @@ const Menu = () => {
     });
 
     const mealList2 = thisWeeksMeals.map((item,i) => {
+        // console.log(item.side)
         return  (
             <Meal key={i} id={i} className={"container"} >
 
@@ -83,7 +84,7 @@ const Menu = () => {
                     <h4>{item.name}</h4>
                 </Title>
                 <Photos>
-                    <PhotoGrid windowWidth={windowWidth} full={!!item.side}>
+                    <PhotoGrid sides={!!item.side} windowWidth={windowWidth} >
                         <MainPhoto photo={item.photo} />
                         {item.side?
                             <SidePhoto photo={item.side ? item.side[1].pic : null} num={1}/>
@@ -241,10 +242,10 @@ const MainPhoto = styled.div`
 const PhotoGrid = styled.div`
   grid-area: photo;
   height: 95%;
-  grid-template-rows: ${ props=>props.windowWidth > 650 ?
-    '50% 50%'
-    :
-    '70% 30%'
+  grid-template-rows: ${ props=>props.windowWidth > 650 ? 
+    `50%  50%`
+    : 
+    `70%  30%`
     };
   border-radius: 5px;
   margin: auto;
@@ -252,7 +253,7 @@ const PhotoGrid = styled.div`
   grid-gap: 2px;
   display: grid;
   grid-template-areas:${ props=>props.windowWidth < 650 ?
-    '"main main" "side1 side2"'
+    props.sides ? '"main main" "side1 side2"' : '"main main" "main main"'
     :
     '"main side1" "main side2"'
     };
