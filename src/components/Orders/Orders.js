@@ -40,5 +40,6 @@ const OrdersContainer = styled.div`
   min-height:fit-content;
   max-height: 90vh;
   overflow: auto;
+  width: 100%;
   
 `

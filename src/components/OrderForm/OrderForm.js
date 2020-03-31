@@ -16,13 +16,11 @@ const OrderForm =  () => {
     const {currentUser,currentUserProfile,  url, setURL} =  useContext( AuthContext)
     const routeResult = useRoutes(Routes);
     setURL(window.location.href)
-    useEffect(() => {
-        console.log(url)
-    }, [url]);
+
 
     useEffect(() => {
         // console.log(currentUserProfile)
-    }, [currentUser,currentUserProfile]);
+    }, [currentUser,currentUserProfile, url]);
 
 
 
