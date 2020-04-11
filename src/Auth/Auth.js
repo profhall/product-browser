@@ -71,18 +71,20 @@ export const AuthProvider = ({children}) => {
             })
         }
 
-        if (currentUserProfile && currentUserProfile.admin){
+        // if (currentUserProfile && currentUserProfile.admin){
             getAdminStuff()
-        }
+        // }
     },[currentUserProfile,])
 
     useEffect(()=> {
-
     },[adminStuff,])
 
     function getAdminStuff ()  {
-        getOrders()
+        console.log("getting stufff admin")
         getRecipes()
+        if (currentUserProfile && currentUserProfile.admin){
+        getOrders()
+        }
     }
 
     const getOrders = ()=>{
@@ -97,15 +99,21 @@ export const AuthProvider = ({children}) => {
         });
     }
 
-    const getRecipes = ()=>{
+    const getRecipes =  ()=>{
         adminStuff.recipes = []
-        recipesDB.get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
+         recipesDB.get().then(function(querySnapshot) {
+             querySnapshot.forEach(function(doc) {
 
                 adminStuff.recipes.push(doc.data())
                 setAdminStuff({...adminStuff, recipes: [...adminStuff.recipes]})
+
             });
-        });
+             console.log("got recipes")
+
+         }).catch(function(error) {
+             // The document probably doesn't exist.
+             console.error("Error updating document: ", error);
+         });
     }
 
     function updateMenu ({item, meal, available})  {
@@ -125,7 +133,7 @@ export const AuthProvider = ({children}) => {
 
 
     return (
-        <AuthContext.Provider value={{getDimensions,updateMenu ,setURL,url, currentUser,adminStuff, currentUserProfile, currentUserOrder,userLogin,infoValidated, gotoPage , setUserProfile,setUserOrder}}>
+        <AuthContext.Provider value={{getDimensions,updateMenu ,setURL,url,getRecipes, currentUser,adminStuff, currentUserProfile, currentUserOrder,userLogin,infoValidated, gotoPage , setUserProfile,setUserOrder}}>
             {children}
         </AuthContext.Provider>
     );

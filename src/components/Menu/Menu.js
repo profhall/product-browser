@@ -8,10 +8,10 @@ function getWidth() {
 }
 
 
-const Menu = () => {
+const Menu =  () => {
     const [currentSlide, setSlide]=useState(0);
     const [selected, setSelected]=useState("meals");
-    const {adminStuff} = useContext(AuthContext)
+    const {adminStuff,getRecipes} = useContext(AuthContext)
 
     const [windowWidth, setWidth] = useState(getWidth);
     const handleResize =()=> setWidth(getWidth());
@@ -20,10 +20,15 @@ const Menu = () => {
 
 
     useEffect(()=>{
-        // console.log(currentSlide)
+        console.log(thisWeeksMeals)
+        if(thisWeeksMeals.length==0)
+        {
+             getRecipes()
+            console.log("getting recipes ")
+        }
         // console.log(meals.length)
 
-    },[windowWidth, currentSlide]);
+    },[windowWidth, currentSlide,adminStuff]);
 
 
     const mealList = thisWeeksMeals.map((item,i) => {

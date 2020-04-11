@@ -28,7 +28,7 @@ const OrderForm =  () => {
     return (
             <TheOrderForm admin={currentUserProfile ? currentUserProfile.admin : false} url={url} className={""}>
 
-                {!!!currentUser && !!!url.includes("menu") && !!!url.includes("signup") && !!!url.includes("steps") ? <Login />:routeResult}
+                {!!!currentUser && !!!url.includes("menu") && !!!url.includes("signup") && !!!url.includes("steps") ? <Login />: routeResult}
 
             </TheOrderForm>
     );
