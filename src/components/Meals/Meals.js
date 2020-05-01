@@ -25,7 +25,9 @@ const MealsSelector = () => {
 
 
     useEffect(()=>{
-        mainsPicked+saladsPicked === meal_count+salad_count ? validateMeals(true) : validateMeals(false)
+        // to include salads uncomment this next line
+        // mainsPicked+saladsPicked === meal_count+salad_count ? validateMeals(true) : validateMeals(false)
+        mainsPicked === meal_count ? validateMeals(true) : validateMeals(false)
     },[mainsList]);
 
 
@@ -90,7 +92,7 @@ const MealsSelector = () => {
                         }
                     </h4>
 
-                    <h5>With every 4 meals you get a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h5>
+                    {/*<h5>With every 4 meals you get a 16oz salad. You have {salad_count - saladsPicked} salads to pick</h5>*/}
 
                     <div className={"row"} style={{display:"flex", justifyContent:"space-evenly" ,width: "90%", marginBottom: 5}}>
 

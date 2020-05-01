@@ -4,6 +4,7 @@ import {usePath,useQueryParams, navigate} from "hookrouter";
 import colors from "../../Colors";
 import {AuthContext} from "../../Auth/Auth";
 import {Button, ButtonContainer} from "../shared_comps/Styles";
+import Card from "../Card/Card";
 
 
 function getWidth() {
@@ -37,22 +38,21 @@ const MealCount = () => {
     if (meal_count > 0){
         console.log("setting order")
         let price = 0;
-        let deliveryFee = 8;
-        let containerFee = 15;
-        if(meal_count === 4){
-            price = 55;
+        let deliveryFee = 7;
+        if(meal_count === 5){
+            price = 5*15;
         }
         else if(meal_count === 7){
-            price = 85;
+            price = 7*13;
         }
         else if(meal_count === 10){
-            price = 110;
+            price = 10*11;
         }
         else if(meal_count === 12){
-            price = 120;
+            price = 12*10;
         }
         console.log(currentUserProfile);
-        setUserOrder({...currentUserOrder, "meal_count": meal_count, "price" :price + deliveryFee + (currentUserProfile.container_fee_paid ? containerFee : 0)})
+        setUserOrder({...currentUserOrder, "meal_count": meal_count, "price" :price + deliveryFee})
     }
 
     const handleSelect = (e,num) => {
@@ -80,10 +80,12 @@ const MealCount = () => {
         <MealCountSelectionContainer className={"center"}>
             <h2>{numOfMeals > 0 ? `You've chosen ${numOfMeals} meals`:"Choose A Selection"}</h2>
             <ButtonsContainer width={ windowWidth} className={"row "}>
-                <MealButton  width={windowWidth} num={4} ppmeal={13.75} total={4*13.75} />
-                <MealButton   width={windowWidth} num={7} ppmeal={12.14} total={85}  />
-                <MealButton  width={windowWidth} num={10} ppmeal={11} total={10*11} />
-                <MealButton width={windowWidth} num={12} ppmeal={10} total={12 *10} />
+
+
+                <Card num={5} ppmeal={14} onClick={(e) => handleSelect(e,5)}/>
+                <Card num={7} ppmeal={13} onClick={(e) => handleSelect(e,7)}/>
+                <Card num={10} ppmeal={11} onClick={(e) => handleSelect(e,10)}/>
+                <Card num={12} ppmeal={10} onClick={(e) => handleSelect(e,12)}/>
             </ButtonsContainer>
 
 
@@ -109,11 +111,7 @@ const MealCountSelectionContainer = styled.div`
     justify-content: center;
     `;
 
-const Card = styled.div`
-background-color: ${colors.secondaryTwo} !important;
 
-
-`;
 const CardDiv = styled.div`
   background-color: ${props=> props.selected ? colors.primaryOne : colors.secondaryTwo};
   border-radius: 10px 10px 0 0 !important;

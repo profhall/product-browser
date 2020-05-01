@@ -53,9 +53,9 @@ const DeliveryDate = () => {
         {
             before:  todays_date_number === days.Tuesday? twoDaysFromToday:tomorrow ,
             after:todays_date_number === 0 ?  threeDaysFromToday  : todays_date_number === days.Monday ? twoDaysFromToday :weekFromToday },
-        { daysOfWeek:[1,2,4,5,6]}
+        { daysOfWeek:[0,today,6]}
     ]
-    console.log(daysToIgnore,tomorrow)
+    // console.log(daysToIgnore,tomorrow)
 
     const db = firebase.firestore(app);
 
@@ -63,6 +63,7 @@ const DeliveryDate = () => {
     let date = currentUserOrder ? currentUserOrder.deliver_date : null
 
     const [deliver_date, setDate] = useState(null);
+    const [pickup, setPickUp] = useState(false);
     const [disabledDays, updateDisabledDays] = useState(daysToIgnore);
     const [tooManyMeals, setTooManyMeals] = useState(false);
     const [windowWidth, setWidth] = useState(getWidth);
@@ -110,7 +111,8 @@ const DeliveryDate = () => {
             });
 
 
-    },[windowWidth, deliver_date])
+    },[windowWidth, deliver_date, pickup])
+
     useEffect(()=>{
         // console.log(disabledDays)
         // console.log("Delivery Date Set: ",deliver_date)
@@ -118,6 +120,11 @@ const DeliveryDate = () => {
 
 
     },[tooManyMeals, disabledDays])
+
+    // useEffect(()=>{
+    // console.log(pickup)
+    //
+    // },[pickup])
 
     useEffect(()=>{
         currentUserOrder && currentUserOrder.meal_count ? navigate("#") : navigate("/")
@@ -165,7 +172,9 @@ const DeliveryDate = () => {
 
 
 
+
     if (deliver_date){
+        if (pickup) setUserOrder({...currentUserOrder, "deliver_date": deliver_date, pick_up:pickup})
         setUserOrder({...currentUserOrder, "deliver_date": deliver_date})
         // console.log(deliver_date)
 
@@ -198,7 +207,7 @@ const DeliveryDate = () => {
         <DeliveryDateContainer className={"center"}>
             <h2>When To Deliver</h2>
             <h5> Meals are delivered on Sundays & Wednesday evenings</h5>
-            <h5>Your Chosen Date:<b style={{color:colors.bright}}> {date ? `${date}` : "pick a day"}</b></h5>
+            <h5>Your Chosen{pickup ? " Pickup ":" "}Date:<b style={{color:colors.bright}}> {date ? `${date}` : "pick a day"}</b></h5>
 
         <CalendarContainer className={"row"}>
                 <DayPickerInput
@@ -214,6 +223,7 @@ const DeliveryDate = () => {
 
             <ButtonContainer className={"row center"}>
                 <Button className={"btn-large col m5"} onClick={()=>gotoPage("/mealcount")}>Go Back</Button>
+
                 <Button className={`btn-large col m5 ${date?"":"disabled"}`} onClick={()=>gotoPage("/mealselection")}>Select Meals</Button>
             </ButtonContainer>
         </DeliveryDateContainer>

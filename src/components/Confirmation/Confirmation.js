@@ -15,20 +15,20 @@ const Confirmation = () => {
     const user = currentUserProfile;
     const db = firebase.firestore(app);
     const {meal_count} = currentUserOrder
-    let deliveryFee = 8;
+    let deliveryFee = 7;
     let containerFee = 15;
     let price = 0;
-    if(meal_count === 4){
-        price = 55;
+    if(meal_count === 5){
+        price = 5*15;
     }
     else if(meal_count === 7){
-        price = 85;
+        price = 7*13;
     }
     else if(meal_count === 10){
-        price = 110;
+        price = 10*11;
     }
     else if(meal_count === 12){
-        price = 120;
+        price = 12*10;
     }
 
     //I need 2 useEffects or else i kept getting an indefinite loop because i was tryin to track iteam that kept getting update
@@ -117,7 +117,7 @@ const Confirmation = () => {
                     </FormInputDiv>
 
                     <FormInputDiv className="input-field col s12 m6 ">
-                        <FormInput autoFocus  id="fees" type="text" value={` $${currentUserOrder.price } ($${price} + $${deliveryFee} ${!user.container_fee_paid ? "+ $" +containerFee+ "" : ""})`}/>
+                        <FormInput autoFocus  id="fees" type="text" value={` $${currentUserOrder.price } ($${price} + $${deliveryFee})`}/>
                         <Label htmlFor="fees" >Total Charges:</Label>
                     </FormInputDiv>
 
